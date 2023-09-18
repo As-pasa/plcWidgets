@@ -6,38 +6,27 @@ ApplicationWindow {
     id: window
     visible: true
     width: 800
-    height: 800
+    height: 480
     title: qsTr("Tabs")
 
-    CustomRect{
+    HeaderBar {
+        id:header
         anchors.left: parent.left
         anchors.right: parent.right
-        height:70
-        RowLayout{
-            anchors.fill: parent
-            spacing: 30
-            ImageButton{
-                Layout.preferredWidth: 150
-                Layout.fillHeight: true
-                //Layout.fillWidth: true
-                Layout.alignment: Qt.AlignLeft
-                Layout.margins: 5
-            }
-            ImageButton{
-                Layout.preferredWidth: 150
-                Layout.fillHeight: true
-                //Layout.fillWidth: true
-                Layout.margins: 5
-                Layout.alignment: Qt.AlignCenter
-            }
-            ImageButton{
-                Layout.preferredWidth: 150
-                Layout.fillHeight: true
-                //Layout.fillWidth: true
-                Layout.margins: 5
-                Layout.alignment: Qt.AlignRight
-            }
-        }
     }
+    Item{
+        id:mainWidget
+        anchors.top:header.bottom
+        anchors.left:parent.left
+        anchors.right:parent.right
+        anchors.bottom: parent.bottom
+
+    }
+
+
+    MainMenuTiles {
+        anchors.fill: mainWidget
+    }
+
 
 }

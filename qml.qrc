@@ -8,5 +8,8 @@
         <file>plkLanguage.png</file>
         <file>ImageButton.qml</file>
         <file>MenuTile.qml</file>
+        <file>MenuButtons.qml</file>
+        <file>HeaderBar.qml</file>
+        <file>MainMenuTiles.qml</file>
     </qresource>
 </RCC>
