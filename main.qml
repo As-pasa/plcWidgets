@@ -10,25 +10,32 @@ ApplicationWindow {
     title: qsTr("Tabs")
 
     CustomRect{
-        width:800
+        anchors.left: parent.left
+        anchors.right: parent.right
         height:70
         RowLayout{
             anchors.fill: parent
-            spacing: 20
+            spacing: 30
             ImageButton{
+                Layout.preferredWidth: 150
                 Layout.fillHeight: true
-                Layout.fillWidth: true
+                //Layout.fillWidth: true
+                Layout.alignment: Qt.AlignLeft
                 Layout.margins: 5
             }
             ImageButton{
+                Layout.preferredWidth: 150
                 Layout.fillHeight: true
-                Layout.fillWidth: true
+                //Layout.fillWidth: true
                 Layout.margins: 5
+                Layout.alignment: Qt.AlignCenter
             }
             ImageButton{
+                Layout.preferredWidth: 150
                 Layout.fillHeight: true
-                Layout.fillWidth: true
+                //Layout.fillWidth: true
                 Layout.margins: 5
+                Layout.alignment: Qt.AlignRight
             }
         }
     }
