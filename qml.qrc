@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>qtquickcontrols2.conf</file>
+        <file>TextButton.qml</file>
+        <file>CustomRect.qml</file>
+        <file>CustomLabel.qml</file>
+        <file>plkLanguage.png</file>
+        <file>ImageButton.qml</file>
+        <file>MenuTile.qml</file>
+    </qresource>
+</RCC>
