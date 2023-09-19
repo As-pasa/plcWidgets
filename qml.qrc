@@ -5,11 +5,29 @@
         <file>TextButton.qml</file>
         <file>CustomRect.qml</file>
         <file>CustomLabel.qml</file>
-        <file>plkLanguage.png</file>
         <file>ImageButton.qml</file>
         <file>MenuTile.qml</file>
         <file>MenuButtons.qml</file>
         <file>HeaderBar.qml</file>
         <file>MainMenuTiles.qml</file>
+        <file>icons/plcBackup.png</file>
+        <file>icons/plcBright.png</file>
+        <file>icons/plcCalibrate.png</file>
+        <file>icons/plcDisplay.png</file>
+        <file>icons/plcExit.png</file>
+        <file>icons/plcExport.png</file>
+        <file>icons/plcHome.png</file>
+        <file>icons/plcImport.png</file>
+        <file>icons/plcInfo.png</file>
+        <file>icons/plcLang.png</file>
+        <file>icons/plcLock.png</file>
+        <file>icons/plcNet.png</file>
+        <file>icons/plcPing.png</file>
+        <file>icons/plcSettings.png</file>
+        <file>icons/plcStorage.png</file>
+        <file>icons/plcTime.png</file>
+        <file>icons/plcWifi.png</file>
+        <file>CustomCheckbox.qml</file>
+        <file>MainScreen.qml</file>
     </qresource>
 </RCC>

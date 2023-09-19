@@ -10,7 +10,7 @@ Item{
     property color pressedColor: "grey"
     property color borderColor: "black"
     property int imageMargins:15
-    property string imageSource: "qrc:/plkLanguage.png"
+    property string imageSource: "qrc:/icons/plcInfo.png"
     id:root
     height:140
     width:500
@@ -29,5 +29,6 @@ Item{
     MouseArea{
         id: mouseArea
         anchors.fill:parent
+        onPressed: {root.clicked();}
     }
 }

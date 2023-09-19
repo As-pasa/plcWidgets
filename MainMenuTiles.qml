@@ -28,8 +28,8 @@ Item{
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.margins: 5
-            onClick : {
-                root.onLeftClicked()
+            onClicked: {
+                root.leftClicked();
             }
         }
         MenuTile{
@@ -38,8 +38,8 @@ Item{
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.margins: 5
-            onClick:{
-                root.onCenterClicked()
+            onClicked: {
+                root.centerClicked();
             }
         }
         MenuTile{
@@ -48,9 +48,10 @@ Item{
             Layout.fillHeight: true
             Layout.fillWidth: true
             Layout.margins: 5
-            onClick:{
-                root.onRightClicked()
+            onClicked:{
+                root.rightClicked();
             }
+
         }
     }
 }

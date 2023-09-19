@@ -3,10 +3,10 @@ import QtQuick.Controls 2.5
 import QtQuick.VirtualKeyboard 2.4
 
 Rectangle{
-    property color defaultColor: "grey"
+    property color defaultColor: "#D9D9D9"
     property color clickedColor: Qt.darker(defaultColor)
-    border.width:3
+    border.width:2
     border.color: "black"
-    color: "grey"
+    color: defaultColor
     radius: Math.min(height,width)*0.3
 }

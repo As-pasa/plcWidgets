@@ -6,6 +6,9 @@ CustomRect{
     width:800
     height:70
     property int imageMargins: 5
+    signal leftClicked()
+    signal centerClicked()
+    signal rightClicked()
     id:root
     RowLayout{
 
@@ -18,6 +21,10 @@ CustomRect{
             Layout.alignment: Qt.AlignLeft
             Layout.margins: 5
             imageMargins: root.imageMargins
+            imageSource: "qrc:/icons/plcLang.png"
+            onClicked: {
+                root.leftClicked();
+            }
         }
         ImageButton{
 
@@ -26,6 +33,10 @@ CustomRect{
             Layout.margins: 5
             Layout.alignment: Qt.AlignCenter
             imageMargins: root.imageMargins
+            imageSource: "qrc:/icons/plcHome.png"
+            onClicked: {
+                root.centerClicked();
+            }
         }
         ImageButton{
             Layout.fillWidth: true
@@ -33,6 +44,10 @@ CustomRect{
             Layout.margins: 5
             Layout.alignment: Qt.AlignRight
             imageMargins: root.imageMargins
+            imageSource: "qrc:/icons/plcExit.png"
+            onClicked: {
+                root.rightClicked();
+            }
         }
     }
 }

@@ -6,7 +6,7 @@ Item{
     height:500
     width:300
     id:root
-    signal click()
+    signal clicked()
     property string imageSource: "qrc:/plkLanguage.png"
     property string text: "hello"
     ImageButton{
@@ -15,10 +15,8 @@ Item{
         anchors.left:parent.left
         anchors.right:parent.right
         anchors.top:parent.top
-        onClicked: {
-            root.click()
-        }
         imageSource: root.imageSource
+        onClicked: {root.clicked();}
     }
     Text{
         anchors.margins: 5
