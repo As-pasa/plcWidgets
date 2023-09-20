@@ -29,5 +29,6 @@
         <file>icons/plcWifi.png</file>
         <file>CustomCheckbox.qml</file>
         <file>MainScreen.qml</file>
+        <file>TimeDisplayLabel.qml</file>
     </qresource>
 </RCC>

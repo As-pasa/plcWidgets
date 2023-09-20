@@ -12,7 +12,8 @@ Button{
     height:140
     font.pixelSize: 20
     background: CustomRect {
-        color: root.down? root.pressedColor:root.mainColor
+        id:back
+        color: root.down? back.clickedColor:back.defaultColor
     }
     contentItem: Text{
         text:root.text
