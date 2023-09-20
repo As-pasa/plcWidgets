@@ -1,0 +1,19 @@
+#ifndef APPMODEL_H
+#define APPMODEL_H
+#include "netmodel.h"
+#include "screenmodel.h"
+#include "deviceinfomodel.h"
+#include "timemodel.h"
+#include "wifimodel.h"
+class AppModel
+{
+public:
+    AppModel(NetModel* cnetwork,WifiModel* cwifi,DeviceInfoModel* cdevice,TimeModel* ctime,ScreenModel* cscreen);
+    NetModel* network;
+    WifiModel* wifi;
+    DeviceInfoModel* device;
+    TimeModel* time;
+    ScreenModel* screen;
+};
+
+#endif // APPMODEL_H
