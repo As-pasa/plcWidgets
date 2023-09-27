@@ -14,6 +14,29 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+        cpp/models/appmodel.cpp \
+        cpp/models/deviceinfomodel.cpp \
+        cpp/models/interfacecredentials.cpp \
+        cpp/models/netmodel.cpp \
+        cpp/models/screenmodel.cpp \
+        cpp/models/timechangepackage.cpp \
+        cpp/models/timemodel.cpp \
+        cpp/models/wificonnection.cpp \
+        cpp/models/wifimodel.cpp \
+        cpp/systems/debugnetsystem.cpp \
+        cpp/systems/debugscreensystem.cpp \
+        cpp/systems/debugtimesystem.cpp \
+        cpp/systems/debugwifisystem.cpp \
+        cpp/systems/ifilesystem.cpp \
+        cpp/systems/inetsystem.cpp \
+        cpp/systems/iscreensystem.cpp \
+        cpp/systems/itimesystem.cpp \
+        cpp/systems/iwifisystem.cpp \
+        cpp/systems/plcnetsystem.cpp \
+        cpp/systems/plcscreensystem.cpp \
+        cpp/systems/plctimesystem.cpp \
+        cpp/systems/plcwifisystem.cpp \
+        cpp/utilities/os.cpp \
         main.cpp
 
 RESOURCES += qml.qrc
@@ -28,3 +51,28 @@ QML_DESIGNER_IMPORT_PATH =
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+HEADERS += \
+    cpp/models/appmodel.h \
+    cpp/models/deviceinfomodel.h \
+    cpp/models/interfacecredentials.h \
+    cpp/models/netmodel.h \
+    cpp/models/screenmodel.h \
+    cpp/models/timechangepackage.h \
+    cpp/models/timemodel.h \
+    cpp/models/wificonnection.h \
+    cpp/models/wifimodel.h \
+    cpp/systems/debugnetsystem.h \
+    cpp/systems/debugscreensystem.h \
+    cpp/systems/debugtimesystem.h \
+    cpp/systems/debugwifisystem.h \
+    cpp/systems/ifilesystem.h \
+    cpp/systems/inetsystem.h \
+    cpp/systems/iscreensystem.h \
+    cpp/systems/itimesystem.h \
+    cpp/systems/iwifisystem.h \
+    cpp/systems/plcnetsystem.h \
+    cpp/systems/plcscreensystem.h \
+    cpp/systems/plctimesystem.h \
+    cpp/systems/plcwifisystem.h \
+    cpp/utilities/os.h

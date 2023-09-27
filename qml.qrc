@@ -30,5 +30,7 @@
         <file>CustomCheckbox.qml</file>
         <file>MainScreen.qml</file>
         <file>TimeDisplayLabel.qml</file>
+        <file>TimeEditLine.qml</file>
+        <file>TimeStatusBar.qml</file>
     </qresource>
 </RCC>

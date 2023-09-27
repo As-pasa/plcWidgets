@@ -1,48 +1,62 @@
 #include "timemodel.h"
 
-TimeModel::TimeModel(ITimeSystem *system)
+TimeModel::TimeModel(DebugTimeSystem *system)
 {
     m_system=system;
-    m_NipStatus=false;
-    m_AtzStatus=false;
+    m_timer=new QTimer(this);
+    current=this->m_system->getCurrentTime();
+    connect(m_timer, &QTimer::timeout,this, [=](){
+        current= current.addSecs(60);
+        emit currentTimeChanged(current);
+    });
+    m_timer->start(1000);
 }
 
-QDateTime TimeModel::getCurrentTime()
-{
-    return m_system->getCurrentTime();
-}
+QDateTime TimeModel::currentTime(){
 
-bool TimeModel::getNipStatus()
-{
-    return m_NipStatus;
-}
+    return current;
 
-bool TimeModel::getAtzStatus()
-{
-    return m_AtzStatus;
-}
 
-void TimeModel::setNipStatus(bool enabled)
-{
-    if(enabled!=m_NipStatus){
-        m_NipStatus=enabled;
-        m_system->setNipEnabled(m_NipStatus);
-        emit NipStatusChanged(m_NipStatus);
+};
+void TimeModel::setCurrentTime(QDateTime nTime){
+    if(nTime!=this->currentTime()){
+        int nyear, nmonth,nday,nminute,nhour;
+
+
+        nTime.date().getDate(&nyear,&nmonth,&nday);
+        nminute=nTime.time().minute();
+        nhour=nTime.time().hour();
+
+        int cyear,cmonth,cday,cminute,chour;
+        auto cur=this->currentTime();
+        cur.date().getDate(&cyear,&cmonth,&cday);
+        cminute=cur.time().minute();
+        chour=cur.time().hour();
+
+        if(nyear==cyear && nmonth==cmonth && nday==cday && nhour==chour && qFabs(nminute-cminute)<=1){
+            return;
+
+        }
+        m_system->setTime(nTime);
+        current=m_system->getCurrentTime();
+        emit currentTimeChanged(nTime);
     }
-}
 
-void TimeModel::setAtzStatus(bool enabled)
-{
-    if(enabled!=m_AtzStatus){
-        m_AtzStatus=enabled;
-        m_system->setAtzEnabled(m_AtzStatus);
-        emit AtzStatusChanged(m_AtzStatus);
-    }
-}
+};
 
-void TimeModel::setTime(TimeChangePackage package)
-{
-    m_system->setTime(package);
-    emit TimeChanged(QDateTime(package.date,package.time));
-}
+bool TimeModel::NIPStatus(){
+    return m_system->NIP;
+};
+void TimeModel::setNIPStatus(bool enabled){
+    m_system->setNipEnabled(enabled);
+    emit NIPStatusChanged(enabled);
+};
 
+bool TimeModel::ATZStatus(){
+    return m_system->ATZ;
+
+};
+void TimeModel::setATZStatus(bool status){
+    m_system->setAtzEnabled(status);
+    emit ATZStatusChanged(status);
+};

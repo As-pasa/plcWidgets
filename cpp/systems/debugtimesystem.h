@@ -4,17 +4,21 @@
 
 #include "itimesystem.h"
 #include <QDebug>
-class DebugTimeSystem:public ITimeSystem
+class DebugTimeSystem
 {
 
 public:
     DebugTimeSystem();
-
+     bool NIP;
+     bool ATZ;
+     QDateTime cur=QDateTime::currentDateTime();
     // ITimeSystem interface
 public:
-    void setTime(TimeChangePackage package);
+    void setTime(QDateTime package);
     void setAtzEnabled(bool enabled);
     void setNipEnabled(bool enabled);
+    bool getATZStatus();
+    bool getNIPStatus();
     QDateTime getCurrentTime();
 };
 

@@ -8,8 +8,8 @@ Button{
     property color borderColor: "black"
     text: "hello"
     id:root
-    width:500
-    height:140
+
+
     font.pixelSize: 20
     background: CustomRect {
         id:back

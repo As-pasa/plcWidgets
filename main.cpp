@@ -1,6 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-
+#include "cpp/systems/debugtimesystem.h"
+#include "cpp/models/timemodel.h"
+#include <QQmlContext>
 int main(int argc, char *argv[])
 {
     qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
@@ -8,6 +10,9 @@ int main(int argc, char *argv[])
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
     QGuiApplication app(argc, argv);
+    DebugTimeSystem* s=new DebugTimeSystem();
+    TimeModel model(s);
+
 
     QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
@@ -17,6 +22,7 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
     engine.load(url);
-
+    QQmlContext* root=engine.rootContext();
+    root->setContextProperty("timeModel",&model);
     return app.exec();
 }
