@@ -42,6 +42,8 @@ ApplicationWindow {
             }
             radius:30
             width:parent.width*0.55
+
+
         }
         CustomRect{
             id: timeZoneWidget
@@ -126,6 +128,7 @@ ApplicationWindow {
             }
             TextButton{
                 id:startTimeEdit
+                enabled: !autoTime.toggled
                 text:"edit"
                 anchors{
                     horizontalCenter: mRoot.horizontalCenter
@@ -137,6 +140,17 @@ ApplicationWindow {
                 }
                 y:monthLabel.y+70
                 width:70
+            }
+            CustomCheckbox{
+                id: autoTime
+
+                anchors{
+                    horizontalCenter: parent.horizontalCenter
+                    top:startTimeEdit.bottom
+                }
+                height:40
+                text: "use NIP"
+
             }
         }
     }
@@ -151,6 +165,9 @@ ApplicationWindow {
                     bottom:parent.bottom
                 }
                 text:"отмена"
+                onClicked: {
+                    timeEditScreens.sourceComponent=timeDisplayScreen
+                }
             }
             TextButton{
                 id:nextBTN
@@ -280,6 +297,9 @@ ApplicationWindow {
                     bottom:parent.bottom
                 }
                 text:"назад"
+                onClicked: {
+                    timeEditScreens.sourceComponent=dateEditScreen
+                }
             }
             TextButton{
                 id:submitBTN

@@ -15,7 +15,7 @@ Item {
             top:control.top
             bottom:control.bottom
             left:control.left
-            margins:5
+            margins:2
         }
         
         
@@ -26,7 +26,7 @@ Item {
             anchors{
                 centerIn:indicator
                 fill:indicator
-                margins: 15
+                margins: 10
             }
             
         }
