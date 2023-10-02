@@ -57,7 +57,7 @@ Item{
             name:"timeMenu"
             PropertyChanges{
                 target:mainWidget
-                sourceComponent:timeScreen
+                sourceComponent:timeScreenComponent
             }
             PropertyChanges{
                 target:header
@@ -71,6 +71,7 @@ Item{
     
     HeaderBar {
         id:header
+
         anchors.left: parent.left
         anchors.right: parent.right
         onCenterClicked: mainScreen.state="mainMenu"
@@ -128,13 +129,12 @@ Item{
         }
     }
     Component{
-        id:timeScreen
+        id:timeScreenComponent
         TimeScreen{
+            id:timeScreen
 
         }
     }
-    
-    
     Loader{
         id:mainWidget
         anchors.top:header.bottom

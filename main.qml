@@ -13,24 +13,6 @@ ApplicationWindow {
         anchors.fill:parent
     }
 
-//    HeaderBar {
-//        id:header
-//        anchors.left: parent.left
-//        anchors.right: parent.right
-//        onCenterClicked: mainScreen.state="mainMenu"
-
-//    }
-//    TimeScreen {
-//        id: mainWidget
-//    }
-
-
-//    Binding {
-//        target: VirtualKeyboardSettings
-//        property: "fullScreenMode"
-//        value:true
-//    }
-
 
 
 }

@@ -4,6 +4,7 @@ import QtQuick.Controls 2.5
 import QtQuick.VirtualKeyboard.Settings 2.1
 import QtQuick.Layouts 1.12
 Item{
+
     id:mainWidget
     anchors{
         fill:parent
@@ -20,7 +21,6 @@ Item{
     }
     CustomRect{
         id: timeZoneWidget
-        property string selectedTZ: timeModel.currentTimeZone
         radius:30
         
         anchors{
@@ -37,132 +37,150 @@ Item{
         }
         
         
-        Component{
-            id: tzDisplay
-            Item{
-                CustomLabel{
-                    id:tzHeader
-                    text:"time zone settings"
-                    anchors{
-                        margins:15
-                        top:parent.top
-                        horizontalCenter: parent.horizontalCenter
-                    }
-                    
+
+        
+        
+    }
+
+
+
+    Component{
+        id: tzDisplay
+        Item{
+            CustomLabel{
+                id:tzHeader
+                text:"time zone settings"
+                anchors{
+                    margins:15
+                    top:parent.top
+                    horizontalCenter: parent.horizontalCenter
                 }
-                
-                CustomLabel{
-                    id:selectLabel
-                    
-                    text:timeZoneWidget.selectedTZ
-                    
-                    anchors{
-                        margins: 15
-                        top:tzHeader.bottom
-                        left:parent.left
-                        right:parent.right
-                        
-                    }
-                }
-                TextButton{
-                    id:editBtn
-                    text:"edit"
-                    enabled: aTZCheckbox.toggled? false : true
-                    anchors{
-                        margins: 15
-                        top:selectLabel.bottom
-                        left:parent.left
-                        right:parent.right
-                    }
-                    onClicked: {
-                        tzPageHolder.sourceComponent=timeZoneEdit
-                    }
-                }
-                CustomCheckbox{
-                    id:aTZCheckbox
-                    text:"use ATZ"
-                    height:40
-                    anchors{
-                        margins: 15
-                        top:editBtn.bottom
-                        horizontalCenter: parent.horizontalCenter
-                    }
-                }
-                
-                
+
             }
-            
+
+            CustomLabel{
+                id:currentTimeZoneLabel
+
+                text:timeModel.currentTimeZone
+
+                anchors{
+                    margins: 15
+                    top:tzHeader.bottom
+                    left:parent.left
+                    right:parent.right
+
+                }
+            }
+            TextButton{
+                id:editBtn
+                text:"edit"
+                enabled: aTZCheckbox.toggled? false : true
+                anchors{
+                    margins: 15
+                    top:currentTimeZoneLabel.bottom
+                    left:parent.left
+                    right:parent.right
+                }
+                onClicked: {
+
+                    tzPageHolder.sourceComponent=timeZoneEdit
+
+                }
+            }
+            CustomCheckbox{
+                id:aTZCheckbox
+                text:"use ATZ"
+                height:40
+                anchors{
+                    margins: 15
+                    top:editBtn.bottom
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+
+
         }
-        Component{
-            id:timeZoneEdit
-            Item{
-                
-                PageSelector {
-                    id: pgSelector
-                    property string initialValue:""
-                    source:Array.from(timeModel.timeZones)
-                    selectedContent: timeModel.currentTimeZone
+
+    }
+    Component{
+        id:timeZoneEdit
+        Item{
+
+            PageSelector {
+                id: pgSelector
+                source:timeModel.timeZones
+                selectedContent: timeModel.currentTimeZone
+
+                anchors{
+                    top:parent.top
+                    left:parent.left
+                    right:parent.right
+                    bottom:selectionDisplay.top
+                    margins: 10
+                }
+
+
+                delegate: TextButton{
                     anchors{
-                        top:parent.top
                         left:parent.left
                         right:parent.right
-                        bottom:selectionDisplay.top
-                        margins: 10
+                        margins: 5
                     }
-                    onSelectedContentChanged: {
-                        timeModel.currentTimeZone=pgSelector.selectedContent
+
+                    background: CustomRect{
+                        border.width:0
+                        color:pgSelector.selectedContent==text?clickedColor: defaultColor
                     }
-                    Component.onCompleted: {
-                        
-                        
-                        initialValue=timeModel.currentTimeZone
-                    }
-                }
-                
-                CustomLabel{
-                    id:selectionDisplay
-                    text: pgSelector.selectedContent
-                    horizontalAlignment: Text.AlignHCenter
-                    anchors{
-                        margins:10
-                        bottom:submitTZBTN.top
-                        horizontalCenter: parent.horizontalCenter
-                    }
-                }
-                TextButton{
-                    id:submitTZBTN
-                    text:"submit selected"
-                    anchors{
-                        margins:10
-                        bottom: discardTZChange.top
-                        horizontalCenter: parent.horizontalCenter
-                    }
+                    text:modelData
                     onClicked: {
-                        timeModel.installCurrentTimeZoneAsSystem()
-                        tzPageHolder.sourceComponent=tzDisplay
-                        
-                    }
-                }
-                TextButton{
-                    id:discardTZChange
-                    text:"cancel"
-                    anchors{
-                        margins:10
-                        bottom: parent.bottom
-                        horizontalCenter: parent.horizontalCenter
-                    }
-                    onClicked:{
-                        timeModel.currentTimeZone=pgSelector.initialValue
-                        tzPageHolder.sourceComponent=tzDisplay
+                        pgSelector.selectedContent=text
                     }
                 }
             }
-            
-            
-            
+
+            CustomLabel{
+                id:selectionDisplay
+                text: pgSelector.selectedContent
+                horizontalAlignment: Text.AlignHCenter
+                anchors{
+                    margins:10
+                    bottom:submitTZBTN.top
+                    horizontalCenter: parent.horizontalCenter
+                }
+            }
+            TextButton{
+                id:submitTZBTN
+                text:"submit selected"
+                anchors{
+                    margins:10
+                    bottom: discardTZChange.top
+                    horizontalCenter: parent.horizontalCenter
+                }
+                onClicked:{
+                    timeModel.currentTimeZone=pgSelector.selectedContent
+                    timeModel.installCurrentTimeZoneAsSystem()
+                    tzPageHolder.sourceComponent=tzDisplay
+                }
+
+            }
+            TextButton{
+                id:discardTZChange
+                text:"cancel"
+                anchors{
+                    margins:10
+                    bottom: parent.bottom
+                    horizontalCenter: parent.horizontalCenter
+                }
+                onClicked:{
+                    pgSelector.selectedContent=timeModel.currentTimeZone
+                    tzPageHolder.sourceComponent=tzDisplay
+                }
+
+            }
         }
-        
-        
+
+
+
     }
     
 }

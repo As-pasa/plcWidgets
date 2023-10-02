@@ -4,12 +4,14 @@ import QtQuick.Controls 2.5
 import QtQuick.VirtualKeyboard.Settings 2.1
 import QtQuick.Layouts 1.12
 CustomRect{
+    property bool editModeOn:timeEditScreens.sourceComponent!=timeDisplayScreen
     id: timeWidget
     property date date: timeModel.currentTime
     property date userDate: new Date(timeModel.currentTime)
     anchors{
     }
     Loader{
+
         anchors.fill:timeWidget
         id:timeEditScreens
         sourceComponent: timeDisplayScreen

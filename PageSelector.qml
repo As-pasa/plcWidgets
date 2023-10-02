@@ -12,9 +12,7 @@ CustomRect{
     function prev(){
         currentPage=Math.max(0, currentPage-1)
     }
-    
-    
-    
+    property alias delegate:lview.delegate
     id:pgSelector
     property var source: ["data","betta","gamma","gamma1","gamma2","gamma3","gamma4","gamma5"]
     property int currentPage:0
@@ -30,22 +28,7 @@ CustomRect{
         }
         id:lview
         model:pgSelector.source.slice(pgSelector.currentPage*pgSelector.pageSize, pgSelector.currentPage*pgSelector.pageSize+pgSelector.pageSize)
-        delegate: TextButton{
-            anchors{
-                left:parent.left
-                right:parent.right
-                margins: 5
-            }
-            
-            background: CustomRect{
-                border.width:0
-                color:pgSelector.selectedContent==text?clickedColor: defaultColor
-            }
-            text:modelData
-            onClicked: {
-                pgSelector.selectedContent=text
-            }
-        }
+
         
         
     }
