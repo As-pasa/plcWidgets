@@ -9,7 +9,7 @@ TimeModel::TimeModel(DebugTimeSystem *system)
         current= current.addSecs(60);
         emit currentTimeChanged(current);
     });
-    m_timer->start(1000);
+    m_timer->start(1000*60);
 }
 
 QDateTime TimeModel::currentTime(){

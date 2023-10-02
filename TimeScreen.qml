@@ -4,8 +4,8 @@ import QtQuick.Controls 2.5
 import QtQuick.VirtualKeyboard.Settings 2.1
 import QtQuick.Layouts 1.12
 Item{
-
-    id:mainWidget
+    id:root
+    property bool blocking:tzPageHolder.sourceComponent!=tzDisplay ||timeWidget.editModeOn
     anchors{
         fill:parent
     }
@@ -35,14 +35,8 @@ Item{
             anchors.fill: parent
             sourceComponent: tzDisplay
         }
-        
-        
-
-        
-        
+           
     }
-
-
 
     Component{
         id: tzDisplay

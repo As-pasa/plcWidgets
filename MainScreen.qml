@@ -70,8 +70,9 @@ Item{
     
     
     HeaderBar {
-        id:header
 
+        id:header
+        enabled: blockSemaphore==0
         anchors.left: parent.left
         anchors.right: parent.right
         onCenterClicked: mainScreen.state="mainMenu"
@@ -132,7 +133,14 @@ Item{
         id:timeScreenComponent
         TimeScreen{
             id:timeScreen
-
+            onBlockingChanged: {
+                if(blocking==true){
+                    header.blockSemaphore+=1
+                }
+                else{
+                    header.blockSemaphore-=1
+                }
+            }
         }
     }
     Loader{

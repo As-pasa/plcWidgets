@@ -4,6 +4,7 @@ import QtQuick.VirtualKeyboard 2.4
 import QtQuick.Layouts 1.12
 Item{
     id:root
+    property int blockSemaphore:0
     height:65
     signal leftClicked()
     signal centerClicked()
@@ -24,6 +25,15 @@ Item{
             Layout.preferredWidth: 100
             Layout.alignment: Qt.AlignLeft
         }
+        CustomLabel{
+            text:"Blocked"
+            fontSize: 16
+            Layout.fillHeight: true
+            Layout.preferredWidth: 100
+            enabled:blockSemaphore>0
+            opacity: blockSemaphore>0? 1:0
+        }
+
         MenuButtons {
             Layout.alignment: Qt.AlignRight
             Layout.fillHeight: true
