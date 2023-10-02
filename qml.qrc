@@ -32,5 +32,8 @@
         <file>TimeDisplayLabel.qml</file>
         <file>TimeEditLine.qml</file>
         <file>TimeStatusBar.qml</file>
+        <file>TimeWidgets.qml</file>
+        <file>PageSelector.qml</file>
+        <file>TimeScreen.qml</file>
     </qresource>
 </RCC>

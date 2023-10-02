@@ -21,8 +21,11 @@ int main(int argc, char *argv[])
         if (!obj && url == objUrl)
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
-    engine.load(url);
+
     QQmlContext* root=engine.rootContext();
     root->setContextProperty("timeModel",&model);
+    engine.load(url);
+
+
     return app.exec();
 }

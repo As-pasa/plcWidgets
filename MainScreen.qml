@@ -52,7 +52,19 @@ Item{
                 text:"Рез. копирование"
                 
             }
+        },
+        State{
+            name:"timeMenu"
+            PropertyChanges{
+                target:mainWidget
+                sourceComponent:timeScreen
+            }
+            PropertyChanges{
+                target:header
+                text:"Время"
+            }
         }
+
         
     ]
     
@@ -112,9 +124,15 @@ Item{
             leftText:"Время"
             centerText:"Об устройстве"
             rightText:"Экран"
+            onLeftClicked: mainScreen.state="timeMenu"
         }
     }
-    
+    Component{
+        id:timeScreen
+        TimeScreen{
+
+        }
+    }
     
     
     Loader{

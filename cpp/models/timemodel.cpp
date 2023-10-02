@@ -42,6 +42,39 @@ void TimeModel::setCurrentTime(QDateTime nTime){
         emit currentTimeChanged(nTime);
     }
 
+}
+
+QStringList TimeModel::timeZones()
+{
+    if(m_timeZones.size()==0){
+        for(const auto& id: QTimeZone::availableTimeZoneIds()){
+            QTimeZone tz(id);
+
+            m_timeZones.append(QString("(%1) %2").arg(tz.displayName(QTimeZone::StandardTime,QTimeZone::OffsetName),QString(id)) );
+            if(id==QTimeZone::systemTimeZoneId()){
+
+                m_currentTimeZone=m_timeZones[m_timeZones.size()-1];
+            }
+        }
+        qDebug()<<QTimeZone::systemTimeZoneId();
+    }
+
+    return m_timeZones;
+}
+
+QString TimeModel::currentTimeZone()
+{
+    if(m_currentTimeZone==""){
+        timeZones();
+    }
+    return m_currentTimeZone;
+}
+
+void TimeModel::setCurrentTimeZone(QString n)
+{
+    qDebug()<<"time zone selected";
+    m_currentTimeZone=n;
+    emit currentTimeZoneChanged(n);
 };
 
 bool TimeModel::NIPStatus(){
@@ -59,4 +92,9 @@ bool TimeModel::ATZStatus(){
 void TimeModel::setATZStatus(bool status){
     m_system->setAtzEnabled(status);
     emit ATZStatusChanged(status);
+}
+
+void TimeModel::installCurrentTimeZoneAsSystem()
+{
+    qDebug()<<"timezone was setted";
 };
