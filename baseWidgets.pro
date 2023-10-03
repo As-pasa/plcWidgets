@@ -15,7 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         cpp/models/appmodel.cpp \
-        cpp/models/deviceinfomodel.cpp \
+        cpp/models/devinfomodel.cpp \
         cpp/models/interfacecredentials.cpp \
         cpp/models/netmodel.cpp \
         cpp/models/screenmodel.cpp \
@@ -54,7 +54,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 HEADERS += \
     cpp/models/appmodel.h \
-    cpp/models/deviceinfomodel.h \
+    cpp/models/devinfomodel.h \
     cpp/models/interfacecredentials.h \
     cpp/models/netmodel.h \
     cpp/models/screenmodel.h \

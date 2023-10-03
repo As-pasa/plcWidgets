@@ -6,6 +6,7 @@
 class ScreenModel:public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(int brightness READ brightness WRITE setBrightness NOTIFY brightnessChanged)
 public:
     ScreenModel(IScreenSystem* system);
 private:
@@ -13,11 +14,13 @@ private:
     int m_brightness;
 public:
     void setBrightness(int value);
-    int getBrightness();
+    int brightness();
+
+public slots:
     void calibrate();
 signals:
     void brightnessChanged(int value);
-    void calibrationPerformed();
+
 
 };
 

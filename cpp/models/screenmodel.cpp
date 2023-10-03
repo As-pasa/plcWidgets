@@ -15,7 +15,7 @@ void ScreenModel::setBrightness(int value)
     }
 }
 
-int ScreenModel::getBrightness()
+int ScreenModel::brightness()
 {
     return m_brightness;
 }
@@ -23,5 +23,5 @@ int ScreenModel::getBrightness()
 void ScreenModel::calibrate()
 {
     m_system->calibrate();
-    emit calibrationPerformed();
+
 }

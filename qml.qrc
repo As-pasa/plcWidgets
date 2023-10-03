@@ -35,5 +35,8 @@
         <file>TimeWidgets.qml</file>
         <file>PageSelector.qml</file>
         <file>TimeScreen.qml</file>
+        <file>DeviceInfo.qml</file>
+        <file>BrightnessPicker.qml</file>
+        <file>ScreenMenu.qml</file>
     </qresource>
 </RCC>

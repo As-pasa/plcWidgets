@@ -63,6 +63,21 @@ Item{
                 target:header
                 text:"Время"
             }
+        },
+        State{
+            name:"deviceInfoMenu"
+            PropertyChanges{
+                target:mainWidget
+                sourceComponent:deviceInfoComponent
+            }
+        },
+        State{
+            name:"screenMenu"
+            PropertyChanges{
+                target:mainWidget
+                sourceComponent:screenMenu
+            }
+
         }
 
         
@@ -127,6 +142,8 @@ Item{
             centerText:"Об устройстве"
             rightText:"Экран"
             onLeftClicked: mainScreen.state="timeMenu"
+            onCenterClicked: mainScreen.state="deviceInfoMenu"
+            onRightClicked: mainScreen.state="screenMenu"
         }
     }
     Component{
@@ -143,6 +160,20 @@ Item{
             }
         }
     }
+    Component{
+        id: deviceInfoComponent
+        DeviceInfo{
+
+
+        }
+    }
+    Component{
+        id:screenMenu
+        ScreenMenu{
+
+        }
+    }
+
     Loader{
         id:mainWidget
         anchors.top:header.bottom
