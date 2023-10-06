@@ -17,7 +17,7 @@ CustomRect{
     property var source: ["data","betta","gamma","gamma1","gamma2","gamma3","gamma4","gamma5"]
     property int currentPage:0
     property int pageSize:5
-    property string selectedContent:"data"
+
     ListView{
         anchors{
             top:parent.top
@@ -29,7 +29,7 @@ CustomRect{
         id:lview
         model:pgSelector.source.slice(pgSelector.currentPage*pgSelector.pageSize, pgSelector.currentPage*pgSelector.pageSize+pgSelector.pageSize)
 
-        
+
         
     }
     RowLayout{

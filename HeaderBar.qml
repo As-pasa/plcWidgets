@@ -21,6 +21,7 @@ Item{
         CustomLabel{
             text:root.text
             fontSize:16
+            Layout.margins: 5
             Layout.fillHeight: true
             Layout.preferredWidth: 100
             Layout.alignment: Qt.AlignLeft

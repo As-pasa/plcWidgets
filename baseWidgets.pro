@@ -1,4 +1,4 @@
-QT += quick virtualkeyboard
+QT += quick virtualkeyboard widgets
 
 CONFIG += c++11
 
@@ -23,6 +23,7 @@ SOURCES += \
         cpp/models/timemodel.cpp \
         cpp/models/wificonnection.cpp \
         cpp/models/wifimodel.cpp \
+        cpp/systems/debugfilesystem.cpp \
         cpp/systems/debugnetsystem.cpp \
         cpp/systems/debugscreensystem.cpp \
         cpp/systems/debugtimesystem.cpp \
@@ -62,6 +63,7 @@ HEADERS += \
     cpp/models/timemodel.h \
     cpp/models/wificonnection.h \
     cpp/models/wifimodel.h \
+    cpp/systems/debugfilesystem.h \
     cpp/systems/debugnetsystem.h \
     cpp/systems/debugscreensystem.h \
     cpp/systems/debugtimesystem.h \

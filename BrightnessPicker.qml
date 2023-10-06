@@ -6,11 +6,15 @@ import QtQuick.Layouts 1.12
 
 Rectangle{
     
-    
+    CustomRect{
+        id:colorPicker
+        width:0
+        height:0
+    }
     
     property int value: 100
-    property color primaryColor: "white"
-    property color secondaryColor:"red"
+    property color primaryColor: colorPicker.defaultColor
+    property color secondaryColor:colorPicker.clickedColor
     property color borderColor: "black"
     
     
@@ -154,6 +158,7 @@ Rectangle{
             anchors.fill:parent
             anchors.margins: parent.height*0.1
         }
+
     }
     
 }

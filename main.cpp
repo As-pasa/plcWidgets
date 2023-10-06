@@ -1,3 +1,4 @@
+#include <QApplication>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include "cpp/systems/debugtimesystem.h"
@@ -5,6 +6,8 @@
 #include "cpp/models/timemodel.h"
 #include "cpp/models/devinfomodel.h"
 #include "cpp/models/screenmodel.h"
+
+#include "cpp/systems/debugfilesystem.h"
 #include <QQmlContext>
 #include <QDebug>
 int main(int argc, char *argv[])
@@ -13,11 +16,12 @@ int main(int argc, char *argv[])
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
-    QGuiApplication app(argc, argv);
+    QApplication app(argc, argv);
     DebugTimeSystem* s=new DebugTimeSystem();
     DebugScreenSystem* screenSys=new DebugScreenSystem();
+    //DebugFileSystem* fileSys=new DebugFileSystem();
     ScreenModel screenModel(screenSys);
-
+    //FileModel fileModel(fileSys,"","");
     TimeModel model(s);
     DevInfoModel devInfo;
 
@@ -33,6 +37,7 @@ int main(int argc, char *argv[])
     root->setContextProperty("timeModel",&model);
     root->setContextProperty("devInfo",&devInfo);
     root->setContextProperty("screenModel",&screenModel);
+    //root->setContextProperty("fileModel",&fileModel);
     engine.load(url);
 
 

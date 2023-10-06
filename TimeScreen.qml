@@ -103,7 +103,7 @@ Item{
             PageSelector {
                 id: pgSelector
                 source:timeModel.timeZones
-                selectedContent: timeModel.currentTimeZone
+                property string selectedContent:timeModel.currentTimeZone
 
                 anchors{
                     top:parent.top
