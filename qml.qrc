@@ -38,5 +38,6 @@
         <file>DeviceInfo.qml</file>
         <file>BrightnessPicker.qml</file>
         <file>ScreenMenu.qml</file>
+        <file>FileExportScreen.qml</file>
     </qresource>
 </RCC>

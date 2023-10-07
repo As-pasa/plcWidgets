@@ -20,7 +20,9 @@ void DebugFileSystem::copyAll(QString from, QString to)
 QStringList DebugFileSystem::fileList(QString dir, bool recursive)
 {
     qDebug()<<"file list requested";
-    return QStringList {"Aaaa","Bbbbb","Ccccc","Dddddd"};
+    QStringList answer;
+    answer<<"aaa"<<"bbb"<<"ccc"<<"ddd";
+    return answer;
 }
 
 int DebugFileSystem::getInnerTotalMB()

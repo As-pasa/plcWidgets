@@ -78,6 +78,14 @@ Item{
                 sourceComponent:screenMenu
             }
 
+        },
+        State{
+            name:"fileExportMenu"
+            PropertyChanges {
+                target: mainWidget
+                sourceComponent:exportMenu
+
+            }
         }
 
         
@@ -129,6 +137,9 @@ Item{
             leftText:"Экспорт данных"
             centerText:"Управление хранилищем"
             rightText:"Импорт данных"
+            onRightClicked: {
+                mainScreen.state="fileExportMenu"
+            }
         }
         
     }
@@ -170,6 +181,13 @@ Item{
     Component{
         id:screenMenu
         ScreenMenu{
+
+        }
+    }
+
+    Component{
+        id:exportMenu
+        FileExportScreen{
 
         }
     }
