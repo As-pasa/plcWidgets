@@ -29,24 +29,28 @@ Item{
                     underLabelUp:true
                     text:devInfo.deviceName
                     Layout.fillWidth: true
+                    makeBorders: false
                 }
                 TimeDisplayLabel{
                     underLabel: "Тип устройства"
                     underLabelUp:true
                     text:devInfo.deviceType
                     Layout.fillWidth: true
+                    makeBorders: false
                 }
                 TimeDisplayLabel{
                     underLabel: "Прошивка"
                     underLabelUp:true
                     text:devInfo.firmWare
                     Layout.fillWidth: true
+                    makeBorders: false
                 }
                 TimeDisplayLabel{
                     underLabel: "Версия прошивки"
                     underLabelUp:true
                     text:devInfo.firmWareDate
                     Layout.fillWidth: true
+                    makeBorders: false
                 }
             }
         }
@@ -68,6 +72,7 @@ Item{
                     underLabelUp:true
                     text:devInfo.password
                     Layout.fillWidth: true
+                    makeBorders: false
                 }
                 TimeEditLine{
                     id: passwordInput

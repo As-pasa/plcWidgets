@@ -9,6 +9,7 @@ CustomRect{
     height:100
     property int value: 05
     property string signatureText:"change day"
+    color:Qt.darker(defaultColor)
     TextInput{
 
         anchors.centerIn: parent

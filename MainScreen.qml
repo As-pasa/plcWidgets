@@ -96,8 +96,14 @@ Item{
 
         id:header
         enabled: blockSemaphore==0
+
         anchors.left: parent.left
         anchors.right: parent.right
+        anchors{
+
+            leftMargin: 15
+            rightMargin: 15
+        }
         onCenterClicked: mainScreen.state="mainMenu"
         
     }
@@ -110,7 +116,7 @@ Item{
             rightImagePath: "qrc:/icons/plcBackup.png"
             leftText:"Сеть"
             centerText:"Настройки"
-            rightText:"Резервное копирование"
+            rightText:"Файлы"
             
             onLeftClicked: mainScreen.state="networkMenu"
             onCenterClicked: mainScreen.state="settingsMenu"

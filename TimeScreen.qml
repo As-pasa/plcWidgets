@@ -42,6 +42,9 @@ Item{
         id: tzDisplay
         Item{
             CustomLabel{
+                background: CustomRect{
+                    border.width: 0
+                }
                 id:tzHeader
                 text:"time zone settings"
                 anchors{
@@ -54,7 +57,9 @@ Item{
 
             CustomLabel{
                 id:currentTimeZoneLabel
-
+                background: CustomRect{
+                    border.width: 0
+                }
                 text:timeModel.currentTimeZone
 
                 anchors{

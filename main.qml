@@ -6,13 +6,19 @@ import QtQuick.Layouts 1.12
 ApplicationWindow {
     id: window
     visible: true
-    width: 800
-    height: 480
+    width: 805
+    height: 485
     title: qsTr("Tabs")
-
-    MainScreen{
-        anchors.fill:parent
+    Rectangle{
+        anchors.fill: parent
+        color:"grey"
+        MainScreen{
+            anchors.topMargin: 5
+            anchors.fill:parent
+        }
     }
+
+
 
 //    HeaderBar {
 //        id:header

@@ -2,7 +2,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.VirtualKeyboard 2.4
 import QtQuick.Layouts 1.12
-Item{
+CustomRect{
     id:root
     property int blockSemaphore:0
     height:65
@@ -11,20 +11,21 @@ Item{
     signal rightClicked()
     property string text: "version 1.3"
     RowLayout{
+        spacing: 5
         anchors{
-            leftMargin: 15
-            rightMargin: 15
-            topMargin: 5
+            leftMargin: 5
+            rightMargin: 5
+            margins: 5
             fill: parent
         }
 
         CustomLabel{
             text:root.text
             fontSize:16
-            Layout.margins: 5
+
             Layout.fillHeight: true
             Layout.preferredWidth: 100
-            Layout.alignment: Qt.AlignLeft
+
         }
         CustomLabel{
             text:"Blocked"
@@ -34,14 +35,43 @@ Item{
             enabled:blockSemaphore>0
             opacity: blockSemaphore>0? 1:0
         }
+        Item{
+            Layout.fillWidth: true
+        }
 
-        MenuButtons {
-            Layout.alignment: Qt.AlignRight
+        ImageButton{
+            Layout.preferredWidth: 100
             Layout.fillHeight: true
-            Layout.preferredWidth: 400
-            onLeftClicked: root.leftClicked()
-            onCenterClicked: root.centerClicked()
-            onRightClicked: root.rightClicked()
+
+
+
+            imageSource: "qrc:/icons/plcLang.png"
+            onClicked: {
+                root.leftClicked();
+            }
+        }
+        ImageButton{
+
+            Layout.preferredWidth: 100
+            Layout.fillHeight: true
+
+
+
+            imageSource: "qrc:/icons/plcHome.png"
+            onClicked: {
+                root.centerClicked();
+            }
+        }
+        ImageButton{
+            Layout.preferredWidth: 100
+            Layout.fillHeight: true
+
+
+
+            imageSource: "qrc:/icons/plcExit.png"
+            onClicked: {
+                root.rightClicked();
+            }
         }
     }
 }

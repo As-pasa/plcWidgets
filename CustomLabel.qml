@@ -5,13 +5,13 @@ import QtQuick.VirtualKeyboard 2.4
 Label{
     property int fontSize: 20
 
-    background: CustomRect{}
-    bottomInset: -5
-    topInset: -5
-    leftInset: -5
-    rightInset: -5
+    background: CustomRect{
+        border.width: 0
+    }
+
     text: "hello"
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     font.pixelSize: fontSize
+    color: "black"
 }

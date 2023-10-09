@@ -22,6 +22,7 @@ Item{
     property string screenName: "version 1.3"
     RowLayout{
         anchors.fill: parent
+        anchors.margins: 15
         MenuTile{
             imageSource: root.leftImagePath
             text: root.leftText

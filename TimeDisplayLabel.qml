@@ -8,6 +8,10 @@ CustomLabel{
 
     property string underLabel: "mm"
     property bool underLabelUp: false
+    property bool makeBorders:true
+    background: CustomRect{
+        border.width: makeBorders?2:0
+    }
     Text{
         id:signature
         anchors{
