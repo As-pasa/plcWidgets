@@ -21,7 +21,7 @@ QStringList DebugFileSystem::fileList(QString dir, bool recursive)
 {
     qDebug()<<"file list requested";
     QStringList answer;
-    answer<<"aaa"<<"bbb"<<"ccc"<<"ddd";
+    answer<<"aaa"<<"bbb"<<"ccc"<<"ddd"<<"eee"<<"fff"<<"ggg"<<"hhh"<<"jjj"<<"kkk"<<"lll"<<"mmm"<<"nnn"<<"ooo"<<"ppp";
     return answer;
 }
 

@@ -13,7 +13,7 @@ Button{
     font.pixelSize: 20
     background: CustomRect {
         id:back
-        color: root.down? back.clickedColor: Qt.darker(back.defaultColor)
+        color: root.down? back.clickedColor: back.buttonColor
     }
     contentItem: Text{
         text:root.text

@@ -7,9 +7,11 @@ DebugTimeSystem::DebugTimeSystem()
 
 void DebugTimeSystem::setTime(QDateTime package)
 {
-
+    qDebug()<<cur;
     qDebug()<<"system time changed";
+
     cur=package;
+    qDebug()<<cur;
 }
 
 
@@ -38,5 +40,5 @@ bool DebugTimeSystem::getNIPStatus()
 QDateTime DebugTimeSystem::getCurrentTime()
 {
     qDebug()<<cur.toString();
-    return QDateTime::currentDateTime();
+    return cur;
 }

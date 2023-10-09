@@ -20,48 +20,43 @@ Item{
             left:parent.left
             
         }
+
         property var selectedContent:[]
+        property var selectAll:false
         source:fileModel.innerFiles
         width:root.width*0.5
-        delegate: TextButton{
+        delegate:TextButton{
+            background: CustomRect{
+                color:pgSelector.selectedContent.includes(text)?colorPicker.clickedColor:colorPicker.buttonColor
+
+
+            }
+            Connections{
+                target:pgSelector
+                function onSelectAllChanged(){
+
+                    background.color=pgSelector.selectedContent.includes(text)?colorPicker.clickedColor:colorPicker.buttonColor
+                }
+            }
+
+            text:modelData
             anchors{
                 left:parent.left
                 right:parent.right
-                margins: 5
+                margins:10
             }
-            
-            text:modelData
-            background: CustomRect{
-
-                property bool isSelected:pgSelector.selectedContent.includes(parent.text)
-
-                border.width:0
-                color:
-                    isSelected?clickedColor : defaultColor
-                
-            }
-
-            
             onClicked: {
-
                 if(pgSelector.selectedContent.includes(text)){
-                    pgSelector.selectedContent=pgSelector.selectedContent.filter( ob=>{
-                                                                                     return ob!==modelData})
-                    //background.color=colorPicker.defaultColor
+                    pgSelector.selectedContent=pgSelector.selectedContent.filter( (a)=>{return a!==modelData} )
+                    pgSelector.selectAll=!pgSelector.selectAll
                 }
                 else{
                     pgSelector.selectedContent.push(text)
-                    //background.color=colorPicker.clickedColor
+                    pgSelector.selectAll=!pgSelector.selectAll
                 }
-                console.log(pgSelector.selectedContent.includes(text))
             }
         }
-        Component.onCompleted:{
-            selectedContent=[]
 
-            
-            
-        }
     }
     CustomRect{
         radius:20
@@ -115,6 +110,7 @@ Item{
                 onClicked:{
 
                     pgSelector.selectedContent=pgSelector.source
+                    pgSelector.selectAll=!pgSelector.selectAll
                     console.log(pgSelector.selectedContent)
                 }
             }
@@ -123,6 +119,7 @@ Item{
                 text:"drop all"
                 onClicked:{
                     pgSelector.selectedContent=[]
+                    pgSelector.selectAll=!pgSelector.selectAll
                     console.log(pgSelector.selectedContent)
                 }
             }

@@ -5,7 +5,7 @@ import QtQuick.VirtualKeyboard.Settings 2.1
 import QtQuick.Layouts 1.12
 CustomRect{
 
-    radius: 30
+    radius: 20
     function next(){
         currentPage=Math.min(currentPage+1, Math.floor(source.length/pageSize ) )
     }

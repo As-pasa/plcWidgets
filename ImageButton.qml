@@ -17,7 +17,7 @@ Item{
     CustomRect{
         id:back
         anchors.fill:parent
-        color: mouseArea.containsPress ? back.clickedColor:Qt.darker(back.defaultColor)
+        color: mouseArea.containsPress ? back.clickedColor:back.buttonColor
     }
     Image{
         anchors.margins: root.imageMargins
