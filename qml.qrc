@@ -39,5 +39,10 @@
         <file>BrightnessPicker.qml</file>
         <file>ScreenMenu.qml</file>
         <file>FileExportScreen.qml</file>
+        <file>InnerFileMenu.qml</file>
+        <file>virtualKeyboards/NumPad.qml</file>
+        <file>virtualKeyboards/KeyboardInput.qml</file>
+        <file>virtualKeyboards/TextKeyboardField.qml</file>
+        <file>virtualKeyboards/IntKeyboardInputField.qml</file>
     </qresource>
 </RCC>

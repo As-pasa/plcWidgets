@@ -86,6 +86,15 @@ Item{
                 sourceComponent:exportMenu
 
             }
+        },
+        State{
+            name:"innerFileMenu"
+            PropertyChanges {
+                target: mainWidget
+                sourceComponent: innerFileMenu
+
+            }
+
         }
 
         
@@ -146,6 +155,9 @@ Item{
             onRightClicked: {
                 mainScreen.state="fileExportMenu"
             }
+            onCenterClicked: {
+                mainScreen.state="innerFileMenu"
+            }
         }
         
     }
@@ -194,6 +206,12 @@ Item{
     Component{
         id:exportMenu
         FileExportScreen{
+
+        }
+    }
+    Component{
+        id:innerFileMenu
+        InnerFileMenu{
 
         }
     }

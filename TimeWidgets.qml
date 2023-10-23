@@ -135,7 +135,7 @@ CustomRect{
                 }
                 onClicked: {
                     var d = dateEdit.unPackDate(parseInt(dayChange.value),parseInt(monthChange.value),parseInt(yearChange.value))
-                    console.log(d)
+
                     if(d!==null){
                         
                         timeWidget.userDate=d
@@ -187,9 +187,9 @@ CustomRect{
             }
             Component.onCompleted: {
                 var d = timeWidget.date
-                dayChange.value=d.getDate()
-                monthChange.value=d.getMonth()
-                yearChange.value=d.getFullYear()
+                dayChange.value=d.getDate().toString()
+                monthChange.value=d.getMonth().toString()
+                yearChange.value=d.getFullYear().toString()
                 
             }
             Timer{
@@ -202,6 +202,7 @@ CustomRect{
                 }
             }
             function unPackDay(day,month,year){
+
                 if (month === 1){
                     if(year %4===0) {
                         if(day >29)  return null

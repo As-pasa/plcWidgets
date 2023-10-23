@@ -1,8 +1,8 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtCharts 2.10
-import QtQuick.VirtualKeyboard.Settings 2.1
 import QtQuick.Layouts 1.12
+import "virtualKeyboards/"
 ApplicationWindow {
     id: window
     visible: true
@@ -11,12 +11,18 @@ ApplicationWindow {
     title: qsTr("Tabs")
     Rectangle{
         anchors.fill: parent
-        color:"grey"
+        color:"blue"
         MainScreen{
             anchors.topMargin: 5
             anchors.fill:parent
         }
     }
+    KeyboardInput{
+        id: kKEYBOARDUNIT
+        state:"closed numbers"
+    }
+
+
 
 
 
@@ -30,12 +36,4 @@ ApplicationWindow {
 //    FileExportScreen {
 //        id: root
 //    }
-
-
-    Binding {
-        target: VirtualKeyboardSettings
-        property: "fullScreenMode"
-        value:true
-    }
-
 }

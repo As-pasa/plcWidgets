@@ -1,4 +1,4 @@
-QT += quick virtualkeyboard widgets
+QT +=  quick widgets #virtualkeyboard
 
 CONFIG += c++11
 QT_OPENGL=angle
@@ -35,7 +35,6 @@ SOURCES += \
         cpp/systems/itimesystem.cpp \
         cpp/systems/iwifisystem.cpp \
         cpp/systems/plcnetsystem.cpp \
-        cpp/systems/plcscreensystem.cpp \
         cpp/systems/plctimesystem.cpp \
         cpp/systems/plcwifisystem.cpp \
         cpp/utilities/os.cpp \
@@ -76,7 +75,6 @@ HEADERS += \
     cpp/systems/itimesystem.h \
     cpp/systems/iwifisystem.h \
     cpp/systems/plcnetsystem.h \
-    cpp/systems/plcscreensystem.h \
     cpp/systems/plctimesystem.h \
     cpp/systems/plcwifisystem.h \
     cpp/utilities/os.h
