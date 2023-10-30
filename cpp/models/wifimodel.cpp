@@ -3,15 +3,22 @@
 WifiModel::WifiModel(IWifiSystem *wifiSystem)
 {
     m_system=wifiSystem;
+    connections=m_system->getWifiConnections();
 }
 
-void WifiModel::setWifiConnection(QString wifiName, QString wifiPassword)
+int WifiModel::declaredLength()
 {
-    m_system->setWifiConnection(wifiName,wifiPassword);
-    emit WifiConnectionAttempt(wifiName,wifiPassword);
+    return connections.length();
 }
 
-QList<WifiConnection> WifiModel::getWifiConnections()
+void WifiModel::refresh()
 {
-    return m_system->getWifiConnections();
+    connections=m_system->getWifiConnections();
+    emit declaredLengthChanged(connections.length());
 }
+
+QVariant WifiModel::fromId(int id)
+{
+    return QVariant::fromValue(connections[id]);
+}
+

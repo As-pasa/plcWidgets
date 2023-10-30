@@ -11,6 +11,7 @@ Item{
     property string signature: "text name"
     property var keyboardUnit:kKEYBOARDUNIT
     property string keyboardType:"en keyboard"
+    signal enterPressed()
     ColumnLayout{
         anchors.fill: parent
         CustomLabel{

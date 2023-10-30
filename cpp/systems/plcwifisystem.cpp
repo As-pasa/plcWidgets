@@ -116,7 +116,7 @@ QList<WifiConnection> PLCWifiSystem::getWifiConnections()
     }
 
     for(int i =0;i<name.size();i++){
-        WifiConnection a("","","","","");
+        WifiConnection a =  WifiConnection::from("","","","","");
         if(name[i]=='\n'){a.name="hidden";}else{a.name=name[i].remove(QRegExp("\\n"));}
         if(freq[i].toUInt()<3000){a.frequency="2.4G";}else{a.frequency="5G";}
         a.signal1=signal1[i]+" dBm";

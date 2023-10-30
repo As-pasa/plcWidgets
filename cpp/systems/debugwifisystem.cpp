@@ -2,7 +2,32 @@
 
 DebugWifiSystem::DebugWifiSystem()
 {
-
+     cons <<WifiConnection::from("Noosphere","666","42.42.42.42","NONE","signal1");
+     cons <<WifiConnection::from("n1","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("n2","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("n3","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("n5","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("aaaaaaaaaaaaaaaaaaaaaaaaaaa","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("FRRRRRRRRROOOOOOOOOOO","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("n8","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("n9","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("n10","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("n11","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("Ailaunamoraaaaaaaaaaaaaaaaaa","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("n13","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("n14","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("n15","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("n16","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("n17","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("n18","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("n19","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("n20","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("n21","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("n22","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("n23","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("n24","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("n25","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("n26","666","13.123.124.4","NONE","signal2");
 }
 
 void DebugWifiSystem::setWifiConnection(QString wifiName, QString wifiPassword,bool null_mgmt)
@@ -13,6 +38,6 @@ void DebugWifiSystem::setWifiConnection(QString wifiName, QString wifiPassword,b
 QList<WifiConnection> DebugWifiSystem::getWifiConnections()
 {
     qDebug()<<"wifi connection list requested";
-    return QList<WifiConnection>() << WifiConnection("noosphere","666","42.42.42.42","NONE","signal1");
+    return cons;
 }
 

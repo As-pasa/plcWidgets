@@ -1,6 +1,5 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
-import QtCharts 2.10
 import QtQuick.VirtualKeyboard.Settings 2.1
 import QtQuick.Layouts 1.12
 Item{
@@ -56,7 +55,6 @@ Item{
                 }
             }
         }
-        
     }
     CustomRect{
         radius:20
@@ -70,20 +68,7 @@ Item{
         }
         height:parent.height*0.5
         
-        ChartView {
-            backgroundColor: usageDisplay.defaultColor
-            title: "space usage"
-            anchors.fill: parent
-            legend.alignment: Qt.AlignBottom
-            antialiasing: true
-            
-            HorizontalStackedBarSeries {
-                axisY: BarCategoryAxis { categories: ["inner"] }
-                BarSet { label: "used"; values: [40] }
-                BarSet { label: "delta"; values: [0] }
-                BarSet { label: "free"; values: [40] }
-            }
-        }
+
         
         
         
@@ -114,7 +99,8 @@ Item{
                     
                     pgSelector.selectedContent=pgSelector.source
                     pgSelector.selectAll=!pgSelector.selectAll
-                    console.log(pgSelector.selectedContent)
+                    pgSelector.selectedContentChanged()
+
                 }
             }
             TextButton{
@@ -125,7 +111,7 @@ Item{
                 onClicked:{
                     pgSelector.selectedContent=[]
                     pgSelector.selectAll=!pgSelector.selectAll
-                    console.log(pgSelector.selectedContent)
+                    pgSelector.selectedContentChanged()
                 }
             }
             TextButton{
@@ -153,65 +139,59 @@ Item{
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 onClicked: {
-                    fileDeleteDialog.open()
+                    formatDialog.open()
                 }
 
             }
 
             Dialog{
                 id:fileDeleteDialog
-
-
-
-                implicitWidth: parent.width
-                implicitHeight: parent.height
-
-                background: CustomRect{
-                    radius: 15
-
+                anchors.centerIn: parent
+                width:parent.width
+                height:parent.height
+                modal:true
+                CustomLabel{
+                    anchors.fill: parent
+                    text:"delete selected?"
                 }
-                ColumnLayout{
-                    anchors.fill: buttonMenu
-                    CustomLabel{
-
-                        text:"submit changes"
-                        Layout.alignment: Qt.AlignHCenter
+                footer:DialogButtonBox{
+                    TextButton{
+                        text:"Yes"
+                        onClicked: {
+                            fileModel.removeFile(pgSelector.selectedContent)
+                            fileDeleteDialog.close()
+                        }
                     }
-                    DialogButtonBox{
-
-                        Layout.alignment: Qt.AlignHCenter
-                         background: CustomRect{
-                            border.width: 0
-                        }
-
-                        TextButton{
-                            text:"accept"
-                            DialogButtonBox.buttonRole: DialogButtonBox.AcceptRole
-                            onClicked: {
-
-                                fileDeleteDialog.accept()
-                            }
-
-                        }
-                        TextButton{
-                            text:"cancel"
-                            DialogButtonBox.buttonRole: DialogButtonBox.RejectRole
-                            onClicked: {
-                                fileDeleteDialog.reject()
-                            }
-                        }
-
+                    TextButton{
+                        text:"No"
+                        onClicked: fileDeleteDialog.close()
                     }
-
                 }
-
-
-
-
             }
-
+            Dialog{
+                id:formatDialog
+                anchors.centerIn: parent
+                width:parent.width
+                height:parent.height
+                modal:true
+                CustomLabel{
+                    anchors.fill: parent
+                    text:"format disk?"
+                }
+                footer:DialogButtonBox{
+                    TextButton{
+                        text:"Yes"
+                        onClicked: {
+                            fileModel.formatInner()
+                            formatDialog.close()
+                        }
+                    }
+                    TextButton{
+                        text:"No"
+                        onClicked: formatDialog.close()
+                    }
+                }
+            }
         }
     }
-    
-    
 }

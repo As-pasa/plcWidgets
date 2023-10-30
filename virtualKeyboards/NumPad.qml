@@ -47,6 +47,7 @@ Item{
                     anchors.centerIn: parent
                     text:  {
                         if(source.length===1){
+
                             return (root.shiftDown)?source.toUpperCase() : source
                         }
                         else{

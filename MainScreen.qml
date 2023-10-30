@@ -95,6 +95,20 @@ Item{
 
             }
 
+        },
+        State{
+            name:"fileImportMenu"
+            PropertyChanges{
+                target:mainWidget
+                sourceComponent:fileImportScreen
+            }
+        },
+        State{
+            name:"wifiConnectionMenu"
+            PropertyChanges{
+                target:mainWidget
+                sourceComponent:wifiConnectionMenu
+            }
         }
 
         
@@ -141,6 +155,8 @@ Item{
             leftText:"Сетевые интерфейсы"
             centerText:"Wifi"
             rightText:"Тестирование подключения"
+
+            onCenterClicked: mainScreen.state= "wifiConnectionMenu"
         }
     }
     Component{
@@ -152,11 +168,14 @@ Item{
             leftText:"Экспорт данных"
             centerText:"Управление хранилищем"
             rightText:"Импорт данных"
-            onRightClicked: {
-                mainScreen.state="fileExportMenu"
-            }
             onCenterClicked: {
                 mainScreen.state="innerFileMenu"
+            }
+            onLeftClicked: {
+                mainScreen.state="fileExportMenu"
+            }
+            onRightClicked: {
+                mainScreen.state="fileImportMenu"
             }
         }
         
@@ -215,7 +234,18 @@ Item{
 
         }
     }
+    Component{
+        id:fileImportScreen
+        FileImportScreen {
 
+        }
+    }
+    Component{
+        id:wifiConnectionMenu
+        WifiConnectionsMenu{
+
+        }
+    }
     Loader{
         id:mainWidget
         anchors.top:header.bottom

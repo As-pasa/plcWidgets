@@ -7,6 +7,7 @@ class DebugWifiSystem:public IWifiSystem
 {
 public:
     DebugWifiSystem();
+    QList<WifiConnection> cons;
 
     // IWifiSystem interface
 public:

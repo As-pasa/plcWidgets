@@ -1,12 +1,16 @@
 #include "wificonnection.h"
 
-WifiConnection::WifiConnection(QString cname, QString cfrequency, QString cbssid, QString csecurity, QString csignal1):name(cname),frequency(cfrequency),bssid(cbssid),security(csecurity),signal1(csignal1)
+
+
+
+
+WifiConnection WifiConnection::from(QString name, QString frequency, QString bssid, QString security, QString signal1)
 {
-
+    WifiConnection con;
+    con.name=name;
+    con.frequency=frequency;
+    con.bssid=bssid;
+    con.security=security;
+    con.signal1=signal1;
+    return con;
 }
-
-bool WifiConnection::operator==(WifiConnection &other)
-{
-    return name==other.name&bssid==other.bssid;
-}
-

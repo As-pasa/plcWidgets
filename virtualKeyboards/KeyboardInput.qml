@@ -13,6 +13,7 @@ Dialog{
         if(c==="enter"){
             if(client!==null){
                 client.value = data
+                client.enterPressed()
             }
             
             root.close()
@@ -23,8 +24,8 @@ Dialog{
         else if(c==="back"){
             data=data.slice(0,-1)
         }
-        else if(c.toLowerCase() ==="shift"){
-            shiftDown= !rt.shiftDown
+        else if(c.toLowerCase() === "shift"){
+            rt.shiftDown= !rt.shiftDown
         }
         else if (c.toLowerCase()==="&123"){
             state="special symbols"
@@ -37,6 +38,9 @@ Dialog{
         }
         else if(c.toLowerCase()==="ru"){
             state="ru keyboard"
+        }
+        else if(c.toLowerCase()==="space"){
+            data=data+" "
         }
         else{
             data+=c

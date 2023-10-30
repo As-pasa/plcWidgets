@@ -27,7 +27,7 @@ CustomRect{
             right:parent.right
         }
         id:lview
-        model:pgSelector.source.slice(pgSelector.currentPage*pgSelector.pageSize, pgSelector.currentPage*pgSelector.pageSize+pgSelector.pageSize)
+        model:(pgSelector.source.length===0)? [] :  pgSelector.source.slice(pgSelector.currentPage*pgSelector.pageSize, pgSelector.currentPage*pgSelector.pageSize+pgSelector.pageSize)
 
 
         

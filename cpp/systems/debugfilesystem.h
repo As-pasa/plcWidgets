@@ -8,7 +8,9 @@ class DebugFileSystem: public IFileSystem
 public:
     DebugFileSystem();
 
-
+private:
+    QStringList answer;
+    QStringList answerOut;
     // IFileSystem interface
 public:
     void copySelected(QString from, QString to, QStringList files);
@@ -18,6 +20,8 @@ public:
     int getInnerUsedMB();
     int getOuterTotalMB(bool &isOuterMounted);
     int getOuterUsedMB(bool &isOuterMounted);
+    void removeFile(QStringList fileNameList);
+    void formatInner();
 };
 
 #endif // DEBUGFILESYSTEM_H

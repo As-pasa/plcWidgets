@@ -14,6 +14,7 @@ class FileModel : public QObject
     Q_PROPERTY(int innerUsedMB READ innerUsedMB NOTIFY innerUsedMBChanged)
     Q_PROPERTY(int outUsedMB READ outUsedMB NOTIFY outUsedMBChanged)
     Q_PROPERTY(int outFreeMB READ outFreeMB NOTIFY outFreeMBChanged)
+
 public:
     explicit FileModel( IFileSystem *sys,QString innerFileDir, QString outRoot, QObject *parent = nullptr);
 
@@ -24,6 +25,7 @@ private:
     QString m_innerFileDir;
     QString m_backupDirRoot;
 public:
+
     QStringList innerFiles();
     QStringList outerSaveDirs();
     int innerFreeMB();
@@ -32,9 +34,12 @@ public:
     int outFreeMB();
 public slots:
     void restoreFiles(QString outerDir);
-    void backupFiles(QStringList filesToSave);
+    void backupFiles(QStringList filesToSave, QString saveName);
+    void importFromFolder(QString folderName);
     void refreshInner();
     void refreshOuter();
+    void removeFile(QStringList fileNameList);
+    void formatInner();
 signals:
     void innerFilesChanged(QStringList);
     void outerSaveDirsChanged(QStringList);
@@ -42,6 +47,7 @@ signals:
     void innerUsedMBChanged(int);
     void outUsedMBChanged(int);
     void outFreeMBChanged(int);
+
 };
 
 #endif // FILEMODEL_H

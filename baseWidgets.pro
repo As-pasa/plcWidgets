@@ -54,7 +54,6 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    cpp/models/appmodel.h \
     cpp/models/devinfomodel.h \
     cpp/models/filemodel.h \
     cpp/models/interfacecredentials.h \

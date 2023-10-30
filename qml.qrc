@@ -44,5 +44,8 @@
         <file>virtualKeyboards/KeyboardInput.qml</file>
         <file>virtualKeyboards/TextKeyboardField.qml</file>
         <file>virtualKeyboards/IntKeyboardInputField.qml</file>
+        <file>FileImportScreen.qml</file>
+        <file>TestPgSelector.qml</file>
+        <file>WifiConnectionsMenu.qml</file>
     </qresource>
 </RCC>

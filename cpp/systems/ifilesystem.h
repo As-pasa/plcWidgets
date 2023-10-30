@@ -12,6 +12,8 @@ public:
     virtual int getInnerUsedMB()=0;
     virtual int getOuterTotalMB(bool &isOuterMounted)=0;
     virtual int getOuterUsedMB(bool &isOuterMounted)=0;
+    virtual void removeFile(QStringList fileNames)=0;
+    virtual void formatInner()=0;
 };
 
 #endif // IFILESYSTEM_H

@@ -157,26 +157,26 @@ CustomRect{
                 anchors{
                     right:monthChange.left
                     verticalCenter: monthChange.verticalCenter
-                    margins:10
+                    margins:7
                 }
-                signatureText:"input day"
+                signatureText:"day"
             }
             TimeEditLine {
                 id: monthChange
                 anchors{
                     centerIn: parent
-                    margins:10
+                    margins:7
                 }
-                signatureText: "input month"
+                signatureText: "month"
             }
             TimeEditLine {
                 id: yearChange
                 anchors{
                     left:monthChange.right
                     verticalCenter: monthChange.verticalCenter
-                    margins:10
+                    margins:7
                 }
-                signatureText: "input year"
+                signatureText: "year"
             }
             TimeStatusBar {
                 id: statusBar
@@ -248,6 +248,7 @@ CustomRect{
         id:hourMinsEditScreen
         Item{
             id:timeEdit
+            anchors.margins: 15
             TextButton{
                 id:backBTN
                 anchors{
@@ -286,16 +287,18 @@ CustomRect{
             
             TimeEditLine{
                 id:minuteChange
-                signatureText: "input minute"
+                signatureText: "minute"
                 anchors{
                     verticalCenter: timeEdit.verticalCenter
                     right: timeEdit.horizontalCenter
+                    margins: 10
                 }
             }
             TimeEditLine{
                 id:hourChange
-                signatureText: "input hour"
+                signatureText: "hour"
                 anchors{
+                    margins: 10
                     verticalCenter: timeEdit.verticalCenter
                     left:minuteChange.right
                 }

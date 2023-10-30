@@ -2,6 +2,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtCharts 2.10
 import QtQuick.Layouts 1.12
+
 import "virtualKeyboards/"
 ApplicationWindow {
     id: window
@@ -11,7 +12,7 @@ ApplicationWindow {
     title: qsTr("Tabs")
     Rectangle{
         anchors.fill: parent
-        color:"blue"
+        color:"grey"
         MainScreen{
             anchors.topMargin: 5
             anchors.fill:parent
@@ -25,15 +26,16 @@ ApplicationWindow {
 
 
 
-
 //    HeaderBar {
 //        id:header
 //        anchors.left: parent.left
 //        anchors.right: parent.right
 //        onCenterClicked: mainScreen.state="mainMenu"
 
+
 //    }
-//    FileExportScreen {
+//    WifiConnectionsMenu {
 //        id: root
 //    }
+
 }
