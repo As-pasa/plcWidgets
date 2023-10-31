@@ -19,6 +19,8 @@ SOURCES += \
         cpp/models/filemodel.cpp \
         cpp/models/interfacecredentials.cpp \
         cpp/models/netmodel.cpp \
+        cpp/models/passwordmodel.cpp \
+        cpp/models/pingmodel.cpp \
         cpp/models/screenmodel.cpp \
         cpp/models/timechangepackage.cpp \
         cpp/models/timemodel.cpp \
@@ -26,6 +28,8 @@ SOURCES += \
         cpp/models/wifimodel.cpp \
         cpp/systems/debugfilesystem.cpp \
         cpp/systems/debugnetsystem.cpp \
+        cpp/systems/debugpasswordsysteml.cpp \
+        cpp/systems/debugpingsystem.cpp \
         cpp/systems/debugscreensystem.cpp \
         cpp/systems/debugtimesystem.cpp \
         cpp/systems/debugwifisystem.cpp \
@@ -40,7 +44,8 @@ SOURCES += \
         cpp/utilities/os.cpp \
         main.cpp
 
-RESOURCES += qml.qrc
+RESOURCES += qml.qrc \
+    translations.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -58,6 +63,8 @@ HEADERS += \
     cpp/models/filemodel.h \
     cpp/models/interfacecredentials.h \
     cpp/models/netmodel.h \
+    cpp/models/passwordmodel.h \
+    cpp/models/pingmodel.h \
     cpp/models/screenmodel.h \
     cpp/models/timechangepackage.h \
     cpp/models/timemodel.h \
@@ -65,6 +72,8 @@ HEADERS += \
     cpp/models/wifimodel.h \
     cpp/systems/debugfilesystem.h \
     cpp/systems/debugnetsystem.h \
+    cpp/systems/debugpasswordsysteml.h \
+    cpp/systems/debugpingsystem.h \
     cpp/systems/debugscreensystem.h \
     cpp/systems/debugtimesystem.h \
     cpp/systems/debugwifisystem.h \

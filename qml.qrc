@@ -47,5 +47,9 @@
         <file>FileImportScreen.qml</file>
         <file>TestPgSelector.qml</file>
         <file>WifiConnectionsMenu.qml</file>
+        <file>NetInerfaces.qml</file>
+        <file>virtualKeyboards/IpKeyboardField.qml</file>
+        <file>PingMenu.qml</file>
+        <file>PasswordScreen.qml</file>
     </qresource>
 </RCC>

@@ -13,11 +13,11 @@ CustomRect{
 //        right:parent.right
 //        bottom:parent.bottom
 //    }
-    property var model
+    property var model: "1 2 3 4 5 6 7 8 9 10".split(" ")
     property alias delegate:supplier.delegate
     property alias signature : signatureLabel.data
     property alias contextButtons:contextButtons.data
-    property string contextButtonText:"connect"
+    property string contextButtonText:qsTr("connect")
 
     property alias columnsOnPage: pgsViewGrid.columns
     property alias rowsOnPage:pgsViewGrid.rows
@@ -68,12 +68,11 @@ CustomRect{
             RowLayout{
                 anchors.fill: parent
                 spacing: 20
-                Item{
-                    Layout.fillWidth: true
-                }
+
                 TextButton{
-                    text:"Prev"
-                    Layout.preferredWidth: 100
+                    text:qsTr("prev page")
+                    Layout.preferredWidth: 200
+                    Layout.alignment: Qt.AlignLeft
 
                     onClicked: {
 
@@ -86,24 +85,21 @@ CustomRect{
                 Item{
                     id:contextButtons
                     Layout.fillHeight: true
-                    Layout.fillWidth: true
+
+                    Layout.preferredWidth: 120
                 }
 
                 TextButton{
-                    Layout.preferredWidth: 100
-                    text:"Next"
+                    Layout.preferredWidth: 200
+                    Layout.alignment: Qt.AlignRight
+                    text:qsTr("next page")
                     onClicked: {
                         if(root.currentPageEndIndex<root.model.length){
                             root.currentPage+=1
                         }
                     }
                 }
-                Item{
-                    Layout.fillWidth: true
-                }
             }
         }
-
     }
-
 }

@@ -46,7 +46,8 @@ Item{
                     border.width: 0
                 }
                 id:tzHeader
-                text:"time zone settings"
+                //: time screen
+                text:qsTr("time zone settings")
                 anchors{
                     margins:15
                     top:parent.top
@@ -72,7 +73,8 @@ Item{
             }
             TextButton{
                 id:editBtn
-                text:"edit"
+                //: time edit btn
+                text: qsTr("edit")
                 enabled: aTZCheckbox.toggled? false : true
                 anchors{
                     margins: 15
@@ -88,7 +90,7 @@ Item{
             }
             CustomCheckbox{
                 id:aTZCheckbox
-                text:"use ATZ"
+                text: qsTr("use ATZ")
                 height:40
                 anchors{
                     margins: 15
@@ -149,7 +151,7 @@ Item{
             }
             TextButton{
                 id:submitTZBTN
-                text:"submit selected"
+                text:qsTr("submit selected")
                 anchors{
                     margins:10
                     bottom: discardTZChange.top
@@ -164,7 +166,7 @@ Item{
             }
             TextButton{
                 id:discardTZChange
-                text:"cancel"
+                text:qsTr("cancel")
                 anchors{
                     margins:10
                     bottom: parent.bottom
@@ -174,12 +176,7 @@ Item{
                     pgSelector.selectedContent=timeModel.currentTimeZone
                     tzPageHolder.sourceComponent=tzDisplay
                 }
-
             }
         }
-
-
-
-    }
-    
+    } 
 }

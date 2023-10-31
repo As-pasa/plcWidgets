@@ -4,6 +4,12 @@
 #include <QObject>
 #include <QString>
 #include <QDebug>
+#include <QQmlApplicationEngine>
+#include <QTranslator>
+#include <QCoreApplication>
+#include <QDebug>
+#include <QGuiApplication>
+
 class DevInfoModel : public QObject
 {
     Q_OBJECT
@@ -14,9 +20,12 @@ class DevInfoModel : public QObject
     Q_PROPERTY(QString password READ password WRITE setPassword NOTIFY passwordChanged)
 private:
     QString m_password;
-
+    QQmlApplicationEngine* m_root;
+    QTranslator m_translator;
+    QStringList languages;
+    int curInd;
 public:
-    explicit DevInfoModel(QObject *parent = nullptr);
+    explicit DevInfoModel(QQmlApplicationEngine* root, QObject *parent = nullptr);
     QString deviceName();
     QString deviceType();
     QString firmWare();
@@ -25,6 +34,8 @@ public:
 
 public slots:
     void setPassword(QString mpass);
+    void retranslate();
+    void close();
 
 signals:
     void passwordChanged(QString);

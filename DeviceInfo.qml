@@ -25,28 +25,30 @@ Item{
                 anchors.margins: 15
                 anchors.fill:parent
                 TimeDisplayLabel{
-                    underLabel: "Имя устройства"
+                    //: dev info screen
+                    underLabel:qsTr("device name")
                     underLabelUp:true
                     text:devInfo.deviceName
                     Layout.fillWidth: true
                     makeBorders: false
                 }
                 TimeDisplayLabel{
-                    underLabel: "Тип устройства"
+                    //: dev info screen
+                    underLabel:qsTr("device type")
                     underLabelUp:true
                     text:devInfo.deviceType
                     Layout.fillWidth: true
                     makeBorders: false
                 }
                 TimeDisplayLabel{
-                    underLabel: "Прошивка"
+                    underLabel:qsTr("firmware")
                     underLabelUp:true
                     text:devInfo.firmWare
                     Layout.fillWidth: true
                     makeBorders: false
                 }
                 TimeDisplayLabel{
-                    underLabel: "Версия прошивки"
+                    underLabel:qsTr("firmwareVersion")
                     underLabelUp:true
                     text:devInfo.firmWareDate
                     Layout.fillWidth: true
@@ -67,35 +69,22 @@ Item{
             ColumnLayout{
                 anchors.fill: parent
                 anchors.margins: 15
-                TimeDisplayLabel{
-                    underLabel: "Пароль устройства"
-                    underLabelUp:true
-                    text:devInfo.password
-                    Layout.fillWidth: true
-                    makeBorders: false
-                }
                 TimeEditLine{
                     id: passwordInput
-                    signatureText: "enter new password"
+                    signatureText:qsTr("enter new password")
                     value: parseInt(devInfo.password)
                     Layout.fillWidth: true
 
                 }
                 TextButton{
-                    text:"set as password"
+                    text:qsTr("set as password")
                     Layout.fillWidth: true
                     onClicked: {
                         devInfo.setPassword(passwordInput.value)
                     }
                 }
-
-
             }
         }
-
-
-
     }
-
 }
 

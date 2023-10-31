@@ -148,6 +148,22 @@ Dialog{
                         columnCount:4
                     }
 
+                },
+                State{
+                    name: "ipInput"
+                    PropertyChanges{
+                        target:rt
+                        model: "7 8 9 back 4 5 6 enter 1 2 3 0 . close".split(" ")
+                        rowSpanFunction: (a)=> {
+                                            if(a==="enter") return 2
+                                              return 1
+                                          }
+                        colSpanFunction: (a)=> {
+                                            if(a==="0")return 2
+                                               return 1
+                                           }
+                        columnCount:4
+                    }
                 }
             ]
         }

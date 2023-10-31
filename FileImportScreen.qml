@@ -55,24 +55,12 @@ Item{
         Component.onCompleted: console.log(source)
         
     }
-    CustomRect{
-        radius:20
-        id:usageDisplay
-        anchors{
-            margins:15
-            top:parent.top
-            right:parent.right
-            left:pgSelector.right
-            
-        }
-        height:parent.height*0.5
-        
-    }
+
     CustomRect{
         radius: 20
         anchors{
             margins:15
-            top:usageDisplay.bottom
+            top:parent.top
             left:pgSelector.right
             right:parent.right
             bottom:parent.bottom
@@ -96,12 +84,12 @@ Item{
                 margins:10
             }
             TextButton{
-                text:"import all files from directory"
+                text:qsTr("import all files from directory")
                 onClicked: formatDialog.open()
                 Layout.fillWidth: true
             }
             TextButton{
-                text:"refresh"
+                text:qsTr("refresh")
                 Layout.fillWidth: true
                 onClicked: {
                     fileModel.refreshOuter()
@@ -115,11 +103,11 @@ Item{
                 modal:true
                 CustomLabel{
                     anchors.fill: parent
-                    text:"delete all local files\n and import?"
+                    text:qsTr("delete all local files\n and import?")
                 }
                 footer:DialogButtonBox{
                     TextButton{
-                        text:"Yes"
+                        text:qsTr("Yes")
                         onClicked: {
                             if(pgSelector.current!==""){
                                 fileModel.importFromFolder(pgSelector.current);
@@ -128,7 +116,7 @@ Item{
                         }
                     }
                     TextButton{
-                        text:"No"
+                        text:qsTr("No")
                         onClicked: formatDialog.close()
                     }
                 }

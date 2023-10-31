@@ -13,7 +13,8 @@ Item{
             }
             PropertyChanges {
                 target: header
-                text:"version 1.3"
+                //: main screen header label
+                text:qsTr("version 1.3")
                 
             }
         },
@@ -25,7 +26,8 @@ Item{
             }
             PropertyChanges {
                 target: header
-                text:"Сеть"
+                //: network header label
+                text:qsTr("Network")
                 
             }
         },
@@ -37,7 +39,8 @@ Item{
             }
             PropertyChanges {
                 target: header
-                text:"Настройки"
+                //: settings header label
+                text: qsTr("Settings")
                 
             }
         },
@@ -49,7 +52,8 @@ Item{
             }
             PropertyChanges {
                 target: header
-                text:"Рез. копирование"
+                //: files header label
+                text:qsTr("Backup")
                 
             }
         },
@@ -61,7 +65,8 @@ Item{
             }
             PropertyChanges{
                 target:header
-                text:"Время"
+                //: timeMenu header label
+                text:qsTr("time")
             }
         },
         State{
@@ -70,12 +75,22 @@ Item{
                 target:mainWidget
                 sourceComponent:deviceInfoComponent
             }
+            PropertyChanges{
+                target:header
+                //: deviceInfo header label
+                text:qsTr("info")
+            }
         },
         State{
             name:"screenMenu"
             PropertyChanges{
                 target:mainWidget
                 sourceComponent:screenMenu
+            }
+            PropertyChanges{
+                target:header
+                //: screenMenu header label
+                text:qsTr("display")
             }
 
         },
@@ -84,7 +99,11 @@ Item{
             PropertyChanges {
                 target: mainWidget
                 sourceComponent:exportMenu
-
+            }
+            PropertyChanges{
+                target:header
+                //: export header label
+                text:qsTr("export")
             }
         },
         State{
@@ -92,7 +111,11 @@ Item{
             PropertyChanges {
                 target: mainWidget
                 sourceComponent: innerFileMenu
-
+            }
+            PropertyChanges{
+                target:header
+                //: storage header label
+                text:qsTr("storage")
             }
 
         },
@@ -102,6 +125,11 @@ Item{
                 target:mainWidget
                 sourceComponent:fileImportScreen
             }
+            PropertyChanges{
+                target:header
+                //: import header label
+                text:qsTr("import")
+            }
         },
         State{
             name:"wifiConnectionMenu"
@@ -109,9 +137,36 @@ Item{
                 target:mainWidget
                 sourceComponent:wifiConnectionMenu
             }
+            PropertyChanges{
+                target:header
+                //: wifi header label
+                text:qsTr("wifi")
+            }
+        },
+        State{
+            name: "netInterfacesMenu"
+            PropertyChanges {
+                target: mainWidget
+                sourceComponent:netInterfaceMenu
+            }
+            PropertyChanges{
+                target:header
+                //: net interfaces header label
+                text:qsTr("interfaces")
+            }
+        },
+        State{
+            name:"pingMenu"
+            PropertyChanges {
+                target: mainWidget
+                sourceComponent:pingMenu
+            }
+            PropertyChanges{
+                target:header
+                //: ping header label
+                text:qsTr("ping")
+            }
         }
-
-        
     ]
     
     
@@ -137,9 +192,9 @@ Item{
             leftImagePath: "qrc:/icons/plcNet.png"
             centerImagePath: "qrc:/icons/plcInfo.png"
             rightImagePath: "qrc:/icons/plcBackup.png"
-            leftText:"Сеть"
-            centerText:"Настройки"
-            rightText:"Файлы"
+            leftText:qsTr("Network")
+            centerText:qsTr("Settings")
+            rightText:qsTr("Backup")
             
             onLeftClicked: mainScreen.state="networkMenu"
             onCenterClicked: mainScreen.state="settingsMenu"
@@ -152,11 +207,13 @@ Item{
             leftImagePath: "qrc:/icons/plcNet.png"
             centerImagePath: "qrc:/icons/plcWifi.png"
             rightImagePath: "qrc:/icons/plcPing.png"
-            leftText:"Сетевые интерфейсы"
-            centerText:"Wifi"
-            rightText:"Тестирование подключения"
+            leftText:qsTr("interfaces")
+            centerText:qsTr("wifi")
+            rightText:qsTr("ping")
 
             onCenterClicked: mainScreen.state= "wifiConnectionMenu"
+            onLeftClicked : mainScreen.state="netInterfacesMenu"
+            onRightClicked: mainScreen.state= "pingMenu"
         }
     }
     Component{
@@ -165,9 +222,9 @@ Item{
             leftImagePath: "qrc:/icons/plcExport.png"
             centerImagePath: "qrc:/icons/plcStorage.png"
             rightImagePath: "qrc:/icons/plcImport.png"
-            leftText:"Экспорт данных"
-            centerText:"Управление хранилищем"
-            rightText:"Импорт данных"
+            leftText:qsTr("export")
+            centerText:qsTr("storage")
+            rightText:qsTr("import")
             onCenterClicked: {
                 mainScreen.state="innerFileMenu"
             }
@@ -186,9 +243,9 @@ Item{
             leftImagePath: "qrc:/icons/plcTime.png"
             centerImagePath: "qrc:/icons/plcInfo.png"
             rightImagePath: "qrc:/icons/plcDisplay.png"
-            leftText:"Время"
-            centerText:"Об устройстве"
-            rightText:"Экран"
+            leftText:qsTr("time")
+            centerText:qsTr("info")
+            rightText:qsTr("display")
             onLeftClicked: mainScreen.state="timeMenu"
             onCenterClicked: mainScreen.state="deviceInfoMenu"
             onRightClicked: mainScreen.state="screenMenu"
@@ -244,6 +301,16 @@ Item{
         id:wifiConnectionMenu
         WifiConnectionsMenu{
 
+        }
+    }
+    Component{
+        id:netInterfaceMenu
+        NetInerfaces {
+        }
+    }
+    Component{
+        id:pingMenu
+        PingMenu {
         }
     }
     Loader{

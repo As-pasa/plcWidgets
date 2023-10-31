@@ -25,7 +25,7 @@ Item{
             text:root.value
         }
         TextButton{
-            text:"edit"
+            text:qsTr("edit")
             Layout.fillWidth: true
             Layout.fillHeight: true
             onClicked: {

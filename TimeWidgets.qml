@@ -35,7 +35,7 @@ CustomRect{
                 }
                 width:70
                 text: mRoot.date.getMonth()
-                underLabel: "month"
+                underLabel: qsTr("month")
             }
             TimeDisplayLabel{
                 id:dayDisplay
@@ -46,7 +46,7 @@ CustomRect{
                 }
                 width:70
                 text: mRoot.date.getDate()
-                underLabel: "day"
+                underLabel: qsTr("day")
             }
             TimeDisplayLabel{
                 id:yearDisplay
@@ -57,7 +57,7 @@ CustomRect{
                 }
                 width:70
                 text:mRoot.date.getFullYear()
-                underLabel: "year"
+                underLabel:qsTr("year")
             }
             TimeDisplayLabel{
                 id:minuteDisplay
@@ -69,7 +69,7 @@ CustomRect{
                 }
                 width:70
                 text:mRoot.date.getMinutes()
-                underLabel: "min"
+                underLabel:qsTr("min")
             }
             TimeDisplayLabel{
                 id:hourDisplay
@@ -81,14 +81,16 @@ CustomRect{
                 }
                 width:70
                 text:mRoot.date.getHours()
-                underLabel: "hour"
+                underLabel:qsTr("hour")
             }
             TextButton{
                 id:startTimeEdit
                 enabled: !autoTime.toggled
-                text:"edit"
+                text:qsTr("edit")
+                width:110
                 anchors{
                     horizontalCenter: mRoot.horizontalCenter
+
                     margins:15
                 }
                 onClicked: {
@@ -96,7 +98,7 @@ CustomRect{
                     
                 }
                 y:monthLabel.y+70
-                width:70
+
             }
             CustomCheckbox{
                 id: autoTime
@@ -106,7 +108,7 @@ CustomRect{
                     top:startTimeEdit.bottom
                 }
                 height:40
-                text: "use NIP"
+                text:qsTr("use NIP")
                 
             }
         }
@@ -121,7 +123,7 @@ CustomRect{
                     left:parent.left
                     bottom:parent.bottom
                 }
-                text:"отмена"
+                text:qsTr("cancel")
                 onClicked: {
                     timeEditScreens.sourceComponent=timeDisplayScreen
                 }
@@ -150,7 +152,7 @@ CustomRect{
                     
                 }
                 
-                text:"далее"
+                text:qsTr("next")
             }
             TimeEditLine {
                 id: dayChange
@@ -159,7 +161,7 @@ CustomRect{
                     verticalCenter: monthChange.verticalCenter
                     margins:7
                 }
-                signatureText:"day"
+                signatureText:qsTr("day")
             }
             TimeEditLine {
                 id: monthChange
@@ -167,7 +169,7 @@ CustomRect{
                     centerIn: parent
                     margins:7
                 }
-                signatureText: "month"
+                signatureText:qsTr("month")
             }
             TimeEditLine {
                 id: yearChange
@@ -176,14 +178,14 @@ CustomRect{
                     verticalCenter: monthChange.verticalCenter
                     margins:7
                 }
-                signatureText: "year"
+                signatureText:qsTr("year")
             }
             TimeStatusBar {
                 id: statusBar
                 anchors.bottom: dateEdit.bottom
                 anchors.left: cancelBTN.right
                 anchors.right: nextBTN.left
-                text: "invalid date"
+                text:qsTr("invalid date")
             }
             Component.onCompleted: {
                 var d = timeWidget.date
@@ -255,7 +257,7 @@ CustomRect{
                     left:parent.left
                     bottom:parent.bottom
                 }
-                text:"назад"
+                text:qsTr("back")
                 onClicked: {
                     timeEditScreens.sourceComponent=dateEditScreen
                 }
@@ -281,13 +283,13 @@ CustomRect{
                     }
                 }
                 
-                text:"установить"
+                text:qsTr("accept")
             }
             
             
             TimeEditLine{
                 id:minuteChange
-                signatureText: "minute"
+                signatureText:qsTr("minute")
                 anchors{
                     verticalCenter: timeEdit.verticalCenter
                     right: timeEdit.horizontalCenter
@@ -296,7 +298,7 @@ CustomRect{
             }
             TimeEditLine{
                 id:hourChange
-                signatureText: "hour"
+                signatureText:qsTr("hour")
                 anchors{
                     margins: 10
                     verticalCenter: timeEdit.verticalCenter
@@ -308,7 +310,7 @@ CustomRect{
                 anchors.bottom: timeEdit.bottom
                 anchors.left: backBTN.right
                 anchors.right: submitBTN.left
-                text: "invalid time"
+                text:qsTr("invalid time")
             }
             Timer{
                 id:hideTimer2

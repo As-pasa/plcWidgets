@@ -13,7 +13,7 @@ CustomRect{
     RowLayout{
         spacing: 5
         anchors{
-            leftMargin: 5
+            leftMargin: 15
             rightMargin: 5
             margins: 5
             fill: parent
@@ -28,7 +28,7 @@ CustomRect{
 
         }
         CustomLabel{
-            text:"Blocked"
+            text:qsTr("Blocked")
             fontSize: 16
             Layout.fillHeight: true
             Layout.preferredWidth: 100
@@ -48,6 +48,7 @@ CustomRect{
             imageSource: "qrc:/icons/plcLang.png"
             onClicked: {
                 root.leftClicked();
+                devInfo.retranslate();
             }
         }
         ImageButton{
@@ -71,6 +72,7 @@ CustomRect{
             imageSource: "qrc:/icons/plcExit.png"
             onClicked: {
                 root.rightClicked();
+                devInfo.close()
             }
         }
     }

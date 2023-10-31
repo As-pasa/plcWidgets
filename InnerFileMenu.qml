@@ -56,36 +56,19 @@ Item{
             }
         }
     }
-    CustomRect{
-        radius:20
-        id:usageDisplay
-        anchors{
-            margins:15
-            top:parent.top
-            right:parent.right
-            left:pgSelector.right
-            
-        }
-        height:parent.height*0.5
-        
 
-        
-        
-        
-        
-    }
     CustomRect{
         id:buttonMenu
         radius: 20
         anchors{
             margins:15
-            top:usageDisplay.bottom
+            top:parent.top
             left:pgSelector.right
             right:parent.right
             bottom:parent.bottom
         }
         GridLayout{
-            columns:2
+            columns:1
             anchors{
                 fill:parent
                 margins:10
@@ -94,7 +77,7 @@ Item{
                 Layout.alignment: Qt.AlignHCenter
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                text:"select all"
+                text:qsTr("select all")
                 onClicked:{
                     
                     pgSelector.selectedContent=pgSelector.source
@@ -105,7 +88,7 @@ Item{
             }
             TextButton{
                 Layout.alignment: Qt.AlignHCenter
-                text:"drop all"
+                text:qsTr("drop all")
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 onClicked:{
@@ -116,7 +99,7 @@ Item{
             }
             TextButton{
                 Layout.alignment: Qt.AlignHCenter
-                text:"delete"
+                text:qsTr("delete")
                 Layout.fillHeight: true
                 Layout.fillWidth: true 
                 onClicked: {
@@ -125,7 +108,7 @@ Item{
             }
             TextButton{
                 Layout.alignment: Qt.AlignHCenter
-                text:"refresh"
+                text:qsTr("refresh")
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 onClicked: {
@@ -135,7 +118,7 @@ Item{
             }
             TextButton{
                 Layout.alignment: Qt.AlignHCenter
-                text:"format"
+                text:qsTr("format")
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 onClicked: {
@@ -152,18 +135,18 @@ Item{
                 modal:true
                 CustomLabel{
                     anchors.fill: parent
-                    text:"delete selected?"
+                    text:qsTr("delete selected?")
                 }
                 footer:DialogButtonBox{
                     TextButton{
-                        text:"Yes"
+                        text:qsTr("Yes")
                         onClicked: {
                             fileModel.removeFile(pgSelector.selectedContent)
                             fileDeleteDialog.close()
                         }
                     }
                     TextButton{
-                        text:"No"
+                        text:qsTr("No")
                         onClicked: fileDeleteDialog.close()
                     }
                 }
@@ -176,18 +159,18 @@ Item{
                 modal:true
                 CustomLabel{
                     anchors.fill: parent
-                    text:"format disk?"
+                    text:qsTr("format disk?")
                 }
                 footer:DialogButtonBox{
                     TextButton{
-                        text:"Yes"
+                        text:qsTr("Yes")
                         onClicked: {
                             fileModel.formatInner()
                             formatDialog.close()
                         }
                     }
                     TextButton{
-                        text:"No"
+                        text:qsTr("No")
                         onClicked: formatDialog.close()
                     }
                 }

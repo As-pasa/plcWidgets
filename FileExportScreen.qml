@@ -54,40 +54,12 @@ Item{
         }
 
     }
-    CustomRect{
-        radius:20
-        id:usageDisplay
-        anchors{
-            margins:15
-            top:parent.top
-            right:parent.right
-            left:pgSelector.right
-            
-        }
-        height:parent.height*0.5  
-        ColumnLayout{
-            anchors.fill: parent
-            anchors.margins: 15
 
-            TimeDisplayLabel{
-                underLabel: "Выбрано файлов"
-                text: pgSelector.selectedContentLength
-                Layout.fillWidth: true
-                Layout.minimumHeight: 50
-            }
-            TimeDisplayLabel{
-                underLabel: "free space on card"
-                text: fileModel.outFreeMB
-                Layout.fillWidth: true
-                Layout.minimumHeight: 50
-            }
-        }
-    }
     CustomRect{
         radius: 20
         anchors{
             margins:15
-            top:usageDisplay.bottom
+            top:parent.top
             left:pgSelector.right
             right:parent.right
             bottom:parent.bottom
@@ -105,7 +77,7 @@ Item{
     Component {
         id:toolPane
         GridLayout{
-            columns:2
+            columns:1
             anchors{
                 fill:parent
                 margins:10
@@ -114,7 +86,7 @@ Item{
                 Layout.alignment: Qt.AlignHCenter
                 Layout.fillHeight: true
                 Layout.fillWidth: true
-                text:"select all"
+                text:qsTr("select all")
                 onClicked:{
 
                     pgSelector.selectedContent=pgSelector.source
@@ -124,7 +96,7 @@ Item{
             }
             TextButton{
                 Layout.alignment: Qt.AlignHCenter
-                text:"drop all"
+                text:qsTr("drop all")
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 onClicked:{
@@ -135,7 +107,7 @@ Item{
             }
             TextButton{
                 Layout.alignment: Qt.AlignHCenter
-                text:"export"
+                text:qsTr("export")
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 onClicked: {
@@ -145,7 +117,7 @@ Item{
             }
             TextButton{
                 Layout.alignment: Qt.AlignHCenter
-                text:"refresh"
+                text:qsTr("refresh")
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 onClicked: {
@@ -167,12 +139,12 @@ Item{
             anchors.centerIn: parent
             width: parent.width
             height:parent.height
-            signature: "input backup folder name"
+            signature:qsTr("input backup folder name")
             value: ""
         }
         footer:DialogButtonBox{
             TextButton{
-                text:"export"
+                text:qsTr("export")
                 onClicked: {
                     if(textInput.value!==""){
                         fileModel.backupFiles(pgSelector.selectedContent,textInput.value)
@@ -181,7 +153,7 @@ Item{
                 }
             }
             TextButton{
-                text:"cancel"
+                text:qsTr("cancel")
                 onClicked: fileNameSelector.close()
             }
         }

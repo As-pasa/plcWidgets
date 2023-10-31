@@ -41,16 +41,18 @@ CustomRect{
             right:parent.right
         }
         TextButton{
-            text:"prev page"
+            text:qsTr("prev page")
             Layout.alignment: Qt.AlignRight
+            Layout.fillWidth: true
             onClicked: {
                 pgSelector.prev()
             }
         }
         
         TextButton{
-            text:"next page"
+            text:qsTr("next page")
             Layout.alignment: Qt.AlignLeft
+            Layout.fillWidth: true
             onClicked: {
                 pgSelector.next()
             }

@@ -23,7 +23,7 @@ Item{
             }
             Text{
                 id:btext
-                text:"set device brightness"
+                text:qsTr("set device brightness")
                 horizontalAlignment: Qt.AlignHCenter
                 anchors{
                     margins: 10
@@ -62,7 +62,7 @@ Item{
                 right:parent.right
             }
             TextButton{
-                text:"calibrate screen"
+                text:qsTr("calibrate screen")
                 anchors{
                     margins: 10
                     top:parent.top
