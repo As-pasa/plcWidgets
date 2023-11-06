@@ -1,6 +1,5 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
-import QtQuick.VirtualKeyboard 2.4
 
 Rectangle{
     property color defaultColor: "#537fc2" //"#D9D9D9" //

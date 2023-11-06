@@ -1,4 +1,4 @@
-QT +=  quick widgets #virtualkeyboard
+QT +=  quick widgets
 
 CONFIG += c++11
 QT_OPENGL=angle
