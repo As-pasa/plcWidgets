@@ -35,7 +35,6 @@ Item{
         }
            
     }
-
     Component{
         id: tzDisplay
         Item{

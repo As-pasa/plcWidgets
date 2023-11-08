@@ -10,14 +10,16 @@ class WifiModel:public QObject
     Q_PROPERTY(int declaredLength READ declaredLength NOTIFY declaredLengthChanged)
 
 private:
-    QList<WifiConnection> connections;
+
     IWifiSystem* m_system;
 
 public:
 
     WifiModel(IWifiSystem* wifiSystem);
     int declaredLength();
+
 public slots:
+    void tryConnect(int idx, QString password);
     void refresh();
     QVariant fromId(int id);
 signals:

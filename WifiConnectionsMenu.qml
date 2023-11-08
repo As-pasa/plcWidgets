@@ -8,8 +8,8 @@ Item{
         id: root
         anchors.margins: 15
         anchors.fill: parent
-        property string selectedContent:""
-
+        property int selectedContent:0
+        property bool somethingSelected: false
         signature: CustomRect{
             anchors.fill: parent
 
@@ -42,7 +42,7 @@ Item{
                 TextButton{
                     text:qsTr("connect")
                     onClicked: {
-                        wifiConnectDialog.open()
+                        if(root.somethingSelected)wifiConnectDialog.open()
                     }
                 }
                 TextButton{
@@ -60,35 +60,42 @@ Item{
 
             Layout.fillWidth: true
             property int idx : root.pageModel[index]
-            color: (root.selectedContent===identifier.text)? clickedColor: defaultColor
+            color: (root.selectedContent===idx && root.somethingSelected)? clickedColor: defaultColor
             RowLayout{
                 anchors.fill: parent
                 Text{
                     Layout.leftMargin: 15
                     id:identifier
                     Layout.preferredWidth: parent.width/2
-                    text:wifiModel.fromId(idx).name
+                    text:(wifiModel!==null)? wifiModel.fromId(idx).name: "";
                 }
                 Text{
                     id:security
-                    text:wifiModel.fromId(idx).security
+                    text:(wifiModel!==null)? wifiModel.fromId(idx).security: "";
                 }
                 Text{
                     id:signal
-                    text:wifiModel.fromId(idx).signal1
+                    text:(wifiModel!==null)? wifiModel.fromId(idx).signal1: "";
                 }
             }
             MouseArea{
                 id:clicker
                 anchors.fill: parent
                 onClicked: {
-
-                    if(root.selectedContent=== wifiModel.fromId(idx).name){
-                        root.selectedContent=""
+                    if(!root.somethingSelected){
+                        root.somethingSelected=true
+                        root.selectedContent=idx
                     }
                     else{
-                        root.selectedContent=wifiModel.fromId(idx).name
+                        if(root.selectedContent===idx){
+                            root.somethingSelected=false
+
+                        }
+                        else{
+                            root.selectedContent=idx
+                        }
                     }
+
                 }
             }
 
@@ -100,7 +107,7 @@ Item{
 
 
 
-        model: range(wifiModel.declaredLength)
+        model: range((wifiModel!==null)? wifiModel.declaredLength:0)
         rowsOnPage:root.height/(1.6*50)
         columnsOnPage:1
         function range(x){
@@ -117,22 +124,21 @@ Item{
             width:parent.width/2
             height:parent.height/2
             modal:true
-            title:qsTr("Connecting to wifi: ") + root.selectedContent
-                        TextKeyboardField{
-                            id:textInput
-                            anchors.centerIn: parent
-                            width: parent.width
-                            height:parent.height
-                            signature: qsTr("input password")
-                            value: ""
-                        }
+
+            TextKeyboardField{
+                id:textInput
+                anchors.centerIn: parent
+                width: parent.width
+                height:parent.height
+                signature: qsTr("input password")
+                value: ""
+            }
             footer:DialogButtonBox{
                 TextButton{
                     text:qsTr("connect")
                     onClicked: {
-                        if(textInput.value!==""){
-                            wifiConnectDialog.close()
-                        }
+                        wifiModel.tryConnect(root.selectedContent,textInput.value)
+
                     }
                 }
                 TextButton{
@@ -140,6 +146,7 @@ Item{
                     onClicked: wifiConnectDialog.close()
                 }
             }
+            Component.onCompleted: title=qsTr("Connecting to wifi: ") + (root.somethingSelected && wifiModel!==null)? wifiModel.fromId(root.selectedContent).name : ""
         }
 
     }

@@ -90,7 +90,7 @@ Item{
                     text:qsTr("To recover your password,\nplease contact one of the addresses provided.")
                 }
                 Repeater{
-                    model:passwordModel.contacts
+                    model:(passwordModel!==null)? passwordModel.contacts: ['Foo']
                     CustomLabel{
                         text:modelData
                     }

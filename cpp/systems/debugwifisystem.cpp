@@ -28,16 +28,37 @@ DebugWifiSystem::DebugWifiSystem()
      cons <<WifiConnection::from("n24","666","13.123.124.4","NONE","signal2");
      cons <<WifiConnection::from("n25","666","13.123.124.4","NONE","signal2");
      cons <<WifiConnection::from("n26","666","13.123.124.4","NONE","signal2");
+     cons2<<WifiConnection::from("abs1","677","123.123.123.123","SOME","Signal3");
+     currentCons=cons;
 }
 
 void DebugWifiSystem::setWifiConnection(QString wifiName, QString wifiPassword,bool null_mgmt)
 {
-    qDebug()<<"wifi connection added with name "<< "wifiName "<<wifiName<<" password "<<   wifiPassword;
+    qDebug()<<"wifi connection added with name "<< "wifiName "<<wifiName<<" password "<< wifiPassword<< "password requested: "<<null_mgmt;
 }
 
-QList<WifiConnection> DebugWifiSystem::getWifiConnections()
+int DebugWifiSystem::getWifiConnectionLength()
+{
+    qDebug()<<"returned cached wifiListLength";
+    return currentCons.length();
+}
+
+QList<WifiConnection> DebugWifiSystem::getWifiConnectionList()
 {
     qDebug()<<"wifi connection list requested";
-    return cons;
+    return currentCons;
+}
+
+void DebugWifiSystem::refreshConnectionList()
+{
+    qDebug()<<"refresh command executed";
+    usedCons2=!usedCons2;
+    if(usedCons2)currentCons=cons2;
+    else currentCons=cons;
+}
+
+WifiConnection DebugWifiSystem::getWifiConnectionFromId(int id)
+{
+    return currentCons[id];
 }
 

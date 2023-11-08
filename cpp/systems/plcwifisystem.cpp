@@ -5,10 +5,10 @@
 
 PLCWifiSystem::PLCWifiSystem()
 {
-
+    innerCache=getWifiConnectionList();
 }
 
-void PLCWifiSystem::setWifiConnection(QString wifiName, QString wifiPassword,bool null_mgmt)
+void PLCWifiSystem::setWifiConnection(QString wifiName, QString wifiPassword,bool passwordNotNeeded)
 {
 
     QFile wifi;
@@ -18,7 +18,7 @@ void PLCWifiSystem::setWifiConnection(QString wifiName, QString wifiPassword,boo
 
     ssid = wifiName;
     psk = wifiPassword;
-    if (null_mgmt) key_mgmt= "NONE";
+    if (passwordNotNeeded) key_mgmt= "NONE";
 
     const QString conn_command = "wpa_supplicant -c/etc/wpa_supplicant.conf -iwlan0 -Dnl80211 -B";
 
@@ -48,7 +48,7 @@ void PLCWifiSystem::setWifiConnection(QString wifiName, QString wifiPassword,boo
     proc.start(conn_command);
 }
 
-QList<WifiConnection> PLCWifiSystem::getWifiConnections()
+QList<WifiConnection> PLCWifiSystem::getWifiConnectionList()
 {
     QList<WifiConnection> answer;
 
@@ -126,4 +126,19 @@ QList<WifiConnection> PLCWifiSystem::getWifiConnections()
         answer<<a;
     }
     return answer;
+}
+
+int PLCWifiSystem::getWifiConnectionLength()
+{
+    return innerCache.length();
+}
+
+void PLCWifiSystem::refreshConnectionList()
+{
+    innerCache=getWifiConnectionList();
+}
+
+WifiConnection PLCWifiSystem::getWifiConnectionFromId(int id)
+{
+    return innerCache[id];
 }

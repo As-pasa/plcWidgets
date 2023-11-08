@@ -4,15 +4,19 @@
 #include "iwifisystem.h"
 #include <QFile>
 #include <QProcess>
-class PLCWifiSystem:public IWifiSystem
+class PLCWifiSystem:IWifiSystem
 {
 public:
     PLCWifiSystem();
+    QList<WifiConnection> innerCache;
 
     // IWifiSystem interface
 public:
-    void setWifiConnection(QString wifiName, QString wifiPassword,bool null_mgmt=false);
-    QList<WifiConnection> getWifiConnections();
+    void setWifiConnection(QString wifiName, QString wifiPassword,bool isPasswordRequired=false);
+    QList<WifiConnection> getWifiConnectionList();
+    int getWifiConnectionLength();
+    void refreshConnectionList();
+    WifiConnection getWifiConnectionFromId(int);
 };
 
 #endif // PLCWIFISYSTEM_H

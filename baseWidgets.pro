@@ -1,4 +1,4 @@
-QT += widgets multimedia
+QT += widgets quick
 
 CONFIG += c++11
 QT_OPENGL=angle
