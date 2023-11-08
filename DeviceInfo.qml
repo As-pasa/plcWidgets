@@ -47,7 +47,7 @@ Item{
                     makeBorders: false
                 }
                 TimeDisplayLabel{
-                    underLabel:qsTr("firmwareVersion")
+                    underLabel:qsTr("firmware Update Date")
                     underLabelUp:true
                     text:devInfo.firmWareDate
                     Layout.fillWidth: true
