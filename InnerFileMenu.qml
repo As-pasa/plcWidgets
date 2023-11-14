@@ -12,13 +12,13 @@ Item{
     PageSelector{
         id:pgSelector
         anchors{
-            margins: 15
+            margins: 5
             top:parent.top
             bottom:parent.bottom
             left:parent.left
             
         }
-        pageSize: 8
+        pageSize:5
         property var selectedContent:[]
         property var selectAll:false
         source:fileModel.innerFiles
@@ -60,7 +60,7 @@ Item{
         id:buttonMenu
         radius: 20
         anchors{
-            margins:15
+            margins:5
             top:parent.top
             left:pgSelector.right
             right:parent.right
@@ -70,7 +70,7 @@ Item{
             columns:1
             anchors{
                 fill:parent
-                margins:10
+                margins:5
             }
             TextButton{
                 Layout.alignment: Qt.AlignHCenter

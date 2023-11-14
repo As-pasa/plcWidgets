@@ -1,6 +1,6 @@
 #include "timechangepackage.h"
 
-TimeChangePackage::TimeChangePackage(QTime ctime, QDate cdate, QByteArray ctimeZone, bool cTimeChanged, bool cDateChanged, bool ctimeZoneChanged)
+TimeChangePackage::TimeChangePackage(QTime ctime, QDate cdate, QString ctimeZone, bool cTimeChanged, bool cDateChanged, bool ctimeZoneChanged)
 {
     time=ctime;
     date=cdate;

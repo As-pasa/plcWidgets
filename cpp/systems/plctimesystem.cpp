@@ -23,9 +23,8 @@ void PLCTimeSystem::setTime(TimeChangePackage package)
 
     if(package.timeZoneChanged)
     {
-        os::System(setTZTempl.arg(QString(package.timeZone)), true);
+        os::System(setTZTempl.arg(package.timeZone), true);
     }
-
 }
 
 void PLCTimeSystem::setAtzEnabled(bool enabled)
@@ -56,4 +55,54 @@ void PLCTimeSystem::setSystemClockToHardware()
 QDateTime PLCTimeSystem::getCurrentTime()
 {
     return QDateTime::currentDateTime();
+}
+
+bool PLCTimeSystem::getATZStatus()
+{
+    bool status=false;
+    QFile atz;
+    atz.setFileName("/etc/systemd/system/multi-user.target.wants/auto-tz.service");
+    if(!atz.open(QIODevice::ReadOnly)){status=false;}
+    else{status = true;}
+    atz.close();
+    return status;
+}
+
+bool PLCTimeSystem::getNIPStatus()
+{
+    bool status=false;
+    QFile nip;
+    nip.setFileName("/etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service");
+    if(!nip.open(QIODevice::ReadOnly)){
+        status=false;
+    }
+    else {status=true;}
+    nip.close();
+    return status;
+
+}
+
+QStringList PLCTimeSystem::getTimeZones()
+{
+    QStringList ans;
+    for(const auto& id: QTimeZone::availableTimeZoneIds()){
+        QTimeZone tz(id);
+        ans.append(QString("(%1) %2").arg(tz.displayName(QTimeZone::StandardTime,QTimeZone::OffsetName),QString(id)) );
+    }
+    return ans;
+}
+
+QString PLCTimeSystem::getCurrentTimeZone()
+{
+    QString ans;
+    for(const auto& id: QTimeZone::availableTimeZoneIds()){
+
+
+        if(id==QTimeZone::systemTimeZoneId()){
+            QTimeZone tz(id);
+            ans=QString("(%1) %2").arg(tz.displayName(QTimeZone::StandardTime,QTimeZone::OffsetName),QString(id));
+        }
+    }
+    return ans;
+
 }

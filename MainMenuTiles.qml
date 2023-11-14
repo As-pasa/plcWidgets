@@ -21,13 +21,13 @@ Item{
     property string screenName: "version 1.3"
     RowLayout{
         anchors.fill: parent
-        anchors.margins: 15
+        anchors.margins: 5
         MenuTile{
             imageSource: root.leftImagePath
             text: root.leftText
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.margins: 5
+            Layout.margins: 2
             onClicked: {
                 root.leftClicked();
             }
@@ -37,7 +37,7 @@ Item{
             text: root.centerText
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.margins: 5
+            Layout.margins: 2
             onClicked: {
                 root.centerClicked();
             }
@@ -47,7 +47,7 @@ Item{
             text: root.rightText
             Layout.fillHeight: true
             Layout.fillWidth: true
-            Layout.margins: 5
+            Layout.margins: 2
             onClicked:{
                 root.rightClicked();
             }

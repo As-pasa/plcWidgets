@@ -70,6 +70,29 @@ Item{
             }
         },
         State{
+            name:"datetime"
+            PropertyChanges{
+                target:mainWidget
+                sourceComponent:dateTimeMenu
+            }
+            PropertyChanges{
+                target:header
+                text:qsTr("date/time")
+            }
+        },
+        State{
+            name:"timeZone"
+            PropertyChanges{
+                target:mainWidget
+                sourceComponent:timeZoneMenu
+            }
+            PropertyChanges{
+                target:header
+                text:qsTr("timeZone")
+            }
+        },
+
+        State{
             name:"deviceInfoMenu"
             PropertyChanges{
                 target:mainWidget
@@ -179,8 +202,8 @@ Item{
         anchors.right: parent.right
         anchors{
 
-            leftMargin: 15
-            rightMargin: 15
+            leftMargin: 5
+            rightMargin: 5
         }
         onCenterClicked: mainScreen.state="mainMenu"
         
@@ -253,16 +276,9 @@ Item{
     }
     Component{
         id:timeScreenComponent
-        TimeScreen{
-            id:timeScreen
-            onBlockingChanged: {
-                if(blocking==true){
-                    header.blockSemaphore+=1
-                }
-                else{
-                    header.blockSemaphore-=1
-                }
-            }
+        TimeScreen {
+            onLeftClicked: mainScreen.state="datetime"
+            onRightClicked:mainScreen.state="timeZone"
         }
     }
     Component{
@@ -311,6 +327,17 @@ Item{
     Component{
         id:pingMenu
         PingMenu {
+        }
+    }
+    Component{
+        id: timeZoneMenu
+        TimeZoneMenu{
+        }
+    }
+    Component{
+        id:dateTimeMenu
+        DatetimeMenu{
+
         }
     }
     Loader{

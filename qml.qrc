@@ -29,12 +29,9 @@
         <file>icons/plcWifi.png</file>
         <file>CustomCheckbox.qml</file>
         <file>MainScreen.qml</file>
-        <file>TimeDisplayLabel.qml</file>
+        <file>SignedLabel.qml</file>
         <file>TimeEditLine.qml</file>
-        <file>TimeStatusBar.qml</file>
-        <file>TimeWidgets.qml</file>
         <file>PageSelector.qml</file>
-        <file>TimeScreen.qml</file>
         <file>DeviceInfo.qml</file>
         <file>BrightnessPicker.qml</file>
         <file>ScreenMenu.qml</file>
@@ -51,5 +48,8 @@
         <file>virtualKeyboards/IpKeyboardField.qml</file>
         <file>PingMenu.qml</file>
         <file>PasswordScreen.qml</file>
+        <file>TimeScreen.qml</file>
+        <file>DatetimeMenu.qml</file>
+        <file>TimeZoneMenu.qml</file>
     </qresource>
 </RCC>

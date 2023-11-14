@@ -2,7 +2,7 @@ import QtQuick 2.12
 import QtQuick.Controls 2.5
 
 Label{
-    property int fontSize: 20
+    property int fontSize: 10
 
     background: CustomRect{
         border.width: 0

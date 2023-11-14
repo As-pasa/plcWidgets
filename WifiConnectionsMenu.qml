@@ -6,7 +6,7 @@ import "virtualKeyboards/"
 Item{
     TestPgSelector {
         id: root
-        anchors.margins: 15
+        anchors.margins: 2
         anchors.fill: parent
         property int selectedContent:0
         property bool somethingSelected: false
@@ -37,15 +37,25 @@ Item{
         }
         contextButtons:Item{
             anchors.fill: parent
-            RowLayout{
+            ColumnLayout{
                 anchors.fill: parent
                 TextButton{
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
                     text:qsTr("connect")
                     onClicked: {
-                        if(root.somethingSelected)wifiConnectDialog.open()
+                        if(root.somethingSelected)
+                        {
+                            wifiConnectDialog.idx=root.selectedContent
+                            wifiConnectDialog.open()
+                        }
+
+
                     }
                 }
                 TextButton{
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
                     text:qsTr("refresh")
                     onClicked: {
                         wifiModel.refresh()
@@ -56,7 +66,7 @@ Item{
         }
         delegate:
             CustomRect{
-            Layout.preferredHeight: 50
+            Layout.preferredHeight: 30
 
             Layout.fillWidth: true
             property int idx : root.pageModel[index]
@@ -66,8 +76,24 @@ Item{
                 Text{
                     Layout.leftMargin: 15
                     id:identifier
+                    property string startName:wifiModel.fromId(idx).name
                     Layout.preferredWidth: parent.width/2
-                    text:(wifiModel!==null)? wifiModel.fromId(idx).name: "";
+                    text:{
+                        if(wifiModel===null)return ""
+                        else
+                            var name=startName
+                            if(name.length<= 1.6*(parent.width/2)/font.pixelSize){
+                                return name
+                            }
+                            else{
+                                const etalonLength=Math.floor(1.6*(parent.width/2)/font.pixelSize)
+
+                                const [head,tail]= [name.slice(0,etalonLength - 8), name.slice(name.length-5)]
+                                    console.log(head, tail)
+                                return head+"..."+tail
+                            }
+                        }
+
                 }
                 Text{
                     id:security
@@ -77,6 +103,7 @@ Item{
                     id:signal
                     text:(wifiModel!==null)? wifiModel.fromId(idx).signal1: "";
                 }
+
             }
             MouseArea{
                 id:clicker
@@ -108,7 +135,7 @@ Item{
 
 
         model: range((wifiModel!==null)? wifiModel.declaredLength:0)
-        rowsOnPage:root.height/(1.6*50)
+        rowsOnPage:root.height/(1.6*30)
         columnsOnPage:1
         function range(x){
             let declaredIndexes=[]
@@ -119,12 +146,14 @@ Item{
         }
 
         Dialog{
+            property int idx:0
             id:wifiConnectDialog
+            parent:Overlay.overlay
             anchors.centerIn: parent
-            width:parent.width/2
-            height:parent.height/2
+            width:parent.width
+            height:parent.height
             modal:true
-
+            title:qsTr("Connect to: ")+ wifiModel.fromId(idx).name
             TextKeyboardField{
                 id:textInput
                 anchors.centerIn: parent
@@ -146,7 +175,7 @@ Item{
                     onClicked: wifiConnectDialog.close()
                 }
             }
-            Component.onCompleted: title=qsTr("Connecting to wifi: ") + (root.somethingSelected && wifiModel!==null)? wifiModel.fromId(root.selectedContent).name : ""
+
         }
 
     }

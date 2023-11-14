@@ -6,17 +6,19 @@ import "virtualKeyboards/"
 ApplicationWindow {
     id: window
     visible: true
-    width: 805
-    height: 485
+    width: 400
+    height: 243
     title: qsTr("Tabs")
+    onWidthChanged: console.log(width,height)
     Rectangle{
         id:mainScreen
         anchors.fill: parent
         color:"grey"
         MainScreen{
             id:appScreen
-            anchors.topMargin: 5
+            anchors.topMargin: 1
             anchors.fill:parent
+            state:"timeMenu"
         }
         PasswordScreen {
             id:passwordScreen
@@ -53,8 +55,9 @@ ApplicationWindow {
                 }
             }
         ]
-        state:"passwordScreen"
+        state:"mainScreen"
     }
+
     KeyboardInput{
         id: kKEYBOARDUNIT
         state:"ipInput"
@@ -72,12 +75,16 @@ ApplicationWindow {
 
 
 //    }
-
-//    anchors{
-//        top:header.bottom
-//        left:parent.left
-//        right:parent.right
-//        bottom:parent.bottom
+//    TimeScreen{
+//        anchors{
+//            top:header.bottom
+//            left:parent.left
+//            right:parent.right
+//            bottom:parent.bottom
+//            margins:5
+//        }
 //    }
+
+
 
 }

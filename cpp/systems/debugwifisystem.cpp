@@ -8,7 +8,7 @@ DebugWifiSystem::DebugWifiSystem()
      cons <<WifiConnection::from("n3","666","13.123.124.4","NONE","signal2");
      cons <<WifiConnection::from("n5","666","13.123.124.4","NONE","signal2");
      cons <<WifiConnection::from("aaaaaaaaaaaaaaaaaaaaaaaaaaa","666","13.123.124.4","NONE","signal2");
-     cons <<WifiConnection::from("FRRRRRRRRROOOOOOOOOOO","666","13.123.124.4","NONE","signal2");
+     cons <<WifiConnection::from("FRODOFRODOFRODOFRO","666","13.123.124.4","NONE","signal2");
      cons <<WifiConnection::from("n8","666","13.123.124.4","NONE","signal2");
      cons <<WifiConnection::from("n9","666","13.123.124.4","NONE","signal2");
      cons <<WifiConnection::from("n10","666","13.123.124.4","NONE","signal2");

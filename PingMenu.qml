@@ -7,8 +7,8 @@ Item{
     id:root
     RowLayout{
         anchors.fill: parent
-        anchors.margins: 20
-        spacing: 20
+        anchors.margins: 5
+        spacing: 5
 
         CustomRect{
             radius: 20
@@ -16,7 +16,7 @@ Item{
             Layout.fillHeight: true
             Layout.fillWidth: true
             ColumnLayout{
-                anchors.margins: 15
+                anchors.margins: 5
                 anchors.fill: parent
                 IpKeyboardField{
                     Layout.alignment: Qt.AlignCenter
@@ -28,6 +28,7 @@ Item{
                 TextButton{
                     text:qsTr("ping")
                     Layout.fillWidth: true
+                    Layout.preferredHeight:40
                     Layout.alignment: Qt.AlignCenter
                     onClicked:{
                         if(root.sanityCheck(localGateInput.value))
@@ -46,7 +47,7 @@ Item{
             Layout.fillWidth: true
             ColumnLayout{
 
-                anchors.margins: 15
+                anchors.margins: 5
                 anchors.fill: parent
                 IpKeyboardField{
                     Layout.fillWidth: true
@@ -58,6 +59,7 @@ Item{
                 TextButton{
                     Layout.alignment: Qt.AlignCenter
                     Layout.fillWidth: true
+                    Layout.preferredHeight:40
                     text:qsTr("ping")
                     onClicked:{
                     if(root.sanityCheck(webIpInput.value))
@@ -75,6 +77,7 @@ Item{
 
     Dialog{
         property string ip:"0.0.0.0"
+        parent:Overlay.overlay
         property string requestType:"local Gate"
         id:pingResultDisplay
         anchors.centerIn: parent

@@ -3,14 +3,14 @@
 
 #include <QTime>
 #include <QDate>
-#include <QByteArray>
+#include <QString>
 class TimeChangePackage
 {
 public:
-    TimeChangePackage(QTime ctime, QDate cdate, QByteArray ctimeZone,bool cTimeChanged,bool cDateChanged,bool ctimeZoneChanged);
+    TimeChangePackage(QTime ctime, QDate cdate, QString ctimeZone,bool cTimeChanged,bool cDateChanged,bool ctimeZoneChanged);
     QTime time;
     QDate date;
-    QByteArray timeZone;
+    QString timeZone;
     bool timeChanged, dateChanged, timeZoneChanged;
 };
 

@@ -15,12 +15,12 @@ Item{
         id:pgSelector
         property string current:""
         anchors{
-            margins: 15
+            margins: 5
             top:parent.top
             bottom:parent.bottom
             left:parent.left
         }
-        pageSize: 8
+        pageSize:5
         
         
         source:fileModel.outerSaveDirs
@@ -33,7 +33,7 @@ Item{
             anchors{
                 left:parent.left
                 right:parent.right
-                margins:10
+                margins:5
             }
             onClicked: {
                 if(pgSelector.current===modelData){
@@ -44,9 +44,7 @@ Item{
                 }
                 else{
                     pgSelector.current=modelData
-                    
-                    
-                    
+
                 }
             }
         }
@@ -58,7 +56,7 @@ Item{
     CustomRect{
         radius: 20
         anchors{
-            margins:15
+            margins:5
             top:parent.top
             left:pgSelector.right
             right:parent.right
@@ -80,7 +78,7 @@ Item{
             columns:1
             anchors{
                 fill:parent
-                margins:10
+                margins:5
             }
             TextButton{
                 text:qsTr("import all files from directory")

@@ -4,19 +4,19 @@ TimeModel::TimeModel(DebugTimeSystem *system)
 {
     m_system=system;
     m_timer=new QTimer(this);
-    current=this->m_system->getCurrentTime();
+    m_currentDT=this->m_system->getCurrentTime();
     connect(m_timer, &QTimer::timeout,this, [=](){
-        current= current.addSecs(60);
-        emit currentTimeChanged(current);
+        m_currentDT= m_currentDT.addSecs(60);
+        emit currentTimeChanged(m_currentDT);
     });
     m_timer->start(1000*60);
+
+    m_NipStatus=m_system->getNIPStatus();
+    m_ATZStatus=m_system->getATZStatus();
 }
 
 QDateTime TimeModel::currentTime(){
-
-    return current;
-
-
+    return m_currentDT;
 };
 void TimeModel::setCurrentTime(QDateTime nTime){
     if(nTime!=this->currentTime()){
@@ -35,63 +35,73 @@ void TimeModel::setCurrentTime(QDateTime nTime){
 
         if(nyear==cyear && nmonth==cmonth && nday==cday && nhour==chour && qFabs(nminute-cminute)<=1){
             return;
-
         }
-        m_system->setTime(nTime);
-        current=m_system->getCurrentTime();
+        TimeChangePackage p(nTime.time(),nTime.date(),"",true,true,false);
+        m_system->setTime(p);
+        m_currentDT=m_system->getCurrentTime();
         emit currentTimeChanged(nTime);
     }
 
 }
 
+void TimeModel::setTimeZone(QString n)
+{
+    setCurrentTimeZone(n);
+}
+
 QStringList TimeModel::timeZones()
 {
     if(m_timeZones.size()==0){
-        for(const auto& id: QTimeZone::availableTimeZoneIds()){
-            QTimeZone tz(id);
-
-            m_timeZones.append(QString("(%1) %2").arg(tz.displayName(QTimeZone::StandardTime,QTimeZone::OffsetName),QString(id)) );
-            if(id==QTimeZone::systemTimeZoneId()){
-
-                m_currentTimeZone=m_timeZones[m_timeZones.size()-1];
-            }
-        }
-        qDebug()<<QTimeZone::systemTimeZoneId();
+        m_timeZones=m_system->getTimeZones();
     }
-
     return m_timeZones;
 }
 
 QString TimeModel::currentTimeZone()
 {
     if(m_currentTimeZone==""){
-        timeZones();
+        m_currentTimeZone= m_system->getCurrentTimeZone();
     }
     return m_currentTimeZone;
 }
 
 void TimeModel::setCurrentTimeZone(QString n)
 {
-    qDebug()<<"time zone selected";
-    m_currentTimeZone=n;
-    emit currentTimeZoneChanged(n);
+    if(n!=m_currentTimeZone){
+
+        m_system->setTime(TimeChangePackage(currentTime().time(), currentTime().date(),n ,false,false,true));
+        m_currentTimeZone=m_system->getCurrentTimeZone();
+        //qDebug()<<"a"<<n;
+        emit currentTimeZoneChanged(n);
+
+    }
 };
 
 bool TimeModel::NIPStatus(){
-    return m_system->NIP;
+
+    return m_NipStatus;
 };
-void TimeModel::setNIPStatus(bool enabled){
-    m_system->setNipEnabled(enabled);
-    emit NIPStatusChanged(enabled);
+void TimeModel::setNIPStatus(bool status){
+    if(status!=m_NipStatus){
+
+        m_NipStatus=status;
+        m_system->setNipEnabled(status);
+        emit NIPStatusChanged(status);
+    }
+
 };
 
 bool TimeModel::ATZStatus(){
-    return m_system->ATZ;
+    return m_ATZStatus;
 
 };
 void TimeModel::setATZStatus(bool status){
-    m_system->setAtzEnabled(status);
-    emit ATZStatusChanged(status);
+    if(status!=m_ATZStatus){
+        m_ATZStatus=status;
+        m_system->setAtzEnabled(status);
+        emit ATZStatusChanged(status);
+    }
+
 }
 
 void TimeModel::installCurrentTimeZoneAsSystem()

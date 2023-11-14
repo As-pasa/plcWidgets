@@ -16,8 +16,8 @@ Item {
             left:control.left
             margins:2
         }
-        
-        
+
+
         CustomRect{
             opacity: control.toggled? 1 :0
             id:innerIndicator
@@ -25,9 +25,9 @@ Item {
             anchors{
                 centerIn:indicator
                 fill:indicator
-                margins: 10
+                margins: 5
             }
-            
+
         }
     }
     Text{
@@ -41,7 +41,7 @@ Item {
         font.pixelSize: control.fontSize
         text:control.text
         verticalAlignment: Text.AlignVCenter
-        
+
     }
     MouseArea{
         id:clickArea

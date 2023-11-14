@@ -6,12 +6,6 @@ import "virtualKeyboards/"
 CustomRect{
     id:root
     radius: 10
-//    anchors{
-//        top:header.bottom
-//        left:parent.left
-//        right:parent.right
-//        bottom:parent.bottom
-//    }
     property var model: "1 2 3 4 5 6 7 8 9 10".split(" ")
     property alias delegate:supplier.delegate
     property alias signature : signatureLabel.data
@@ -20,20 +14,22 @@ CustomRect{
 
     property alias columnsOnPage: pgsViewGrid.columns
     property alias rowsOnPage:pgsViewGrid.rows
-    property var pageModel:{
+    property var pageModel:model.slice(currentPageStartIndex,currentPageEndIndex)
 
-        model.slice(currentPageStartIndex, currentPageEndIndex)
-    }
     property int elementsOnCurrentPage: currentPageEndIndex-currentPageEndIndex
     property int currentPage:0
     property int currentPageStartIndex: currentPage*(columnsOnPage*rowsOnPage)
     property int currentPageEndIndex:Math.min((currentPage+1)*(columnsOnPage*rowsOnPage), model.length)
+    onCurrentPageEndIndexChanged:{
+
+        pageModel= model.slice(currentPageStartIndex,currentPageEndIndex)
+    }
 
 
     
-    ColumnLayout{
+    RowLayout{
         anchors.fill: parent
-        anchors.margins: 15
+        anchors.margins: 5
 
         Item{
             
@@ -62,16 +58,18 @@ CustomRect{
         Item{
             
             id:pgsToolbar
-            Layout.fillWidth: true
-            Layout.minimumHeight: 100
-            RowLayout{
+            Layout.preferredWidth: 100
+            Layout.fillHeight: true
+            ColumnLayout{
                 anchors.fill: parent
-                spacing: 20
+                spacing: 2
 
                 TextButton{
                     text:qsTr("prev page")
-                    Layout.preferredWidth: 200
-                    Layout.alignment: Qt.AlignLeft
+                    Layout.minimumHeight: parent.height/4
+                    Layout.maximumHeight: 70
+                    Layout.fillWidth: true
+
 
                     onClicked: {
 
@@ -84,14 +82,18 @@ CustomRect{
                 Item{
                     id:contextButtons
                     Layout.fillHeight: true
-
-                    Layout.preferredWidth: 120
+                    Layout.minimumHeight: 70
+                    Layout.maximumHeight: 200
+                    Layout.fillWidth: true
                 }
 
                 TextButton{
-                    Layout.preferredWidth: 200
-                    Layout.alignment: Qt.AlignRight
+                    Layout.minimumHeight: parent.height/4
+                    Layout.maximumHeight: 70
+                    Layout.fillWidth: true
+
                     text:qsTr("next page")
+
                     onClicked: {
                         if(root.currentPageEndIndex<root.model.length){
                             root.currentPage+=1

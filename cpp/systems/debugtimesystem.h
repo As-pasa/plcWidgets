@@ -4,7 +4,8 @@
 
 #include "itimesystem.h"
 #include <QDebug>
-class DebugTimeSystem
+#include <QTimeZone>
+class DebugTimeSystem:ITimeSystem
 {
 
 public:
@@ -12,14 +13,26 @@ public:
      bool NIP;
      bool ATZ;
      QDateTime cur=QDateTime::currentDateTime();
-    // ITimeSystem interface
+     QString currentTimeZone;
+
+
+
+     // ITimeSystem interface
 public:
-    void setTime(QDateTime package);
-    void setAtzEnabled(bool enabled);
-    void setNipEnabled(bool enabled);
-    bool getATZStatus();
-    bool getNIPStatus();
-    QDateTime getCurrentTime();
+     void setTime(TimeChangePackage package);
+     void setAtzEnabled(bool enabled);
+     void setNipEnabled(bool enabled);
+     bool getATZStatus();
+     bool getNIPStatus();
+     QDateTime getCurrentTime();
+
+     // ITimeSystem interface
+public:
+     QStringList getTimeZones();
+
+     // ITimeSystem interface
+public:
+     QString getCurrentTimeZone();
 };
 
 #endif // DEBUGTIMESYSTEM_H

@@ -7,8 +7,8 @@ Item{
     TestPgSelector{
         id:root
         anchors.fill: parent
-        anchors.margins: 15
-        rowsOnPage:root.height/(1.6*50)
+        anchors.margins: 5
+        rowsOnPage:root.height/(1.6*30)
         columnsOnPage:1
         property string selectedContent:""
         signature:CustomLabel{
@@ -17,7 +17,7 @@ Item{
         }
 
         delegate: CustomRect{
-            Layout.preferredHeight: 50
+            Layout.preferredHeight: 30
             Layout.fillWidth: true
 
             property int idx : root.pageModel[index]
@@ -57,6 +57,7 @@ Item{
         }
         Dialog{
             id:interfaceEditDialog
+            parent: Overlay.overlay
             anchors.centerIn: parent
             width:parent.width*0.9
             height:parent.height*0.9
