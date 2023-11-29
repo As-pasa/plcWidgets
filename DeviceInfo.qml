@@ -65,7 +65,7 @@ Item{
                     TimeEditLine{
                         id: passwordInput
                         signatureText:qsTr("enter new password")
-                        value: parseInt(devInfo.password)
+                        value: "54321"
                         Layout.fillWidth: true
 
                     }
@@ -73,7 +73,7 @@ Item{
                         text:qsTr("set as password")
                         Layout.fillWidth: true
                         onClicked: {
-                            devInfo.setPassword(passwordInput.value)
+                            passwordModel.setPassword(passwordInput.value)
                         }
                     }
                 }

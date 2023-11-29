@@ -14,34 +14,44 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        cpp/models/devinfomodel.cpp \
-        cpp/models/filemodel.cpp \
-        cpp/models/interfacecredentials.cpp \
-        cpp/models/netmodel.cpp \
-        cpp/models/passwordmodel.cpp \
-        cpp/models/pingmodel.cpp \
-        cpp/models/screenmodel.cpp \
-        cpp/models/timechangepackage.cpp \
-        cpp/models/timemodel.cpp \
-        cpp/models/wificonnection.cpp \
-        cpp/models/wifimodel.cpp \
-        cpp/systems/debugfilesystem.cpp \
-        cpp/systems/debugnetsystem.cpp \
-        cpp/systems/debugpasswordsysteml.cpp \
-        cpp/systems/debugpingsystem.cpp \
-        cpp/systems/debugscreensystem.cpp \
-        cpp/systems/debugtimesystem.cpp \
-        cpp/systems/debugwifisystem.cpp \
-        cpp/systems/ifilesystem.cpp \
-        cpp/systems/inetsystem.cpp \
-        cpp/systems/iscreensystem.cpp \
-        cpp/systems/itimesystem.cpp \
-        cpp/systems/iwifisystem.cpp \
-        cpp/systems/plcnetsystem.cpp \
-        cpp/systems/plctimesystem.cpp \
-        cpp/systems/plcwifisystem.cpp \
-        cpp/utilities/os.cpp \
-        main.cpp
+    cpp/devinfoModel/devinfomodel.cpp \
+    cpp/devinfoModel/plcdevicesystem.cpp \
+    cpp/fileModel/debugfilesystem.cpp \
+    cpp/fileModel/filemodel.cpp \
+    cpp/fileModel/filesystemtimestamper.cpp \
+    cpp/fileModel/ifilesystem.cpp \
+    cpp/fileModel/plcfilesystem.cpp \
+    cpp/fileModel/savedeviceentry.cpp \
+    cpp/passwordModel/debugpasswordsysteml.cpp \
+    cpp/passwordModel/ipasswordsystem.cpp \
+    cpp/passwordModel/passwordmodel.cpp \
+    cpp/passwordModel/plcpaswordsystem.cpp \
+    cpp/pingModel/debugpingsystem.cpp \
+    cpp/pingModel/ipingsystem.cpp \
+    cpp/pingModel/pingmodel.cpp \
+    cpp/pingModel/plcpingsystem.cpp \
+    cpp/screenModel/plcscreensystem.cpp \
+    cpp/timeModel/debugtimesystem.cpp \
+    cpp/timeModel/itimesystem.cpp \
+    cpp/timeModel/plctimesystem.cpp \
+    cpp/timeModel/timechangepackage.cpp \
+    cpp/timeModel/timemodel.cpp \
+    cpp/wifiModel/debugwifisystem.cpp \
+    cpp/wifiModel/iwifisystem.cpp \
+    cpp/wifiModel/plcwifisystem.cpp \
+    cpp/wifiModel/wificonnection.cpp \
+    cpp/wifiModel/wifimodel.cpp \
+    cpp/netModel/debugnetsystem.cpp \
+    cpp/netModel/inetsystem.cpp \
+    cpp/netModel/interfacecredential.cpp \
+    cpp/netModel/netmodel.cpp \
+    cpp/netModel/plcnetsystem.cpp \
+    cpp/screenModel/debugscreensystem.cpp \
+    cpp/screenModel/iscreensystem.cpp \
+    cpp/screenModel/screenmodel.cpp \
+    cpp/utilities/os.cpp \
+    main.cpp\
+
 
 RESOURCES += qml.qrc \
     translations.qrc
@@ -58,30 +68,39 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    cpp/models/devinfomodel.h \
-    cpp/models/filemodel.h \
-    cpp/models/interfacecredentials.h \
-    cpp/models/netmodel.h \
-    cpp/models/passwordmodel.h \
-    cpp/models/pingmodel.h \
-    cpp/models/screenmodel.h \
-    cpp/models/timechangepackage.h \
-    cpp/models/timemodel.h \
-    cpp/models/wificonnection.h \
-    cpp/models/wifimodel.h \
-    cpp/systems/debugfilesystem.h \
-    cpp/systems/debugnetsystem.h \
-    cpp/systems/debugpasswordsysteml.h \
-    cpp/systems/debugpingsystem.h \
-    cpp/systems/debugscreensystem.h \
-    cpp/systems/debugtimesystem.h \
-    cpp/systems/debugwifisystem.h \
-    cpp/systems/ifilesystem.h \
-    cpp/systems/inetsystem.h \
-    cpp/systems/iscreensystem.h \
-    cpp/systems/itimesystem.h \
-    cpp/systems/iwifisystem.h \
-    cpp/systems/plcnetsystem.h \
-    cpp/systems/plctimesystem.h \
-    cpp/systems/plcwifisystem.h \
-    cpp/utilities/os.h
+    cpp/devinfoModel/devinfomodel.h \
+    cpp/devinfoModel/plcdevicesystem.h \
+    cpp/fileModel/debugfilesystem.h \
+    cpp/fileModel/filemodel.h \
+    cpp/fileModel/filesystemtimestamper.h \
+    cpp/fileModel/ifilesystem.h \
+    cpp/fileModel/plcfilesystem.h \
+    cpp/fileModel/savedeviceentry.h \
+    cpp/passwordModel/debugpasswordsysteml.h \
+    cpp/passwordModel/ipasswordsystem.h \
+    cpp/passwordModel/passwordmodel.h \
+    cpp/passwordModel/plcpaswordsystem.h \
+    cpp/pingModel/debugpingsystem.h \
+    cpp/pingModel/ipingsystem.h \
+    cpp/pingModel/pingmodel.h \
+    cpp/pingModel/plcpingsystem.h \
+    cpp/screenModel/plcscreensystem.h \
+    cpp/timeModel/debugtimesystem.h \
+    cpp/timeModel/itimesystem.h \
+    cpp/timeModel/plctimesystem.h \
+    cpp/timeModel/timechangepackage.h \
+    cpp/timeModel/timemodel.h \
+    cpp/wifiModel/debugwifisystem.h \
+    cpp/wifiModel/iwifisystem.h \
+    cpp/wifiModel/plcwifisystem.h \
+    cpp/wifiModel/wificonnection.h \
+    cpp/wifiModel/wifimodel.h \
+    cpp/netModel/debugnetsystem.h \
+    cpp/netModel/inetsystem.h \
+    cpp/netModel/interfacecredential.h \
+    cpp/netModel/netmodel.h \
+    cpp/netModel/plcnetsystem.h \
+    cpp/screenModel/debugscreensystem.h \
+    cpp/screenModel/iscreensystem.h \
+    cpp/screenModel/screenmodel.h \
+    cpp/utilities/os.h\

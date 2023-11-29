@@ -4,11 +4,11 @@ import QtQuick.Layouts 1.12
 
 import "virtualKeyboards/"
 Item{
+
     id:passwordScreen
-    signal openGates()
     ColumnLayout{
-        anchors.margins: 20
-        spacing: 20
+        anchors.margins: 5
+        spacing: 5
         anchors.fill: parent
         CustomLabel{
             Layout.fillHeight: true
@@ -29,14 +29,11 @@ Item{
             text:qsTr("Accept")
             Layout.fillHeight: true
             Layout.fillWidth: true
-            onClicked: {
-                if(passwordModel.checkPassword(passwordinput.value) ){
-                    passwordScreen.openGates()
-                }
-            }
+            onClicked: passwordModel.checkPassword(passwordinput.value)
+
         }
         Item{
-            Layout.minimumHeight: 70
+            Layout.minimumHeight: 50
 
             Layout.fillWidth: true
             RowLayout{
@@ -53,7 +50,7 @@ Item{
                 }
                 TextButton{
                     Layout.alignment: Qt.AlignCenter
-                    Layout.minimumWidth: 150
+                    Layout.minimumWidth: 70
                     Layout.fillHeight: true
                     text:qsTr("password recovery")
                     onClicked: {
@@ -72,6 +69,8 @@ Item{
                 }
             }
         }
+
+
     }
     Dialog{
         property string ip:"0.0.0.0"

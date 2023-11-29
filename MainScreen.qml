@@ -1,9 +1,9 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
-import QtQuick.VirtualKeyboard 2.4
 import QtQuick.Layouts 1.12
 Item{
     id:mainScreen
+    property string deviceSelected:""
     states:[
         State{
             name: "mainMenu"
@@ -14,7 +14,7 @@ Item{
             PropertyChanges {
                 target: header
                 //: main screen header label
-                text:qsTr("version 1.3")
+                text:qsTr("version") +" " + devInfo.firmwareVersion
                 
             }
         },
@@ -129,28 +129,27 @@ Item{
                 text:qsTr("export")
             }
         },
+
         State{
-            name:"innerFileMenu"
-            PropertyChanges {
-                target: mainWidget
-                sourceComponent: innerFileMenu
+            name:"fileImportMenu"
+            PropertyChanges{
+                target:mainWidget
+                sourceComponent:deviceImportScreen
             }
             PropertyChanges{
                 target:header
-                //: storage header label
-                text:qsTr("storage")
+                //: import header label
+                text:qsTr("import")
             }
-
         },
         State{
-            name:"fileImportMenu"
+            name:"fileImportFolderMenu"
             PropertyChanges{
                 target:mainWidget
                 sourceComponent:fileImportScreen
             }
             PropertyChanges{
                 target:header
-                //: import header label
                 text:qsTr("import")
             }
         },
@@ -241,23 +240,35 @@ Item{
     }
     Component{
         id: backupMenu
-        MainMenuTiles{
-            leftImagePath: "qrc:/icons/plcExport.png"
-            centerImagePath: "qrc:/icons/plcStorage.png"
-            rightImagePath: "qrc:/icons/plcImport.png"
-            leftText:qsTr("export")
-            centerText:qsTr("storage")
-            rightText:qsTr("import")
-            onCenterClicked: {
-                mainScreen.state="innerFileMenu"
+        RowLayout{
+            anchors.fill: parent
+            spacing: 30
+            MenuTile{
+                Layout.preferredWidth: height*0.7
+                Layout.fillHeight: true
+                Layout.alignment: Qt.AlignLeft
+                Layout.margins: 5
+                text:"export"
+                imageSource: "qrc:/icons/plcExport.png"
+                onClicked: {
+                    mainScreen.state="fileExportMenu"
+                }
             }
-            onLeftClicked: {
-                mainScreen.state="fileExportMenu"
-            }
-            onRightClicked: {
-                mainScreen.state="fileImportMenu"
+            MenuTile{
+
+                Layout.preferredWidth: height*0.7
+                Layout.fillHeight: true
+                Layout.margins: 5
+                Layout.alignment: Qt.AlignRight
+                text:"import"
+                imageSource: "qrc:/icons/plcImport.png"
+                onClicked: {
+                    mainScreen.state="fileImportMenu"
+                }
             }
         }
+
+
         
     }
     Component{
@@ -301,18 +312,28 @@ Item{
 
         }
     }
+
     Component{
-        id:innerFileMenu
-        InnerFileMenu{
+        id:deviceImportScreen
+        ImportDeviceSelector {
+            id:devImpScrn
+
+            onSelected:{
+            mainScreen.deviceSelected = devImpScrn.selectedContent
+            mainScreen.state="fileImportFolderMenu"
+            }
+
 
         }
     }
     Component{
         id:fileImportScreen
-        FileImportScreen {
+        ImportFileSelector{
+            selectedDevice: mainScreen.deviceSelected
 
         }
     }
+
     Component{
         id:wifiConnectionMenu
         WifiConnectionsMenu{

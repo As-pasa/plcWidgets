@@ -4,7 +4,9 @@ import QtQuick.Layouts 1.12
 
 import "virtualKeyboards/"
 Item{
-
+    id:root
+    property alias selectedContent : rt1.selectedContent
+    signal selected()
     
     Connections{
         target:fileModel
@@ -12,25 +14,27 @@ Item{
         
     }
     
+    
     TestPgSelector{
-        id:rt
+        anchors.fill: parent
+        anchors.margins: 5
+        id:rt1
         columnsOnPage: 1
         rowsOnPage: (workFieldHeight-2*spacing)/ (delegateHeight+spacing)
         property string selectedContent:""
         model: fileModel.detectedDevices
         property int delegateHeight:30
-        anchors.fill: parent
-        anchors.margins: 5
+        
         contextButtons:
             Item{
              anchors.fill: parent
             ColumnLayout{
                  anchors.fill: parent
                 TextButton{
-                    text:"export"
+                    text:"select"
                     onClicked:{
-                        if(rt.selectedContent!==""){
-                            fileModel.copyTo(rt.selectedContent)
+                        if(rt1.selectedContent!==""){
+                            root.selected()
                         }
                         
                     }
@@ -50,9 +54,9 @@ Item{
         
         delegate: CustomRect{
             
-            Layout.preferredHeight: rt.delegateHeight
+            Layout.preferredHeight: rt1.delegateHeight
             Layout.fillWidth: true
-            color: (rt.selectedContent===modelData)? clickedColor:defaultColor
+            color: (rt1.selectedContent===modelData)? clickedColor:defaultColor
             Text{
                 anchors.fill: parent
                 id:identifier
@@ -64,11 +68,11 @@ Item{
                 id:clicker
                 anchors.fill: parent
                 onClicked: {
-                    if(rt.selectedContent===modelData){
-                        rt.selectedContent=""
+                    if(rt1.selectedContent===modelData){
+                        rt1.selectedContent=""
                     }
                     else{
-                        rt.selectedContent=modelData
+                        rt1.selectedContent=modelData
                     }
                 }
             }
@@ -76,8 +80,7 @@ Item{
         
         signature: CustomLabel{
             anchors.fill: parent
-            text:"select export device"
+            text:"select import device"
         }
     }
-    
 }

@@ -23,7 +23,7 @@ Item{
                     Layout.fillWidth: true
                     id:localGateInput
                     signature:qsTr("localGate ip")
-                    value:"0.0.0.0"
+                    value:"8.8.8.8"
                 }
                 TextButton{
                     text:qsTr("ping")
@@ -41,42 +41,10 @@ Item{
                 }
             }
         }
-        CustomRect{
-            radius: 20
-            Layout.fillHeight: true
-            Layout.fillWidth: true
-            ColumnLayout{
-
-                anchors.margins: 5
-                anchors.fill: parent
-                IpKeyboardField{
-                    Layout.fillWidth: true
-                    Layout.alignment: Qt.AlignCenter
-                    id:webIpInput
-                    signature:qsTr("web ip")
-                    value:"0.0.0.0"
-                }
-                TextButton{
-                    Layout.alignment: Qt.AlignCenter
-                    Layout.fillWidth: true
-                    Layout.preferredHeight:40
-                    text:qsTr("ping")
-                    onClicked:{
-                    if(root.sanityCheck(webIpInput.value))
-                    {
-                        pingResultDisplay.requestType="web"
-                        pingResultDisplay.ip=webIpInput.value
-                        pingResultDisplay.open()
-                    }
-
-                    }
-                }
-            }
-        }
     }
 
     Dialog{
-        property string ip:"0.0.0.0"
+        property string ip:"8.8.8.8"
         parent:Overlay.overlay
         property string requestType:"local Gate"
         id:pingResultDisplay
@@ -99,12 +67,7 @@ Item{
             }
         }
         Component.onCompleted:{
-            if(requestType==="local Gate"){
-                pingModel.startLocalPing(ip);
-            }
-            if(requestType==="web"){
-                pingModel.startWebPing(ip);
-            }
+            pingModel.startPing(ip);
         }
         Connections{
             target:pingModel

@@ -1,27 +1,33 @@
 #include <QApplication>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
-#include "cpp/systems/debugtimesystem.h"
-#include "cpp/systems/debugscreensystem.h"
-#include "cpp/models/timemodel.h"
-#include "cpp/models/devinfomodel.h"
-#include "cpp/models/screenmodel.h"
-#include "cpp/models/filemodel.h"
-#include "cpp/systems/debugfilesystem.h"
-#include "cpp/systems/debugwifisystem.h"
-#include "cpp/models/wifimodel.h"
-#include "cpp/systems/debugpingsystem.h"
-#include "cpp/models/pingmodel.h"
-#include "cpp/models/passwordmodel.h"
-#include "cpp/systems/debugpasswordsysteml.h"
+#include "cpp/screenModel/debugscreensystem.h"
+#include "cpp/screenModel/screenmodel.h"
+#include "cpp/screenModel/plcscreensystem.h"
+#include "cpp/wifiModel//debugwifisystem.h"
+#include "cpp/wifiModel//wifimodel.h"
+#include "cpp/netModel/netmodel.h"
+#include "cpp/netModel/debugnetsystem.h"
+#include "cpp/netModel/plcnetsystem.h"
+#include "cpp/timeModel/debugtimesystem.h"
+#include "cpp/timeModel/timemodel.h"
+#include "cpp/fileModel/plcfilesystem.h"
+#include "cpp/fileModel/filemodel.h"
+#include "cpp/pingModel/debugpingsystem.h"
+#include "cpp/pingModel/pingmodel.h"
+#include "cpp/passwordModel/plcpaswordsystem.h"
+#include "cpp/passwordModel/debugpasswordsysteml.h"
+#include "cpp/passwordModel/passwordmodel.h"
+#include "cpp/devinfoModel/devinfomodel.h"
+#include "cpp/devinfoModel/plcdevicesystem.h"
 #include <QQmlContext>
 #include <QDebug>
 #include <QTranslator>
-
+#include <QDir>
 int main(int argc, char *argv[])
 {
-    qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
 
+    qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
 
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -29,18 +35,20 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     QQmlApplicationEngine engine;
 
-
+    PlcNetSystem* nets=new PlcNetSystem();
     DebugTimeSystem* s=new DebugTimeSystem();
-    DebugScreenSystem* screenSys=new DebugScreenSystem();
-    DebugFileSystem* fileSys=new DebugFileSystem();
+    plcScreenSystem* screenSys=new plcScreenSystem();
+    PlcFileSystem* fileSys=new PlcFileSystem();
     ScreenModel screenModel(screenSys);
-    FileModel fileModel(fileSys,"a","b");
+    FileModel fileModel(fileSys,QString("B:/coding/matemp/innerStorage/"));
     DebugWifiSystem* wifiSystem=new DebugWifiSystem();
     DebugPingSystem* pingSystem = new DebugPingSystem();
-    DebugPasswordSystem* passwordSystem = new DebugPasswordSystem();
+    IPasswordSystem* passwordSystem = new PlcPaswordSystem();
+    PlcDeviceSystem* devSystem=new PlcDeviceSystem();
     WifiModel wifiModel(wifiSystem);
     TimeModel model(s);
-    DevInfoModel devInfo(&engine);
+    NetModel netModel(nets);
+    DevInfoModel devInfo(&engine,devSystem);
     PingModel pingModel(pingSystem);
     PasswordModel passwordModel(passwordSystem);
 
@@ -62,6 +70,7 @@ int main(int argc, char *argv[])
     root->setContextProperty("wifiModel",&wifiModel);
     root->setContextProperty("pingModel",&pingModel);
     root->setContextProperty("passwordModel",&passwordModel);
+    root->setContextProperty("netModel",&netModel);
     engine.load(url);
 
 

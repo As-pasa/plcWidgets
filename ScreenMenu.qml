@@ -32,7 +32,8 @@ Item{
                     horizontalCenter: parent.horizontalCenter
 
                 }
-                onValueChanged: {screenModel.brightness=value}
+                onValueChanged: {
+                    screenModel.brightness=value}
                 width:height
                 Component.onCompleted: {
                     value=screenModel.brightness

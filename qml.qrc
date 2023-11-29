@@ -35,13 +35,10 @@
         <file>DeviceInfo.qml</file>
         <file>BrightnessPicker.qml</file>
         <file>ScreenMenu.qml</file>
-        <file>FileExportScreen.qml</file>
-        <file>InnerFileMenu.qml</file>
         <file>virtualKeyboards/NumPad.qml</file>
         <file>virtualKeyboards/KeyboardInput.qml</file>
         <file>virtualKeyboards/TextKeyboardField.qml</file>
         <file>virtualKeyboards/IntKeyboardInputField.qml</file>
-        <file>FileImportScreen.qml</file>
         <file>TestPgSelector.qml</file>
         <file>WifiConnectionsMenu.qml</file>
         <file>NetInerfaces.qml</file>
@@ -51,5 +48,8 @@
         <file>TimeScreen.qml</file>
         <file>DatetimeMenu.qml</file>
         <file>TimeZoneMenu.qml</file>
+        <file>FileExportScreen.qml</file>
+        <file>ImportDeviceSelector.qml</file>
+        <file>ImportFileSelector.qml</file>
     </qresource>
 </RCC>

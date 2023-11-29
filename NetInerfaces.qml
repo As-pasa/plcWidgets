@@ -6,22 +6,25 @@ import "virtualKeyboards/"
 Item{
     TestPgSelector{
         id:root
+        model:range(netModel.declaredLength-1)
         anchors.fill: parent
         anchors.margins: 5
         rowsOnPage:root.height/(1.6*30)
         columnsOnPage:1
-        property string selectedContent:""
+        property int selectedContent:0
+        property bool somethingSelected: false
         signature:CustomLabel{
             anchors.fill: parent
             text:qsTr("select web interface to edit")
         }
 
         delegate: CustomRect{
+
             Layout.preferredHeight: 30
             Layout.fillWidth: true
-
+            id:rrr
             property int idx : root.pageModel[index]
-            color: (root.selectedContent===identifier.text)? clickedColor: defaultColor
+            color: (root.selectedContent===idx && root.somethingSelected)? clickedColor: defaultColor
 
                 Text{
                     anchors.fill: parent
@@ -29,65 +32,88 @@ Item{
                     id:identifier
                     horizontalAlignment: Qt.AlignHCenter
                     verticalAlignment: Qt.AlignVCenter
-                    text:modelData
+                    text:netModel.fromId(rrr.idx).name
                 }
             MouseArea{
                 id:clicker
                 anchors.fill: parent
                 onClicked: {
-
-                    if(root.selectedContent=== modelData){
-                        root.selectedContent=""
+                    if(!root.somethingSelected){
+                        root.somethingSelected=true
+                        root.selectedContent=rrr.idx
                     }
                     else{
-                        root.selectedContent=modelData
+                        if(root.selectedContent===rrr.idx){
+                            root.somethingSelected=false
+
+                        }
+                        else{
+                            root.selectedContent=rrr.idx
+                        }
                     }
+
                 }
             }
         }
-        contextButtons: TextButton{
+        contextButtons:ColumnLayout{
+            anchors.fill: parent
+            TextButton{
+            text:qsTr("refresh")
+            onClicked: netModel.refresh();
+            }
+
+            TextButton{
             text:qsTr("edit")
-            anchors.left:parent.left
-            anchors.right: parent.right
-            anchors.verticalCenter: parent.verticalCenter
             onClicked:
             {
-                if(root.selectedContent!=="")interfaceEditDialog.open()
+                if(root.somethingSelected)interfaceEditDialog.open()
             }
+        }
+
+
         }
         Dialog{
             id:interfaceEditDialog
             parent: Overlay.overlay
             anchors.centerIn: parent
-            width:parent.width*0.9
-            height:parent.height*0.9
+            width:parent.width
+            height:parent.height
             modal:true
-            title:qsTr("editing net interface: ") + root.selectedContent
+            title:qsTr("editing net interface: ") + netModel.fromId(root.selectedContent).name
             RowLayout{
+
                 anchors.fill: parent
+                CustomCheckbox{
+                    id:useDhcp
+                    text:"DHCP"
+                    Layout.preferredHeight:40
+                    Layout.preferredWidth: 100
+                    toggled: netModel.fromId(root.selectedContent).dhcp
+                }
+
                 IpKeyboardField{
                     id:ip
+                    enabled: !useDhcp.toggled
                     Layout.fillWidth: true
-                    width: parent.width
-                    height:parent.height
-                    signature:qsTr("input ip")
-                    value: ""
+                    Layout.fillHeight: true
+                    signature:qsTr("ip")
+                    value: netModel.fromId(root.selectedContent).ip
                 }
                 IpKeyboardField{
                     id:mask
+                     enabled: !useDhcp.toggled
                     Layout.fillWidth: true
-                    width: parent.width
-                    height:parent.height
-                    signature:qsTr("input mask")
-                    value: ""
+                    Layout.fillHeight: true
+                    signature:qsTr("mask")
+                    value: netModel.fromId(root.selectedContent).mask
                 }
                 IpKeyboardField{
                     id:gate
+                     enabled: !useDhcp.toggled
                     Layout.fillWidth: true
-                    width: parent.width
-                    height:parent.height
-                    signature:qsTr("input gate")
-                    value: ""
+                    Layout.fillHeight: true
+                    signature:qsTr("gate")
+                    value: netModel.fromId(root.selectedContent).gate
                 }
             }
 
@@ -96,6 +122,10 @@ Item{
                 TextButton{
                     text:qsTr("connect")
                     onClicked: {
+                        if(useDhcp.toggled){
+
+                        }
+
                         var k = [ip.value, mask.value, gate.value]
                         .map((ff)=> {return root.sanityCheck(ff)})
                         .filter((z)=>{return z!==null})
@@ -104,11 +134,12 @@ Item{
 
 
                         if(k.length===3){
-                            console.log("try to connect")
+                            netModel.setInterface(netModel.fromId(root.selectedContent).name, ip.value, mask.value, gate.value, useDhcp.toggled)
                             interfaceEditDialog.close()
                         }
                     }
                 }
+
                 TextButton{
                     text:qsTr("cancel")
                     onClicked: interfaceEditDialog.close()
@@ -122,6 +153,15 @@ Item{
             return null
         }
 
+    }
+    function range(x){
+        if(x===0)return []
+        let declaredIndexes=[]
+        for(var i = 0 ; i <netModel.declaredLength;i++){
+            declaredIndexes.push(i)
+        }
+
+        return declaredIndexes
     }
 }
 

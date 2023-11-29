@@ -1,0 +1,101 @@
+#include "plcnetsystem.h"
+
+PlcNetSystem::PlcNetSystem()
+{
+
+}
+
+QHostAddress PlcNetSystem::getDefaultGateWay(QString dev, QString* pOutput)
+{
+    qDebug()<<"get default gateway started";
+    const QString getDefGateWayTempl("ip -4 route show default dev %1");
+
+    QString out;
+    bool ret =  os::System(getDefGateWayTempl.arg(dev), false, &out);
+
+    if(pOutput) pOutput->operator+=(out);
+    qDebug()<<"get default gateWay ended successfully";
+    return ret ? QHostAddress(out.section(' ', 2, 2)) : QHostAddress::Null;
+}
+bool PlcNetSystem::getDefdhcp(const QString dev, QString* pOutput)
+{
+    qDebug()<<"get dhcp function started";
+    const QString getDefGateWayTempl("ip -4 route show default dev %1");
+    QString out;
+    bool ret = os::System(getDefGateWayTempl.arg(dev), false, &out);
+    if(pOutput) pOutput->operator+=(out);
+
+    //qDebug() << out;
+    qDebug()<<"get dhcp function ended successfully";
+    return ret ? out.contains("dhcp") : false;
+
+}
+
+
+
+QList<InterfaceCredential> PlcNetSystem::getConnections()
+{
+    QList<InterfaceCredential> ans;
+    for(const auto& netIf : QNetworkInterface::allInterfaces())
+    {
+       // if(netIf.type() != QNetworkInterface::Ethernet) continue;
+
+        for(const auto& addrEnt : netIf.addressEntries())
+        {
+            if(addrEnt.ip().protocol() == QAbstractSocket::IPv4Protocol)
+            {
+                qDebug()<<"found correct interface, construction started";
+                InterfaceCredential nInterface= InterfaceCredential::from(
+                            netIf.name(),
+                            addrEnt.ip().toString(),
+                            addrEnt.netmask().toString(),
+                            getDefaultGateWay(netIf.name(),nullptr).toString(),
+                            getDefdhcp(netIf.name(),nullptr));
+                    if (netIf.name() != "lo" and netIf.name() != "usb0" and netIf.name() != "can0" and netIf.name() != "can1")
+                ans.push_back(nInterface);
+                break;
+                qDebug()<<"correct interface constructed";
+            }
+
+        }
+        }
+
+
+    return ans;
+}
+
+void PlcNetSystem::setupInterface(InterfaceCredential cred)
+{
+    QString fileName;
+    //for pc ***************отключить после отладки
+   // if (newIf.name == "enp0s3") fileName = "/home/bustaz/test/network";
+  //  else if (newIf.name == "docker0") fileName = "/home/bustaz/test/network1";
+    //for plc ***************включить после отладки
+    if (cred.name == "eth0")  fileName = "/etc/systemd/network/10-eth.network";
+    else if (cred.name == "wlan0") fileName = "/etc/systemd/network/30-wlan.network";
+
+    QFile data(fileName);
+    if(!data.open(QFile::WriteOnly | QFile::Truncate)) return;
+    data.resize(0);
+    QTextStream txt(&data);
+
+    txt << "[Match]\nName=" << cred.name << "\nKernelCommandLine=!root=/dev/nfs\n[Network]\n";
+
+    if(cred.DHCPUsed)
+    {
+        txt << "DHCP=yes\n[DHCP]\nRouteMetric=1024\n";
+    }
+    else
+    {
+        QString prefix = QString::number(QHostAddress::parseSubnet(cred.ip+  "/" + cred.mask).second);
+        txt << "Address=" << cred.ip << "\\" << prefix;
+        txt << "\nGateway=" << cred.gate << "\n";
+    }
+
+    data.close();
+
+//***************включить после отладки
+// tools::System("systemctl restart systemd-networkd", true);
+ }
+
+

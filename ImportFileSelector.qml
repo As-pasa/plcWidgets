@@ -4,33 +4,29 @@ import QtQuick.Layouts 1.12
 
 import "virtualKeyboards/"
 Item{
-
-    
-    Connections{
-        target:fileModel
-        function onSavedWithStamp(a) {infoBox.openWithValue("file saved with stamp: "+a)}
-        
-    }
-    
+    id:root
+    property alias selectedContent: rt1.selectedContent
+    property string selectedDevice:devImpScrn.selectedContent
     TestPgSelector{
-        id:rt
-        columnsOnPage: 1
-        rowsOnPage: (workFieldHeight-2*spacing)/ (delegateHeight+spacing)
-        property string selectedContent:""
-        model: fileModel.detectedDevices
-        property int delegateHeight:30
         anchors.fill: parent
         anchors.margins: 5
+        id:rt1
+        columnsOnPage: 1
+        rowsOnPage: (workFieldHeight-2*spacing) / (delegateHeight+spacing)
+        property string selectedContent:""
+        model: fileModel.getfoldersInDevice(root.selectedDevice)
+        property int delegateHeight:30
+        
         contextButtons:
             Item{
-             anchors.fill: parent
+            anchors.fill: parent
             ColumnLayout{
-                 anchors.fill: parent
+                anchors.fill: parent
                 TextButton{
-                    text:"export"
+                    text:"import"
                     onClicked:{
-                        if(rt.selectedContent!==""){
-                            fileModel.copyTo(rt.selectedContent)
+                        if(rt1.selectedContent!==""){
+                            fileModel.copyFrom(root.selectedDevice, rt1.selectedContent)
                         }
                         
                     }
@@ -38,21 +34,23 @@ Item{
                     Layout.fillWidth: true
                     
                 }
+
                 TextButton{
                     Layout.fillHeight: true
                     Layout.fillWidth: true
                     text:"refresh"
                     onClicked: fileModel.refreshDevices()
                 }
+                
             }
             
         }
         
         delegate: CustomRect{
             
-            Layout.preferredHeight: rt.delegateHeight
+            Layout.preferredHeight: rt1.delegateHeight
             Layout.fillWidth: true
-            color: (rt.selectedContent===modelData)? clickedColor:defaultColor
+            color: (rt1.selectedContent===modelData)? clickedColor:defaultColor
             Text{
                 anchors.fill: parent
                 id:identifier
@@ -64,11 +62,11 @@ Item{
                 id:clicker
                 anchors.fill: parent
                 onClicked: {
-                    if(rt.selectedContent===modelData){
-                        rt.selectedContent=""
+                    if(rt1.selectedContent===modelData){
+                        rt1.selectedContent=""
                     }
                     else{
-                        rt.selectedContent=modelData
+                        rt1.selectedContent=modelData
                     }
                 }
             }
@@ -76,7 +74,7 @@ Item{
         
         signature: CustomLabel{
             anchors.fill: parent
-            text:"select export device"
+            text:"select import device"
         }
     }
     

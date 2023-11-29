@@ -11,11 +11,11 @@ CustomRect{
     property alias signature : signatureLabel.data
     property alias contextButtons:contextButtons.data
     property string contextButtonText:qsTr("connect")
-
+    property int workFieldHeight : pgsViewGrid.height-signatureLabel.height
     property alias columnsOnPage: pgsViewGrid.columns
     property alias rowsOnPage:pgsViewGrid.rows
     property var pageModel:model.slice(currentPageStartIndex,currentPageEndIndex)
-
+    property alias spacing :pgsViewGrid.rowSpacing
     property int elementsOnCurrentPage: currentPageEndIndex-currentPageEndIndex
     property int currentPage:0
     property int currentPageStartIndex: currentPage*(columnsOnPage*rowsOnPage)
@@ -37,6 +37,7 @@ CustomRect{
             Layout.fillHeight: true
             Layout.fillWidth: true
             GridLayout{
+
                 Item{
                     id:signatureLabel
                     Layout.preferredHeight: 30
@@ -46,6 +47,7 @@ CustomRect{
 
                 anchors.fill: parent
                 id:pgsViewGrid
+                Component.onCompleted: console.log(rowSpacing)
                 Repeater{
                     model:root.pageModel
                     id:supplier

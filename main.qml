@@ -14,16 +14,32 @@ ApplicationWindow {
         id:mainScreen
         anchors.fill: parent
         color:"grey"
+        Connections{
+            target:passwordModel
+            function onPasswordCorrect(){
+                mainScreen.state="mainScreen"
+            }
+            function onPasswordWrong(){
+                infoBox.openWithValue("Wrong password")
+            }
+            function onHashFileNotExist(){
+                infoBox.openWithValue("Hash file not found.\n Use root password")
+            }
+        }
+
+
         MainScreen{
             id:appScreen
             anchors.topMargin: 1
             anchors.fill:parent
-            state:"timeMenu"
+            state:"networkMenu"
         }
         PasswordScreen {
             id:passwordScreen
             anchors.fill:parent
-            onOpenGates: mainScreen.state="mainScreen"
+
+
+
         }
         states:[
             State{
@@ -55,15 +71,46 @@ ApplicationWindow {
                 }
             }
         ]
-        state:"mainScreen"
+        state:"passwordScreen"
     }
 
     KeyboardInput{
         id: kKEYBOARDUNIT
         state:"ipInput"
     }
+    Connections{
+        target: screenModel
+        function onCalibrationEnded(){
+            showNormal();
 
+        }
+    }
 
+    Dialog{
+        id:infoBox
+        property string val:""
+        parent:Overlay.overlay
+        anchors.centerIn: parent
+        width: parent.width
+        height: parent.height
+        CustomLabel{
+
+            anchors.fill: parent
+            text:infoBox.val
+
+        }
+        function openWithValue(value){
+            infoBox.val=value
+            infoBox.open();
+        }
+        footer:DialogButtonBox{
+
+            TextButton{
+                text:qsTr("close")
+                onClicked: infoBox.close()
+            }
+        }
+    }
 
 
 
@@ -75,16 +122,23 @@ ApplicationWindow {
 
 
 //    }
-//    TimeScreen{
+//    ImportDeviceSelector {
+//        id:rt2
+//        selectedContent:"CD card"
+//    }
+
+
+//    ImportFileSelector {
 //        anchors{
 //            top:header.bottom
 //            left:parent.left
 //            right:parent.right
 //            bottom:parent.bottom
-//            margins:5
 //        }
 //    }
 
 
-
 }
+
+
+
