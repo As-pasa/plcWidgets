@@ -30,41 +30,47 @@ void FileModel::refreshDevices()
     emit detectedDevicesChanged(ans);
 }
 
-bool FileModel::copyTo(QString deviceName)
+void FileModel::copyTo(QString deviceName)
 {
 
     foreach (auto dev, m_devices) {
         if(dev.getName()==deviceName){
 
             if(!dev.isOnline()){
-                return false;
+                m_displayer->showMessage(QString("device (%1) not mounted. Unable to save").arg(dev.getName()));
+                return;
             }
             else{
                 QString stamp=m_stamper.getStamp();
                 QString pathWithStamp =dev.getPath()+ QDir::separator()+stamp;
                 m_system->copyAll(m_localCodesys, pathWithStamp);
                 m_displayer->showMessage("saved with stamp: "+stamp);
-                return true;
+                return;
             }
             break;
         }
     }
-    return false;
+    m_displayer->showMessage(QString("device (%1) not founded").arg(deviceName));
 }
 
-bool FileModel::copyFrom(QString device, QString saveName)
+void FileModel::copyFrom(QString device, QString saveName)
 {
     foreach (auto dev, m_devices) {
         if(dev.getName()==device){
             if(!dev.isOnline()){
-                return false;
+               m_displayer->showMessage(QString("device (%1) not mounted. Unable to save").arg(dev.getName()));
+               return;
             }
             if(!dev.getEntries().contains(saveName)){
-                return false;
+                  m_displayer->showMessage(QString("file (%1) not found on device. Unable to save").arg(saveName));
+                  return;
             }
             QString path=QDir::cleanPath(dev.getPath()+QDir::separator()+saveName);
             QDir a(m_localCodesys);
-
+            if(!a.exists()){
+                m_displayer->showMessage(QString("codeSys folder not found on specified path"));
+                return;
+            }
             foreach (QString file, a.entryList(QDir::NoDotAndDotDot|QDir::Hidden  | QDir::AllDirs | QDir::Files)) {
                 QString pp=QDir::cleanPath(a.absoluteFilePath(file));
                 QFileInfo fileInfo(pp);
@@ -78,12 +84,13 @@ bool FileModel::copyFrom(QString device, QString saveName)
             }
 
             m_system->copyAll(path,m_localCodesys);
-            return true;
+            return;
 
             break;
         }
     }
-    return false;
+    m_displayer->showMessage(QString("could not found device / savename specified: (%1/%2)").arg(device,saveName));
+    return;
 }
 
 QStringList FileModel::getfoldersInDevice(QString device)

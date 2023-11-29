@@ -29,8 +29,8 @@ private:
 
 public slots:
     void refreshDevices();
-    bool copyTo(QString path);
-    bool copyFrom(QString device, QString saveName);
+    void copyTo(QString path);
+    void copyFrom(QString device, QString saveName);
     QStringList getfoldersInDevice(QString device);
 signals:
     void detectedDevicesChanged(QStringList);
