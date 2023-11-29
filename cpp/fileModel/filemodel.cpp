@@ -1,12 +1,13 @@
 #include "filemodel.h"
 
-FileModel::FileModel(IFileSystem *sys,QString innerFileDir,  QObject *parent) : QObject(parent)
+FileModel::FileModel(MessageDisplayer* displayer,IFileSystem *sys,QString innerFileDir,  QObject *parent) : QObject(parent)
 {
      m_system=sys;
      m_localCodesys=innerFileDir;
      m_devices.append(SaveDeviceEntry("CD card", "B:/coding/matemp/cdStorage", m_system));
      m_devices.append(SaveDeviceEntry("USB device", "B:/coding/matemp/usbStorage", m_system));
      refreshDevices();
+     m_displayer=displayer;
 }
 
 QStringList FileModel::detectedDevices()
@@ -20,7 +21,6 @@ QStringList FileModel::detectedDevices()
                 ans.append(entry.getName());
             }
     }
-    qDebug()<<ans;
     return ans;
 }
 
@@ -43,7 +43,7 @@ bool FileModel::copyTo(QString deviceName)
                 QString stamp=m_stamper.getStamp();
                 QString pathWithStamp =dev.getPath()+ QDir::separator()+stamp;
                 m_system->copyAll(m_localCodesys, pathWithStamp);
-                emit savedWithStamp(stamp);
+                m_displayer->showMessage("saved with stamp: "+stamp);
                 return true;
             }
             break;

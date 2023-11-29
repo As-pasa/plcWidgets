@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QStringList>
+#include "cpp/utilities/messagedisplayer.h"
 
 class FileModel : public QObject
 {
@@ -15,7 +16,7 @@ class FileModel : public QObject
     Q_PROPERTY(QStringList detectedDevices READ detectedDevices NOTIFY detectedDevicesChanged)
 
 public:
-    explicit FileModel( IFileSystem *sys,QString innerFileDir, QObject *parent = nullptr);
+    explicit FileModel(MessageDisplayer* displayer, IFileSystem *sys,QString innerFileDir, QObject *parent = nullptr);
 
 private:
     QList<SaveDeviceEntry> m_devices;
@@ -23,6 +24,7 @@ private:
     IFileSystem* m_system;
     QString m_localCodesys;
     QStringList detectedDevices();
+    MessageDisplayer* m_displayer;
 
 
 public slots:

@@ -88,6 +88,13 @@ ApplicationWindow {
 
     Dialog{
         id:infoBox
+        Connections{
+            target:messager
+            function onMessageFound(a){
+                infoBox.openWithValue(a)
+            }
+        }
+
         property string val:""
         parent:Overlay.overlay
         anchors.centerIn: parent
