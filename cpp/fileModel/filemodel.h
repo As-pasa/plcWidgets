@@ -34,7 +34,6 @@ public slots:
     QStringList getfoldersInDevice(QString device);
 signals:
     void detectedDevicesChanged(QStringList);
-    void savedWithStamp(QString);
 
 };
 

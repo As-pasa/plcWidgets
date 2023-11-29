@@ -6,11 +6,7 @@ import "virtualKeyboards/"
 Item{
 
     
-    Connections{
-        target:fileModel
-        function onSavedWithStamp(a) {infoBox.openWithValue("file saved with stamp: "+a)}
-        
-    }
+
     
     TestPgSelector{
         id:rt
