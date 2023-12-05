@@ -28,6 +28,7 @@ void plcScreenSystem::setScreenBrightness(int value)
 
     int foo= value*maxBr/100;
     os::writeToFile(m_configPath,QString::number(foo));
+    os::writeToFile(m_fileSetterPath,QString::number(foo));
 }
 
 int plcScreenSystem::getCurrentScreenBrightness()

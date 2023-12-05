@@ -36,6 +36,8 @@ SOURCES += \
     cpp/timeModel/plctimesystem.cpp \
     cpp/timeModel/timechangepackage.cpp \
     cpp/timeModel/timemodel.cpp \
+    cpp/utilities/confirmationDisplayer/commandconfirmator.cpp \
+    cpp/utilities/confirmationDisplayer/confirmatorstate.cpp \
     cpp/utilities/messagedisplayer.cpp \
     cpp/wifiModel/debugwifisystem.cpp \
     cpp/wifiModel/iwifisystem.cpp \
@@ -91,6 +93,7 @@ HEADERS += \
     cpp/timeModel/plctimesystem.h \
     cpp/timeModel/timechangepackage.h \
     cpp/timeModel/timemodel.h \
+    cpp/utilities/confirmationDisplayer/commandconfirmator.h \
     cpp/utilities/messagedisplayer.h \
     cpp/wifiModel/debugwifisystem.h \
     cpp/wifiModel/iwifisystem.h \

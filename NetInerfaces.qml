@@ -58,11 +58,15 @@ Item{
         contextButtons:ColumnLayout{
             anchors.fill: parent
             TextButton{
+                Layout.fillHeight: true
+                Layout.fillWidth: true
             text:qsTr("refresh")
             onClicked: netModel.refresh();
             }
 
             TextButton{
+                Layout.fillHeight: true
+                Layout.fillWidth: true
             text:qsTr("edit")
             onClicked:
             {
@@ -120,7 +124,7 @@ Item{
 
             footer:DialogButtonBox{
                 TextButton{
-                    text:qsTr("connect")
+                    text:qsTr("save")
                     onClicked: {
                         if(useDhcp.toggled){
 

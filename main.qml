@@ -119,6 +119,45 @@ ApplicationWindow {
         }
     }
 
+    Dialog{
+        id:confUI
+        Connections{
+            target:confirmator
+            function onConfirmRequested(s){
+                confUI.openWithValue(s)
+            }
+        }
+        function openWithValue(value){
+            confUI.val=value
+            confUI.open();
+        }
+        property string val:""
+        parent:Overlay.overlay
+        anchors.centerIn: parent
+        width: parent.width
+        height: parent.height
+        CustomLabel{
+
+            anchors.fill: parent
+            text:confUI.val
+
+        }
+        footer:DialogButtonBox{
+            TextButton{
+                text:qsTr("accept")
+                onClicked: {
+                    confirmator.accept()
+                    confUI.close()
+                }
+            }
+            TextButton{
+                text:qsTr("close")
+                onClicked: confUI.close()
+            }
+
+        }
+    }
+
 
 
 //    HeaderBar {

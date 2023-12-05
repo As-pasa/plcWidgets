@@ -1,6 +1,6 @@
 #include "filemodel.h"
 
-FileModel::FileModel(MessageDisplayer* displayer,IFileSystem *sys,QString innerFileDir,  QObject *parent) : QObject(parent)
+FileModel::FileModel(MessageDisplayer* displayer,CommandConfirmator* confirmator, IFileSystem *sys,QString innerFileDir,  QObject *parent) : QObject(parent)
 {
      m_system=sys;
      m_localCodesys=innerFileDir;
@@ -8,6 +8,7 @@ FileModel::FileModel(MessageDisplayer* displayer,IFileSystem *sys,QString innerF
      m_devices.append(SaveDeviceEntry("USB device", "B:/coding/matemp/usbStorage", m_system));
      refreshDevices();
      m_displayer=displayer;
+     m_confirmator=confirmator;
 }
 
 QStringList FileModel::detectedDevices()
@@ -54,6 +55,12 @@ void FileModel::copyTo(QString deviceName)
 }
 
 void FileModel::copyFrom(QString device, QString saveName)
+{
+    auto a =new ImportConfirm(this,device,saveName);
+    m_confirmator->enqueue(a);
+}
+
+void FileModel::innerCopyFrom(QString device, QString saveName)
 {
     foreach (auto dev, m_devices) {
         if(dev.getName()==device){
@@ -111,3 +118,21 @@ QStringList FileModel::getfoldersInDevice(QString device)
 
 
 
+
+
+FileModel::ImportConfirm::ImportConfirm(FileModel *model, QString device, QString saveName)
+{
+    m_model=model;
+    m_device=device;
+    m_saveFile=saveName;
+}
+
+QString FileModel::ImportConfirm::getDescription()
+{
+    return "All inner files will be deleted. Continue?";
+}
+
+void FileModel::ImportConfirm::accept()
+{
+    m_model-> innerCopyFrom(m_device,m_saveFile);
+}

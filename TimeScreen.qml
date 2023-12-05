@@ -12,14 +12,14 @@ Item{
         MenuTile{
             text:"datetime"
 
-            imageSource: "qrc:/icons/plcInfo.png"
+            imageSource: "qrc:/icons/plcTime.png"
             Layout.fillHeight: true
             Layout.fillWidth: true
             onClicked: leftClicked()
         }
         MenuTile{
             text:"timeZone"
-            imageSource: "qrc:/icons/plcInfo.png"
+            imageSource: "qrc:/icons/plcTime.png"
             Layout.fillHeight: true
             Layout.fillWidth: true
             onClicked: rightClicked()

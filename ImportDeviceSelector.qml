@@ -8,11 +8,7 @@ Item{
     property alias selectedContent : rt1.selectedContent
     signal selected()
     
-    Connections{
-        target:fileModel
-        function onSavedWithStamp(a) {infoBox.openWithValue("file saved with stamp: "+a)}
-        
-    }
+
     
     
     TestPgSelector{

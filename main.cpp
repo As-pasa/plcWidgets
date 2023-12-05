@@ -21,6 +21,7 @@
 #include "cpp/devinfoModel/devinfomodel.h"
 #include "cpp/devinfoModel/plcdevicesystem.h"
 #include "cpp/utilities/messagedisplayer.h"
+#include "cpp/utilities/confirmationDisplayer/commandconfirmator.h"
 #include <QQmlContext>
 #include <QDebug>
 #include <QTranslator>
@@ -35,14 +36,14 @@ int main(int argc, char *argv[])
 
     QApplication app(argc, argv);
     QQmlApplicationEngine engine;
-
+    CommandConfirmator* confirmator = new CommandConfirmator();
     MessageDisplayer*displayer = new  MessageDisplayer();
     PlcNetSystem* nets=new PlcNetSystem();
     DebugTimeSystem* s=new DebugTimeSystem();
     plcScreenSystem* screenSys=new plcScreenSystem();
     PlcFileSystem* fileSys=new PlcFileSystem();
     ScreenModel screenModel(screenSys);
-    FileModel fileModel(displayer, fileSys,QString("B:/coding/matemp/innerStorage/"));
+    FileModel fileModel(displayer,confirmator, fileSys,QString("B:/coding/matemp/innerStorage/"));
     DebugWifiSystem* wifiSystem=new DebugWifiSystem();
     DebugPingSystem* pingSystem = new DebugPingSystem();
     IPasswordSystem* passwordSystem = new PlcPaswordSystem();
@@ -53,6 +54,7 @@ int main(int argc, char *argv[])
     DevInfoModel devInfo(&engine,devSystem);
     PingModel pingModel(pingSystem);
     PasswordModel passwordModel(passwordSystem);
+
 
 
 
@@ -74,6 +76,7 @@ int main(int argc, char *argv[])
     root->setContextProperty("passwordModel",&passwordModel);
     root->setContextProperty("netModel",&netModel);
     root->setContextProperty("messager",displayer);
+    root->setContextProperty("confirmator",confirmator);
     engine.load(url);
 
 
