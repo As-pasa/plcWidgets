@@ -39,5 +39,6 @@
         <file>BrightnessPicker.qml</file>
         <file>ScreenMenu.qml</file>
         <file>FileExportScreen.qml</file>
+        <file>QmlKeyboard/KeyRow.qml</file>
     </qresource>
 </RCC>
