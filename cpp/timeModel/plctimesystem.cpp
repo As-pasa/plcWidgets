@@ -61,16 +61,12 @@ bool PLCTimeSystem::getATZStatus()
 {
     QString a="";
     return os::readFromFile("/etc/systemd/system/multi-user.target.wants/auto-tz.service",a);
-
-
 }
 
 bool PLCTimeSystem::getNIPStatus()
 {
-
     QString a="";
     return os::readFromFile("/etc/systemd/system/sysinit.target.wants/systemd-timesyncd.service",a);
-
 }
 
 QStringList PLCTimeSystem::getTimeZones()

@@ -8,7 +8,7 @@ class PlcPaswordSystem:public IPasswordSystem
 {
 private:
     QString sudoPassword="54321";
-    QString passwordHashConfigPath="B:/coding/matemp/password.txt";
+    QString passwordHashConfigPath="/etc/plcconf/password";
 
 
 public:

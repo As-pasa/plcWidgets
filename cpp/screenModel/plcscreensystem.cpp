@@ -42,5 +42,4 @@ void plcScreenSystem::calibrate()
     QProcess proc;
     proc.start("ts_calibrate");
     proc.waitForFinished(60000);
-
 }

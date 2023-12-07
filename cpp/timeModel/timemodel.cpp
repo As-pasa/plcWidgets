@@ -1,6 +1,6 @@
 #include "timemodel.h"
 
-TimeModel::TimeModel(DebugTimeSystem *system)
+TimeModel::TimeModel(ITimeSystem *system)
 {
     m_system=system;
     m_timer=new QTimer(this);

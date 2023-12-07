@@ -4,16 +4,16 @@
 #include "cpp/screenModel/debugscreensystem.h"
 #include "cpp/screenModel/screenmodel.h"
 #include "cpp/screenModel/plcscreensystem.h"
-#include "cpp/wifiModel//debugwifisystem.h"
-#include "cpp/wifiModel//wifimodel.h"
+#include "cpp/wifiModel/plcwifisystem.h"
+#include "cpp/wifiModel/wifimodel.h"
 #include "cpp/netModel/netmodel.h"
 #include "cpp/netModel/debugnetsystem.h"
 #include "cpp/netModel/plcnetsystem.h"
-#include "cpp/timeModel/debugtimesystem.h"
+#include "cpp/timeModel/plctimesystem.h"
 #include "cpp/timeModel/timemodel.h"
 #include "cpp/fileModel/plcfilesystem.h"
 #include "cpp/fileModel/filemodel.h"
-#include "cpp/pingModel/debugpingsystem.h"
+#include "cpp/pingModel/plcpingsystem.h"
 #include "cpp/pingModel/pingmodel.h"
 #include "cpp/passwordModel/plcpaswordsystem.h"
 #include "cpp/passwordModel/debugpasswordsysteml.h"
@@ -39,13 +39,13 @@ int main(int argc, char *argv[])
     CommandConfirmator* confirmator = new CommandConfirmator();
     MessageDisplayer*displayer = new  MessageDisplayer();
     PlcNetSystem* nets=new PlcNetSystem();
-    DebugTimeSystem* s=new DebugTimeSystem();
+    PLCTimeSystem* s=new PLCTimeSystem();
     plcScreenSystem* screenSys=new plcScreenSystem();
     PlcFileSystem* fileSys=new PlcFileSystem();
-    ScreenModel screenModel(screenSys);
-    FileModel fileModel(displayer,confirmator, fileSys,QString("B:/coding/matemp/innerStorage/"));
-    DebugWifiSystem* wifiSystem=new DebugWifiSystem();
-    DebugPingSystem* pingSystem = new DebugPingSystem();
+    ScreenModel screenModel(screenSys,confirmator);
+    FileModel fileModel(displayer,confirmator, fileSys,QString("/opt/codesys/"));
+    PLCWifiSystem* wifiSystem=new PLCWifiSystem();
+    plcPingSystem* pingSystem = new plcPingSystem();
     IPasswordSystem* passwordSystem = new PlcPaswordSystem();
     PlcDeviceSystem* devSystem=new PlcDeviceSystem();
     WifiModel wifiModel(wifiSystem);

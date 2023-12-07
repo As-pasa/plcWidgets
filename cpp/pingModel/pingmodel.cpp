@@ -1,6 +1,6 @@
 #include "pingmodel.h"
 
-PingModel::PingModel(DebugPingSystem* system,QObject *parent) : QObject(parent)
+PingModel::PingModel(IPingSystem* system,QObject *parent) : QObject(parent)
 {
     m_system=system;
 }

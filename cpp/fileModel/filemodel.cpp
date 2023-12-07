@@ -4,8 +4,8 @@ FileModel::FileModel(MessageDisplayer* displayer,CommandConfirmator* confirmator
 {
      m_system=sys;
      m_localCodesys=innerFileDir;
-     m_devices.append(SaveDeviceEntry("CD card", "B:/coding/matemp/cdStorage", m_system));
-     m_devices.append(SaveDeviceEntry("USB device", "B:/coding/matemp/usbStorage", m_system));
+     m_devices.append(SaveDeviceEntry("CD card", "/run/media/mmcblk1p1/", m_system));
+     //m_devices.append(SaveDeviceEntry("USB device", "B:/coding/matemp/usbStorage", m_system));
      refreshDevices();
      m_displayer=displayer;
      m_confirmator=confirmator;

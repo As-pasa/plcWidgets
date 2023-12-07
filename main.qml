@@ -32,7 +32,7 @@ ApplicationWindow {
             id:appScreen
             anchors.topMargin: 1
             anchors.fill:parent
-            state:"networkMenu"
+            state:"mainMenu"
         }
         PasswordScreen {
             id:passwordScreen
@@ -130,6 +130,7 @@ ApplicationWindow {
         function openWithValue(value){
             confUI.val=value
             confUI.open();
+
         }
         property string val:""
         parent:Overlay.overlay
@@ -146,8 +147,9 @@ ApplicationWindow {
             TextButton{
                 text:qsTr("accept")
                 onClicked: {
+                     confUI.close()
                     confirmator.accept()
-                    confUI.close()
+
                 }
             }
             TextButton{
@@ -157,7 +159,84 @@ ApplicationWindow {
 
         }
     }
+    CustomRect{
+        radius: 0
+        id: calibrationUIHelper
+        Component.onCompleted: console.log("qml changed")
+        function open(){
+            calibrationUIHelper.enabled= true
+            calibrationUIHelper.visible= true
+        }
+        function close(){
+            calibrationUIHelper.enabled= false
+            calibrationUIHelper.visible= false
 
+        }
+        Connections{
+            target:screenModel
+            function onCalibrationStarted(){
+                calibrationUIHelper.open()
+            }
+        }
+        Connections{
+            target:screenModel
+            function onCalibrationEnded(){
+                calibrationUIHelper.close()
+            }
+        }
+
+        enabled: false
+        visible: false
+        parent: Overlay.overlay
+        anchors.fill: parent
+        TextButton{
+            text:"1"
+            anchors.top:parent.top
+            anchors.left: parent.left
+            width:20
+            height:20
+
+        }
+        TextButton{
+            text:"2"
+            anchors.top:parent.top
+            anchors.right: parent.right
+            width:20
+            height:20
+
+        }
+        TextButton{
+            text:"3"
+            anchors.bottom:parent.bottom
+            anchors.right: parent.right
+            width:20
+            height:20
+
+        }
+        TextButton{
+            text:"4"
+            anchors.bottom:parent.bottom
+            anchors.left: parent.left
+            width:20
+            height:20
+
+        }
+        TextButton{
+            text:"5"
+            anchors.centerIn: parent
+            width:20
+            height:20
+        }
+        TextButton{
+            text:"start"
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+            onClicked: {
+            screenModel.innerCalibrate()
+            calibrationUIHelper.close()
+            }
+        }
+    }
 
 
 //    HeaderBar {

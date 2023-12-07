@@ -21,7 +21,7 @@ class TimeModel:public QObject
     Q_PROPERTY(QString currentTimeZone READ currentTimeZone WRITE setCurrentTimeZone NOTIFY currentTimeZoneChanged)
     Q_OBJECT
 private:
-    DebugTimeSystem* m_system;
+    ITimeSystem* m_system;
     QTimer* m_timer;
     QDateTime m_currentDT;
     QStringList m_timeZones;
@@ -30,7 +30,7 @@ private:
     bool m_ATZStatus;
 
 public:
-    TimeModel(DebugTimeSystem* system);
+    TimeModel(ITimeSystem* system);
     QStringList timeZones();
     QDateTime currentTime();
     bool NIPStatus();

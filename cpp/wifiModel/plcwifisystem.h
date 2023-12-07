@@ -4,7 +4,7 @@
 #include "iwifisystem.h"
 #include <QFile>
 #include <QProcess>
-class PLCWifiSystem:IWifiSystem
+class PLCWifiSystem:public IWifiSystem
 {
 public:
     PLCWifiSystem();

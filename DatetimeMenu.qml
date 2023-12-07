@@ -18,7 +18,7 @@ CustomRect{
         SignedLabel{
             underLabel:"current datetime (h : m dd/mm/yyyy)"
             text:
-                `${timeSegment.curDate.getHours()} : ${timeSegment.curDate.getMinutes()}  ${timeSegment.curDate.getDate()}/${timeSegment.curDate.getMonth()+1}/${timeSegment.curDate.getFullYear()}"`
+                `${timeSegment.curDate.getHours()} : ${timeSegment.curDate.getMinutes()}  ${timeSegment.curDate.getDate()}/${timeSegment.curDate.getMonth()+1}/${timeSegment.curDate.getFullYear()}`
             
             
             Layout.preferredHeight:70

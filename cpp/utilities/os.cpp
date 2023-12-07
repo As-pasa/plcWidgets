@@ -66,18 +66,28 @@ bool os::System2(const QString cmd, const QStringList args, bool elevation, QStr
 
 bool os::writeToFile(QString path, QString string)
 {
-    QFileInfo a(path);
-    QString parentDir= a.absolutePath();
-    QString tmpPath= QDir::cleanPath(parentDir+QDir::separator()+"psv_plc_tmp_file");
-    QFile tempFile(tmpPath);
-    tempFile.open(QIODevice::WriteOnly);
-    QTextStream tmpTextStream(&tempFile);
-    tmpTextStream<<string;
-    tempFile.close();
-    QFile aa(path);
-    aa.remove();
-    QFile::rename(tmpPath,path);
-    return true;
+    QFile a(path);
+    if(a.open(QIODevice::WriteOnly))
+    {
+        QTextStream aWriter(&a);
+        aWriter<<string;
+        a.close();
+        return true;
+    }
+    return false;
+
+//    QFileInfo a(path);
+//    QString parentDir= a.absolutePath();
+//    QString tmpPath= QDir::cleanPath(parentDir+QDir::separator()+"psv_plc_tmp_file");
+//    QFile tempFile(tmpPath);
+//    tempFile.open(QIODevice::WriteOnly);
+//    QTextStream tmpTextStream(&tempFile);
+//    tmpTextStream<<string;
+//    tempFile.close();
+//    QFile aa(path);
+//    aa.remove();
+//    QFile::rename(tmpPath,path);
+//    return true;
 }
 
 bool os::readFromFile(QString path, QString &output)

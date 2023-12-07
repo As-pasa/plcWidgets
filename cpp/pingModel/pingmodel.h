@@ -3,15 +3,15 @@
 
 #include <QObject>
 #include <QWidget>
-#include "debugpingsystem.h"
+#include "ipingsystem.h"
 class PingModel : public QObject
 {
     Q_OBJECT
 public:
-    explicit PingModel(DebugPingSystem* system, QObject *parent = nullptr);
+    explicit PingModel(IPingSystem* system, QObject *parent = nullptr);
 private:
     QString lastPingResult;
-    DebugPingSystem* m_system;
+    IPingSystem* m_system;
 public slots:
     void startPing(QString ip);
     QString getPingResult();

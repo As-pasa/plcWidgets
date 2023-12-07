@@ -6,11 +6,22 @@ import "virtualKeyboards/"
 Item{
     TestPgSelector{
         id:root
-        model:range(netModel.declaredLength-1)
+        model:range(netModel.declaredLength)
         anchors.fill: parent
         anchors.margins: 5
-        rowsOnPage:root.height/(1.6*30)
+        rowsOnPage:(workFieldHeight-2*spacing)/ (30+spacing)
         columnsOnPage:1
+        Component.onCompleted: console.log(model)
+        Connections{
+        target:netModel
+        function onDeclaredLengthChanged(a){
+            console.log(a)
+            for(var z = 0 ; z < a;z++){
+                console.log(netModel.fromId(z))
+            }
+        }
+        }
+
         property int selectedContent:0
         property bool somethingSelected: false
         signature:CustomLabel{
@@ -19,7 +30,6 @@ Item{
         }
 
         delegate: CustomRect{
-
             Layout.preferredHeight: 30
             Layout.fillWidth: true
             id:rrr
@@ -54,6 +64,7 @@ Item{
 
                 }
             }
+            Component.onCompleted: console.log("constructing delegate for",index)
         }
         contextButtons:ColumnLayout{
             anchors.fill: parent

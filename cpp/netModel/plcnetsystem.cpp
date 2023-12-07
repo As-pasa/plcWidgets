@@ -7,26 +7,26 @@ PlcNetSystem::PlcNetSystem()
 
 QHostAddress PlcNetSystem::getDefaultGateWay(QString dev, QString* pOutput)
 {
-    qDebug()<<"get default gateway started";
+
     const QString getDefGateWayTempl("ip -4 route show default dev %1");
 
     QString out;
     bool ret =  os::System(getDefGateWayTempl.arg(dev), false, &out);
 
     if(pOutput) pOutput->operator+=(out);
-    qDebug()<<"get default gateWay ended successfully";
+
     return ret ? QHostAddress(out.section(' ', 2, 2)) : QHostAddress::Null;
 }
 bool PlcNetSystem::getDefdhcp(const QString dev, QString* pOutput)
 {
-    qDebug()<<"get dhcp function started";
+
     const QString getDefGateWayTempl("ip -4 route show default dev %1");
     QString out;
     bool ret = os::System(getDefGateWayTempl.arg(dev), false, &out);
     if(pOutput) pOutput->operator+=(out);
 
     //qDebug() << out;
-    qDebug()<<"get dhcp function ended successfully";
+
     return ret ? out.contains("dhcp") : false;
 
 }
@@ -42,9 +42,10 @@ QList<InterfaceCredential> PlcNetSystem::getConnections()
 
         for(const auto& addrEnt : netIf.addressEntries())
         {
+
             if(addrEnt.ip().protocol() == QAbstractSocket::IPv4Protocol)
             {
-                qDebug()<<"found correct interface, construction started";
+
                 InterfaceCredential nInterface= InterfaceCredential::from(
                             netIf.name(),
                             addrEnt.ip().toString(),
@@ -54,13 +55,13 @@ QList<InterfaceCredential> PlcNetSystem::getConnections()
                     if (netIf.name() != "lo" and netIf.name() != "usb0" and netIf.name() != "can0" and netIf.name() != "can1")
                 ans.push_back(nInterface);
                 break;
-                qDebug()<<"correct interface constructed";
             }
-
         }
         }
 
-
+    foreach (auto aa, ans) {
+        qDebug()<<"interface in list: "<<aa.name;
+    }
     return ans;
 }
 

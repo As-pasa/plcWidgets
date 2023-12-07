@@ -8,7 +8,7 @@ class PlcDeviceSystem
 {
 
 private:
-    QString pathToConfig="B:/coding/matemp/devinfo.conf.txt";
+    QString pathToConfig="/etc/plcconf/plcinfo";
     QMap<QString, QString> m_data;
     QMap<QString,QString> collectData();
     QString checkGet(QString key);

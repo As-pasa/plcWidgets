@@ -47,7 +47,7 @@ CustomRect{
 
                 anchors.fill: parent
                 id:pgsViewGrid
-                Component.onCompleted: console.log(rowSpacing)
+                //Component.onCompleted: console.log(rowSpacing)
                 Repeater{
                     model:root.pageModel
                     id:supplier

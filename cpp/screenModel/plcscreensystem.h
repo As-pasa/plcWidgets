@@ -12,9 +12,9 @@ public:
 
     plcScreenSystem();
 private:
-    QString m_configPath="B:/coding/matemp/screen.conf.txt";
-    QString m_fileSetterPath="B:/coding/matemp/brightness.txt";
-    QString m_maxBrightnessPath="B:/coding/matemp/max_brightness.txt";
+    QString m_configPath="/etc/plcconf/brightness";
+    QString m_fileSetterPath="/sys/devices/platform/backlight/backlight/backlight/brightness";
+    QString m_maxBrightnessPath="/sys/devices/platform/backlight/backlight/backlight/max_brightness";
 
     int maxBr=0;
     // IScreenSystem interface
