@@ -1,101 +1,87 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 
-import QtQuick.VirtualKeyboard.Settings 2.1
 import QtQuick.Layouts 1.12
 
 Item{
-    CustomRect{
+    RowLayout{
         anchors.fill: parent
-        anchors.margins: 15
-        radius:30
-        CustomRect{
-            radius: 20
-            id:deviceInfo
-            anchors{
-                margins: 15
-                top:parent.top
-                left:parent.left
-                bottom:parent.bottom
-            }
-            width:parent.width*0.5
+        anchors.margins: 5
 
+            CustomRect{
+                radius: 20
+                id:deviceInfo
+                Layout.fillHeight: true
+                Layout.fillWidth: true
 
-            ColumnLayout{
-                anchors.margins: 15
-                anchors.fill:parent
-                TimeDisplayLabel{
-                    underLabel: "Имя устройства"
-                    underLabelUp:true
-                    text:devInfo.deviceName
-                    Layout.fillWidth: true
-                    makeBorders: false
-                }
-                TimeDisplayLabel{
-                    underLabel: "Тип устройства"
-                    underLabelUp:true
-                    text:devInfo.deviceType
-                    Layout.fillWidth: true
-                    makeBorders: false
-                }
-                TimeDisplayLabel{
-                    underLabel: "Прошивка"
-                    underLabelUp:true
-                    text:devInfo.firmWare
-                    Layout.fillWidth: true
-                    makeBorders: false
-                }
-                TimeDisplayLabel{
-                    underLabel: "Версия прошивки"
-                    underLabelUp:true
-                    text:devInfo.firmWareDate
-                    Layout.fillWidth: true
-                    makeBorders: false
-                }
-            }
-        }
-        CustomRect{
-            id:passwordInfo
-            radius: 20
-            anchors{
-                margins: 15
-                top:parent.top
-                right:parent.right
-                left:deviceInfo.right
-                bottom:parent.bottom
-            }
-            ColumnLayout{
-                anchors.fill: parent
-                anchors.margins: 15
-                TimeDisplayLabel{
-                    underLabel: "Пароль устройства"
-                    underLabelUp:true
-                    text:devInfo.password
-                    Layout.fillWidth: true
-                    makeBorders: false
-                }
-                TimeEditLine{
-                    id: passwordInput
-                    signatureText: "enter new password"
-                    value: parseInt(devInfo.password)
-                    Layout.fillWidth: true
-
-                }
-                TextButton{
-                    text:"set as password"
-                    Layout.fillWidth: true
-                    onClicked: {
-                        devInfo.setPassword(passwordInput.value)
+                ColumnLayout{
+                    anchors.margins: 5
+                    anchors.fill:parent
+                    SignedLabel{
+                        //: dev info screen
+                        underLabel:qsTr("device name")
+                        textHeight:20
+                        text:devInfo.deviceName
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        makeBorders: false
+                    }
+                    SignedLabel{
+                        //: dev info screen
+                        underLabel:qsTr("device type")
+                        textHeight:20
+                        text:devInfo.deviceType
+                        Layout.fillWidth: true
+                                                Layout.fillHeight: true
+                        makeBorders: false
+                    }
+                    SignedLabel{
+                        underLabel:qsTr("firmware")
+                        textHeight:20
+                        text:devInfo.firmWare
+                        Layout.fillWidth: true
+                                                Layout.fillHeight: true
+                        makeBorders: false
+                    }
+                    SignedLabel{
+                        underLabel:qsTr("firmware Update Date")
+                        textHeight:20
+                                                Layout.fillHeight: true
+                        text:devInfo.firmWareDate
+                        Layout.fillWidth: true
+                        makeBorders: false
                     }
                 }
+            }
+            CustomRect{
+                id:passwordInfo
+                radius: 20
+                Layout.fillHeight: true
+                Layout.fillWidth: true
 
+                ColumnLayout{
+                    anchors.fill: parent
+                    anchors.margins: 5
+                    TimeEditLine{
+                        id: passwordInput
+                        signatureText:qsTr("enter new password")
+                        value: "54321"
+                        Layout.fillWidth: true
 
+                    }
+                    TextButton{
+                        text:qsTr("set as password")
+                        Layout.fillWidth: true
+                        onClicked: {
+                            passwordModel.setPassword(passwordInput.value)
+                        }
+                    }
+                }
             }
         }
-
-
-
     }
 
-}
+
+
+
 

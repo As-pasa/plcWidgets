@@ -1,39 +1,28 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
-
-import QtQuick.VirtualKeyboard.Settings 2.1
 import QtQuick.Layouts 1.12
 Item{
-
-    CustomRect{
+    RowLayout{
         anchors.fill: parent
-        anchors.margins: 15
-        radius: 30
-        
-        
+        anchors.margins: 5
         CustomRect{
             id:leftBar
             radius:25
-            anchors{
-                margins: 10
-                top:parent.top
-                left:parent.left
-                bottom:parent.bottom
-                right:parent.horizontalCenter
-            }
+            Layout.fillHeight: true
+            Layout.fillWidth: true
             Text{
                 id:btext
-                text:"set device brightness"
+                text:qsTr("set device brightness")
                 horizontalAlignment: Qt.AlignHCenter
                 anchors{
-                    margins: 10
+                    margins: 5
                     top:parent.top
                     left:parent.left
                     right:parent.right
-                    
+
                 }
             }
-            
+
             BrightnessPicker{
                 id:brightnessPicker
                 anchors{
@@ -41,28 +30,24 @@ Item{
                     bottom:parent.bottom
                     top:btext.bottom
                     horizontalCenter: parent.horizontalCenter
-                    
+
                 }
-                onValueChanged: {screenModel.brightness=value}
+                onValueChanged: {
+                    screenModel.brightness=value}
                 width:height
                 Component.onCompleted: {
                     value=screenModel.brightness
                 }
-                
+
             }
-            
+
         }
         CustomRect{
             radius:25
-            anchors{
-                margins: 10
-                top:parent.top
-                bottom:parent.bottom
-                left:leftBar.right
-                right:parent.right
-            }
+            Layout.fillHeight: true
+            Layout.fillWidth: true
             TextButton{
-                text:"calibrate screen"
+                text:qsTr("calibrate screen")
                 anchors{
                     margins: 10
                     top:parent.top
@@ -72,12 +57,17 @@ Item{
                 }
                 onClicked: screenModel.calibrate();
             }
-            
-            
+
+
         }
+    }
+
+
+
+        
+
         
         
         
     }
-    
-}
+

@@ -1,13 +1,12 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
-import QtQuick.VirtualKeyboard 2.4
 
 Item{
     height:500
     width:300
     id:root
     signal clicked()
-    property string imageSource: "qrc:/plkLanguage.png"
+    property string imageSource: "qrc:/icons/plcInfo.png"
     property string text: "hello"
     ImageButton{
         id:centralImage
@@ -24,7 +23,7 @@ Item{
         anchors.top:centralImage.bottom
         anchors.left: parent.left
         anchors.right: parent.right
-        font.pixelSize: 30
+        font.pixelSize: 15
         text:root.text
         wrapMode: Text.WordWrap
         horizontalAlignment: Text.AlignHCenter

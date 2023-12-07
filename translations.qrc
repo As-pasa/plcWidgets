@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>baseWidgets_ru.qm</file>
+        <file>baseWidgets_en.qm</file>
+    </qresource>
+</RCC>

@@ -63,3 +63,47 @@ bool os::System2(const QString cmd, const QStringList args, bool elevation, QStr
     return true;
 }
 
+
+bool os::writeToFile(QString path, QString string)
+{
+    QFile a(path);
+    if(a.open(QIODevice::WriteOnly))
+    {
+        QTextStream aWriter(&a);
+        aWriter<<string;
+        a.close();
+        return true;
+    }
+    return false;
+
+//    QFileInfo a(path);
+//    QString parentDir= a.absolutePath();
+//    QString tmpPath= QDir::cleanPath(parentDir+QDir::separator()+"psv_plc_tmp_file");
+//    QFile tempFile(tmpPath);
+//    tempFile.open(QIODevice::WriteOnly);
+//    QTextStream tmpTextStream(&tempFile);
+//    tmpTextStream<<string;
+//    tempFile.close();
+//    QFile aa(path);
+//    aa.remove();
+//    QFile::rename(tmpPath,path);
+//    return true;
+}
+
+bool os::readFromFile(QString path, QString &output)
+{
+
+    QFile file(path);
+    if(!file.exists()){
+        return false;
+
+    }
+    file.open(QIODevice::ReadOnly);
+    QTextStream readStream(&file);
+    QString line;
+    while(readStream.readLineInto(&line)){
+        output.append(line+"\n");
+    }
+    file.close();
+    return true;
+}

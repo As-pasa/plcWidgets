@@ -1,114 +1,242 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
-import QtCharts 2.10
-import QtQuick.VirtualKeyboard.Settings 2.1
 import QtQuick.Layouts 1.12
-import "QmlKeyboard"
+
+import "virtualKeyboards/"
 ApplicationWindow {
     id: window
     visible: true
-    width: 805
-    height: 485
+    width: 400
+    height: 243
     title: qsTr("Tabs")
-
-    Dialog{
-        id:enKeyBoard
-        anchors.centerIn: parent
-        implicitWidth:  parent.width
-        implicitHeight:parent.height
-        property bool shiftPressed:false
-        ColumnLayout{
-            spacing: 1
-            anchors.fill: parent
-            Text{
-                text:"aaaaa"
-                horizontalAlignment: Qt.AlignHCenter
-                Layout.minimumHeight: parent.height/8*2
-                Layout.fillWidth: true
-                verticalAlignment: Qt.AlignVCenter
+    onWidthChanged: console.log(width,height)
+    Rectangle{
+        id:mainScreen
+        anchors.fill: parent
+        color:"grey"
+        Connections{
+            target:passwordModel
+            function onPasswordCorrect(){
+                mainScreen.state="mainScreen"
             }
-            KeyRow {
-                Layout.minimumHeight: parent.height/8
-
-                Layout.fillWidth: true
-                model:'`@@~ 1@@! 2@@@ 3@@# 4@@$ 5 6@@^ 7@@& 8@@* 9@@( 0@@) -@@_ =@@+ backspace'.split(" ")
+            function onPasswordWrong(){
+                infoBox.openWithValue("Wrong password")
             }
-            KeyRow {
-                Layout.minimumHeight: parent.height/8
-
-                Layout.fillWidth: true
-
-                model:'q w e r t y u i o p [@@{ ]@@} \\@@| close'.split(" ")
-            }
-
-            KeyRow {
-                Layout.minimumHeight: parent.height/8
-
-                Layout.fillWidth: true
-                model:'a s d f g h j k l ;@@: \'@@\" enter'.split(" ")
-            }
-
-            KeyRow {
-                Layout.minimumHeight: parent.height/8
-
-                Layout.fillWidth: true
-
-                model:'z x c v b n m ,@@< .@@> /@@? shift'.split(" ")
-            }
-
-            KeyRow {
-                Layout.minimumHeight: parent.height/8
-
-                Layout.fillWidth: true
-
-                model:'space'.split(" ")
+            function onHashFileNotExist(){
+                infoBox.openWithValue("Hash file not found.\n Use root password")
             }
         }
 
 
+        MainScreen{
+            id:appScreen
+            anchors.topMargin: 1
+            anchors.fill:parent
+            state:"mainMenu"
+        }
+        PasswordScreen {
+            id:passwordScreen
+            anchors.fill:parent
 
 
-    }
-    Dialog{
-        id:test
-        implicitWidth: parent.width
-        implicitHeight: parent.height
-        GridLayout{
-            anchors.fill: parent
-            columns:3
 
-            Repeater{
-                model:8
-                CustomRect{
-                    Text{
-                        text:index
-                    }
-                    Layout.fillHeight: true
-                    Layout.fillWidth: true
-                    Layout.columnSpan: {
-                        if(index===3){
-                            return 2
-                        }
-                        return 1
-                    }
+        }
+        states:[
+            State{
+                name:"passwordScreen"
+                PropertyChanges {
+                    target: appScreen
+                    opacity:0
+                    enabled:false
                 }
+                PropertyChanges {
+                    target: passwordScreen
+                    opacity:100
+                    enabled:true
 
+                }
+            },
+            State{
+                name:"mainScreen"
+                PropertyChanges {
+                    target: passwordScreen
+                    opacity:0
+                    enabled:false
+                }
+                PropertyChanges {
+                    target: appScreen
+                    opacity:100
+                    enabled:true
+
+                }
+            }
+        ]
+        state:"passwordScreen"
+    }
+
+    KeyboardInput{
+        id: kKEYBOARDUNIT
+        state:"ipInput"
+    }
+    Connections{
+        target: screenModel
+        function onCalibrationEnded(){
+            showNormal();
+
+        }
+    }
+
+    Dialog{
+        id:infoBox
+        Connections{
+            target:messager
+            function onMessageFound(a){
+                infoBox.openWithValue(a)
             }
         }
 
+        property string val:""
+        parent:Overlay.overlay
+        anchors.centerIn: parent
+        width: parent.width
+        height: parent.height
+        CustomLabel{
+
+            anchors.fill: parent
+            text:infoBox.val
+
+        }
+        function openWithValue(value){
+            infoBox.val=value
+            infoBox.open();
+        }
+        footer:DialogButtonBox{
+
+            TextButton{
+                text:qsTr("close")
+                onClicked: infoBox.close()
+            }
+        }
     }
-    Component.onCompleted: test.open()
-    //Component.onCompleted: enKeyBoard.open()
 
-    //    Rectangle{
-//        anchors.fill: parent
-//        color:"grey"
-//        MainScreen{
-//            anchors.topMargin: 5
-//            anchors.fill:parent
-//        }
-//    }
+    Dialog{
+        id:confUI
+        Connections{
+            target:confirmator
+            function onConfirmRequested(s){
+                confUI.openWithValue(s)
+            }
+        }
+        function openWithValue(value){
+            confUI.val=value
+            confUI.open();
 
+        }
+        property string val:""
+        parent:Overlay.overlay
+        anchors.centerIn: parent
+        width: parent.width
+        height: parent.height
+        CustomLabel{
+
+            anchors.fill: parent
+            text:confUI.val
+
+        }
+        footer:DialogButtonBox{
+            TextButton{
+                text:qsTr("accept")
+                onClicked: {
+                     confUI.close()
+                    confirmator.accept()
+
+                }
+            }
+            TextButton{
+                text:qsTr("close")
+                onClicked: confUI.close()
+            }
+
+        }
+    }
+    CustomRect{
+        radius: 0
+        id: calibrationUIHelper
+        Component.onCompleted: console.log("qml changed")
+        function open(){
+            calibrationUIHelper.enabled= true
+            calibrationUIHelper.visible= true
+        }
+        function close(){
+            calibrationUIHelper.enabled= false
+            calibrationUIHelper.visible= false
+
+        }
+        Connections{
+            target:screenModel
+            function onCalibrationStarted(){
+                calibrationUIHelper.open()
+            }
+        }
+        Connections{
+            target:screenModel
+            function onCalibrationEnded(){
+                calibrationUIHelper.close()
+            }
+        }
+
+        enabled: false
+        visible: false
+        parent: Overlay.overlay
+        anchors.fill: parent
+        TextButton{
+            text:"1"
+            anchors.top:parent.top
+            anchors.left: parent.left
+            width:20
+            height:20
+
+        }
+        TextButton{
+            text:"2"
+            anchors.top:parent.top
+            anchors.right: parent.right
+            width:20
+            height:20
+
+        }
+        TextButton{
+            text:"3"
+            anchors.bottom:parent.bottom
+            anchors.right: parent.right
+            width:20
+            height:20
+
+        }
+        TextButton{
+            text:"4"
+            anchors.bottom:parent.bottom
+            anchors.left: parent.left
+            width:20
+            height:20
+
+        }
+        TextButton{
+            text:"5"
+            anchors.centerIn: parent
+            width:20
+            height:20
+        }
+        TextButton{
+            text:"start"
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottom: parent.bottom
+            onClicked: {
+            screenModel.innerCalibrate()
+            calibrationUIHelper.close()
+            }
+        }
+    }
 
 
 //    HeaderBar {
@@ -117,16 +245,22 @@ ApplicationWindow {
 //        anchors.right: parent.right
 //        onCenterClicked: mainScreen.state="mainMenu"
 
+
 //    }
-//    FileExportScreen {
-//        id: root
+//    ImportDeviceSelector {
+//        id:rt2
+//        selectedContent:"CD card"
 //    }
 
 
-    Binding {
-        target: VirtualKeyboardSettings
-        property: "fullScreenMode"
-        value:true
-    }
+//    ImportFileSelector {
+//        anchors{
+//            top:header.bottom
+//            left:parent.left
+//            right:parent.right
+//            bottom:parent.bottom
+//        }
+//    }
+
 
 }

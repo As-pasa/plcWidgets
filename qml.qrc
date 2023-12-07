@@ -29,16 +29,27 @@
         <file>icons/plcWifi.png</file>
         <file>CustomCheckbox.qml</file>
         <file>MainScreen.qml</file>
-        <file>TimeDisplayLabel.qml</file>
+        <file>SignedLabel.qml</file>
         <file>TimeEditLine.qml</file>
-        <file>TimeStatusBar.qml</file>
-        <file>TimeWidgets.qml</file>
         <file>PageSelector.qml</file>
-        <file>TimeScreen.qml</file>
         <file>DeviceInfo.qml</file>
         <file>BrightnessPicker.qml</file>
         <file>ScreenMenu.qml</file>
+        <file>virtualKeyboards/NumPad.qml</file>
+        <file>virtualKeyboards/KeyboardInput.qml</file>
+        <file>virtualKeyboards/TextKeyboardField.qml</file>
+        <file>virtualKeyboards/IntKeyboardInputField.qml</file>
+        <file>TestPgSelector.qml</file>
+        <file>WifiConnectionsMenu.qml</file>
+        <file>NetInerfaces.qml</file>
+        <file>virtualKeyboards/IpKeyboardField.qml</file>
+        <file>PingMenu.qml</file>
+        <file>PasswordScreen.qml</file>
+        <file>TimeScreen.qml</file>
+        <file>DatetimeMenu.qml</file>
+        <file>TimeZoneMenu.qml</file>
         <file>FileExportScreen.qml</file>
-        <file>QmlKeyboard/KeyRow.qml</file>
+        <file>ImportDeviceSelector.qml</file>
+        <file>ImportFileSelector.qml</file>
     </qresource>
 </RCC>

@@ -1,11 +1,9 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
-
-import QtQuick.VirtualKeyboard.Settings 2.1
 import QtQuick.Layouts 1.12
 CustomRect{
 
-    radius: 30
+    radius: 20
     function next(){
         currentPage=Math.min(currentPage+1, Math.floor(source.length/pageSize ) )
     }
@@ -27,7 +25,7 @@ CustomRect{
             right:parent.right
         }
         id:lview
-        model:pgSelector.source.slice(pgSelector.currentPage*pgSelector.pageSize, pgSelector.currentPage*pgSelector.pageSize+pgSelector.pageSize)
+        model:(pgSelector.source.length===0)? [] :  pgSelector.source.slice(pgSelector.currentPage*pgSelector.pageSize, pgSelector.currentPage*pgSelector.pageSize+pgSelector.pageSize)
 
 
         
@@ -41,16 +39,18 @@ CustomRect{
             right:parent.right
         }
         TextButton{
-            text:"prev page"
+            text:qsTr("prev page")
             Layout.alignment: Qt.AlignRight
+            Layout.fillWidth: true
             onClicked: {
                 pgSelector.prev()
             }
         }
         
         TextButton{
-            text:"next page"
+            text:qsTr("next page")
             Layout.alignment: Qt.AlignLeft
+            Layout.fillWidth: true
             onClicked: {
                 pgSelector.next()
             }
