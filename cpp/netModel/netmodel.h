@@ -21,6 +21,7 @@ public slots:
     void setInterface(QString, QString, QString, QString, bool );
 signals:
     void declaredLengthChanged(int);
+
 };
 
 #endif // NETMODEL_H

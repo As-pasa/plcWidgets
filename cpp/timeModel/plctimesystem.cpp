@@ -9,27 +9,36 @@ void PLCTimeSystem::setTime(TimeChangePackage package)
 {
 
     const QString setTimeTempl("timedatectl set-time \"%1\"");
-    const QString setTZTempl("timedatectl set-timezone %1");
+    const QString setTZTempl("timedatectl set-timezone  %1 ");
 
     if(package.timeChanged || package.dateChanged)
 
     {
+        qDebug()<<"time changed";
         auto dt = QDateTime::currentDateTime();
         if(package.timeChanged) dt.setTime(package.time);
         if(package.dateChanged) dt.setDate(package.date);
-        os::System2("timedatectl", {" set-time", dt.toString(" yyyy-MM-dd hh:mm:ss")}, true);
+        QStringList a;
+        a.append("set-time");
+        a.append(dt.toString(" yyyy-MM-dd hh:mm:ss"));
+        qDebug()<<os::System2("timedatectl", a, true);
 
     }
 
     if(package.timeZoneChanged)
     {
-        os::System(setTZTempl.arg(package.timeZone), true);
+        QStringList a;
+        a.append("set-timezone");
+        a.append(package.timeZone.split(" ")[1]);
+        os::System2("timedatectl",a, true);
     }
 }
 
 void PLCTimeSystem::setAtzEnabled(bool enabled)
 {
+    QStringList a;
     if(enabled){
+        os::System2("auto-tz",a,true);
         os::System("systemctl enable auto-tz.service", true);
     }
     else{
@@ -40,9 +49,17 @@ void PLCTimeSystem::setAtzEnabled(bool enabled)
 void PLCTimeSystem::setNipEnabled(bool enabled)
 {
     if(enabled){
+        QStringList a;
+        a.append("set-ntp");
+        a.append("true");
+        os::System2("timedatectl",a,true);
         os::System("systemctl enable systemd-timesyncd.service", true);
     }
     else{
+        QStringList a;
+        a.append("set-ntp");
+        a.append("false");
+        os::System2("timedatectl",a,true);
         os::System("systemctl disable systemd-timesyncd.service", true);
     }
 }
@@ -82,6 +99,7 @@ QStringList PLCTimeSystem::getTimeZones()
 QString PLCTimeSystem::getCurrentTimeZone()
 {
     QString ans;
+    qDebug()<<QTimeZone::systemTimeZone();
     for(const auto& id: QTimeZone::availableTimeZoneIds()){
 
 

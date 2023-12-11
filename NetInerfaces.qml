@@ -64,7 +64,7 @@ Item{
 
                 }
             }
-            Component.onCompleted: console.log("constructing delegate for",index)
+
         }
         contextButtons:ColumnLayout{
             anchors.fill: parent
@@ -137,10 +137,6 @@ Item{
                 TextButton{
                     text:qsTr("save")
                     onClicked: {
-                        if(useDhcp.toggled){
-
-                        }
-
                         var k = [ip.value, mask.value, gate.value]
                         .map((ff)=> {return root.sanityCheck(ff)})
                         .filter((z)=>{return z!==null})

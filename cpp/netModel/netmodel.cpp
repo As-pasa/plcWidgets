@@ -22,7 +22,9 @@ QVariant NetModel::fromId(int id)
 
 void NetModel::setInterface(QString name, QString ip, QString mask, QString gate, bool dhcpUsed)
 {
+    qDebug()<<dhcpUsed;
     m_system->setupInterface(InterfaceCredential::from(name,ip,mask,gate,dhcpUsed));
+    refresh();
 }
 
 int NetModel::declaredLength()

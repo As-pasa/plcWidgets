@@ -68,7 +68,7 @@ QString TimeModel::currentTimeZone()
 void TimeModel::setCurrentTimeZone(QString n)
 {
     if(n!=m_currentTimeZone){
-
+        qDebug()<<n;
         m_system->setTime(TimeChangePackage(currentTime().time(), currentTime().date(),n ,false,false,true));
         m_currentTimeZone=m_system->getCurrentTimeZone();
         //qDebug()<<"a"<<n;
@@ -87,6 +87,7 @@ void TimeModel::setNIPStatus(bool status){
         m_NipStatus=status;
         m_system->setNipEnabled(status);
         emit NIPStatusChanged(status);
+        emit currentTimeChanged(currentTime());
     }
 
 };
@@ -100,6 +101,7 @@ void TimeModel::setATZStatus(bool status){
         m_ATZStatus=status;
         m_system->setAtzEnabled(status);
         emit ATZStatusChanged(status);
+        emit currentTimeZoneChanged(currentTimeZone());
     }
 
 }

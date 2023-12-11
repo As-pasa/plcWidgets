@@ -105,11 +105,13 @@ CustomRect{
             TextButton{
                 text:qsTr("accept")
                 onClicked: {
-                    var a = timeEditDialog.unPackDate(parseInt(dayEdit.value),parseInt(monthEdit.value) ,parseInt(yearEdit.value))
+                    var a = timeEditDialog.unPackDate(parseInt(dayEdit.value),parseInt(monthEdit.value-1) ,parseInt(yearEdit.value))
                     var b = timeEditDialog.unpackTime(parseInt(minuteEdit.value),parseInt(hourEdit.value) )
-                    if(a!==null && b!==null)
+
+                    if(a!==null && b!==null){
                         timeModel.setCurrentTime(new Date(yearEdit.value,monthEdit.value-1,dayEdit.value,hourEdit.value,minuteEdit.value))
                         timeEditDialog.close()
+                    }
                 }
             }
             TextButton{

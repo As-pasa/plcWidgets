@@ -67,6 +67,7 @@ QList<InterfaceCredential> PlcNetSystem::getConnections()
 
 void PlcNetSystem::setupInterface(InterfaceCredential cred)
 {
+    qDebug()<<"interface edit "<<cred.toString();
     QString fileName;
     //for pc ***************отключить после отладки
    // if (newIf.name == "enp0s3") fileName = "/home/bustaz/test/network";
