@@ -14,8 +14,7 @@ void PLCTimeSystem::setTime(TimeChangePackage package)
     if(package.timeChanged || package.dateChanged)
 
     {
-        MyLogger::log("TimeSystem","time changed. package: "+package.time.toString()+" "+ package.date.toString());
-        qDebug()<<"time changed";
+        MyLogger::log("timeSystem","time changed. package: "+package.time.toString()+" "+ package.date.toString());
         auto dt = QDateTime::currentDateTime();
         if(package.timeChanged) dt.setTime(package.time);
         if(package.dateChanged) dt.setDate(package.date);
@@ -53,18 +52,22 @@ void PLCTimeSystem::setAtzEnabled(bool enabled)
 
 void PLCTimeSystem::setNipEnabled(bool enabled)
 {
+    MyLogger::log("timeSystem","nip status changing");
     if(enabled){
+        MyLogger::log("timeSystem","nip enabled");
         QStringList a;
         a.append("set-ntp");
         a.append("true");
-        os::System2("timedatectl",a,true);
+        MyLogger::log("timeSystem","nip change process end code:"+ QString::number(os::System2("timedatectl",a,true))) ;
+
         os::System("systemctl enable systemd-timesyncd.service", true);
     }
     else{
         QStringList a;
+         MyLogger::log("timeSystem","nip disabled");
         a.append("set-ntp");
         a.append("false");
-        os::System2("timedatectl",a,true);
+        MyLogger::log("timeSystem","nip change process end code:"+ QString::number(os::System2("timedatectl",a,true))) ;
         os::System("systemctl disable systemd-timesyncd.service", true);
     }
 }

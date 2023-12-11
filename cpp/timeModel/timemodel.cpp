@@ -89,9 +89,11 @@ bool TimeModel::NIPStatus(){
 };
 void TimeModel::setNIPStatus(bool status){
     if(status!=m_NipStatus){
-
+        MyLogger::log("timeModel","changing nip status");
         m_NipStatus=status;
         m_system->setNipEnabled(status);
+        m_currentDT=m_system->getCurrentTime();
+        MyLogger::log("timeModel","model time settled from system: "+m_currentDT.toString());
         emit NIPStatusChanged(status);
         emit currentTimeChanged(currentTime());
     }
