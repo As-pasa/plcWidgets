@@ -93,6 +93,7 @@ void TimeModel::setNIPStatus(bool status){
 };
 
 bool TimeModel::ATZStatus(){
+    qDebug()<<"i have given it UUUUPPP";
     return m_ATZStatus;
 
 };
