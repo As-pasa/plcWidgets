@@ -16,11 +16,11 @@ MyLogger::MyLogger(QString savePath, LogCode logLevel)
 MyLogger *MyLogger::getInstance()
 {
     if(m_instance==nullptr){
-        m_instance=new MyLogger("/home/info",LogCode::debug);
+        m_instance=new MyLogger("/home/root/info",LogCode::debug);
     }
     return m_instance;
 }
-MyLogger* MyLogger::m_instance = new MyLogger("B:/coding/info.txt",LogCode::debug);
+MyLogger* MyLogger::m_instance = new MyLogger("/home/root/info",LogCode::debug);
 void MyLogger::log(QString source, QString msg)
 {
     getInstance()->m_log(LogEntity(LogCode::debug, source, msg));

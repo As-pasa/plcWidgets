@@ -105,6 +105,9 @@ QStringList PLCTimeSystem::getTimeZones()
 
 QString PLCTimeSystem::getCurrentTimeZone()
 {
+
+
+
     QString ans;
     MyLogger::log("timeSystem","current time zone search started");
     auto zz=QTimeZone::systemTimeZoneId();
