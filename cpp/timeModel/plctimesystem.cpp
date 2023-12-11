@@ -101,7 +101,11 @@ QStringList PLCTimeSystem::getTimeZones()
     QStringList ans;
     for(const auto& id: QTimeZone::availableTimeZoneIds()){
         QTimeZone tz(id);
-        ans.append(QString("(%1) %2").arg(tz.displayName(QTimeZone::StandardTime,QTimeZone::OffsetName),QString(id)) );
+        if(tz.displayName(QTimeZone::StandardTime,QTimeZone::OffsetName)!=""){
+            qDebug()<<tz.displayName(QTimeZone::StandardTime,QTimeZone::OffsetName)<<" "<<QString(id);
+            ans.append(QString("(%1) %2").arg(tz.displayName(QTimeZone::StandardTime,QTimeZone::OffsetName),QString(id)) );
+        }
+        
     }
     return ans;
 }

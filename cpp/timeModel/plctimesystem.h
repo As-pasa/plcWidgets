@@ -4,7 +4,8 @@
 #include "itimesystem.h"
 #include "../utilities/os.h"
 #include <QFile>
-#include <QTimeZone>
+#include <QTimeZone
+#include <QDebug>
 #include "cpp/utilities/mylogger.h"
 class PLCTimeSystem:public ITimeSystem
 {
@@ -20,8 +21,7 @@ public:
     QDateTime getCurrentTime();
 
     // ITimeSystem interface
-public:
-    bool getATZStatus();
+public:            qDebug()<<tz.displayName(QTimeZone::StandardTime,QTimeZone::OffsetName);us();
     bool getNIPStatus();
 
     // ITimeSystem interface
