@@ -35,6 +35,7 @@ bool PlcNetSystem::getDefdhcp(const QString dev, QString* pOutput)
 
 QList<InterfaceCredential> PlcNetSystem::getConnections()
 {
+    MyLogger::log("netSystem","interface list requested");
     QList<InterfaceCredential> ans;
     for(const auto& netIf : QNetworkInterface::allInterfaces())
     {
@@ -59,15 +60,12 @@ QList<InterfaceCredential> PlcNetSystem::getConnections()
         }
         }
 
-    foreach (auto aa, ans) {
-        qDebug()<<"interface in list: "<<aa.name;
-    }
     return ans;
 }
 
 void PlcNetSystem::setupInterface(InterfaceCredential cred)
 {
-    qDebug()<<"interface edit "<<cred.toString();
+    MyLogger::log("netSystem","interface setup: "+cred.toString());
     QString fileName;
     //for pc ***************отключить после отладки
    // if (newIf.name == "enp0s3") fileName = "/home/bustaz/test/network";

@@ -5,6 +5,7 @@
 #include <QWidget>
 #include "debugnetsystem.h"
 #include "interfacecredential.h"
+#include "cpp/utilities/mylogger.h"
 
 class NetModel : public QObject
 {

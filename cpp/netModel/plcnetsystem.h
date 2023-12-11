@@ -6,6 +6,7 @@
 #include <QNetworkInterface>
 #include "../utilities/os.h"
 #include <QFile>
+#include "cpp/utilities/mylogger.h"
 class PlcNetSystem:public INetSystem
 {
 public:
