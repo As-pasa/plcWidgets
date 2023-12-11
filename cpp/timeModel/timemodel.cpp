@@ -64,16 +64,16 @@ QStringList TimeModel::timeZones()
 
 QString TimeModel::currentTimeZone()
 {
-    if(m_currentTimeZone==""){
-        m_currentTimeZone= m_system->getCurrentTimeZone();
-    }
+    
+    m_currentTimeZone= m_system->getCurrentTimeZone();
+    
     return m_currentTimeZone;
 }
 
 void TimeModel::setCurrentTimeZone(QString n)
 {
     if(n!=m_currentTimeZone){
-        MyLogger::log("timeModel",QString("changing time zone: was (%1) become (%1)").arg(m_currentTimeZone, n) );
+        MyLogger::log("timeModel",QString("changing time zone: was (%1) become (%2)").arg(m_currentTimeZone, n) );
         m_system->setTime(TimeChangePackage(currentTime().time(), currentTime().date(),n ,false,false,true));
         m_currentTimeZone=m_system->getCurrentTimeZone();
         MyLogger::log("timeModel","time zone read from system, equals: "+m_currentTimeZone);
