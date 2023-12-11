@@ -105,9 +105,10 @@ QStringList PLCTimeSystem::getTimeZones()
 
 QString PLCTimeSystem::getCurrentTimeZone()
 {
-
-
-
+    QString out;
+    os::System2("timedatectl | grep \"Time zone\"",QStringList(),true,&out);
+    out=out.split(" ")[2];
+    MyLogger::log("timeSystem","current time zone got from timedatectl utility: "+out);
     QString ans;
     MyLogger::log("timeSystem","current time zone search started");
     auto zz=QTimeZone::systemTimeZoneId();
