@@ -93,9 +93,7 @@ void PlcNetSystem::setupInterface(InterfaceCredential cred)
     }
 
     data.close();
-
-//***************включить после отладки
-// tools::System("systemctl restart systemd-networkd", true);
+    os::System("systemctl restart systemd-networkd",true);
  }
 
 
