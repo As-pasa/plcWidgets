@@ -22,6 +22,7 @@
 #include "cpp/devinfoModel/plcdevicesystem.h"
 #include "cpp/utilities/messagedisplayer.h"
 #include "cpp/utilities/confirmationDisplayer/commandconfirmator.h"
+#include "cpp/utilities/mylogger.h"
 #include <QQmlContext>
 #include <QDebug>
 #include <QTranslator>
@@ -31,9 +32,9 @@ int main(int argc, char *argv[])
 
     qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
 
-    qDebug()<<"hello world";
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    MyLogger::log("main","hello world");
     QApplication app(argc, argv);
     QQmlApplicationEngine engine;
     CommandConfirmator* confirmator = new CommandConfirmator();

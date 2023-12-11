@@ -76,6 +76,7 @@ bool os::writeToFile(QString path, QString string)
     }
     return false;
 
+
 //    QFileInfo a(path);
 //    QString parentDir= a.absolutePath();
 //    QString tmpPath= QDir::cleanPath(parentDir+QDir::separator()+"psv_plc_tmp_file");
@@ -88,6 +89,19 @@ bool os::writeToFile(QString path, QString string)
 //    aa.remove();
 //    QFile::rename(tmpPath,path);
 //    return true;
+}
+
+bool os::appendToFile(QString path, QString string)
+{
+    QFile a(path);
+    if(a.open(QIODevice::WriteOnly|QIODevice::Append))
+    {
+        QTextStream aWriter(&a);
+        aWriter<<string;
+        a.close();
+        return true;
+    }
+    return false;
 }
 
 bool os::readFromFile(QString path, QString &output)
