@@ -88,7 +88,7 @@ void PlcNetSystem::setupInterface(InterfaceCredential cred)
     else
     {
         QString prefix = QString::number(QHostAddress::parseSubnet(cred.ip+  "/" + cred.mask).second);
-        txt << "Address=" << cred.ip << "\\" << prefix;
+        txt << "Address=" << cred.ip << "/" << prefix;
         txt << "\nGateway=" << cred.gate << "\n";
     }
 
