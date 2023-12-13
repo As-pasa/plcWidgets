@@ -81,7 +81,7 @@ Item{
             text:qsTr("edit")
             onClicked:
             {
-                if(root.somethingSelected)interfaceEditDialog.open()
+                if(root.somethingSelected)interfaceEditDialog.openWith(root.selectedContent)
             }
         }
 
