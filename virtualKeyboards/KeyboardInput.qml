@@ -88,11 +88,13 @@ Dialog{
                     name:"special symbols"
                     PropertyChanges {
                         target: rt
-                        columnCount:11
-                        model: "1 2 3 4 5 6 7 8 9 0 back ! @ # $ % ^ & * ( ) enter - _ = + [ ] { } | \\ : ; \' \" , . / < > ? ~ ` space abc".split(" ")
+                        columnCount:10
+                        model: "1 2 3 4 5 6 7 8 9 0 ! @ # $ % ^ & * ( ) - _ = + [ ] { } | \\ : ; \' \" , . / < > ? ~ ` back space abc enter".split(" ")
                         colSpanFunction:(a)=> {
-                                            if(a==="space")return 10
-                                            
+                                            if(a==="space")return 2
+                                            if(a==="back")return 2
+                                            if(a==="abc")return 2
+                                            if(a==="enter")return 2
                                             return 1
                                         }
                         rowSpanFunction: (a)=> {return 1}
@@ -104,10 +106,20 @@ Dialog{
                     PropertyChanges{
                         target:rt
                         lastLan: "en keyboard"
-                        columnCount:11
-                        model: "1 2 3 4 5 6 7 8 9 0 back q w e r t y u i o p enter a s d f g h j k l \' shift z x c v b n m , . ? close space ru &123".split(" ")
+                        columnCount:10
+                        model: "q w e r t y u i o p a s d f g h j k l \' z x c v b n m , . ? back shift enter close ru space &123".split(" ")
                         colSpanFunction:(a)=> {
-                                            if(a==="space")return 9
+                                            if(a==="back")return 3
+                                            if(a==="shift")return 2
+                                            if(a==="enter")return 2
+
+                                            if(a==="close")return 3
+
+
+
+                                            if(a==="ru")return 3
+                                            if(a==="space")return 4
+                                            if(a==="&123")return 3
                                             
                                             return 1
                                         }
@@ -120,11 +132,16 @@ Dialog{
                     PropertyChanges{
                         target:rt
                         lastLan:"ru keyboard"
-                        model: "й ц у к е н г ш щ з х ъ ф ы в а п р о л д ж э back я ч с м и т ь б ю shift enter close space en &123".split(" ")
+                        model: "й ц у к е н г ш щ з х ъ ф ы в а п р о л д ж э я ч с м и т ь б ю back shift enter close space en &123".split(" ")
                         columnCount:12
                         colSpanFunction:(a)=> {
-                                            if(a==="space")return 10
-                                            
+                                            if(a==="back")return 2
+                                            if(a==="shift")return 2
+                                            if(a==="enter")return 2
+                                            if(a==="close")return 2
+                                            if(a==="space")return 4
+                                            if(a==="en")return 2
+                                            if(a==="&123")return 2
                                             return 1
                                         }
                         rowSpanFunction: (a)=> {return 1}

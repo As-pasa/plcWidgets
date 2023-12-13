@@ -26,7 +26,7 @@ Item{
         property bool somethingSelected: false
         signature:CustomLabel{
             anchors.fill: parent
-            text:qsTr("select web interface to edit")
+            text:qsTr("net interface")
         }
 
         delegate: CustomRect{
@@ -94,7 +94,7 @@ Item{
             width:parent.width
             height:parent.height
             modal:true
-            title:qsTr("editing net interface: ") + netModel.fromId(root.selectedContent).name
+            title:qsTr("interface: ") + netModel.fromId(root.selectedContent).name
             RowLayout{
 
                 anchors.fill: parent
@@ -104,6 +104,14 @@ Item{
                     Layout.preferredHeight:40
                     Layout.preferredWidth: 100
                     toggled: netModel.fromId(root.selectedContent).dhcp
+                    onToggledChanged: {
+                        if(toggled){
+                            netModel.setInterface(netModel.fromId(root.selectedContent).name, ip.value, mask.value, gate.value, useDhcp.toggled)
+                            interfaceEditDialog.close()
+                        }
+                    }
+
+
                 }
 
                 IpKeyboardField{
@@ -162,6 +170,14 @@ Item{
             var b=a.split(".").map((f)=>{return parseInt(f)}).filter((z)=>{return z>=0 && z<256 } )
             if(b.length===4){return b}
             return null
+        }
+        function openWith(idx){
+            title= qsTr("interface: ") + netModel.fromId(root.selectedContent).name
+            useDhcp.toggled=netModel.fromId(root.selectedContent).dhcp
+            ip.value=netModel.fromId(root.selectedContent).ip
+            mask.value=netModel.fromId(root.selectedContent).mask
+            gate.value=netModel.fromId(root.selectedContent).gate
+            interfaceEditDialog.open()
         }
 
     }

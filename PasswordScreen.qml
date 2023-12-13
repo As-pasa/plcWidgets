@@ -83,14 +83,24 @@ Item{
         //: recovery screen
         title: qsTr("Password recovery")
         Item{
+            anchors.fill: parent
+            anchors.margins: 10
             ColumnLayout{
+                anchors.fill: parent
                 Text{
+
+                    wrapMode:
+                        Text.Wrap
                     //: password recovery screen
-                    text:qsTr("To recover your password,\nplease contact one of the addresses provided.")
+                    text:qsTr("To recover your password, \n please contact one of the addresses provided.")
                 }
                 Repeater{
+
                     model:(passwordModel!==null)? passwordModel.contacts: ['Foo']
                     CustomLabel{
+                        fontSize: 15
+                        bb:"white"
+                        Layout.fillWidth: true
                         text:modelData
                     }
                 }

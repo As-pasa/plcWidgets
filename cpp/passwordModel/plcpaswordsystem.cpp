@@ -31,5 +31,5 @@ void PlcPaswordSystem::setPassword(QString password)
 
 QStringList PlcPaswordSystem::getContacts()
 {
-    return QStringList();
+    return QStringList()<<"as-pasa@mail.ru";
 }

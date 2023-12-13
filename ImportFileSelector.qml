@@ -23,7 +23,7 @@ Item{
             ColumnLayout{
                 anchors.fill: parent
                 TextButton{
-                    text:"import"
+                    text:qsTr("import")
                     onClicked:{
                         if(rt1.selectedContent!==""){
                             fileModel.copyFrom(root.selectedDevice, rt1.selectedContent)
@@ -38,7 +38,7 @@ Item{
                 TextButton{
                     Layout.fillHeight: true
                     Layout.fillWidth: true
-                    text:"refresh"
+                    text:qsTr("refresh")
                     onClicked: fileModel.refreshDevices()
                 }
                 
@@ -74,7 +74,7 @@ Item{
         
         signature: CustomLabel{
             anchors.fill: parent
-            text:"select import device"
+            text:qsTr("select import device")
         }
     }
     

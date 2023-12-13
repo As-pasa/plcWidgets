@@ -15,7 +15,7 @@ CustomRect{
         anchors.margins: 5
         SignedLabel{
             id:currentTimeZone
-            underLabel:"current time zone"
+            underLabel:qsTr("current time zone")
             text:timeModel.currentTimeZone
             
             
@@ -28,7 +28,7 @@ CustomRect{
         TextButton{
             Layout.preferredHeight: 30
             Layout.fillWidth: true
-            text:"edit"
+            text:qsTr("edit")
             onClicked:{
                 timeZoneDialog.open()
                 console.log(timeModel.currentTimeZone)
@@ -81,7 +81,7 @@ CustomRect{
                     TextButton{
                         Layout.fillHeight: true
                         Layout.fillWidth: true
-                        text:"select"
+                        text:qsTr("select")
                         onClicked: {
                             timeModel.setTimeZone(foo.selectedContent)
                             timeZoneDialog.close()
@@ -90,7 +90,7 @@ CustomRect{
                     TextButton{
                         Layout.fillHeight: true
                         Layout.fillWidth: true
-                        text:"cancel"
+                        text:qsTr("cancel")
                         onClicked: timeZoneDialog.close()
                     }
                 }
@@ -99,7 +99,7 @@ CustomRect{
             columnsOnPage: 1
             rowsOnPage:timeZoneDialog.height/(1.6*30)
             signature: CustomLabel{
-                text:"select new timezone"
+                text:qsTr("select new timezone")
                 Layout.alignment: Qt.AlignHCenter
             }
             delegate:

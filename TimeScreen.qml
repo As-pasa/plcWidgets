@@ -10,7 +10,7 @@ Item{
         anchors.fill: parent
         anchors.margins: 5
         MenuTile{
-            text:"datetime"
+            text:qsTr("date/time")
 
             imageSource: "qrc:/icons/plcTime.png"
             Layout.fillHeight: true
@@ -18,7 +18,7 @@ Item{
             onClicked: leftClicked()
         }
         MenuTile{
-            text:"timeZone"
+            text:qsTr("timeZone")
             imageSource: "qrc:/icons/plcTime.png"
             Layout.fillHeight: true
             Layout.fillWidth: true
@@ -27,4 +27,3 @@ Item{
     }
 
 }
-
