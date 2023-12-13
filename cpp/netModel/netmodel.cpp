@@ -24,7 +24,7 @@ void NetModel::refresh()
 QVariant NetModel::fromId(int id)
 {
     if(id>=m_credentials.length()){
-        MyLogger::err("netModel",QString("ui requested entry with out-of-bound index. declared Length: %1. Requested index: %2").arg(m_credentials.length(),id));
+        MyLogger::err("netModel",QString("ui requested entry with out-of-bound index. declared Length: %1. Requested index: %2").arg(m_credentials.length()).arg(id));
         return QVariant::fromValue(InterfaceCredential::from("err","err","err","err",false));}
     MyLogger::log("netmodel", "ui requested credential from model. Got: "+m_credentials[id].toString());
     return QVariant::fromValue(m_credentials[id]);
