@@ -72,6 +72,7 @@ Item{
             target:pingModel
             function onPingExecutionEnded(){
                 display.text=pingModel.getPingResult()
+                pingResultDisplay.open()
             }
 
         }

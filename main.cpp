@@ -53,7 +53,7 @@ int main(int argc, char *argv[])
     TimeModel model(s);
     NetModel netModel(nets);
     DevInfoModel devInfo(&engine,devSystem);
-    PingModel pingModel(pingSystem);
+    PingModel pingModel(displayer, pingSystem);
     PasswordModel passwordModel(passwordSystem);
 
 
