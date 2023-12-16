@@ -164,6 +164,14 @@ Item{
                     onClicked: interfaceEditDialog.close()
                 }
             }
+            function openWith(idx){
+                title= qsTr("interface: ") + netModel.fromId(root.selectedContent).name
+                useDhcp.toggled=netModel.fromId(root.selectedContent).dhcp
+                ip.value=netModel.fromId(root.selectedContent).ip
+                mask.value=netModel.fromId(root.selectedContent).mask
+                gate.value=netModel.fromId(root.selectedContent).gate
+                interfaceEditDialog.open()
+            }
 
         }
         function sanityCheck(a){
@@ -171,14 +179,7 @@ Item{
             if(b.length===4){return b}
             return null
         }
-        function openWith(idx){
-            title= qsTr("interface: ") + netModel.fromId(root.selectedContent).name
-            useDhcp.toggled=netModel.fromId(root.selectedContent).dhcp
-            ip.value=netModel.fromId(root.selectedContent).ip
-            mask.value=netModel.fromId(root.selectedContent).mask
-            gate.value=netModel.fromId(root.selectedContent).gate
-            interfaceEditDialog.open()
-        }
+
 
     }
     function range(x){
