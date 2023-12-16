@@ -368,7 +368,24 @@ Item{
         anchors.right:parent.right
         anchors.bottom: parent.bottom
         sourceComponent: mainMenuComponent
-        
+        onSourceComponentChanged:
+        {
+            animation.running=true
+            mainWidget.enabled=false
+        }
+
+
+
+        NumberAnimation{
+            id:animation
+            target:mainWidget.item
+            property:"opacity"
+            from:0
+            to: 1
+            duration:300
+            easing.type:Easing.InExpo
+            onFinished: mainWidget.enabled=true
+        }
     }
     
 }

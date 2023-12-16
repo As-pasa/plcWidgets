@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QWidget>
 #include "ipingsystem.h"
+#include "../utilities/mylogger.h"
 class PingModel : public QObject
 {
     Q_OBJECT

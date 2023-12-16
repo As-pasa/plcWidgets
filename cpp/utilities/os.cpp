@@ -24,7 +24,7 @@ bool os::System(const QString cmd, bool elevation, QString *pOutput)
     //for plc
     proc.start(sl.first(), sl.mid(1));
 
-    if(!proc.waitForFinished(3000))
+    if(!proc.waitForFinished(4000))
     {
         if(pOutput) pOutput->operator+=(proc.errorString());
         return false;
