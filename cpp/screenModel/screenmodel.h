@@ -7,6 +7,7 @@
 #include <QtMath>
 #include <QDebug>
 #include <QThread>
+#include "../utilities/mylogger.h"
 class ScreenModel:public QObject
 {
     Q_OBJECT

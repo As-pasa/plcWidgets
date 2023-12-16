@@ -6,6 +6,7 @@
 #include <QDebug>
 #include <QProcess>
 #include "../utilities/os.h"
+#include "../utilities/mylogger.h"
 class plcScreenSystem:public IScreenSystem
 {
 public:
