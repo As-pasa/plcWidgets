@@ -30,6 +30,13 @@ void PlcPaswordSystem::setPassword(QString password)
 }
 
 QStringList PlcPaswordSystem::getContacts()
-{
-    return QStringList()<<"as-pasa@mail.ru";
+{   
+    QString ans;
+
+    if(!os::readFromFile(mailsConfigPath,ans)){
+        return QStringList();
+    }
+    QStringList data = ans.split(" \n ");
+
+    return data;
 }
