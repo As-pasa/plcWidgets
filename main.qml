@@ -20,10 +20,10 @@ ApplicationWindow {
                 mainScreen.state="mainScreen"
             }
             function onPasswordWrong(){
-                infoBox.openWithValue("Wrong password")
+                infoBox.openWithValue(qsTr("Wrong password"))
             }
             function onHashFileNotExist(){
-                infoBox.openWithValue("Hash file not found.\n Use root password")
+                infoBox.openWithValue(qsTr("Hash file not found.\n Use root password"))
             }
         }
 
@@ -228,7 +228,7 @@ ApplicationWindow {
             height:20
         }
         TextButton{
-            text:"start"
+            text:qsTr("start")
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottom: parent.bottom
             onClicked: {

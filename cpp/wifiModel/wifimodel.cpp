@@ -14,7 +14,9 @@ int WifiModel::declaredLength()
 void WifiModel::tryConnect(int id,  QString password)
 {
     auto wificon=m_system->getWifiConnectionFromId(id);
-
+    if(wificon.name=="err" && wificon.bssid=="err"){
+        MyLogger::err("wifiModel","attempt to connect to errror wifi");
+    }
     m_system->setWifiConnection(wificon.name,password,wificon.security=="NONE");
 }
 
@@ -26,6 +28,10 @@ void WifiModel::refresh()
 
 QVariant WifiModel::fromId(int id)
 {
+    if(id>=declaredLength()){
+        MyLogger::err("wifiModel","ui requested index out of range");
+        return QVariant::fromValue(WifiConnection::from("err","err","err","err","err"));
+    }
     return QVariant::fromValue(m_system->getWifiConnectionFromId(id));
 }
 

@@ -26,7 +26,7 @@ Item{
         property bool somethingSelected: false
         signature:CustomLabel{
             anchors.fill: parent
-            text:qsTr("select web interface to edit")
+            text:qsTr("net interface")
         }
 
         delegate: CustomRect{
@@ -64,7 +64,7 @@ Item{
 
                 }
             }
-            Component.onCompleted: console.log("constructing delegate for",index)
+
         }
         contextButtons:ColumnLayout{
             anchors.fill: parent
@@ -81,7 +81,7 @@ Item{
             text:qsTr("edit")
             onClicked:
             {
-                if(root.somethingSelected)interfaceEditDialog.open()
+                if(root.somethingSelected)interfaceEditDialog.openWith(root.selectedContent)
             }
         }
 
@@ -94,7 +94,7 @@ Item{
             width:parent.width
             height:parent.height
             modal:true
-            title:qsTr("editing net interface: ") + netModel.fromId(root.selectedContent).name
+            title:qsTr("interface: ") + netModel.fromId(root.selectedContent).name
             RowLayout{
 
                 anchors.fill: parent
@@ -104,6 +104,14 @@ Item{
                     Layout.preferredHeight:40
                     Layout.preferredWidth: 100
                     toggled: netModel.fromId(root.selectedContent).dhcp
+                    onToggledChanged: {
+                        if(toggled){
+                            netModel.setInterface(netModel.fromId(root.selectedContent).name, ip.value, mask.value, gate.value, useDhcp.toggled)
+                            interfaceEditDialog.close()
+                        }
+                    }
+
+
                 }
 
                 IpKeyboardField{
@@ -137,10 +145,6 @@ Item{
                 TextButton{
                     text:qsTr("save")
                     onClicked: {
-                        if(useDhcp.toggled){
-
-                        }
-
                         var k = [ip.value, mask.value, gate.value]
                         .map((ff)=> {return root.sanityCheck(ff)})
                         .filter((z)=>{return z!==null})
@@ -160,6 +164,14 @@ Item{
                     onClicked: interfaceEditDialog.close()
                 }
             }
+            function openWith(idx){
+                title= qsTr("interface: ") + netModel.fromId(root.selectedContent).name
+                useDhcp.toggled=netModel.fromId(root.selectedContent).dhcp
+                ip.value=netModel.fromId(root.selectedContent).ip
+                mask.value=netModel.fromId(root.selectedContent).mask
+                gate.value=netModel.fromId(root.selectedContent).gate
+                interfaceEditDialog.open()
+            }
 
         }
         function sanityCheck(a){
@@ -167,6 +179,7 @@ Item{
             if(b.length===4){return b}
             return null
         }
+
 
     }
     function range(x){

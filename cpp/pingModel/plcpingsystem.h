@@ -2,6 +2,7 @@
 #define PLCPINGSYSTEM_H
 #include "../utilities/os.h"
 #include "ipingsystem.h"
+#include "../utilities/mylogger.h"
 class plcPingSystem:public IPingSystem
 {
 public:

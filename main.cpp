@@ -22,6 +22,7 @@
 #include "cpp/devinfoModel/plcdevicesystem.h"
 #include "cpp/utilities/messagedisplayer.h"
 #include "cpp/utilities/confirmationDisplayer/commandconfirmator.h"
+#include "cpp/utilities/mylogger.h"
 #include <QQmlContext>
 #include <QDebug>
 #include <QTranslator>
@@ -33,7 +34,7 @@ int main(int argc, char *argv[])
 
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-
+    MyLogger::log("main","hello world");
     QApplication app(argc, argv);
     QQmlApplicationEngine engine;
     CommandConfirmator* confirmator = new CommandConfirmator();
@@ -52,7 +53,7 @@ int main(int argc, char *argv[])
     TimeModel model(s);
     NetModel netModel(nets);
     DevInfoModel devInfo(&engine,devSystem);
-    PingModel pingModel(pingSystem);
+    PingModel pingModel(displayer, pingSystem);
     PasswordModel passwordModel(passwordSystem);
 
 

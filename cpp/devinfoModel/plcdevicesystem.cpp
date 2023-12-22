@@ -43,7 +43,7 @@ QMap<QString,QString> PlcDeviceSystem::collectData(){
     foreach(QString rec, records){
 
         QStringList lineData = rec.split(" ");
-        //qDebug()<< lineData[0]<< " | "<<lineData[1];
+
         if(lineData.length()==2) ans[lineData[0]]=lineData[1];
     }
     return ans;

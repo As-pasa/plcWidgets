@@ -9,6 +9,7 @@ class PlcPaswordSystem:public IPasswordSystem
 private:
     QString sudoPassword="54321";
     QString passwordHashConfigPath="/etc/plcconf/password";
+    QString mailsConfigPath="/etc/plcconf/mails";
 
 
 public:

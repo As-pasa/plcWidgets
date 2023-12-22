@@ -13,5 +13,6 @@ bool System(const QString cmd, bool elevation = false, QString* pOutput = NULL);
 bool System2(const QString cmd, const QStringList args, bool elevation = false, QString* pOutput = NULL);
 bool writeToFile(QString path, QString string);
 bool readFromFile(QString path, QString& output);
+bool appendToFile(QString path, QString string);
 }
 #endif // OS_H

@@ -4,9 +4,10 @@ import QtQuick.Layouts 1.12
 
 import "virtualKeyboards/"
 Item{
+
     TestPgSelector {
         id: root
-        anchors.margins: 2
+        anchors.margins: 5
         anchors.fill: parent
         property int selectedContent:0
         property bool somethingSelected: false
@@ -21,16 +22,16 @@ Item{
                     Layout.preferredWidth: parent.width/2
                     Layout.leftMargin: 15
                     //: wifi
-                    text:qsTr("network name")
+                    text:qsTr("name")
                 }
 
                 Text{
                     //: wifi
-                    text:qsTr("protection")
+                    text:qsTr("secur")
                 }
                 Text{
                     //: wifi
-                    text:qsTr("signal")
+                    text:qsTr("sign")
                 }
 
             }
@@ -97,11 +98,19 @@ Item{
                 }
                 Text{
                     id:security
-                    text:(wifiModel!==null)? wifiModel.fromId(idx).security: "";
+                    text:{
+                        if(wifiModel.fromId(idx).security==="WPA-PSK"){
+                            "PWD"
+                        }
+                        else{
+                           qsTr("None")
+                        }
+
+                        }
                 }
                 Text{
                     id:signal
-                    text:(wifiModel!==null)? wifiModel.fromId(idx).signal1: "";
+                    text:(wifiModel!==null)? wifiModel.fromId(idx).signal1.split(" ")[0]: "";
                 }
 
             }
@@ -139,6 +148,9 @@ Item{
         columnsOnPage:1
         function range(x){
             let declaredIndexes=[]
+            if(x===0){
+                return []
+            }
             for(var i = 0 ; i <wifiModel.declaredLength;i++){
                 declaredIndexes.push(i)
             }

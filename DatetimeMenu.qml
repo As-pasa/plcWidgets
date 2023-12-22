@@ -16,7 +16,7 @@ CustomRect{
         anchors.fill: parent
         anchors.margins: 5
         SignedLabel{
-            underLabel:"current datetime (h : m dd/mm/yyyy)"
+            underLabel:qsTr("current datetime") +"(h : m dd/mm/yyyy)"
             text:
                 `${timeSegment.curDate.getHours()} : ${timeSegment.curDate.getMinutes()}  ${timeSegment.curDate.getDate()}/${timeSegment.curDate.getMonth()+1}/${timeSegment.curDate.getFullYear()}`
             
@@ -28,7 +28,7 @@ CustomRect{
         TextButton{
             Layout.preferredHeight: 30
             Layout.fillWidth: true
-            text:"edit"
+            text:qsTr("edit")
             onClicked: timeEditDialog.open()
             enabled: (autoTimeOption.toggled)?false:true
         }
@@ -45,7 +45,7 @@ CustomRect{
                 }
                 width:100
 
-                text:"AUTO"
+                text:qsTr("AUTO")
                 toggled: timeModel.NIPStatus
                 onToggledChanged: timeModel.NIPStatus=toggled
             }
@@ -105,11 +105,13 @@ CustomRect{
             TextButton{
                 text:qsTr("accept")
                 onClicked: {
-                    var a = timeEditDialog.unPackDate(parseInt(dayEdit.value),parseInt(monthEdit.value) ,parseInt(yearEdit.value))
+                    var a = timeEditDialog.unPackDate(parseInt(dayEdit.value),parseInt(monthEdit.value-1) ,parseInt(yearEdit.value))
                     var b = timeEditDialog.unpackTime(parseInt(minuteEdit.value),parseInt(hourEdit.value) )
-                    if(a!==null && b!==null)
+
+                    if(a!==null && b!==null){
                         timeModel.setCurrentTime(new Date(yearEdit.value,monthEdit.value-1,dayEdit.value,hourEdit.value,minuteEdit.value))
                         timeEditDialog.close()
+                    }
                 }
             }
             TextButton{

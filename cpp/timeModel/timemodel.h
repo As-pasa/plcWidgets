@@ -10,6 +10,7 @@
 #include <QDebug>
 #include <QtMath>
 #include <QTimeZone>
+#include "cpp/utilities/mylogger.h"
 class TimeModel:public QObject
 
 {

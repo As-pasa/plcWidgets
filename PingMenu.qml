@@ -22,7 +22,7 @@ Item{
                     Layout.alignment: Qt.AlignCenter
                     Layout.fillWidth: true
                     id:localGateInput
-                    signature:qsTr("localGate ip")
+                    signature:qsTr("ip")
                     value:"8.8.8.8"
                 }
                 TextButton{
@@ -34,8 +34,8 @@ Item{
                         if(root.sanityCheck(localGateInput.value))
                         {
                             pingResultDisplay.requestType="local Gate"
-                            pingResultDisplay.ip=localGateInput.value
-                            pingResultDisplay.open()
+
+                            pingResultDisplay.openWith(localGateInput.value)
                         }
                     }
                 }
@@ -52,10 +52,11 @@ Item{
         width:parent.width
         height:parent.height
         modal:true
-        title:qsTr("ping result for ip: "  ) + ip
+        title:qsTr("ping ip: "  ) + ip
         Text{
             id:display
             text:qsTr("loading")
+            font.pixelSize: 5
             horizontalAlignment: Qt.AlignHCenter
             verticalAlignment: Qt.AlignVCenter
         }
@@ -66,15 +67,18 @@ Item{
                 onClicked: pingResultDisplay.close()
             }
         }
-        Component.onCompleted:{
-            pingModel.startPing(ip);
-        }
+
         Connections{
             target:pingModel
             function onPingExecutionEnded(){
                 display.text=pingModel.getPingResult()
+                pingResultDisplay.open()
             }
 
+        }
+        function openWith(ip){
+            pingResultDisplay.ip=ip
+            pingModel.startPing(ip);
         }
     }
     function sanityCheck(a){
@@ -82,6 +86,8 @@ Item{
         if(b.length===4){return b}
         return null
     }
+
+
 
 
 }

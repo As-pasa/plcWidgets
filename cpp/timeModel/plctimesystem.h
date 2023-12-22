@@ -5,6 +5,8 @@
 #include "../utilities/os.h"
 #include <QFile>
 #include <QTimeZone>
+#include <QDebug>
+#include "cpp/utilities/mylogger.h"
 class PLCTimeSystem:public ITimeSystem
 {
 public:

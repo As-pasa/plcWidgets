@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QVariant>
 #include "iwifisystem.h"
+#include "cpp/utilities/mylogger.h"
 class WifiModel:public QObject
 {
     Q_OBJECT

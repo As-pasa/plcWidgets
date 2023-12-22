@@ -8,18 +8,18 @@ CustomRect{
     signal leftClicked()
     signal centerClicked()
     signal rightClicked()
-    property string text: "version 1.3"
+    property string text: qsTr("version 1.3")
     RowLayout{
         spacing: 5
         anchors{
-
+            leftMargin: 15
             margins: 5
             fill: parent
         }
 
         CustomLabel{
             text:root.text
-            fontSize:16
+            fontSize:14
 
             Layout.fillHeight: true
             Layout.preferredWidth: 130

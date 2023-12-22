@@ -5,6 +5,7 @@
 #include <QWidget>
 #include "debugnetsystem.h"
 #include "interfacecredential.h"
+#include "cpp/utilities/mylogger.h"
 
 class NetModel : public QObject
 {
@@ -21,6 +22,7 @@ public slots:
     void setInterface(QString, QString, QString, QString, bool );
 signals:
     void declaredLengthChanged(int);
+
 };
 
 #endif // NETMODEL_H

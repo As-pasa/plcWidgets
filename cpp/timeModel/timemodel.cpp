@@ -19,10 +19,11 @@ QDateTime TimeModel::currentTime(){
     return m_currentDT;
 };
 void TimeModel::setCurrentTime(QDateTime nTime){
+    MyLogger::log("timeModel","set current time started");
+
     if(nTime!=this->currentTime()){
         int nyear, nmonth,nday,nminute,nhour;
-
-
+        MyLogger::log("timeModel","time not equal current. changing time from "+this->currentTime().toString()+" to "+nTime.toString());
         nTime.date().getDate(&nyear,&nmonth,&nday);
         nminute=nTime.time().minute();
         nhour=nTime.time().hour();
@@ -34,11 +35,15 @@ void TimeModel::setCurrentTime(QDateTime nTime){
         chour=cur.time().hour();
 
         if(nyear==cyear && nmonth==cmonth && nday==cday && nhour==chour && qFabs(nminute-cminute)<=1){
+            MyLogger::warn("timeModel","time is considered equal to current. breaking");
             return;
         }
         TimeChangePackage p(nTime.time(),nTime.date(),"",true,true,false);
+        MyLogger::log("timeModel","time package constructed."+nTime.time().toString()+" "+nTime.date().toString());
         m_system->setTime(p);
+
         m_currentDT=m_system->getCurrentTime();
+        MyLogger::log("timeModel","current time setted."+m_currentDT.toString());
         emit currentTimeChanged(nTime);
     }
 
@@ -59,19 +64,20 @@ QStringList TimeModel::timeZones()
 
 QString TimeModel::currentTimeZone()
 {
-    if(m_currentTimeZone==""){
-        m_currentTimeZone= m_system->getCurrentTimeZone();
-    }
+    
+    m_currentTimeZone= m_system->getCurrentTimeZone();
+    
     return m_currentTimeZone;
 }
 
 void TimeModel::setCurrentTimeZone(QString n)
 {
     if(n!=m_currentTimeZone){
-
+        MyLogger::log("timeModel",QString("changing time zone: was (%1) become (%2)").arg(m_currentTimeZone, n) );
         m_system->setTime(TimeChangePackage(currentTime().time(), currentTime().date(),n ,false,false,true));
         m_currentTimeZone=m_system->getCurrentTimeZone();
-        //qDebug()<<"a"<<n;
+        MyLogger::log("timeModel","time zone read from system, equals: "+m_currentTimeZone);
+
         emit currentTimeZoneChanged(n);
 
     }
@@ -83,10 +89,13 @@ bool TimeModel::NIPStatus(){
 };
 void TimeModel::setNIPStatus(bool status){
     if(status!=m_NipStatus){
-
+        MyLogger::log("timeModel","changing nip status");
         m_NipStatus=status;
         m_system->setNipEnabled(status);
+        m_currentDT=m_system->getCurrentTime();
+        MyLogger::log("timeModel","model time settled from system: "+m_currentDT.toString());
         emit NIPStatusChanged(status);
+        emit currentTimeChanged(currentTime());
     }
 
 };
@@ -97,9 +106,16 @@ bool TimeModel::ATZStatus(){
 };
 void TimeModel::setATZStatus(bool status){
     if(status!=m_ATZStatus){
+        MyLogger::log("timeModel","atz status changing");
         m_ATZStatus=status;
         m_system->setAtzEnabled(status);
+
         emit ATZStatusChanged(status);
+        MyLogger::log("timeModel","signal emitted: atz status changed");
+        m_currentTimeZone=currentTimeZone();
+        MyLogger::log("timeModel","current time zone: "+m_currentTimeZone);
+        emit currentTimeZoneChanged(m_currentTimeZone);
+        MyLogger::log("timeModel","signal emitted: current time zone changed");
     }
 
 }

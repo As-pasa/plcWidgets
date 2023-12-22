@@ -12,7 +12,7 @@ Item{
             Layout.fillWidth: true
             Text{
                 id:btext
-                text:qsTr("set device brightness")
+                text:qsTr("brightness")
                 horizontalAlignment: Qt.AlignHCenter
                 anchors{
                     margins: 5

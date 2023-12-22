@@ -248,7 +248,7 @@ Item{
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignLeft
                 Layout.margins: 5
-                text:"export"
+                text:qsTr("export")
                 imageSource: "qrc:/icons/plcExport.png"
                 onClicked: {
                     mainScreen.state="fileExportMenu"
@@ -260,7 +260,7 @@ Item{
                 Layout.fillHeight: true
                 Layout.margins: 5
                 Layout.alignment: Qt.AlignRight
-                text:"import"
+                text:qsTr("import")
                 imageSource: "qrc:/icons/plcImport.png"
                 onClicked: {
                     mainScreen.state="fileImportMenu"
@@ -368,7 +368,24 @@ Item{
         anchors.right:parent.right
         anchors.bottom: parent.bottom
         sourceComponent: mainMenuComponent
-        
+        onSourceComponentChanged:
+        {
+            animation.running=true
+            mainWidget.enabled=false
+        }
+
+
+
+        NumberAnimation{
+            id:animation
+            target:mainWidget.item
+            property:"opacity"
+            from:0
+            to: 1
+            duration:300
+            easing.type:Easing.InExpo
+            onFinished: mainWidget.enabled=true
+        }
     }
     
 }
