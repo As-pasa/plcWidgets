@@ -32,7 +32,7 @@ ApplicationWindow {
             id:appScreen
             anchors.topMargin: 1
             anchors.fill:parent
-            state:"mainMenu"
+            state:screenView.CurrenScreen
         }
         PasswordScreen {
             id:passwordScreen
@@ -162,7 +162,6 @@ ApplicationWindow {
     CustomRect{
         radius: 0
         id: calibrationUIHelper
-        Component.onCompleted: console.log("qml changed")
         function open(){
             calibrationUIHelper.enabled= true
             calibrationUIHelper.visible= true

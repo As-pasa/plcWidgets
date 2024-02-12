@@ -23,6 +23,7 @@
 #include "cpp/utilities/messagedisplayer.h"
 #include "cpp/utilities/confirmationDisplayer/commandconfirmator.h"
 #include "cpp/utilities/mylogger.h"
+#include "cpp/utilities/view/screenview.h"
 #include <QQmlContext>
 #include <QDebug>
 #include <QTranslator>
@@ -35,7 +36,7 @@ int main(int argc, char *argv[])
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
     MyLogger::log("main","hello world");
-    QApplication app(argc, argv);
+    QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
     CommandConfirmator* confirmator = new CommandConfirmator();
     MessageDisplayer*displayer = new  MessageDisplayer();
@@ -55,7 +56,7 @@ int main(int argc, char *argv[])
     DevInfoModel devInfo(&engine,devSystem);
     PingModel pingModel(displayer, pingSystem);
     PasswordModel passwordModel(passwordSystem);
-
+    ScreenView screens;
 
 
 
@@ -66,7 +67,7 @@ int main(int argc, char *argv[])
             QCoreApplication::exit(-1);
     }, Qt::QueuedConnection);
 
-
+    qmlRegisterType<ScreenView>("ScreenService",1,0,"Screens");
     QQmlContext* root=engine.rootContext();
     root->setContextProperty("timeModel",&model);
     root->setContextProperty("devInfo",&devInfo);
@@ -78,6 +79,7 @@ int main(int argc, char *argv[])
     root->setContextProperty("netModel",&netModel);
     root->setContextProperty("messager",displayer);
     root->setContextProperty("confirmator",confirmator);
+    root->setContextProperty("screenView",&screens);
     engine.load(url);
 
 
