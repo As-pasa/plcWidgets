@@ -28,7 +28,6 @@ int ScreenModel::brightness()
 
 void ScreenModel::calibrate()
 {
-    //m_confirmator->enqueue(new CalibrateConfirmation(this));
     emit calibrationStarted();
     MyLogger::log("screenModel","signal emitted: calibration started");
 }

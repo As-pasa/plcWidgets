@@ -4,12 +4,13 @@
 #include <QObject>
 #include <QMap>
 #include <QDebug>
-
+#include <QStack>
 class ScreenView : public QObject
 {
     Q_OBJECT
 public:
     Q_PROPERTY(QString CurrenScreen READ getCurrentScreen NOTIFY currentScreenChanged)
+    Q_PROPERTY(QString ShortScreenName READ getCurrenScreenShortName NOTIFY ScreenShortNameChanged)
     explicit ScreenView(QObject *parent = nullptr);
     enum Screens{
         TopMenu=1,
@@ -28,16 +29,33 @@ public:
         PingMenu=14,
         DisplayMenu=15
     };
+    struct ScreenInfo{
+        QString stateName;
+        QString shortName;
+        QString iconPath;
+
+    };
+
     Q_ENUM(Screens)
-    const static QMap<Screens,QString> ScreenToStateName;
+
+
 private:
-    QString currentScreen=ScreenToStateName[TopMenu];
+    Screens currentScreen=TopMenu;
+    QStack<Screens> m_screenHistory;
+
+    const static QMap<Screens,ScreenInfo> ScreenToInfo;
+
 public slots:
+    Screens getPreviousScreen();
+    void switchToPreviousScreen();
     QString getScreen(Screens name);
+    QString getScreenShortName(Screens name);
+    QString getCurrenScreenShortName();
     QString getCurrentScreen();
     void setCurrentScreen(Screens n);
 signals:
 void currentScreenChanged(QString);
+void ScreenShortNameChanged(QString);
 };
 
 #endif // SCREENVIEW_H

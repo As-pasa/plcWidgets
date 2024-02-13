@@ -1,39 +1,71 @@
 #include "screenview.h"
 
+const QMap<ScreenView::Screens,ScreenView::ScreenInfo> ScreenView::ScreenToInfo={
+    {ScreenView::TopMenu,{"Top Level Menu","$version",""}},
+    {ScreenView::NetMenu,{"Network Menu","Network123",""}},
+    {ScreenView::BaseMenu,{"Base Menu","Settings",""}},
+    {ScreenView::FileMenu,{"File Menu","Backup",""}},
+    {ScreenView::TimeMenu,{"Time Menu","Time",""}},
+    {ScreenView::DateSubmenu,{"Date Time Submenu","Datetime",""}},
+    {ScreenView::TimeZoneSubmenu,{"Time Zone Submenu","Timezone",""}},
+    {ScreenView::AboutMenu,{"About Device Submenu","About",""}},
+    {ScreenView::ExportMenu,{"File Export Menu","Export",""}},
+    {ScreenView::ImportMenu,{"File Import Menu","Import",""}},
+    {ScreenView::ImportDirSubmenu, {"Import Directory Selection Menu","Import",""}},
+    {ScreenView::WifiMenu,{"Wifi Configuration Menu","Wifi",""}},
+    {ScreenView::NetInterfaceMenu,{"Network Interface Selection Menu","Net",""}},
+    {ScreenView::PingMenu,{"Ping Menu","Ping",""}},
+    {ScreenView::DisplayMenu,{"Display Menu","Display",""}}
+};
+
+
+
 ScreenView::ScreenView(QObject *parent) : QObject(parent)
 {
+    m_screenHistory.push(currentScreen);
+}
 
+ScreenView::Screens ScreenView::getPreviousScreen()
+{
+    return m_screenHistory.top();
+}
+
+void ScreenView::switchToPreviousScreen()
+{
+   if(m_screenHistory.top()==TopMenu){
+       return;
+   }
+   m_screenHistory.pop();
+   setCurrentScreen(m_screenHistory.pop());
 }
 
 QString ScreenView::getScreen(Screens name)
 {
-    return ScreenToStateName[name];
+    return ScreenToInfo[name].stateName;
+}
+
+QString ScreenView::getScreenShortName(ScreenView::Screens name)
+{
+    return ScreenToInfo[name].shortName;
+}
+
+QString ScreenView::getCurrenScreenShortName()
+{
+    return getScreenShortName(currentScreen);
 }
 
 QString ScreenView::getCurrentScreen()
 {
-    return currentScreen;
+    return ScreenToInfo[currentScreen].stateName;
 }
 
 void ScreenView::setCurrentScreen(Screens n)
 {
-    currentScreen=getScreen(n);
-    emit currentScreenChanged(currentScreen);
+
+    m_screenHistory.push(n);
+    currentScreen=n;
+    emit currentScreenChanged(getScreen( currentScreen));
+    emit ScreenShortNameChanged(ScreenToInfo[currentScreen].shortName);
 }
-const QMap<ScreenView::Screens, QString> ScreenView::ScreenToStateName={
-    {ScreenView::TopMenu,"Top Level Menu"},
-    {NetMenu,"Network Menu"},
-    {BaseMenu,"Base Menu"},
-    {FileMenu,"File Menu"},
-    {TimeMenu,"Time Menu"},
-    {DateSubmenu,"Date Time Submenu"},
-    {TimeZoneSubmenu,"Time Zone Submenu"},
-    {AboutMenu,"About Device Submenu"},
-    {ExportMenu,"File Export Menu"},
-    {ImportMenu,"File Import Menu"},
-    {ImportDirSubmenu, "Import Directory Selection Menu"},
-    {WifiMenu,"Wifi Configuration Menu"},
-    {NetInterfaceMenu,"Network Interface Selection Menu"},
-    {PingMenu,"Ping Menu"},
-    {DisplayMenu,"Display Menu"}
-};
+
+

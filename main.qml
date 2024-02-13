@@ -9,15 +9,14 @@ ApplicationWindow {
     width: 400
     height: 243
     title: qsTr("Tabs")
-    onWidthChanged: console.log(width,height)
     Rectangle{
-        id:mainScreen
+        id:applicationScreen
         anchors.fill: parent
         color:"grey"
         Connections{
             target:passwordModel
             function onPasswordCorrect(){
-                mainScreen.state="mainScreen"
+                applicationScreen.state="mainScreen"
             }
             function onPasswordWrong(){
                 infoBox.openWithValue(qsTr("Wrong password"))
@@ -25,6 +24,11 @@ ApplicationWindow {
             function onHashFileNotExist(){
                 infoBox.openWithValue(qsTr("Hash file not found.\n Use root password"))
             }
+        }
+        Loader{
+            id:appScreenLoader
+            anchors.fill: parent
+
         }
 
 
@@ -37,8 +41,6 @@ ApplicationWindow {
         PasswordScreen {
             id:passwordScreen
             anchors.fill:parent
-
-
 
         }
         states:[
@@ -71,7 +73,13 @@ ApplicationWindow {
                 }
             }
         ]
-        state:"passwordScreen"
+        state:"mainScreen"
+    }
+    Component{
+        id:password
+        PasswordScreen{
+
+        }
     }
 
     KeyboardInput{
@@ -85,7 +93,6 @@ ApplicationWindow {
 
         }
     }
-
     Dialog{
         id:infoBox
         Connections{
@@ -118,7 +125,6 @@ ApplicationWindow {
             }
         }
     }
-
     Dialog{
         id:confUI
         Connections{

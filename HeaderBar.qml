@@ -1,14 +1,12 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
+import ScreenService 1.0
 CustomRect{
     id:root
     property int blockSemaphore:0
     height:60
-    signal leftClicked()
-    signal centerClicked()
-    signal rightClicked()
-    property string text: qsTr("version 1.3")
+    property string text: screenView.ShortScreenName // qsTr("version 1.3")
     RowLayout{
         spacing: 5
         anchors{
@@ -45,7 +43,6 @@ CustomRect{
 
             imageSource: "qrc:/icons/plcLang.png"
             onClicked: {
-                root.leftClicked();
                 devInfo.retranslate();
             }
         }
@@ -58,7 +55,7 @@ CustomRect{
 
             imageSource: "qrc:/icons/plcHome.png"
             onClicked: {
-                root.centerClicked();
+                screenView.switchToPreviousScreen()
             }
         }
         ImageButton{
@@ -69,7 +66,6 @@ CustomRect{
 
             imageSource: "qrc:/icons/plcExit.png"
             onClicked: {
-                root.rightClicked();
                 devInfo.close()
             }
         }

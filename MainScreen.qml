@@ -8,18 +8,11 @@ Item{
     states:[
         State{
             name: {
-                console.log("AAAAA",Screens.TopMenu)
                 screenView.getScreen(Screens.TopMenu)
             }
             PropertyChanges {
                 target: mainWidget
                 sourceComponent:mainMenuComponent
-            }
-            PropertyChanges {
-                target: header
-                //: main screen header label
-                text:qsTr("version") +" " + devInfo.firmwareVersion
-                
             }
         },
         State{
@@ -28,24 +21,12 @@ Item{
                 target:mainWidget
                 sourceComponent:networkMenu
             }
-            PropertyChanges {
-                target: header
-                //: network header label
-                text:qsTr("Network")
-                
-            }
         },
         State{
             name: screenView.getScreen(Screens.BaseMenu)
             PropertyChanges{
                 target:mainWidget
                 sourceComponent:settingsMenu
-            }
-            PropertyChanges {
-                target: header
-                //: settings header label
-                text: qsTr("Settings")
-                
             }
         },
         State{
@@ -54,23 +35,12 @@ Item{
                 target:mainWidget
                 sourceComponent:backupMenu
             }
-            PropertyChanges {
-                target: header
-                //: files header label
-                text:qsTr("Backup")
-                
-            }
         },
         State{
             name:screenView.getScreen(Screens.TimeMenu)
             PropertyChanges{
                 target:mainWidget
                 sourceComponent:timeScreenComponent
-            }
-            PropertyChanges{
-                target:header
-                //: timeMenu header label
-                text:qsTr("time")
             }
         },
         State{
@@ -79,20 +49,12 @@ Item{
                 target:mainWidget
                 sourceComponent:dateTimeMenu
             }
-            PropertyChanges{
-                target:header
-                text:qsTr("date/time")
-            }
         },
         State{
             name:screenView.getScreen(Screens.TimeZoneSubmenu)
             PropertyChanges{
                 target:mainWidget
                 sourceComponent:timeZoneMenu
-            }
-            PropertyChanges{
-                target:header
-                text:qsTr("timeZone")
             }
         },
 
@@ -102,22 +64,12 @@ Item{
                 target:mainWidget
                 sourceComponent:deviceInfoComponent
             }
-            PropertyChanges{
-                target:header
-                //: deviceInfo header label
-                text:qsTr("info")
-            }
         },
         State{
             name:screenView.getScreen(Screens.DisplayMenu)
             PropertyChanges{
                 target:mainWidget
                 sourceComponent:screenMenu
-            }
-            PropertyChanges{
-                target:header
-                //: screenMenu header label
-                text:qsTr("display")
             }
 
         },
@@ -127,11 +79,6 @@ Item{
                 target: mainWidget
                 sourceComponent:exportMenu
             }
-            PropertyChanges{
-                target:header
-                //: export header label
-                text:qsTr("export")
-            }
         },
 
         State{
@@ -140,21 +87,12 @@ Item{
                 target:mainWidget
                 sourceComponent:deviceImportScreen
             }
-            PropertyChanges{
-                target:header
-                //: import header label
-                text:qsTr("import")
-            }
         },
         State{
             name:screenView.getScreen(Screens.ImportDirSubmenu)
             PropertyChanges{
                 target:mainWidget
                 sourceComponent:fileImportScreen
-            }
-            PropertyChanges{
-                target:header
-                text:qsTr("import")
             }
         },
         State{
@@ -163,11 +101,6 @@ Item{
                 target:mainWidget
                 sourceComponent:wifiConnectionMenu
             }
-            PropertyChanges{
-                target:header
-                //: wifi header label
-                text:qsTr("wifi")
-            }
         },
         State{
             name: screenView.getScreen(Screens.NetInterfaceMenu)
@@ -175,22 +108,12 @@ Item{
                 target: mainWidget
                 sourceComponent:netInterfaceMenu
             }
-            PropertyChanges{
-                target:header
-                //: net interfaces header label
-                text:qsTr("interfaces")
-            }
         },
         State{
             name:screenView.getScreen(screenView.PingMenu)
             PropertyChanges {
                 target: mainWidget
                 sourceComponent:pingMenu
-            }
-            PropertyChanges{
-                target:header
-                //: ping header label
-                text:qsTr("ping")
             }
         }
     ]
@@ -208,7 +131,6 @@ Item{
             leftMargin: 5
             rightMargin: 5
         }
-        onCenterClicked: mainScreen.state="mainMenu"
         
     }
     
