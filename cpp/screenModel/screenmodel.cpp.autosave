@@ -11,7 +11,7 @@ ScreenModel::ScreenModel(IScreenSystem *system, CommandConfirmator *confirmator)
 
 void ScreenModel::setBrightness(int value)
 {
-    qDebug()<<"brightness setted to "<< value;
+    qDebug()<<"brightness setted to "<< value; 
     MyLogger::log("screenModel","UI attempted to set brightness: "+QString::number(value));
     m_system->setScreenBrightness(value);
     emit brightnessChanged(value);
@@ -28,7 +28,6 @@ int ScreenModel::brightness()
 
 void ScreenModel::calibrate()
 {
-    //m_confirmator->enqueue(new CalibrateConfirmation(this));
     emit calibrationStarted();
     MyLogger::log("screenModel","signal emitted: calibration started");
 }

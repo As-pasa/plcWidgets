@@ -11,7 +11,6 @@ Rectangle{
         height:0
     }
     
-    property int value: 100
     property color primaryColor: colorPicker.defaultColor
     property color secondaryColor:colorPicker.clickedColor
     property color borderColor: "black"
@@ -51,7 +50,7 @@ Rectangle{
             
         }
         Rectangle{
-            color: background.value>=25? background.secondaryColor: background.primaryColor
+            color: screenModel.brightness >=25? background.secondaryColor: background.primaryColor
             width:background.width/2
             height:background.height/2
             
@@ -60,7 +59,7 @@ Rectangle{
             anchors.left:parent.horizontalCenter
             MouseArea{
                 anchors.fill:parent
-                onClicked: {background.value=25}
+                onClicked: screenModel.setBrightness(25)
             }
             Text{
                 anchors.centerIn: parent
@@ -71,7 +70,7 @@ Rectangle{
             
         }
         Rectangle{
-            color: background.value>=50? background.secondaryColor: background.primaryColor
+            color: screenModel.brightness>=50? background.secondaryColor: background.primaryColor
             width:background.width/2
             height:background.height/2
             
@@ -79,7 +78,7 @@ Rectangle{
             anchors.left:parent.horizontalCenter
             MouseArea{
                 anchors.fill:parent
-                onClicked: {background.value=50}
+                onClicked: screenModel.setBrightness(50)
             }
             Text{
                 anchors.centerIn: parent
@@ -89,7 +88,7 @@ Rectangle{
             }
         }
         Rectangle{
-            color: background.value>=75? background.secondaryColor: background.primaryColor
+            color: screenModel.brightness>=75? background.secondaryColor: background.primaryColor
             width:background.width/2
             height:background.height/2
             
@@ -97,7 +96,7 @@ Rectangle{
             anchors.right:parent.horizontalCenter
             MouseArea{
                 anchors.fill:parent
-                onClicked: {background.value=75}
+                onClicked: screenModel.setBrightness(75)
             }
             Text{
                 anchors.centerIn: parent
@@ -108,7 +107,7 @@ Rectangle{
             
         }
         Rectangle{
-            color: background.value>=100? background.secondaryColor: background.primaryColor
+            color: screenModel.brightness>=100? background.secondaryColor: background.primaryColor
             width:background.width/2
             height:background.height/2
             anchors.bottom: parent.verticalCenter
@@ -116,7 +115,7 @@ Rectangle{
             
             MouseArea{
                 anchors.fill:parent
-                onClicked: {background.value=100}
+                onClicked: screenModel.setBrightness(100)
             }
             Text{
                 anchors.centerIn: parent

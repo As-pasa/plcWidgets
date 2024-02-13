@@ -237,9 +237,9 @@ Item{
             centerText:qsTr("wifi")
             rightText:qsTr("ping")
 
-            onCenterClicked: screenView.setCurrentScreen(screenView.WifiMenu)
-            onLeftClicked : screenView.setCurrentScreen(screenView.NetInterfaceMenu)
-            onRightClicked: screenView.setCurrentScreen(screenView.PingMenu)
+            onCenterClicked: screenView.setCurrentScreen(Screens.WifiMenu)
+            onLeftClicked : screenView.setCurrentScreen(Screens.NetInterfaceMenu)
+            onRightClicked: screenView.setCurrentScreen(Screens.PingMenu)
         }
     }
     Component{
@@ -255,7 +255,7 @@ Item{
                 text:qsTr("export")
                 imageSource: "qrc:/icons/plcExport.png"
                 onClicked: {
-                    screenView.setCurrentScreen(screenView.ExportMenu)
+                    screenView.setCurrentScreen(Screens.ExportMenu)
                 }
             }
             MenuTile{
@@ -267,7 +267,7 @@ Item{
                 text:qsTr("import")
                 imageSource: "qrc:/icons/plcImport.png"
                 onClicked: {
-                    screenView.setCurrentScreen(screenView.ImportMenu)
+                    screenView.setCurrentScreen(Screens.ImportMenu)
                 }
             }
         }
@@ -285,16 +285,16 @@ Item{
             centerText:qsTr("info")
             rightText:qsTr("display")
 
-            onLeftClicked: screenView.setCurrentScreen(screenView.TimeMenu)
-            onCenterClicked:screenView.setCurrentScreen(screenView.AboutMenu)
-            onRightClicked: screenView.setCurrentScreen(screenView.DisplayMenu)
+            onLeftClicked: screenView.setCurrentScreen(Screens.TimeMenu)
+            onCenterClicked:screenView.setCurrentScreen(Screens.AboutMenu)
+            onRightClicked: screenView.setCurrentScreen(Screens.DisplayMenu)
         }
     }
     Component{
         id:timeScreenComponent
         TimeScreen {
-            onLeftClicked: screenView.setCurrentScreen(screenView.DateSubmenu)
-            onRightClicked:screenView.setCurrentScreen(screenView.TimeZoneSubmenu)
+            onLeftClicked: screenView.setCurrentScreen(Screens.DateSubmenu)
+            onRightClicked:screenView.setCurrentScreen(Screens.TimeZoneSubmenu)
         }
     }
     Component{
@@ -325,7 +325,7 @@ Item{
 
             onSelected:{
             mainScreen.deviceSelected = devImpScrn.selectedContent
-            screenView.setCurrentScreen(screenView.ImportDirSubmenu)
+            screenView.setCurrentScreen(Screens.ImportDirSubmenu)
             }
 
 
