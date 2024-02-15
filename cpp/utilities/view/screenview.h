@@ -27,7 +27,8 @@ public:
         WifiMenu=12,
         NetInterfaceMenu=13,
         PingMenu=14,
-        DisplayMenu=15
+        DisplayMenu=15,
+        KeyboardMenu=16
     };
     struct ScreenInfo{
         QString stateName;

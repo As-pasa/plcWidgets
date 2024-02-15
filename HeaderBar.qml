@@ -4,9 +4,9 @@ import QtQuick.Layouts 1.12
 import ScreenService 1.0
 CustomRect{
     id:root
-    property int blockSemaphore:0
     height:60
-    property string text: screenView.ShortScreenName // qsTr("version 1.3")
+    property int normalHeight
+    property string text: screenView.ShortScreenName
     RowLayout{
         spacing: 5
         anchors{
@@ -28,13 +28,10 @@ CustomRect{
             fontSize: 16
             Layout.fillHeight: true
             Layout.preferredWidth: 2
-            enabled:blockSemaphore>0
-            opacity: blockSemaphore>0? 1:0
         }
         Item{
             Layout.fillWidth: true
         }
-
         ImageButton{
             Layout.preferredWidth: 50
             Layout.fillHeight: true
@@ -70,4 +67,26 @@ CustomRect{
             }
         }
     }
+    state:barModel.BarState
+    states:[
+        State{
+            name:"closed"
+            PropertyChanges {
+                target: root
+                y:normalHeight-(root.height/2)
+                opacity:0
+                enabled:false
+            }
+        },
+        State{
+            name:"opened"
+            PropertyChanges{
+                target:root
+                y:normalHeight
+                opacity:100
+                enabled:true
+            }
+        }
+    ]
+    Component.onCompleted: normalHeight=root.y
 }

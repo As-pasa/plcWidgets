@@ -40,6 +40,8 @@ SOURCES += \
     cpp/utilities/confirmationDisplayer/confirmatorstate.cpp \
     cpp/utilities/messagedisplayer.cpp \
     cpp/utilities/mylogger.cpp \
+    cpp/utilities/view/headerbarmodel.cpp \
+    cpp/utilities/view/screencontroller.cpp \
     cpp/utilities/view/screenview.cpp \
     cpp/wifiModel/debugwifisystem.cpp \
     cpp/wifiModel/iwifisystem.cpp \
@@ -98,6 +100,8 @@ HEADERS += \
     cpp/utilities/confirmationDisplayer/commandconfirmator.h \
     cpp/utilities/messagedisplayer.h \
     cpp/utilities/mylogger.h \
+    cpp/utilities/view/headerbarmodel.h \
+    cpp/utilities/view/screencontroller.h \
     cpp/utilities/view/screenview.h \
     cpp/wifiModel/debugwifisystem.h \
     cpp/wifiModel/iwifisystem.h \

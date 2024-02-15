@@ -24,6 +24,8 @@
 #include "cpp/utilities/confirmationDisplayer/commandconfirmator.h"
 #include "cpp/utilities/mylogger.h"
 #include "cpp/utilities/view/screenview.h"
+#include "cpp/utilities/view/headerbarmodel.h"
+#include "cpp/utilities/view/screencontroller.h"
 #include <QQmlContext>
 #include <QDebug>
 #include <QTranslator>
@@ -35,7 +37,6 @@ int main(int argc, char *argv[])
 
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    MyLogger::log("main","hello world");
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
     CommandConfirmator* confirmator = new CommandConfirmator();
@@ -56,7 +57,9 @@ int main(int argc, char *argv[])
     DevInfoModel devInfo(&engine,devSystem);
     PingModel pingModel(displayer, pingSystem);
     PasswordModel passwordModel(passwordSystem);
+    HeaderBarModel header;
     ScreenView screens;
+    ScreenController screenController(&header,&screens);
 
 
 
@@ -68,6 +71,7 @@ int main(int argc, char *argv[])
     }, Qt::QueuedConnection);
 
     qmlRegisterType<ScreenView>("ScreenService",1,0,"Screens");
+    qmlRegisterType<HeaderBarModel>("HeaderService",1,0,"Header");
     QQmlContext* root=engine.rootContext();
     root->setContextProperty("timeModel",&model);
     root->setContextProperty("devInfo",&devInfo);
@@ -80,6 +84,8 @@ int main(int argc, char *argv[])
     root->setContextProperty("messager",displayer);
     root->setContextProperty("confirmator",confirmator);
     root->setContextProperty("screenView",&screens);
+    root->setContextProperty("barModel",&header);
+    root->setContextProperty("screenController",&screenController);
     engine.load(url);
 
 

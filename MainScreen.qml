@@ -122,7 +122,6 @@ Item{
     HeaderBar {
 
         id:header
-        enabled: blockSemaphore==0
 
         anchors.left: parent.left
         anchors.right: parent.right
@@ -144,7 +143,7 @@ Item{
             centerText:qsTr("Settings")
             rightText:qsTr("Backup")
             
-            onLeftClicked:screenView.setCurrentScreen(Screens.NetMenu)
+            onLeftClicked: screenView.setCurrentScreen(Screens.NetMenu)
             onCenterClicked: screenView.setCurrentScreen(Screens.BaseMenu)
             onRightClicked: screenView.setCurrentScreen(Screens.FileMenu)
         }

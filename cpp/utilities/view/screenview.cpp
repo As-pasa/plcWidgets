@@ -16,6 +16,7 @@ const QMap<ScreenView::Screens,ScreenView::ScreenInfo> ScreenView::ScreenToInfo=
     {ScreenView::NetInterfaceMenu,{"Network Interface Selection Menu","Net",""}},
     {ScreenView::PingMenu,{"Ping Menu","Ping",""}},
     {ScreenView::DisplayMenu,{"Display Menu","Display",""}}
+
 };
 
 
