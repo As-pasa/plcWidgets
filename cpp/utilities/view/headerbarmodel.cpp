@@ -5,18 +5,25 @@ HeaderBarModel::HeaderBarModel(QObject *parent) : QObject(parent)
     m_currentState=HeaderBarModel::Opened;
 }
 
-void HeaderBarModel::setState(HeaderBarModel::BarStates state)
+void HeaderBarModel::setState(int state)
 {
        m_currentState=state;
        emit BarStateChanged(getCurrentState());
 }
 
-QString HeaderBarModel::getCurrentState()
+QString HeaderBarModel::getStateName(int state)
 {
-    return StateToName[m_currentState];
+    return StateToName[state];
 }
 
-const QMap<HeaderBarModel::BarStates,QString> HeaderBarModel::StateToName={
+QString HeaderBarModel::getCurrentState()
+{
+    return getStateName(m_currentState);
+}
+
+
+const QMap<int,QString> HeaderBarModel::StateToName={
     {HeaderBarModel::Opened,"opened"},
-    {HeaderBarModel::Closed,"closed"}
+    {HeaderBarModel::Closed,"closed"},
+    {HeaderBarModel::Password,"password"}
 };

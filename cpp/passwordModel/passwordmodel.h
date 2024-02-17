@@ -17,7 +17,7 @@ private:
 
 public slots:
     QStringList contacts();
-    void checkPassword(QString password);
+    bool checkPassword(QString password);
     void setPassword(QString password);
 signals:
     void contactsChanged(QStringList contacts);

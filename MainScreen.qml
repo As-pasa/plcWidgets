@@ -110,10 +110,24 @@ Item{
             }
         },
         State{
-            name:screenView.getScreen(screenView.PingMenu)
+            name:screenView.getScreen(Screens.PingMenu)
             PropertyChanges {
                 target: mainWidget
                 sourceComponent:pingMenu
+            }
+        },
+        State{
+            name:screenView.getScreen(Screens.PasswordMenu)
+            PropertyChanges{
+                target:mainWidget
+                sourceComponent:passwordScreen
+            }
+        },
+        State{
+            name:screenView.getScreen(Screens.PasswordRecovery)
+            PropertyChanges{
+                target:mainWidget
+                sourceComponent:passwordRecoveryScreen
             }
         }
     ]
@@ -143,9 +157,9 @@ Item{
             centerText:qsTr("Settings")
             rightText:qsTr("Backup")
             
-            onLeftClicked: screenView.setCurrentScreen(Screens.NetMenu)
-            onCenterClicked: screenView.setCurrentScreen(Screens.BaseMenu)
-            onRightClicked: screenView.setCurrentScreen(Screens.FileMenu)
+            onLeftClicked: screenController.goToScreen(Screens.NetMenu)// screenView.setCurrentScreen(Screens.NetMenu)
+            onCenterClicked: screenController.goToScreen(Screens.BaseMenu)
+            onRightClicked: screenController.goToScreen(Screens.FileMenu)
         }
     }
     Component{
@@ -158,9 +172,9 @@ Item{
             centerText:qsTr("wifi")
             rightText:qsTr("ping")
 
-            onCenterClicked: screenView.setCurrentScreen(Screens.WifiMenu)
-            onLeftClicked : screenView.setCurrentScreen(Screens.NetInterfaceMenu)
-            onRightClicked: screenView.setCurrentScreen(Screens.PingMenu)
+            onCenterClicked: screenController.goToScreen(Screens.WifiMenu)
+            onLeftClicked : screenController.goToScreen(Screens.NetInterfaceMenu)
+            onRightClicked: screenController.goToScreen(Screens.PingMenu)
         }
     }
     Component{
@@ -285,6 +299,16 @@ Item{
         id:dateTimeMenu
         DatetimeMenu{
 
+        }
+    }
+    Component{
+        id:passwordScreen
+        PasswordScreen{
+        }
+    }
+    Component{
+        id:passwordRecoveryScreen
+        PasswordRecoveryScreen{
         }
     }
     Loader{

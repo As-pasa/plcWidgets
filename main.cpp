@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     PasswordModel passwordModel(passwordSystem);
     HeaderBarModel header;
     ScreenView screens;
-    ScreenController screenController(&header,&screens);
+    ScreenController screenController(&header,&screens,&passwordModel);
 
 
 
@@ -87,8 +87,6 @@ int main(int argc, char *argv[])
     root->setContextProperty("barModel",&header);
     root->setContextProperty("screenController",&screenController);
     engine.load(url);
-
-
-
+    screenController.goToScreen(ScreenView::PasswordMenu);
     return app.exec();
 }

@@ -10,12 +10,13 @@ QStringList PasswordModel::contacts()
     return m_system->getContacts();
 }
 
-void PasswordModel::checkPassword(QString password)
+bool PasswordModel::checkPassword(QString password)
 {
     IPasswordSystem::AnswerCodes a= m_system->checkPassword(password);
-    if(a==IPasswordSystem::AnswerCodes::OK) emit passwordCorrect();
-    else if(a==IPasswordSystem::AnswerCodes::WRONG) emit passwordWrong();
+    if(a==IPasswordSystem::AnswerCodes::OK) return true;
+    else if(a==IPasswordSystem::AnswerCodes::WRONG) return false;
     else emit hashFileNotExist();
+    return false;
 }
 
 void PasswordModel::setPassword(QString password)

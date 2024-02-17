@@ -4,7 +4,7 @@ import QtQuick.Controls 2.5
 Item{
 
     signal clicked();
-
+    property alias pressed:mouseArea.pressed
     property color mainColor: "white"
     property color pressedColor: "grey"
     property color borderColor: "black"

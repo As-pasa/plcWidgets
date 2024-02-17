@@ -10,14 +10,16 @@ class HeaderBarModel : public QObject
 public:
     explicit HeaderBarModel(QObject *parent = nullptr);
     enum BarStates{
-        Opened,
-        Closed
+        Opened=1,
+        Closed=2,
+        Password=3
     };
     Q_ENUM(BarStates)
-    BarStates m_currentState;
-    static const QMap<BarStates,QString> StateToName;
+    int m_currentState;
+    static const QMap<int,QString> StateToName;
 public slots:
-    void setState(BarStates state);
+    void setState(int state);
+    QString getStateName(int state);
     QString getCurrentState();
 signals:
     void BarStateChanged(QString);

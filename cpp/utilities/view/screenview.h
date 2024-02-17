@@ -28,7 +28,9 @@ public:
         NetInterfaceMenu=13,
         PingMenu=14,
         DisplayMenu=15,
-        KeyboardMenu=16
+        KeyboardMenu=16,
+        PasswordMenu=17,
+        PasswordRecovery=18
     };
     struct ScreenInfo{
         QString stateName;
@@ -41,19 +43,20 @@ public:
 
 
 private:
-    Screens currentScreen=TopMenu;
-    QStack<Screens> m_screenHistory;
+    int currentScreen=PasswordMenu;
+    QStack<int> m_screenHistory;
 
-    const static QMap<Screens,ScreenInfo> ScreenToInfo;
+    const static QMap<int,ScreenInfo> ScreenToInfo;
 
 public slots:
-    Screens getPreviousScreen();
+    int ScreenToId(Screens screen);
+    int getPreviousScreen();
     void switchToPreviousScreen();
-    QString getScreen(Screens name);
-    QString getScreenShortName(Screens name);
+    QString getScreen(int name);
+    QString getScreenShortName(int name);
     QString getCurrenScreenShortName();
     QString getCurrentScreen();
-    void setCurrentScreen(Screens n);
+    void setCurrentScreen(int n);
 signals:
 void currentScreenChanged(QString);
 void ScreenShortNameChanged(QString);
