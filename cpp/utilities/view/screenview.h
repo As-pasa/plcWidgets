@@ -30,7 +30,8 @@ public:
         DisplayMenu=15,
         KeyboardMenu=16,
         PasswordMenu=17,
-        PasswordRecovery=18
+        PasswordRecovery=18,
+        AppMessager=19
     };
     struct ScreenInfo{
         QString stateName;

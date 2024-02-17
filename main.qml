@@ -13,18 +13,6 @@ ApplicationWindow {
         id:applicationScreen
         anchors.fill: parent
         color:"grey"
-        Connections{
-            target:passwordModel
-            function onPasswordCorrect(){
-                applicationScreen.state="mainScreen"
-            }
-            function onPasswordWrong(){
-                infoBox.openWithValue(qsTr("Wrong password"))
-            }
-            function onHashFileNotExist(){
-                infoBox.openWithValue(qsTr("Hash file not found.\n Use root password"))
-            }
-        }
         Loader{
             id:appScreenLoader
             anchors.fill: parent
@@ -38,48 +26,7 @@ ApplicationWindow {
             anchors.fill:parent
             state:screenView.CurrenScreen
         }
-        PasswordScreen {
-            id:passwordScreen
-            anchors.fill:parent
 
-        }
-        states:[
-            State{
-                name:"passwordScreen"
-                PropertyChanges {
-                    target: appScreen
-                    opacity:0
-                    enabled:false
-                }
-                PropertyChanges {
-                    target: passwordScreen
-                    opacity:100
-                    enabled:true
-
-                }
-            },
-            State{
-                name:"mainScreen"
-                PropertyChanges {
-                    target: passwordScreen
-                    opacity:0
-                    enabled:false
-                }
-                PropertyChanges {
-                    target: appScreen
-                    opacity:100
-                    enabled:true
-
-                }
-            }
-        ]
-        state:"mainScreen"
-    }
-    Component{
-        id:password
-        PasswordScreen{
-
-        }
     }
 
     KeyboardInput{
@@ -90,39 +37,6 @@ ApplicationWindow {
         target: screenModel
         function onCalibrationEnded(){
             showNormal();
-
-        }
-    }
-    Dialog{
-        id:infoBox
-        Connections{
-            target:messager
-            function onMessageFound(a){
-                infoBox.openWithValue(a)
-            }
-        }
-
-        property string val:""
-        parent:Overlay.overlay
-        anchors.centerIn: parent
-        width: parent.width
-        height: parent.height
-        CustomLabel{
-
-            anchors.fill: parent
-            text:infoBox.val
-
-        }
-        function openWithValue(value){
-            infoBox.val=value
-            infoBox.open();
-        }
-        footer:DialogButtonBox{
-
-            TextButton{
-                text:qsTr("close")
-                onClicked: infoBox.close()
-            }
         }
     }
     Dialog{
@@ -242,30 +156,4 @@ ApplicationWindow {
             }
         }
     }
-
-
-//    HeaderBar {
-//        id:header
-//        anchors.left: parent.left
-//        anchors.right: parent.right
-//        onCenterClicked: mainScreen.state="mainMenu"
-
-
-//    }
-//    ImportDeviceSelector {
-//        id:rt2
-//        selectedContent:"CD card"
-//    }
-
-
-//    ImportFileSelector {
-//        anchors{
-//            top:header.bottom
-//            left:parent.left
-//            right:parent.right
-//            bottom:parent.bottom
-//        }
-//    }
-
-
 }

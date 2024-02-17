@@ -7,5 +7,11 @@ MessageDisplayer::MessageDisplayer(QObject *parent) : QObject(parent)
 
 void MessageDisplayer::showMessage(QString message)
 {
-    emit messageFound(message);
+    currentMessage=message;
+    emit messageChanged(message);
+}
+
+QString MessageDisplayer::getMessage()
+{
+    return currentMessage;
 }

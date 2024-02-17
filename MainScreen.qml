@@ -129,6 +129,13 @@ Item{
                 target:mainWidget
                 sourceComponent:passwordRecoveryScreen
             }
+        },
+        State{
+            name:screenView.getScreen(Screens.AppMessager)
+            PropertyChanges{
+                target:mainWidget
+                sourceComponent:appMessager
+            }
         }
     ]
     
@@ -309,6 +316,11 @@ Item{
     Component{
         id:passwordRecoveryScreen
         PasswordRecoveryScreen{
+        }
+    }
+    Component{
+        id:appMessager
+        AppMessager{
         }
     }
     Loader{

@@ -11,9 +11,14 @@ void ScreenController::setupHeader(int screen)
 
 }
 
-ScreenController::ScreenController(HeaderBarModel *headerModel, ScreenView *viewModel,PasswordModel* passwordm, QObject *parent)
+ScreenController::ScreenController(HeaderBarModel *headerModel,
+                                   ScreenView *viewModel,
+                                   PasswordModel* passwordm,
+                                   MessageDisplayer* messager,
+                                   QObject *parent)
 {
     m_headerModel=headerModel;
+    m_messager=messager;
     m_viewModel=viewModel;
     m_password=passwordm;
 }
@@ -38,6 +43,12 @@ void ScreenController::submitPassword(QString password)
         goToScreen(ScreenView::TopMenu);
     }
 
+}
+
+void ScreenController::showInfoWithText(QString text)
+{
+    goToScreen(ScreenView::AppMessager);
+    m_messager->showMessage(text);
 }
 
 const QMap<int,int> ScreenController::ClosedHeaderStates={

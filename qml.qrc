@@ -52,5 +52,6 @@
         <file>ImportDeviceSelector.qml</file>
         <file>ImportFileSelector.qml</file>
         <file>PasswordRecoveryScreen.qml</file>
+        <file>AppMessager.qml</file>
     </qresource>
 </RCC>

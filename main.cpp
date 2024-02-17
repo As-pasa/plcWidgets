@@ -59,7 +59,7 @@ int main(int argc, char *argv[])
     PasswordModel passwordModel(passwordSystem);
     HeaderBarModel header;
     ScreenView screens;
-    ScreenController screenController(&header,&screens,&passwordModel);
+    ScreenController screenController(&header,&screens,&passwordModel,displayer);
 
 
 

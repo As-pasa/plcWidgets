@@ -92,8 +92,7 @@ CustomRect{
             PropertyChanges{
                 target:backBtn
                 onClicked:{
-                    console.log("asdAsdasd")
-                    screenController.goToScreen(Screens.PasswordRecovery)
+                    screenController.showInfoWithText("hehehe")
                 }
             }
         }

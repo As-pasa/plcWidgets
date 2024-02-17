@@ -17,7 +17,8 @@ const QMap<int,ScreenView::ScreenInfo> ScreenView::ScreenToInfo={
     {ScreenView::PingMenu,{"Ping Menu","Ping",""}},
     {ScreenView::DisplayMenu,{"Display Menu","Display",""}},
     {ScreenView::PasswordMenu,{"Password Menu","Password",""}},
-    {ScreenView::PasswordRecovery,{"Password Recovery Menu","Recovery",""}}
+    {ScreenView::PasswordRecovery,{"Password Recovery Menu","Recovery",""}},
+    {ScreenView::AppMessager,{"Application info menu","Info",""}}
 };
 
 
