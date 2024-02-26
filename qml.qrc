@@ -53,10 +53,5 @@
         <file>ImportFileSelector.qml</file>
         <file>PasswordRecoveryScreen.qml</file>
         <file>AppMessager.qml</file>
-        <file>baseWidgets/CustomLabel.qml</file>
-        <file>baseWidgets/CustomRect.qml</file>
-        <file>baseWidgets/ImageButton.qml</file>
-        <file>baseWidgets/TextButton.qml</file>
-        <file>baseWidgets/CustomText.qml</file>
     </qresource>
 </RCC>
