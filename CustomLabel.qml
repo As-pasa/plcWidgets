@@ -6,7 +6,7 @@ Label{
         id:colorPicker
     }
     property int fontSize: 10
-    property color bb:colorPicker.defaultColor
+    property color bb:  colorPicker.defaultColor
     background: CustomRect{
         color:bb
         border.width: 0
@@ -16,5 +16,5 @@ Label{
     horizontalAlignment: Text.AlignHCenter
     verticalAlignment: Text.AlignVCenter
     font.pixelSize: fontSize
-    color: "black"
+    color: "white"
 }

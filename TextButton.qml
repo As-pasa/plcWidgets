@@ -5,7 +5,7 @@ import QtQuick.Controls 2.5
 Button{
     property color mainColor: "white"
     property color pressedColor: "grey"
-    property color borderColor: "black"
+    property color borderColor: "white"
     text: "hello"
     id:root
 

@@ -12,7 +12,7 @@ ApplicationWindow {
     Rectangle{
         id:applicationScreen
         anchors.fill: parent
-        color:"grey"
+        color: "grey"
         Loader{
             id:appScreenLoader
             anchors.fill: parent
