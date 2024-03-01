@@ -26,16 +26,25 @@ ApplicationWindow {
         anchors.fill: parent
         id:root
         property int role:1
+        property string inputed:""
         function process(ch){
             if(ch==="close"){
-                keyBinder.clear(role)
+                inputed=""
                 return
             }
             if(ch==="acc"){
-                keyBinder.apply(role)
+                keyBinder.apply(role,inputed)
                 return
             }
-            keyBinder.process(role,ch)
+            if(ch==="back"){
+                inputed=inputed.substring(0,inputed.length-1)
+            }
+
+            if(keyBinder.validate(role,inputed+ch)){
+                inputed= inputed + ch
+                return
+            }
+
         }
         ColumnLayout{
             anchors.fill: parent
@@ -44,14 +53,7 @@ ApplicationWindow {
                 Layout.fillWidth: true
                 Layout.preferredHeight: 40
                 fontSize: fontBig
-                Connections{
-                    target:keyBinder
-                    function onStateChanged(){
-                        header.text=keyBinder.getState(root.role)
-                    }
-                }
-                Component.onCompleted: header.text=keyBinder.getState(root.role)
-
+                text:root.inputed
             }
             Item{
                 id:keyBoard
