@@ -26,6 +26,10 @@
 #include "cpp/utilities/view/screenview.h"
 #include "cpp/utilities/view/headerbarmodel.h"
 #include "cpp/utilities/view/screencontroller.h"
+#include "cpp/utilities/keyboard/keyboardbinder.h"
+#include "cpp/utilities/keyboard/keyboardStateImpl.h"
+#include "cpp/utilities/keyboard/keyboardconsumer.h"
+#include "cpp/utilities/keyboard/debugkeyboardconsumer.h"
 #include <QQmlContext>
 #include <QDebug>
 #include <QTranslator>
@@ -60,8 +64,9 @@ int main(int argc, char *argv[])
     HeaderBarModel header;
     ScreenView screens;
     ScreenController screenController(&header,&screens,&passwordModel,displayer);
-
-
+    KeyboardBinder keyboardBinder;
+    keyboardBinder.addState(1,new NoValidationKeyboardState());
+    keyboardBinder.addConsumer(1,new DebugKeyboardConsumer());
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
@@ -86,6 +91,7 @@ int main(int argc, char *argv[])
     root->setContextProperty("screenView",&screens);
     root->setContextProperty("barModel",&header);
     root->setContextProperty("screenController",&screenController);
+    root->setContextProperty("keyBinder",&keyboardBinder);
     engine.load(url);
     screenController.goToScreen(ScreenView::PasswordMenu);
     return app.exec();

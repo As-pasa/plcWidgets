@@ -141,17 +141,13 @@ Item{
     
     
     HeaderBar {
-
         id:header
-
         anchors.left: parent.left
         anchors.right: parent.right
         anchors{
-
             leftMargin: 5
             rightMargin: 5
         }
-        
     }
     
     Component{
@@ -277,7 +273,6 @@ Item{
         id:fileImportScreen
         ImportFileSelector{
             selectedDevice: mainScreen.deviceSelected
-
         }
     }
 

@@ -38,10 +38,16 @@ SOURCES += \
     cpp/timeModel/timemodel.cpp \
     cpp/utilities/confirmationDisplayer/commandconfirmator.cpp \
     cpp/utilities/confirmationDisplayer/confirmatorstate.cpp \
+    cpp/utilities/keyboard/debugkeyboardconsumer.cpp \
+    cpp/utilities/keyboard/ikeyboardstate.cpp \
+    cpp/utilities/keyboard/keyboardStateImpl.cpp \
+    cpp/utilities/keyboard/keyboardbinder.cpp \
+    cpp/utilities/keyboard/keyboardconsumer.cpp \
     cpp/utilities/messagedisplayer.cpp \
     cpp/utilities/mylogger.cpp \
     cpp/utilities/view/headerbarmodel.cpp \
     cpp/utilities/view/screencontroller.cpp \
+    cpp/utilities/view/screenhistorymodel.cpp \
     cpp/utilities/view/screenview.cpp \
     cpp/wifiModel/debugwifisystem.cpp \
     cpp/wifiModel/iwifisystem.cpp \
@@ -98,10 +104,16 @@ HEADERS += \
     cpp/timeModel/timechangepackage.h \
     cpp/timeModel/timemodel.h \
     cpp/utilities/confirmationDisplayer/commandconfirmator.h \
+    cpp/utilities/keyboard/debugkeyboardconsumer.h \
+    cpp/utilities/keyboard/ikeyboardstate.h \
+    cpp/utilities/keyboard/keyboardStateImpl.h \
+    cpp/utilities/keyboard/keyboardbinder.h \
+    cpp/utilities/keyboard/keyboardconsumer.h \
     cpp/utilities/messagedisplayer.h \
     cpp/utilities/mylogger.h \
     cpp/utilities/view/headerbarmodel.h \
     cpp/utilities/view/screencontroller.h \
+    cpp/utilities/view/screenhistorymodel.h \
     cpp/utilities/view/screenview.h \
     cpp/wifiModel/debugwifisystem.h \
     cpp/wifiModel/iwifisystem.h \

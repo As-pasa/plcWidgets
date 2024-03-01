@@ -5,7 +5,7 @@ import "../"
 Item{
     signal keyPressed(string key)
 
-    //defalut function overriden in KeyboarDialog states
+
     property var rowSpanFunction: (a)=> {
                         if(a==="enter") return 2
                           return 1

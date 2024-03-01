@@ -8,7 +8,6 @@
         <file>ImageButton.qml</file>
         <file>MenuTile.qml</file>
         <file>MenuButtons.qml</file>
-        <file>HeaderBar.qml</file>
         <file>MainMenuTiles.qml</file>
         <file>icons/plcBackup.png</file>
         <file>icons/plcBright.png</file>
@@ -53,5 +52,20 @@
         <file>ImportFileSelector.qml</file>
         <file>PasswordRecoveryScreen.qml</file>
         <file>AppMessager.qml</file>
+        <file>widgets/BaseBtn.qml</file>
+        <file>widgets/BaseRect.qml</file>
+        <file>widgets/BaseText.qml</file>
+        <file>widgets/ImageBtn.qml</file>
+        <file>widgets/TextBtn.qml</file>
+        <file>header/HeaderBase.qml</file>
+        <file>header/HeaderState.qml</file>
+        <file>screenComponents/BaseScreen.qml</file>
+        <file>screenComponents/ScreenStates.qml</file>
+        <file>widgets/MenuBtn.qml</file>
+        <file>screenComponents/TopMenu.qml</file>
+        <file>icons2/BaseSettings_02.png</file>
+        <file>icons2/Files_02.png</file>
+        <file>icons2/Network_02.png</file>
+        <file>screenComponents/DoubleMenu.qml</file>
     </qresource>
 </RCC>
