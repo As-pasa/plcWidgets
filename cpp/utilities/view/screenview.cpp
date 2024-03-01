@@ -41,15 +41,9 @@ int ScreenView::getPreviousScreen()
 void ScreenView::switchToPreviousScreen()
 {
    if(m_screenHistory.top()==TopMenu){
-       currentScreen=TopMenu;
-       emit(currentScreenChanged(getScreen(currentScreen)));
-       emit ScreenShortNameChanged(ScreenToInfo[currentScreen].shortName);
        return;
    }
-   currentScreen= m_screenHistory.pop();
-   emit(currentScreenChanged(getScreen(currentScreen)));
-   emit ScreenShortNameChanged(ScreenToInfo[currentScreen].shortName);
-
+   setCurrentScreen(m_screenHistory.pop());
 }
 
 QString ScreenView::getScreen(int name)
@@ -76,6 +70,7 @@ void ScreenView::setCurrentScreen(int n)
 {
     m_screenHistory.push(currentScreen);
     currentScreen=n;
+    for(auto a :m_screenHistory){qDebug()<<ScreenToInfo[a].stateName;}
     emit currentScreenChanged(getScreen(currentScreen));
     emit ScreenShortNameChanged(ScreenToInfo[currentScreen].shortName);
 }
