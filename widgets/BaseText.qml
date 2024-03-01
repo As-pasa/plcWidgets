@@ -16,7 +16,6 @@ Item{
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         text:root.text
-        onTextChanged: console.log("text changed to:"+text)
         
     }
 }

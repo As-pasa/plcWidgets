@@ -24,26 +24,36 @@ void KeyboardBinder::addState(int role, IKeyboardState *state)
     m_states[role]=state;
 }
 
-
-
-
-bool KeyboardBinder::validate(int role, QString input)
+void KeyboardBinder::process(int role,QString ch)
 {
     if(m_states.contains(role)){
-        return m_states[role]->validate(input);
+        if(m_states[role]->add(ch)){
+          emit stateChanged();
+        }
     }
-    return false;
 }
 
-void KeyboardBinder::apply(int role, QString input)
+void KeyboardBinder::clear(int role)
 {
     if(m_states.contains(role)){
-        if(m_states[role]->validate(input)){
-            if(m_consumers.contains(role)){
-                foreach(auto a , m_consumers[role]){
-                    a->consume(input);
-                }
-            }
+        m_states[role]->clearState();
+        emit stateChanged();
+    }
+}
+
+QString KeyboardBinder::getState(int role)
+{
+    if(m_states.contains(role)){
+        return m_states[role]->getState();
+    }
+    return "ERROR";
+}
+
+void KeyboardBinder::apply(int role)
+{
+    if(m_consumers.contains(role) && m_states.contains(role)){
+        foreach(KeyboardConsumer* cons,m_consumers[role]){
+            cons->consume(m_states[role]->getState());
         }
     }
 }

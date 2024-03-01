@@ -21,8 +21,10 @@ public:
     void addState(int role, IKeyboardState* state);
 
 public slots:
-    bool validate(int role, QString input);
-    void apply(int role, QString input);
+    void process(int role,QString ch);
+    void clear(int role);
+    QString getState(int role);
+    void apply(int role);
 signals:
     void stateChanged();
 };

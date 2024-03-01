@@ -9,10 +9,10 @@ private:
     QList<QString> specialSymbols{"back"};
 
     QString m_state;
-
+    virtual bool validate(QString nstring)=0;
     QString processSpecial(QString old,QString addition);
 public:
-    virtual bool validate(QString nstring)=0;
+
     QString getState();
     void clearState();
     bool add(QString ch);
