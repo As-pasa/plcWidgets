@@ -1,159 +1,95 @@
 import QtQuick 2.12
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.12
+import HeaderService 1.0
+import ScreenService 1.0
 
 import "virtualKeyboards/"
+import "widgets"
+import "header"
+import "screenComponents"
+
+
 ApplicationWindow {
     id: window
     visible: true
     width: 400
     height: 243
     title: qsTr("Tabs")
-    Rectangle{
-        id:applicationScreen
+    BaseRect{id:colorPicker}
+    color:colorPicker.backgroundColor
+//    ScreenStates {
+//        anchors.fill:parent
+//        state:screenView.getScreen(Screens.TimeMenu)
+//    }
+    Item{
         anchors.fill: parent
-        color: "grey"
-        Loader{
-            id:appScreenLoader
-            anchors.fill: parent
-
-        }
-
-
-        MainScreen{
-            id:appScreen
-            anchors.topMargin: 1
-            anchors.fill:parent
-            state:screenView.CurrenScreen
-        }
-
-    }
-
-    KeyboardInput{
-        id: kKEYBOARDUNIT
-        state:"ipInput"
-    }
-    Connections{
-        target: screenModel
-        function onCalibrationEnded(){
-            showNormal();
-        }
-    }
-    Dialog{
-        id:confUI
-        Connections{
-            target:confirmator
-            function onConfirmRequested(s){
-                confUI.openWithValue(s)
+        id:root
+        property int role:1
+        function process(ch){
+            if(ch==="close"){
+                keyBinder.clear(role)
+                return
             }
+            if(ch==="acc"){
+                keyBinder.apply(role)
+                return
+            }
+            keyBinder.process(role,ch)
         }
-        function openWithValue(value){
-            confUI.val=value
-            confUI.open();
-
-        }
-        property string val:""
-        parent:Overlay.overlay
-        anchors.centerIn: parent
-        width: parent.width
-        height: parent.height
-        CustomLabel{
-
+        ColumnLayout{
             anchors.fill: parent
-            text:confUI.val
+            BaseText{
+                id:header
+                Layout.fillWidth: true
+                Layout.preferredHeight: 40
+                fontSize: fontBig
+                Connections{
+                    target:keyBinder
+                    function onStateChanged(){
+                        header.text=keyBinder.getState(root.role)
+                    }
+                }
+                Component.onCompleted: header.text=keyBinder.getState(root.role)
 
-        }
-        footer:DialogButtonBox{
-            TextButton{
-                text:qsTr("accept")
-                onClicked: {
-                     confUI.close()
-                    confirmator.accept()
+            }
+            Item{
+                id:keyBoard
+                function cSpan(str){
+                    if(str==="0") return 3
+                    return 1
+                }
+                function rSpan(str){
+                   if(str==="acc"){
+                       return 2
+                           }
+                    return 1
+                   }
 
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+                GridLayout{
+                    anchors.fill: parent
+                    columns: 4
+                    Repeater{
+                        delegate:TextBtn{
+                            Layout.fillHeight: true
+                            Layout.fillWidth: true
+                            Layout.rowSpan: keyBoard.rSpan(modelData)
+                            Layout.columnSpan: keyBoard.cSpan(modelData)
+                            text:modelData
+                            onClicked: root.process(modelData)
+
+                        }
+                         model:"7 8 9 back 4 5 6 close 1 2 3 acc 0".split(" ")
+
+                    }
                 }
             }
-            TextButton{
-                text:qsTr("close")
-                onClicked: confUI.close()
-            }
+
 
         }
     }
-    CustomRect{
-        radius: 0
-        id: calibrationUIHelper
-        function open(){
-            calibrationUIHelper.enabled= true
-            calibrationUIHelper.visible= true
-        }
-        function close(){
-            calibrationUIHelper.enabled= false
-            calibrationUIHelper.visible= false
 
-        }
-        Connections{
-            target:screenModel
-            function onCalibrationStarted(){
-                calibrationUIHelper.open()
-            }
-        }
-        Connections{
-            target:screenModel
-            function onCalibrationEnded(){
-                calibrationUIHelper.close()
-            }
-        }
 
-        enabled: false
-        visible: false
-        parent: Overlay.overlay
-        anchors.fill: parent
-        TextButton{
-            text:"1"
-            anchors.top:parent.top
-            anchors.left: parent.left
-            width:20
-            height:20
-
-        }
-        TextButton{
-            text:"2"
-            anchors.top:parent.top
-            anchors.right: parent.right
-            width:20
-            height:20
-
-        }
-        TextButton{
-            text:"3"
-            anchors.bottom:parent.bottom
-            anchors.right: parent.right
-            width:20
-            height:20
-
-        }
-        TextButton{
-            text:"4"
-            anchors.bottom:parent.bottom
-            anchors.left: parent.left
-            width:20
-            height:20
-
-        }
-        TextButton{
-            text:"5"
-            anchors.centerIn: parent
-            width:20
-            height:20
-        }
-        TextButton{
-            text:qsTr("start")
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottom: parent.bottom
-            onClicked: {
-            screenModel.innerCalibrate()
-            calibrationUIHelper.close()
-            }
-        }
-    }
 }
