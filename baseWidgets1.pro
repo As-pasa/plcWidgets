@@ -43,6 +43,12 @@ SOURCES += \
     cpp/utilities/keyboard/keyboardStateImpl.cpp \
     cpp/utilities/keyboard/keyboardbinder.cpp \
     cpp/utilities/keyboard/keyboardconsumer.cpp \
+    cpp/utilities/keyboard/time/consumers/ITimeConsumer.cpp \
+    cpp/utilities/keyboard/time/daykeyboardstate.cpp \
+    cpp/utilities/keyboard/time/hourkeyboardstate.cpp \
+    cpp/utilities/keyboard/time/minutekeyboardstate.cpp \
+    cpp/utilities/keyboard/time/monthkeyboardstate.cpp \
+    cpp/utilities/keyboard/time/yearkeyboardstate.cpp \
     cpp/utilities/messagedisplayer.cpp \
     cpp/utilities/mylogger.cpp \
     cpp/utilities/view/headerbarmodel.cpp \
@@ -109,6 +115,12 @@ HEADERS += \
     cpp/utilities/keyboard/keyboardStateImpl.h \
     cpp/utilities/keyboard/keyboardbinder.h \
     cpp/utilities/keyboard/keyboardconsumer.h \
+    cpp/utilities/keyboard/time/consumers/ITimeConsumer.h \
+    cpp/utilities/keyboard/time/daykeyboardstate.h \
+    cpp/utilities/keyboard/time/hourkeyboardstate.h \
+    cpp/utilities/keyboard/time/minutekeyboardstate.h \
+    cpp/utilities/keyboard/time/monthkeyboardstate.h \
+    cpp/utilities/keyboard/time/yearkeyboardstate.h \
     cpp/utilities/messagedisplayer.h \
     cpp/utilities/mylogger.h \
     cpp/utilities/view/headerbarmodel.h \

@@ -34,6 +34,14 @@
 #include <QDebug>
 #include <QTranslator>
 #include <QDir>
+
+#include "cpp/utilities/keyboard/time/daykeyboardstate.h"
+#include "cpp/utilities/keyboard/time/hourkeyboardstate.h"
+#include "cpp/utilities/keyboard/time/minutekeyboardstate.h"
+#include "cpp/utilities/keyboard/time/monthkeyboardstate.h"
+#include "cpp/utilities/keyboard/time/yearkeyboardstate.h"
+#include "cpp/utilities/keyboard/time/consumers/ITimeConsumer.h"
+
 int main(int argc, char *argv[])
 {
 
@@ -65,8 +73,20 @@ int main(int argc, char *argv[])
     ScreenView screens;
     ScreenController screenController(&header,&screens,&passwordModel,displayer);
     KeyboardBinder keyboardBinder;
-    keyboardBinder.addState(1,new NoValidationKeyboardState());
-    keyboardBinder.addConsumer(1,new DebugKeyboardConsumer());
+    keyboardBinder.addState(KeyboardBinder::Roles::Day,new DayKeyboardState(&model));
+    keyboardBinder.addConsumer(KeyboardBinder::Roles::Day,new DayConsumer(&model));
+
+    keyboardBinder.addState(KeyboardBinder::Roles::Month,new MonthKeyboardState(&model));
+    keyboardBinder.addConsumer(KeyboardBinder::Roles::Month,new MonthConsumer(&model));
+
+    keyboardBinder.addState(KeyboardBinder::Roles::Year,new YearKeyboardState(&model));
+    keyboardBinder.addConsumer(KeyboardBinder::Roles::Year,new YearConsumer(&model));
+
+    keyboardBinder.addState(KeyboardBinder::Roles::Minute,new MinuteKeyboardState());
+    keyboardBinder.addConsumer(KeyboardBinder::Roles::Minute,new MinuteConsumer(&model));
+
+    keyboardBinder.addState(KeyboardBinder::Roles::Hour,new HourKeyboardState());
+    keyboardBinder.addConsumer(KeyboardBinder::Roles::Hour,new HourConsumer(&model));
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
@@ -77,6 +97,7 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<ScreenView>("ScreenService",1,0,"Screens");
     qmlRegisterType<HeaderBarModel>("HeaderService",1,0,"Header");
+    qmlRegisterType<KeyboardBinder>("KeyboardService",1,0,"KeyRole");
     QQmlContext* root=engine.rootContext();
     root->setContextProperty("timeModel",&model);
     root->setContextProperty("devInfo",&devInfo);
@@ -93,6 +114,6 @@ int main(int argc, char *argv[])
     root->setContextProperty("screenController",&screenController);
     root->setContextProperty("keyBinder",&keyboardBinder);
     engine.load(url);
-    screenController.goToScreen(ScreenView::PasswordMenu);
+    screenController.goToScreen(ScreenView::TopMenu);
     return app.exec();
 }

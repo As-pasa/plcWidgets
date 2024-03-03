@@ -53,7 +53,6 @@ signals:
     void ATZStatusChanged(bool status);
     void currentTimeZoneChanged(QString);
 
-
 public slots:
     void installCurrentTimeZoneAsSystem();
     void setCurrentTime(QDateTime);

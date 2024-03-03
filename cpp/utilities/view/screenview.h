@@ -31,7 +31,12 @@ public:
         KeyboardMenu=16,
         PasswordMenu=17,
         PasswordRecovery=18,
-        AppMessager=19
+        AppMessager=19,
+        DayInput,
+        MonthInput,
+        YearInput,
+        MinuteInput,
+        HourInput
     };
     struct ScreenInfo{
         QString stateName;
@@ -44,7 +49,7 @@ public:
 
 
 private:
-    int currentScreen=PasswordMenu;
+    int currentScreen=TopMenu;
     QStack<int> m_screenHistory;
 
     const static QMap<int,ScreenInfo> ScreenToInfo;

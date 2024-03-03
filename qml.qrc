@@ -67,5 +67,8 @@
         <file>icons2/Files_02.png</file>
         <file>icons2/Network_02.png</file>
         <file>screenComponents/DoubleMenu.qml</file>
+        <file>QmlKeyboard/KeyboardInputProcessor.qml</file>
+        <file>QmlKeyboard/KeyRow.qml</file>
+        <file>QmlKeyboard/IntKeyboardScreen.qml</file>
     </qresource>
 </RCC>

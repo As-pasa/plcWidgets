@@ -26,10 +26,22 @@ void KeyboardBinder::addState(int role, IKeyboardState *state)
 
 void KeyboardBinder::process(int role,QString ch)
 {
+
+
     if(m_states.contains(role)){
-        if(m_states[role]->add(ch)){
-          emit stateChanged();
+        if(ch=="close"){
+            clear(role);
         }
+        else if(ch=="acc"){
+           apply(role);
+        }
+        else{
+            if(m_states[role]->add(ch)){
+              emit stateChanged();
+            }
+        }
+
+
     }
 }
 

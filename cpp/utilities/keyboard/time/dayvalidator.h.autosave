@@ -1,0 +1,11 @@
+#ifndef DAYVALIDATOR_H
+#define DAYVALIDATOR_H
+
+#include "../ikeyboardstate.h"
+class DayValidator:public IKeyboardState
+{
+public:
+    DayValidator();
+};
+
+#endif // DAYVALIDATOR_H

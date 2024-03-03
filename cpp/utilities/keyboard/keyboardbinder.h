@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QMap>
+#include <QDebug>
 #include <QList>
 #include "ikeyboardstate.h"
 #include "keyboardconsumer.h"
@@ -15,8 +16,13 @@ private:
 public:
     explicit KeyboardBinder(QObject *parent = nullptr);
     enum Roles{
-        Password=1
+        Minute=1,
+        Hour=2,
+        Day=3,
+        Month=4,
+        Year=5
     };
+    Q_ENUM(Roles)
     void addConsumer(int role,KeyboardConsumer* consumer);
     void addState(int role, IKeyboardState* state);
 

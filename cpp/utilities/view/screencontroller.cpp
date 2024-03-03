@@ -25,6 +25,7 @@ ScreenController::ScreenController(HeaderBarModel *headerModel,
 
 void ScreenController::goToScreen(int screen)
 {
+
     setupHeader(screen);
     m_viewModel->setCurrentScreen(screen);
 }
