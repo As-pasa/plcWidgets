@@ -11,8 +11,10 @@ void MinuteConsumer::consume(QString st)
     int a = st.toInt(&isNum);
     if(isNum){
         QDateTime cur=model->currentTime();
-        int hour=cur.time.hour();
-        QTime tme= QTime(cur.time.hour(),a,cur.time().second());
+        int hour,minute,second;
+        hour=cur.time().hour();
+        second=cur.time().second();
+        QTime tme= QTime(hour,a,second);
 
         if(tme.isValid()){
             model->setCurrentTime(QDateTime(cur.date(),tme));
@@ -30,11 +32,11 @@ void HourConsumer::consume(QString st)
     bool isNum;
     int a = st.toInt(&isNum);
     if(isNum){
-        QDateTime cur=model->currentTime();
+        QDateTime cur=m_model->currentTime();
 
-        QTime tme= QTime(a,cur.time.minute(),cur.time().second());
+        QTime tme= QTime(a,cur.time().minute(),cur.time().second());
         if(tme.isValid()){
-            model->setCurrentTime(QDateTime(cur.date(),tme));
+            m_model->setCurrentTime(QDateTime(cur.date(),tme));
         }
     }
 }
@@ -60,11 +62,11 @@ void MonthConsumer::consume(QString st)
     bool isNum;
     int a = st.toInt(&isNum);
     if(isNum){
-        QDateTime cur=model->currentTime();
+        QDateTime cur = m_model->currentTime();
 
-        QDate dte = QDate(cur.date.year(),a,cur.date.day());
+        QDate dte = QDate(cur.date().year(),a,cur.date().day());
         if(dte.isValid()){
-            model->setCurrentTime(QDateTime(dte,cur.time));
+            m_model->setCurrentTime(QDateTime(dte,cur.time()));
         }
     }
 }
@@ -81,11 +83,11 @@ void YearConsumer::consume(QString st)
     bool isNum;
     int a = st.toInt(&isNum);
     if(isNum){
-        QDateTime cur=model->currentTime();
+        QDateTime cur=m_model->currentTime();
 
-        QDate dte = QDate(a,cur.date.month(),cur.date.day());
+        QDate dte = QDate(a,cur.date().month(),cur.date().day());
         if(dte.isValid()){
-            model->setCurrentTime(QDateTime(dte,cur.time));
+            m_model->setCurrentTime(QDateTime(dte,cur.time()));
         }
     }
 }
