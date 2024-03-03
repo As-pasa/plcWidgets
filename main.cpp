@@ -34,16 +34,18 @@
 #include <QDebug>
 #include <QTranslator>
 #include <QDir>
-
+#include "cpp/utilities/keyboard/time/keybinderroles.h"
 #include "cpp/utilities/keyboard/time/daykeyboardstate.h"
 #include "cpp/utilities/keyboard/time/hourkeyboardstate.h"
 #include "cpp/utilities/keyboard/time/minutekeyboardstate.h"
 #include "cpp/utilities/keyboard/time/monthkeyboardstate.h"
 #include "cpp/utilities/keyboard/time/yearkeyboardstate.h"
 #include "cpp/utilities/keyboard/time/consumers/ITimeConsumer.h"
-
+#include <QDateTime>
 int main(int argc, char *argv[])
 {
+
+
 
     qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
 
@@ -72,21 +74,21 @@ int main(int argc, char *argv[])
     HeaderBarModel header;
     ScreenView screens;
     ScreenController screenController(&header,&screens,&passwordModel,displayer);
-    KeyboardBinder keyboardBinder;
-    keyboardBinder.addState(KeyboardBinder::Roles::Day,new DayKeyboardState(&model));
-    keyboardBinder.addConsumer(KeyboardBinder::Roles::Day,new DayConsumer(&model));
+    KeyboardBinder keyboardBinder(&screenController);
+    keyboardBinder.addState(KeyBinderRoles::TimeRoles::Day,new DayKeyboardState(&model));
+    keyboardBinder.addConsumer(KeyBinderRoles::TimeRoles::Day,new DayConsumer(&model));
 
-    keyboardBinder.addState(KeyboardBinder::Roles::Month,new MonthKeyboardState(&model));
-    keyboardBinder.addConsumer(KeyboardBinder::Roles::Month,new MonthConsumer(&model));
+    keyboardBinder.addState(KeyBinderRoles::TimeRoles::Month,new MonthKeyboardState(&model));
+    keyboardBinder.addConsumer(KeyBinderRoles::TimeRoles::Month,new MonthConsumer(&model));
 
-    keyboardBinder.addState(KeyboardBinder::Roles::Year,new YearKeyboardState(&model));
-    keyboardBinder.addConsumer(KeyboardBinder::Roles::Year,new YearConsumer(&model));
+    keyboardBinder.addState(KeyBinderRoles::TimeRoles::Year,new YearKeyboardState(&model));
+    keyboardBinder.addConsumer(KeyBinderRoles::TimeRoles::Year,new YearConsumer(&model));
 
-    keyboardBinder.addState(KeyboardBinder::Roles::Minute,new MinuteKeyboardState());
-    keyboardBinder.addConsumer(KeyboardBinder::Roles::Minute,new MinuteConsumer(&model));
+    keyboardBinder.addState(KeyBinderRoles::TimeRoles::Minute,new MinuteKeyboardState());
+    keyboardBinder.addConsumer(KeyBinderRoles::TimeRoles::Minute,new MinuteConsumer(&model));
 
-    keyboardBinder.addState(KeyboardBinder::Roles::Hour,new HourKeyboardState());
-    keyboardBinder.addConsumer(KeyboardBinder::Roles::Hour,new HourConsumer(&model));
+    keyboardBinder.addState(KeyBinderRoles::TimeRoles::Hour,new HourKeyboardState());
+    keyboardBinder.addConsumer(KeyBinderRoles::TimeRoles::Hour,new HourConsumer(&model));
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
@@ -97,7 +99,7 @@ int main(int argc, char *argv[])
 
     qmlRegisterType<ScreenView>("ScreenService",1,0,"Screens");
     qmlRegisterType<HeaderBarModel>("HeaderService",1,0,"Header");
-    qmlRegisterType<KeyboardBinder>("KeyboardService",1,0,"KeyRole");
+    qmlRegisterType<KeyBinderRoles>("KeyboardService",1,0,"KeyRole");
     QQmlContext* root=engine.rootContext();
     root->setContextProperty("timeModel",&model);
     root->setContextProperty("devInfo",&devInfo);

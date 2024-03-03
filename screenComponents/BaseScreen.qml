@@ -17,7 +17,7 @@ Item{
         anchors.right: parent.right
         anchors.top: parent.top
         anchors.margins: 5
-        state: Header.Opened
+        state: barModel.BarState
 
     }
     Loader{

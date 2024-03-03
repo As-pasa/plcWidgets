@@ -3,6 +3,7 @@
 void ScreenController::setupHeader(int screen)
 {
     if(ClosedHeaderStates.keys().contains(screen)){
+
         m_headerModel->setState(ClosedHeaderStates[screen]);
     }
     else{
@@ -26,6 +27,7 @@ ScreenController::ScreenController(HeaderBarModel *headerModel,
 void ScreenController::goToScreen(int screen)
 {
 
+    qDebug()<<"screen:"<<screen;
     setupHeader(screen);
     m_viewModel->setCurrentScreen(screen);
 }
@@ -52,7 +54,13 @@ void ScreenController::showInfoWithText(QString text)
     m_messager->showMessage(text);
 }
 
+
+
 const QMap<int,int> ScreenController::ClosedHeaderStates={
-  {ScreenView::KeyboardMenu, HeaderBarModel::Closed},
+  {ScreenView::DayInput, HeaderBarModel::Closed},
+    {ScreenView::MonthInput, HeaderBarModel::Closed},
+  {ScreenView::YearInput, HeaderBarModel::Closed},
+  {ScreenView::MinuteInput, HeaderBarModel::Closed},
+  {ScreenView::HourInput, HeaderBarModel::Closed},
   {ScreenView::PasswordMenu,HeaderBarModel::Password}
 };

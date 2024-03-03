@@ -7,6 +7,7 @@
 #include "screenview.h"
 #include "cpp/passwordModel/passwordmodel.h"
 #include "cpp/utilities/messagedisplayer.h"
+#include "cpp/utilities/messagedisplayer.h"
 class ScreenController : public QObject
 {
     Q_OBJECT

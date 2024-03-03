@@ -46,6 +46,7 @@ SOURCES += \
     cpp/utilities/keyboard/time/consumers/ITimeConsumer.cpp \
     cpp/utilities/keyboard/time/daykeyboardstate.cpp \
     cpp/utilities/keyboard/time/hourkeyboardstate.cpp \
+    cpp/utilities/keyboard/time/keybinderroles.cpp \
     cpp/utilities/keyboard/time/minutekeyboardstate.cpp \
     cpp/utilities/keyboard/time/monthkeyboardstate.cpp \
     cpp/utilities/keyboard/time/yearkeyboardstate.cpp \
@@ -118,6 +119,7 @@ HEADERS += \
     cpp/utilities/keyboard/time/consumers/ITimeConsumer.h \
     cpp/utilities/keyboard/time/daykeyboardstate.h \
     cpp/utilities/keyboard/time/hourkeyboardstate.h \
+    cpp/utilities/keyboard/time/keybinderroles.h \
     cpp/utilities/keyboard/time/minutekeyboardstate.h \
     cpp/utilities/keyboard/time/monthkeyboardstate.h \
     cpp/utilities/keyboard/time/yearkeyboardstate.h \

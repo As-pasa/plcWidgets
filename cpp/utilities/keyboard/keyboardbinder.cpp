@@ -1,8 +1,10 @@
 #include "keyboardbinder.h"
 
-KeyboardBinder::KeyboardBinder(QObject *parent) : QObject(parent)
-{
 
+
+KeyboardBinder::KeyboardBinder(ScreenController* controller, QObject *parent)
+{
+    m_controller=controller;
 }
 
 void KeyboardBinder::addConsumer(int role, KeyboardConsumer *consumer)
@@ -31,9 +33,11 @@ void KeyboardBinder::process(int role,QString ch)
     if(m_states.contains(role)){
         if(ch=="close"){
             clear(role);
+            m_controller->prevScreen();
         }
         else if(ch=="acc"){
            apply(role);
+           m_controller->prevScreen();
         }
         else{
             if(m_states[role]->add(ch)){

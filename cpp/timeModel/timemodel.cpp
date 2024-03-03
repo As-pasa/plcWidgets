@@ -16,6 +16,7 @@ TimeModel::TimeModel(ITimeSystem *system)
 }
 
 QDateTime TimeModel::currentTime(){
+
     return m_currentDT;
 };
 void TimeModel::setCurrentTime(QDateTime nTime){
@@ -41,7 +42,6 @@ void TimeModel::setCurrentTime(QDateTime nTime){
         TimeChangePackage p(nTime.time(),nTime.date(),"",true,true,false);
         MyLogger::log("timeModel","time package constructed."+nTime.time().toString()+" "+nTime.date().toString());
         m_system->setTime(p);
-
         m_currentDT=m_system->getCurrentTime();
         MyLogger::log("timeModel","current time setted."+m_currentDT.toString());
         emit currentTimeChanged(nTime);
@@ -84,7 +84,7 @@ void TimeModel::setCurrentTimeZone(QString n)
 };
 
 bool TimeModel::NIPStatus(){
-
+    qDebug()<<"NTP: "<<m_NipStatus;
     return m_NipStatus;
 };
 void TimeModel::setNIPStatus(bool status){
@@ -101,6 +101,7 @@ void TimeModel::setNIPStatus(bool status){
 };
 
 bool TimeModel::ATZStatus(){
+
     return m_ATZStatus;
 
 };

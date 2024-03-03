@@ -11,7 +11,6 @@ import "../widgets"
 HeaderBase {
     height:50
     id: headerState
-    state:barModel.BarState
     states:[
         State{
             name:barModel.getStateName(Header.Closed)

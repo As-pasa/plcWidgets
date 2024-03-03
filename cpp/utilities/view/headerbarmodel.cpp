@@ -7,6 +7,7 @@ HeaderBarModel::HeaderBarModel(QObject *parent) : QObject(parent)
 
 void HeaderBarModel::setState(int state)
 {
+
        m_currentState=state;
        emit BarStateChanged(getCurrentState());
 }

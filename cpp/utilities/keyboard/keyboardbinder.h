@@ -7,22 +7,16 @@
 #include <QList>
 #include "ikeyboardstate.h"
 #include "keyboardconsumer.h"
+#include "../view/screencontroller.h"
 class KeyboardBinder : public QObject
 {
     Q_OBJECT
 private:
     QMap<int,IKeyboardState*> m_states;
     QMap<int,QList<KeyboardConsumer*>> m_consumers;
+    ScreenController* m_controller;
 public:
-    explicit KeyboardBinder(QObject *parent = nullptr);
-    enum Roles{
-        Minute=1,
-        Hour=2,
-        Day=3,
-        Month=4,
-        Year=5
-    };
-    Q_ENUM(Roles)
+    explicit KeyboardBinder(ScreenController* controller,  QObject *parent = nullptr);
     void addConsumer(int role,KeyboardConsumer* consumer);
     void addState(int role, IKeyboardState* state);
 

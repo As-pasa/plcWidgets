@@ -4,8 +4,12 @@ import QtQuick.Layouts 1.3
 BaseBtn{
     id:textBtn
     property string text:"click"
+    property int fontBig:wrapped.fontBig
+    property int fontSmall:wrapped.fontSmall
+    property int fontSize: fontBig
     BaseText{
-        fontSize: fontBig
+        id:wrapped
+        fontSize: textBtn.fontSize
         anchors.fill: parent
         text:textBtn.text
     }

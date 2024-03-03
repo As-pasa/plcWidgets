@@ -38,12 +38,9 @@ public:
     bool ATZStatus();
 
 
-    void setNIPStatus(bool);
 
 
-    void setATZStatus(bool status);
 
-    QString currentTimeZone();
     void setCurrentTimeZone(QString);
 
 signals:
@@ -54,9 +51,14 @@ signals:
     void currentTimeZoneChanged(QString);
 
 public slots:
+    QString currentTimeZone();
     void installCurrentTimeZoneAsSystem();
     void setCurrentTime(QDateTime);
     void setTimeZone(QString);
+    void setNIPStatus(bool);
+
+
+    void setATZStatus(bool status);
 };
 
 #endif // TIMEMODEL_H

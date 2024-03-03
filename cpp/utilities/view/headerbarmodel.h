@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QMap>
+#include <QtDebug>
 class HeaderBarModel : public QObject
 {
     Q_OBJECT

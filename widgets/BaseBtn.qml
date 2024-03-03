@@ -6,7 +6,8 @@ BaseRect{
     property color normalColor: "#35359c"//"#021030"
     property color clickColor:Qt.lighter(normalColor)
     signal clicked()
-
+    Layout.fillHeight: true
+    Layout.fillWidth: true
     color:clicker.containsPress?  clickColor:normalColor
     MouseArea{
         anchors.fill: parent

@@ -15,7 +15,7 @@ const QMap<int,ScreenView::ScreenInfo> ScreenView::ScreenToInfo={
     {ScreenView::WifiMenu,{"Wifi Configuration Menu","Wifi",""}},
     {ScreenView::NetInterfaceMenu,{"Network Interface Selection Menu","Net",""}},
     {ScreenView::PingMenu,{"Ping Menu","Ping",""}},
-    {ScreenView::DisplayMenu,{"Display Menu","Display",""}},
+    {ScreenView::DisplayMenu,{"Display Menu","Brightness",""}},
     {ScreenView::PasswordMenu,{"Password Menu","Password",""}},
     {ScreenView::PasswordRecovery,{"Password Recovery Menu","Recovery",""}},
     {ScreenView::AppMessager,{"Application info menu","Info",""}},
@@ -23,7 +23,9 @@ const QMap<int,ScreenView::ScreenInfo> ScreenView::ScreenToInfo={
     {ScreenView::MonthInput,{"Month input menu","Month",""}},
     {ScreenView::YearInput,{"Year input menu","Year",""}},
     {ScreenView::MinuteInput,{"Minute input menu","Minute",""}},
-    {ScreenView::HourInput,{"Hour input menu","Hour",""}}
+    {ScreenView::HourInput,{"Hour input menu","Hour",""}},
+    {ScreenView::TimeZoneInput,{"Time zone input","Time zone",""}},
+    {ScreenView::NetInterfaceEditor,{"Interface editor","interface setup",""}}
 };
 
 

@@ -70,5 +70,8 @@
         <file>QmlKeyboard/KeyboardInputProcessor.qml</file>
         <file>QmlKeyboard/KeyRow.qml</file>
         <file>QmlKeyboard/IntKeyboardScreen.qml</file>
+        <file>widgets/InputBtn.qml</file>
+        <file>screenComponents/DateScreen.qml</file>
+        <file>widgets/PageBasedSelector.qml</file>
     </qresource>
 </RCC>

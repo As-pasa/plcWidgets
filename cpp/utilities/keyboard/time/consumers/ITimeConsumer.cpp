@@ -11,13 +11,14 @@ void MinuteConsumer::consume(QString st)
     int a = st.toInt(&isNum);
     if(isNum){
         QDateTime cur=model->currentTime();
-        int hour,minute,second;
+        int hour,second;
         hour=cur.time().hour();
         second=cur.time().second();
         QTime tme= QTime(hour,a,second);
 
         if(tme.isValid()){
-            model->setCurrentTime(QDateTime(cur.date(),tme));
+            auto aa=QDateTime(cur.date(),tme);
+            model->setCurrentTime(aa);
         }
     }
 }
