@@ -8,6 +8,7 @@
 #include "ikeyboardstate.h"
 #include "keyboardconsumer.h"
 #include "../view/screencontroller.h"
+#include "../keyboard/time/keybinderroles.h"
 class KeyboardBinder : public QObject
 {
     Q_OBJECT

@@ -46,6 +46,8 @@ SOURCES += \
     cpp/utilities/keyboard/network/ipconsumers.cpp \
     cpp/utilities/keyboard/network/ipkeyboardstate.cpp \
     cpp/utilities/keyboard/network/netinterfaceinputstate.cpp \
+    cpp/utilities/keyboard/password/gatewaypasswordconsumer.cpp \
+    cpp/utilities/keyboard/password/passwordstate.cpp \
     cpp/utilities/keyboard/time/consumers/ITimeConsumer.cpp \
     cpp/utilities/keyboard/time/daykeyboardstate.cpp \
     cpp/utilities/keyboard/time/hourkeyboardstate.cpp \
@@ -122,6 +124,8 @@ HEADERS += \
     cpp/utilities/keyboard/network/ipconsumers.h \
     cpp/utilities/keyboard/network/ipkeyboardstate.h \
     cpp/utilities/keyboard/network/netinterfaceinputstate.h \
+    cpp/utilities/keyboard/password/gatewaypasswordconsumer.h \
+    cpp/utilities/keyboard/password/passwordstate.h \
     cpp/utilities/keyboard/time/consumers/ITimeConsumer.h \
     cpp/utilities/keyboard/time/daykeyboardstate.h \
     cpp/utilities/keyboard/time/hourkeyboardstate.h \

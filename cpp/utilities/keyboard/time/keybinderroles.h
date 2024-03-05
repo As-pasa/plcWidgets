@@ -16,12 +16,16 @@ public:
         Year=5
     };
     enum InterfaceRoles{
-        Ip,
-        Mask,
-        Gate
+        Ip=6,
+        Mask=7,
+        Gate=8
     };
-    Q_ENUM(InterfaceRoles)
+    enum PasswordRoles{
+        Password=9
+    };
 
+    Q_ENUM(InterfaceRoles)
+    Q_ENUM(PasswordRoles)
     Q_ENUM(TimeRoles)
 signals:
 

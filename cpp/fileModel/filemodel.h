@@ -14,7 +14,8 @@ class FileModel : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QStringList detectedDevices READ detectedDevices NOTIFY detectedDevicesChanged)
-
+    Q_PROPERTY(QString selectedDevice READ selectedDevice NOTIFY selectedDeviceChanged)
+    Q_PROPERTY(QStringList detectedFiles READ detectedFiles NOTIFY detectedFilesChanged)
 public:
     explicit FileModel(MessageDisplayer* displayer,CommandConfirmator* confirmator, IFileSystem *sys,QString innerFileDir, QObject *parent = nullptr);
 
@@ -24,9 +25,10 @@ private:
     IFileSystem* m_system;
     QString m_localCodesys;
     QStringList detectedDevices();
+    QStringList detectedFiles();
     MessageDisplayer* m_displayer;
     CommandConfirmator* m_confirmator;
-
+    QString m_selectedDevice;
     class ImportConfirm:public Confirmable{
         // Confirmable interface
         private:
@@ -47,9 +49,12 @@ public slots:
     void copyFrom(QString device, QString saveName);
     void innerCopyFrom(QString device,QString saveName);
     QStringList getfoldersInDevice(QString device);
+    QString selectedDevice();
+    void setSelectedDevice(QString);
 signals:
     void detectedDevicesChanged(QStringList);
-
+    void selectedDeviceChanged(QString);
+    void detectedFilesChanged(QStringList);
 };
 
 

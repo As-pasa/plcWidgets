@@ -30,8 +30,9 @@ const QMap<int,ScreenView::ScreenInfo> ScreenView::ScreenToInfo={
 
     {ScreenView::IpInput,{"Ip input","Ip input",""}},
     {ScreenView::MaskInput,{"Mask input","Mask input",""}},
-    {ScreenView::GateInput,{"Gate input","Gate input",""}}
-
+    {ScreenView::GateInput,{"Gate input","Gate input",""}},
+    {ScreenView::PasswordInput,{"Password input","Password input",""}},
+    {ScreenView::ImportDeviceSelection,{"Device selection screen","Device selection",""}}
 };
 //IpInput=28,
 //MaskInput=29,
@@ -91,7 +92,6 @@ void ScreenView::setCurrentScreen(int n)
 {
     m_screenHistory.push(currentScreen);
     currentScreen=n;
-    qDebug()<<getScreen(currentScreen);
     emit currentScreenChanged(getScreen(currentScreen));
     emit ScreenShortNameChanged(ScreenToInfo[currentScreen].shortName);
 }

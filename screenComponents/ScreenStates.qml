@@ -11,7 +11,7 @@ import "../screenComponents"
 import "../QmlKeyboard"
 
 BaseScreen{
-
+    onStateChanged:(a)=> console.log("SCREEN CHANGED:"+a)
     states:[
         State{
             name: {
@@ -176,6 +176,21 @@ BaseScreen{
                 target:main
                 sourceComponent:gateKeyboardScreen
             }
+        },
+        State{
+            name:screenView.getScreen(Screens.PasswordInput)
+            PropertyChanges{
+                target:main
+                sourceComponent:passwordInputScreen
+            }
+        },
+        State{
+            name:screenView.getScreen(Screens.ImportDeviceSelection)
+            PropertyChanges{
+                target:main
+                sourceComponent:importDeviceSelectionScreen
+
+            }
         }
 
 
@@ -240,7 +255,7 @@ BaseScreen{
             lft.source:"qrc:/icons2/Network_02.png"
             rgt.source:"qrc:/icons2/Files_02.png"
 
-            lft.onClicked:{console.log("foo")}
+            lft.onClicked:screenController.goToScreen(Screens.ImportDeviceSelection)
 
             rgt.onClicked:{console.log("foo")}
         }
@@ -551,6 +566,19 @@ BaseScreen{
         id:gateKeyboardScreen
         Ipv4Input {
             role:KeyRole.Gate
+        }
+    }
+    Component{
+        id:importDeviceSelectionScreen
+        PageBasedSelector{
+            model:fileModel.detectedDevices
+
+        }
+    }
+    Component{
+        id:passwordInputScreen
+        IntKeyboardScreen{
+            role:KeyRole.Password
         }
     }
 

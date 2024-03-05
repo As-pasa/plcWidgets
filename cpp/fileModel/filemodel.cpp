@@ -25,6 +25,14 @@ QStringList FileModel::detectedDevices()
     return ans;
 }
 
+QStringList FileModel::detectedFiles()
+{
+    auto a =getfoldersInDevice(m_selectedDevice);
+    emit detectedFilesChanged(a);
+    return a;
+
+}
+
 void FileModel::refreshDevices()
 {
     QStringList ans= detectedDevices();
@@ -114,6 +122,18 @@ QStringList FileModel::getfoldersInDevice(QString device)
         }
     }
     return QStringList();
+}
+
+QString FileModel::selectedDevice()
+{
+    return m_selectedDevice;
+}
+
+void FileModel::setSelectedDevice(QString a)
+{
+    m_selectedDevice=a;
+    emit selectedDeviceChanged(m_selectedDevice);
+
 }
 
 

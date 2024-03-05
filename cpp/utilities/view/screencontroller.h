@@ -13,6 +13,10 @@ class ScreenController : public QObject
 {
     Q_OBJECT
 private:
+    int gatewayTarget;
+    static const QList<int> securedScreens;
+
+private:
     HeaderBarModel* m_headerModel;
     ScreenView* m_viewModel;
     MessageDisplayer* m_messager;
@@ -30,6 +34,8 @@ public:
 public slots:
     void goToScreen(int screen);
     void prevScreen();
+    void openTheGate();
+    void startGateValidation(int to);
     void submitPassword(QString password);
     void showInfoWithText(QString text);
     void openNetInterfaceEditMenu(QString netInterfaceName,QString startIp, QString startMask, QString startGate);

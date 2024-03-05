@@ -37,7 +37,11 @@ void KeyboardBinder::process(int role,QString ch)
         }
         else if(ch=="acc"){
            if(apply(role)){
-             m_controller->prevScreen();
+               clear(role);
+               if(role!=KeyBinderRoles::Password){
+                    m_controller->prevScreen();
+               }
+
            }
            else{
                m_controller->showInfoWithText("Wrong input value:\n"+ m_states[role]->getState());

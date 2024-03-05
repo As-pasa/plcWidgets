@@ -45,6 +45,9 @@
 #include "cpp/utilities/keyboard/network/netinterfaceinputstate.h"
 #include "cpp/utilities/keyboard/network/ipkeyboardstate.h"
 #include "cpp/utilities/keyboard/network/ipconsumers.h"
+
+#include "cpp/utilities/keyboard/password/gatewaypasswordconsumer.h"
+#include "cpp/utilities/keyboard/password/passwordstate.h"
 #include <QDateTime>
 #include <QRegularExpression>
 int main(int argc, char *argv[])
@@ -106,6 +109,10 @@ int main(int argc, char *argv[])
     keyboardBinder.addConsumer(KeyBinderRoles::InterfaceRoles::Ip,new IpConsumer(interfaceInputState));
     keyboardBinder.addConsumer(KeyBinderRoles::InterfaceRoles::Mask,new MaskConsumer(interfaceInputState));
     keyboardBinder.addConsumer(KeyBinderRoles::InterfaceRoles::Gate,new GateConsumer(interfaceInputState));
+
+    keyboardBinder.addState(KeyBinderRoles::PasswordRoles::Password,new PasswordState(&passwordModel));
+
+    keyboardBinder.addConsumer(KeyBinderRoles::PasswordRoles::Password,new GatewayPasswordConsumer(&screenController));
 
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));

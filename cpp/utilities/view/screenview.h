@@ -41,7 +41,9 @@ public:
         NetInterfaceEdit=27,
         IpInput=28,
         MaskInput=29,
-        GateInput=30
+        GateInput=30,
+        PasswordInput=31,
+        ImportDeviceSelection=32
 
 
     };
