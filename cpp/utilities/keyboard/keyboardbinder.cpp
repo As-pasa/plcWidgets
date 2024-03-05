@@ -36,8 +36,13 @@ void KeyboardBinder::process(int role,QString ch)
             m_controller->prevScreen();
         }
         else if(ch=="acc"){
-           apply(role);
-           m_controller->prevScreen();
+           if(apply(role)){
+             m_controller->prevScreen();
+           }
+           else{
+               m_controller->showInfoWithText("Wrong input value:\n"+ m_states[role]->getState());
+           }
+
         }
         else{
             if(m_states[role]->add(ch)){
@@ -65,11 +70,17 @@ QString KeyboardBinder::getState(int role)
     return "ERROR";
 }
 
-void KeyboardBinder::apply(int role)
+bool KeyboardBinder::apply(int role)
 {
     if(m_consumers.contains(role) && m_states.contains(role)){
-        foreach(KeyboardConsumer* cons,m_consumers[role]){
-            cons->consume(m_states[role]->getState());
+        if(m_states[role]->validate(m_states[role]->getState())){
+            foreach(KeyboardConsumer* cons,m_consumers[role]){
+                cons->consume(m_states[role]->getState());
+            }
+        }
+        else{
+            return false;
         }
     }
+    return true;
 }

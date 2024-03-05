@@ -27,10 +27,9 @@ bool IKeyboardState::add(QString ch)
     }
     else{
 
-        if(validate(m_state+ch)){
+
             m_state+=ch;
             return true;
-        }
     }
     return false;
 

@@ -43,6 +43,9 @@ SOURCES += \
     cpp/utilities/keyboard/keyboardStateImpl.cpp \
     cpp/utilities/keyboard/keyboardbinder.cpp \
     cpp/utilities/keyboard/keyboardconsumer.cpp \
+    cpp/utilities/keyboard/network/ipconsumers.cpp \
+    cpp/utilities/keyboard/network/ipkeyboardstate.cpp \
+    cpp/utilities/keyboard/network/netinterfaceinputstate.cpp \
     cpp/utilities/keyboard/time/consumers/ITimeConsumer.cpp \
     cpp/utilities/keyboard/time/daykeyboardstate.cpp \
     cpp/utilities/keyboard/time/hourkeyboardstate.cpp \
@@ -116,6 +119,9 @@ HEADERS += \
     cpp/utilities/keyboard/keyboardStateImpl.h \
     cpp/utilities/keyboard/keyboardbinder.h \
     cpp/utilities/keyboard/keyboardconsumer.h \
+    cpp/utilities/keyboard/network/ipconsumers.h \
+    cpp/utilities/keyboard/network/ipkeyboardstate.h \
+    cpp/utilities/keyboard/network/netinterfaceinputstate.h \
     cpp/utilities/keyboard/time/consumers/ITimeConsumer.h \
     cpp/utilities/keyboard/time/daykeyboardstate.h \
     cpp/utilities/keyboard/time/hourkeyboardstate.h \

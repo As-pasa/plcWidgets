@@ -143,10 +143,38 @@ BaseScreen{
 
         },
         State{
-            name:screenView.getScreen(Screens.NetInterfaceEditor)
+            name:screenView.getScreen(Screens.NetInterfaceView)
+            PropertyChanges{
+                target:main
+                sourceComponent:interfaceView
+            }
+        },
+        State{
+            name:screenView.getScreen(Screens.NetInterfaceEdit)
             PropertyChanges{
                 target:main
                 sourceComponent:interfaceEditor
+            }
+        },
+        State{
+            name:screenView.getScreen(Screens.IpInput)
+            PropertyChanges{
+                target:main
+                sourceComponent:ipKeyboardScreen
+            }
+        },
+        State{
+            name:screenView.getScreen(Screens.MaskInput)
+            PropertyChanges{
+                target:main
+                sourceComponent:maskKeyboardScreen
+            }
+        },
+        State{
+            name:screenView.getScreen(Screens.GateInput)
+            PropertyChanges{
+                target:main
+                sourceComponent:gateKeyboardScreen
             }
         }
 
@@ -367,13 +395,19 @@ BaseScreen{
     Component{
         id:interfaceSelector
         PageBasedSelector{
-            model:"1 2 3 4 5 6 7 8 9".split(" ")
-            onTriggered: (a)=>screenController.goToScreen(Screens.NetInterfaceEditor)
+
+            model:netModel.declaredInterfaces
+            onTriggered: (a)=>{
+                             netModel.setCurrentSelectedInterface(a)
+                             screenController.goToScreen(Screens.NetInterfaceView)
+                            }
         }
     }
     Component{
-        id:interfaceEditor
+        id:interfaceView
         Item{
+            id:interfaceRoot
+            property string currentInterfaceName:netModel.currentSelectedInterface
             RowLayout{
                 anchors.fill:parent
                 BaseRect{
@@ -381,26 +415,36 @@ BaseScreen{
                     Layout.fillWidth: true
                     ColumnLayout{
                         anchors.fill: parent
-                        InputBtn{
+                        BaseText{
                             Layout.fillHeight: true
                             fontSize: fontSmall
                             Layout.fillWidth: true
-                            text:"ip: 123.123.123.123"
-                            btnEnabled: !dhcp.dhcpStatus
+                            text:"ip:"+netModel.fromName(currentInterfaceName).ip
+
                         }
-                        InputBtn{
+                        BaseText{
                             Layout.fillHeight: true
                             Layout.fillWidth: true
                             fontSize: fontSmall
-                            btnEnabled: !dhcp.dhcpStatus
-                            text:"mask: 255.255.255.255"
+                            text:"mask:"+netModel.fromName(currentInterfaceName).mask
                         }
-                        InputBtn{
-                            btnEnabled: !dhcp.dhcpStatus
+                        BaseText{
+
                             fontSize: fontSmall
                             Layout.fillHeight: true
                             Layout.fillWidth: true
-                            text:"gate: 123.543.435.123"
+                            text:"gate:"+netModel.fromName(currentInterfaceName).gate
+                        }
+                        TextBtn{
+                            text:"manual setup"
+                            visible:!dhcp.dhcpStatus
+                            enabled:!dhcp.dhcpStatus
+                            onClicked: screenController.openNetInterfaceEditMenu(
+                                           interfaceRoot.currentInterfaceName,
+                                           netModel.fromName(interfaceRoot.currentInterfaceName).ip,
+                                           netModel.fromName(interfaceRoot.currentInterfaceName).mask,
+                                           netModel.fromName(interfaceRoot.currentInterfaceName).gate,
+                                           )
                         }
                     }
                 }
@@ -438,13 +482,78 @@ BaseScreen{
                                         "Turn on"
                                     }
                                 }
-                                onClicked:console.log("foo")
+                                onClicked:dhcp.dhcpStatus=!dhcp.dhcpStatus
 
                             }
+
                         }
                     }
                 }
             }
         }
     }
+    Component{
+        id:interfaceEditor
+        Item{
+            RowLayout{
+                anchors.fill: parent
+                Item{
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    ColumnLayout{
+                        anchors.fill: parent
+                        InputBtn{
+                            text:"ip:"+interfaceInput.ip
+                            Layout.fillHeight: true
+                            Layout.fillWidth: true
+
+                            inputScreenState: Screens.IpInput
+                        }
+                        InputBtn{
+                            text:"mask:"+interfaceInput.mask
+                            Layout.fillHeight: true
+                            Layout.fillWidth: true
+
+                            inputScreenState: Screens.MaskInput
+                        }
+                        InputBtn{
+                            text:"gate:"+interfaceInput.gate
+                            Layout.fillHeight: true
+                            Layout.fillWidth: true
+
+                            inputScreenState: Screens.GateInput
+                        }
+                    }
+                }
+
+                TextBtn{
+                    Layout.fillWidth: false
+                    Layout.preferredWidth: 100
+                    text:"accept"
+                    onClicked:interfaceInput.accept()
+                }
+            }
+        }
+    }
+    Component{
+        id:ipKeyboardScreen
+        Ipv4Input {
+            role:KeyRole.Ip
+        }
+    }
+    Component{
+        id:maskKeyboardScreen
+        Ipv4Input {
+            role:KeyRole.Mask
+        }
+    }
+    Component{
+        id:gateKeyboardScreen
+        Ipv4Input {
+            role:KeyRole.Gate
+        }
+    }
+
+
+
 }

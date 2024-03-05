@@ -15,6 +15,13 @@ public:
         Month=4,
         Year=5
     };
+    enum InterfaceRoles{
+        Ip,
+        Mask,
+        Gate
+    };
+    Q_ENUM(InterfaceRoles)
+
     Q_ENUM(TimeRoles)
 signals:
 

@@ -25,9 +25,17 @@ const QMap<int,ScreenView::ScreenInfo> ScreenView::ScreenToInfo={
     {ScreenView::MinuteInput,{"Minute input menu","Minute",""}},
     {ScreenView::HourInput,{"Hour input menu","Hour",""}},
     {ScreenView::TimeZoneInput,{"Time zone input","Time zone",""}},
-    {ScreenView::NetInterfaceEditor,{"Interface editor","interface setup",""}}
-};
+    {ScreenView::NetInterfaceView,{"Interface view","interface view",""}},
+    {ScreenView::NetInterfaceEdit,{"Interface edit","interface edit",""}},
 
+    {ScreenView::IpInput,{"Ip input","Ip input",""}},
+    {ScreenView::MaskInput,{"Mask input","Mask input",""}},
+    {ScreenView::GateInput,{"Gate input","Gate input",""}}
+
+};
+//IpInput=28,
+//MaskInput=29,
+//GateInput=30
 
 
 ScreenView::ScreenView(QObject *parent) : QObject(parent)

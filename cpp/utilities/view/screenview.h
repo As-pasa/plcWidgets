@@ -37,7 +37,11 @@ public:
         MinuteInput=23,
         HourInput=24,
         TimeZoneInput=25,
-        NetInterfaceEditor=26
+        NetInterfaceView=26,
+        NetInterfaceEdit=27,
+        IpInput=28,
+        MaskInput=29,
+        GateInput=30
 
 
     };

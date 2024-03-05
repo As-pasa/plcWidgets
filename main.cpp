@@ -41,13 +41,20 @@
 #include "cpp/utilities/keyboard/time/monthkeyboardstate.h"
 #include "cpp/utilities/keyboard/time/yearkeyboardstate.h"
 #include "cpp/utilities/keyboard/time/consumers/ITimeConsumer.h"
+
+#include "cpp/utilities/keyboard/network/netinterfaceinputstate.h"
+#include "cpp/utilities/keyboard/network/ipkeyboardstate.h"
+#include "cpp/utilities/keyboard/network/ipconsumers.h"
 #include <QDateTime>
+#include <QRegularExpression>
 int main(int argc, char *argv[])
 {
 
 
 
     qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
+
+
 
 
     QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -60,6 +67,7 @@ int main(int argc, char *argv[])
     plcScreenSystem* screenSys=new plcScreenSystem();
     PlcFileSystem* fileSys=new PlcFileSystem();
     ScreenModel screenModel(screenSys,confirmator);
+
     FileModel fileModel(displayer,confirmator, fileSys,QString("/opt/codesys/"));
     PLCWifiSystem* wifiSystem=new PLCWifiSystem();
     plcPingSystem* pingSystem = new plcPingSystem();
@@ -68,12 +76,13 @@ int main(int argc, char *argv[])
     WifiModel wifiModel(wifiSystem);
     TimeModel model(s);
     NetModel netModel(nets);
+    NetInterfaceInputState* interfaceInputState=new NetInterfaceInputState(&netModel);
     DevInfoModel devInfo(&engine,devSystem);
     PingModel pingModel(displayer, pingSystem);
     PasswordModel passwordModel(passwordSystem);
     HeaderBarModel header;
     ScreenView screens;
-    ScreenController screenController(&header,&screens,&passwordModel,displayer);
+    ScreenController screenController(&header,&screens,&passwordModel,displayer,interfaceInputState);
     KeyboardBinder keyboardBinder(&screenController);
     keyboardBinder.addState(KeyBinderRoles::TimeRoles::Day,new DayKeyboardState(&model));
     keyboardBinder.addConsumer(KeyBinderRoles::TimeRoles::Day,new DayConsumer(&model));
@@ -89,6 +98,15 @@ int main(int argc, char *argv[])
 
     keyboardBinder.addState(KeyBinderRoles::TimeRoles::Hour,new HourKeyboardState());
     keyboardBinder.addConsumer(KeyBinderRoles::TimeRoles::Hour,new HourConsumer(&model));
+
+    keyboardBinder.addState(KeyBinderRoles::InterfaceRoles::Ip,new IpKeyboardState());
+    keyboardBinder.addState(KeyBinderRoles::InterfaceRoles::Mask,new IpKeyboardState());
+    keyboardBinder.addState(KeyBinderRoles::InterfaceRoles::Gate,new IpKeyboardState());
+
+    keyboardBinder.addConsumer(KeyBinderRoles::InterfaceRoles::Ip,new IpConsumer(interfaceInputState));
+    keyboardBinder.addConsumer(KeyBinderRoles::InterfaceRoles::Mask,new MaskConsumer(interfaceInputState));
+    keyboardBinder.addConsumer(KeyBinderRoles::InterfaceRoles::Gate,new GateConsumer(interfaceInputState));
+
 
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
@@ -115,6 +133,7 @@ int main(int argc, char *argv[])
     root->setContextProperty("barModel",&header);
     root->setContextProperty("screenController",&screenController);
     root->setContextProperty("keyBinder",&keyboardBinder);
+    root-> setContextProperty("interfaceInput",interfaceInputState);
     engine.load(url);
     screenController.goToScreen(ScreenView::TopMenu);
     return app.exec();

@@ -24,7 +24,7 @@ public slots:
     void process(int role,QString ch);
     void clear(int role);
     QString getState(int role);
-    void apply(int role);
+    bool apply(int role);
 signals:
     void stateChanged();
 };

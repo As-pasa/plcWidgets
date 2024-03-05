@@ -73,5 +73,6 @@
         <file>widgets/InputBtn.qml</file>
         <file>screenComponents/DateScreen.qml</file>
         <file>widgets/PageBasedSelector.qml</file>
+        <file>QmlKeyboard/Ipv4Input.qml</file>
     </qresource>
 </RCC>

@@ -6,22 +6,31 @@
 #include "debugnetsystem.h"
 #include "interfacecredential.h"
 #include "cpp/utilities/mylogger.h"
-
+#include <QMap>
 class NetModel : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(int declaredLength READ declaredLength NOTIFY declaredLengthChanged)
-    QList<InterfaceCredential> m_credentials;
+    Q_PROPERTY(QStringList declaredInterfaces READ declaredInterfaces NOTIFY declaredInterfacesChanged)
+    QMap<QString,InterfaceCredential> m_credentials;
+    Q_PROPERTY(QString currentSelectedInterface READ getCurrentSelectedInterface NOTIFY currentSelectedInterfaceChanged)
     INetSystem * m_system;
+private:
+    QString currentSelectedInterface;
 public:
     explicit NetModel(INetSystem* sys, QObject *parent = nullptr);
     int declaredLength();
 public slots:
     void refresh();
-    QVariant fromId(int);
+    QVariant fromName(QString name);
     void setInterface(QString, QString, QString, QString, bool );
+    QStringList declaredInterfaces();
+    QString getCurrentSelectedInterface();
+    void setCurrentSelectedInterface(QString);
 signals:
+    void declaredInterfacesChanged();
     void declaredLengthChanged(int);
+    void currentSelectedInterfaceChanged(QString);
 
 };
 
