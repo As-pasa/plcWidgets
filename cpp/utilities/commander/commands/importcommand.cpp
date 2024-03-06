@@ -17,7 +17,7 @@ void ImportCommand::consume(IKeyboardState *st)
     else{
         m_model->copyFrom(m_model->selectedDevice(),m_path);
         m_controller->prevScreen();
-        m_controller->showInfoWithText("successfully importing");
+        m_controller->showInfoWithText("successfully importing from: \n"+m_path);
         m_binder->removeListeners(m_role);
         delete this;
     }

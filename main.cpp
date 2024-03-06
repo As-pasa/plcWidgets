@@ -41,11 +41,9 @@
 #include "cpp/utilities/keyboard/time/monthkeyboardstate.h"
 #include "cpp/utilities/keyboard/time/yearkeyboardstate.h"
 #include "cpp/utilities/keyboard/time/consumers/ITimeConsumer.h"
-
 #include "cpp/utilities/keyboard/network/netinterfaceinputstate.h"
 #include "cpp/utilities/keyboard/network/ipkeyboardstate.h"
 #include "cpp/utilities/keyboard/network/ipconsumers.h"
-
 #include "cpp/utilities/keyboard/password/gatewaypasswordconsumer.h"
 #include "cpp/utilities/keyboard/password/passwordstate.h"
 #include "cpp/utilities/commander/commandcontroller.h"
