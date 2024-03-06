@@ -43,7 +43,8 @@ public:
         MaskInput=29,
         GateInput=30,
         PasswordInput=31,
-        ImportDeviceSelection=32
+        ImportDeviceSelection=32,
+        ImportConfirm=33
 
 
     };

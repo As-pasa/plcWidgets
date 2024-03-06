@@ -36,6 +36,8 @@ SOURCES += \
     cpp/timeModel/plctimesystem.cpp \
     cpp/timeModel/timechangepackage.cpp \
     cpp/timeModel/timemodel.cpp \
+    cpp/utilities/commander/commandcontroller.cpp \
+    cpp/utilities/commander/commands/importcommand.cpp \
     cpp/utilities/confirmationDisplayer/commandconfirmator.cpp \
     cpp/utilities/confirmationDisplayer/confirmatorstate.cpp \
     cpp/utilities/keyboard/binderdefaultconsumers.cpp \
@@ -116,6 +118,8 @@ HEADERS += \
     cpp/timeModel/plctimesystem.h \
     cpp/timeModel/timechangepackage.h \
     cpp/timeModel/timemodel.h \
+    cpp/utilities/commander/commandcontroller.h \
+    cpp/utilities/commander/commands/importcommand.h \
     cpp/utilities/confirmationDisplayer/commandconfirmator.h \
     cpp/utilities/keyboard/binderdefaultconsumers.h \
     cpp/utilities/keyboard/debugkeyboardconsumer.h \

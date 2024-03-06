@@ -191,6 +191,13 @@ BaseScreen{
                 sourceComponent:importDeviceSelectionScreen
 
             }
+        },
+        State{
+            name:screenView.getScreen(Screens.ImportConfirm)
+            PropertyChanges{
+                target:main
+                sourceComponent:importConfirmator
+            }
         }
 
 
@@ -257,7 +264,7 @@ BaseScreen{
 
             lft.onClicked:screenController.goToScreen(Screens.ImportDeviceSelection)
 
-            rgt.onClicked:{console.log("foo")}
+            rgt.onClicked:commander.import("some strange path")
         }
 
 
@@ -579,6 +586,12 @@ BaseScreen{
         id:passwordInputScreen
         IntKeyboardScreen{
             role:KeyRole.Password
+        }
+    }
+    Component{
+        id:importConfirmator
+        IntKeyboardScreen{
+            role:commander.import_role
         }
     }
 

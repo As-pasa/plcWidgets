@@ -29,6 +29,7 @@ public slots:
     void clear(int role);
     QString getState(int role);
     bool apply(int role);
+    void removeListeners(int role);
 signals:
     void stateChanged();
 };

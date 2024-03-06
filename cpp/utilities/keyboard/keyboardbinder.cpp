@@ -81,3 +81,10 @@ bool KeyboardBinder::apply(int role)
         }
     return true;
 }
+
+void KeyboardBinder::removeListeners(int role)
+{
+    if(m_acceptConsumers.contains(role)){
+        m_acceptConsumers[role].clear();
+    }
+}

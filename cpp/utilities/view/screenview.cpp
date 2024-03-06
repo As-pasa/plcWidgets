@@ -32,12 +32,9 @@ const QMap<int,ScreenView::ScreenInfo> ScreenView::ScreenToInfo={
     {ScreenView::MaskInput,{"Mask input","Mask input",""}},
     {ScreenView::GateInput,{"Gate input","Gate input",""}},
     {ScreenView::PasswordInput,{"Password input","Password input",""}},
-    {ScreenView::ImportDeviceSelection,{"Device selection screen","Device selection",""}}
+    {ScreenView::ImportDeviceSelection,{"Device selection screen","Device selection",""}},
+    {ScreenView::ImportConfirm,{"Confirm password","Password confirm",""}}
 };
-//IpInput=28,
-//MaskInput=29,
-//GateInput=30
-
 
 ScreenView::ScreenView(QObject *parent) : QObject(parent)
 {

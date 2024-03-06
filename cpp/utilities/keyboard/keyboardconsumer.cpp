@@ -4,3 +4,8 @@ KeyboardConsumer::KeyboardConsumer()
 {
 
 }
+
+KeyboardConsumer::~KeyboardConsumer()
+{
+
+}

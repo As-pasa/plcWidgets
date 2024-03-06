@@ -94,6 +94,8 @@ void ScreenController::openNetInterfaceEditMenu(QString netInterfaceName, QStrin
 
 
 
+
+
 const QMap<int,int> ScreenController::ClosedHeaderStates={
     {ScreenView::DayInput, HeaderBarModel::Closed},
     {ScreenView::MonthInput, HeaderBarModel::Closed},
@@ -109,5 +111,4 @@ const QMap<int,int> ScreenController::ClosedHeaderStates={
 
 
 const QList<int> ScreenController::securedScreens={
-        ScreenView::FileMenu
 };

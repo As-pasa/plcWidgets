@@ -48,6 +48,7 @@
 
 #include "cpp/utilities/keyboard/password/gatewaypasswordconsumer.h"
 #include "cpp/utilities/keyboard/password/passwordstate.h"
+#include "cpp/utilities/commander/commandcontroller.h"
 #include <QDateTime>
 #include <QRegularExpression>
 int main(int argc, char *argv[])
@@ -85,8 +86,11 @@ int main(int argc, char *argv[])
     PasswordModel passwordModel(passwordSystem);
     HeaderBarModel header;
     ScreenView screens;
+
     ScreenController screenController(&header,&screens,&passwordModel,displayer,interfaceInputState);
     KeyboardBinder keyboardBinder(&screenController);
+    CommandController* commandController=new CommandController(&screenController,&fileModel,&keyboardBinder,&passwordModel);
+
     keyboardBinder.addState(KeyBinderRoles::TimeRoles::Day,new DayKeyboardState(&model));
     keyboardBinder.addConsumer(KeyBinderRoles::TimeRoles::Day,new DayConsumer(&screenController, &model));
 
@@ -141,6 +145,7 @@ int main(int argc, char *argv[])
     root->setContextProperty("screenController",&screenController);
     root->setContextProperty("keyBinder",&keyboardBinder);
     root-> setContextProperty("interfaceInput",interfaceInputState);
+    root->setContextProperty("commander",commandController);
     engine.load(url);
     screenController.goToScreen(ScreenView::TopMenu);
     return app.exec();
