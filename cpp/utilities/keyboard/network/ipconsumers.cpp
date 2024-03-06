@@ -5,9 +5,10 @@ IpConsumer::IpConsumer(NetInterfaceInputState *output)
     m_output=output;
 }
 
-void IpConsumer::consume(QString st)
+void IpConsumer::consume(IKeyboardState* st)
 {
-    m_output->setIp(st);
+    m_output->setIp(st->getState());
+    st->clearState();
 }
 
 MaskConsumer::MaskConsumer(NetInterfaceInputState *output)
@@ -15,9 +16,10 @@ MaskConsumer::MaskConsumer(NetInterfaceInputState *output)
     m_output=output;
 }
 
-void MaskConsumer::consume(QString st)
+void MaskConsumer::consume(IKeyboardState* st)
 {
-    m_output->setMask(st);
+    m_output->setMask(st->getState());
+    st->clearState();
 }
 
 GateConsumer::GateConsumer(NetInterfaceInputState *output)
@@ -25,7 +27,8 @@ GateConsumer::GateConsumer(NetInterfaceInputState *output)
     m_output=output;
 }
 
-void GateConsumer::consume(QString st)
+void GateConsumer::consume(IKeyboardState* st)
 {
-    m_output->setGate(st);
+    m_output->setGate(st->getState());
+    st->clearState();
 }

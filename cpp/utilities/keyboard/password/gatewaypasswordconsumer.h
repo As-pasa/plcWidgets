@@ -12,7 +12,7 @@ private:
     ScreenController* m_controller;
     // KeyboardConsumer interface
 public:
-    void consume(QString st);
+    void consume(IKeyboardState* st);
 };
 
 #endif // GATEWAYPASSWORDCONSUMER_H

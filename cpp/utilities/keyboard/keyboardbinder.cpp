@@ -9,11 +9,11 @@ KeyboardBinder::KeyboardBinder(ScreenController* controller, QObject *parent)
 
 void KeyboardBinder::addConsumer(int role, KeyboardConsumer *consumer)
 {
-    if(m_consumers.contains(role)){
-        m_consumers[role].append(consumer);
+    if(m_acceptConsumers.contains(role)){
+        m_acceptConsumers[role].append(consumer);
     }
     else{
-        m_consumers[role]=QList<KeyboardConsumer*>{consumer};
+        m_acceptConsumers[role]=QList<KeyboardConsumer*>{consumer};
     }
 }
 
@@ -76,10 +76,10 @@ QString KeyboardBinder::getState(int role)
 
 bool KeyboardBinder::apply(int role)
 {
-    if(m_consumers.contains(role) && m_states.contains(role)){
+    if(m_acceptConsumers.contains(role) && m_states.contains(role)){
         if(m_states[role]->validate(m_states[role]->getState())){
-            foreach(KeyboardConsumer* cons,m_consumers[role]){
-                cons->consume(m_states[role]->getState());
+            foreach(KeyboardConsumer* cons,m_acceptConsumers[role]){
+                cons->consume(m_states[role]);
             }
         }
         else{

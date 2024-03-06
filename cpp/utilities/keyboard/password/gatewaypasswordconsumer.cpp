@@ -6,7 +6,7 @@ GatewayPasswordConsumer::GatewayPasswordConsumer(ScreenController *controller)
     m_controller=controller;
 }
 
-void GatewayPasswordConsumer::consume(QString st)
+void GatewayPasswordConsumer::consume(IKeyboardState* st)
 {
    m_controller->openTheGate();
 }

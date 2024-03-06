@@ -13,7 +13,7 @@ public:
         // KeyboardConsumer interface
     public:
         MinuteConsumer(TimeModel* m_model);
-        void consume(QString st);
+        void consume(IKeyboardState* st);
 };
 
 class HourConsumer:public KeyboardConsumer{
@@ -24,7 +24,7 @@ class HourConsumer:public KeyboardConsumer{
         // KeyboardConsumer interface
     public:
         HourConsumer(TimeModel*model);
-        void consume(QString st);
+        void consume(IKeyboardState* st);
 };
 class DayConsumer:public KeyboardConsumer{
 
@@ -34,7 +34,7 @@ class DayConsumer:public KeyboardConsumer{
         // KeyboardConsumer interface
     public:
         DayConsumer(TimeModel*model);
-        void consume(QString st);
+        void consume(IKeyboardState* st);
 };
 class MonthConsumer:public KeyboardConsumer{
 
@@ -44,7 +44,7 @@ class MonthConsumer:public KeyboardConsumer{
         // KeyboardConsumer interface
     public:
         MonthConsumer(TimeModel*model);
-        void consume(QString st);
+        void consume(IKeyboardState* st);
 };
 class YearConsumer:public KeyboardConsumer{
 
@@ -54,7 +54,7 @@ class YearConsumer:public KeyboardConsumer{
         // KeyboardConsumer interface
     public:
         YearConsumer(TimeModel*model);
-        void consume(QString st);
+        void consume(IKeyboardState* st);
 };
 
 

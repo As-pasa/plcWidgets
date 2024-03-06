@@ -14,7 +14,8 @@ class KeyboardBinder : public QObject
     Q_OBJECT
 private:
     QMap<int,IKeyboardState*> m_states;
-    QMap<int,QList<KeyboardConsumer*>> m_consumers;
+    QMap<int,QList<KeyboardConsumer*>> m_acceptConsumers;
+    QMap<int,QList<KeyboardConsumer*>> m_cancelConsumers;
     ScreenController* m_controller;
 public:
     explicit KeyboardBinder(ScreenController* controller,  QObject *parent = nullptr);

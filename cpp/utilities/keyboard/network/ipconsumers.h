@@ -12,7 +12,7 @@ public:
 
     // KeyboardConsumer interface
 public:
-    void consume(QString st);
+    void consume(IKeyboardState* st);
 };
 class MaskConsumer:public KeyboardConsumer
 {
@@ -23,7 +23,7 @@ public:
 
     // KeyboardConsumer interface
 public:
-    void consume(QString st);
+    void consume(IKeyboardState* st);
 };
 class GateConsumer:public KeyboardConsumer
 {
@@ -34,7 +34,7 @@ public:
 
     // KeyboardConsumer interface
 public:
-    void consume(QString st);
+    void consume(IKeyboardState* st);
 };
 
 

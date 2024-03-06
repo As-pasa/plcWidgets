@@ -38,6 +38,7 @@ SOURCES += \
     cpp/timeModel/timemodel.cpp \
     cpp/utilities/confirmationDisplayer/commandconfirmator.cpp \
     cpp/utilities/confirmationDisplayer/confirmatorstate.cpp \
+    cpp/utilities/keyboard/binderdefaultconsumers.cpp \
     cpp/utilities/keyboard/debugkeyboardconsumer.cpp \
     cpp/utilities/keyboard/ikeyboardstate.cpp \
     cpp/utilities/keyboard/keyboardStateImpl.cpp \
@@ -116,6 +117,7 @@ HEADERS += \
     cpp/timeModel/timechangepackage.h \
     cpp/timeModel/timemodel.h \
     cpp/utilities/confirmationDisplayer/commandconfirmator.h \
+    cpp/utilities/keyboard/binderdefaultconsumers.h \
     cpp/utilities/keyboard/debugkeyboardconsumer.h \
     cpp/utilities/keyboard/ikeyboardstate.h \
     cpp/utilities/keyboard/keyboardStateImpl.h \

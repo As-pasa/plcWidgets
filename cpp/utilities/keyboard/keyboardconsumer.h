@@ -1,11 +1,11 @@
 #ifndef KEYBOARDCONSUMER_H
 #define KEYBOARDCONSUMER_H
 
-#include <QString>
+#include "ikeyboardstate.h"
 class KeyboardConsumer
 {
 public:
-    virtual void consume(QString st)=0;
+    virtual void consume(IKeyboardState* st)=0;
     KeyboardConsumer();
 };
 
