@@ -1,12 +1,19 @@
 #include "ITimeConsumer.h"
 
-MinuteConsumer::MinuteConsumer(TimeModel *m_model)
+MinuteConsumer::MinuteConsumer(ScreenController* controller,TimeModel *m_model)
 {
     model=m_model;
+    m_controller=controller;
 }
 
 void MinuteConsumer::consume(IKeyboardState* st)
 {
+
+    if(!st->validate(st->getState())){
+
+        m_controller->showInfoWithText("Wrong input value:\n"+ st->getState());
+        return;
+    }
     bool isNum;
     int a = st->getState().toInt(&isNum);
     if(isNum){
@@ -24,13 +31,19 @@ void MinuteConsumer::consume(IKeyboardState* st)
     }
 }
 
-HourConsumer::HourConsumer(TimeModel *model)
+HourConsumer::HourConsumer(ScreenController* controller,TimeModel *model)
 {
     m_model=model;
+    m_controller=controller;
 }
 
 void HourConsumer::consume(IKeyboardState* st)
 {
+    if(!st->validate(st->getState())){
+
+        m_controller->showInfoWithText("Wrong input value:\n"+ st->getState());
+        return;
+    }
     bool isNum;
     int a = st->getState().toInt(&isNum);
     if(isNum){
@@ -44,13 +57,20 @@ void HourConsumer::consume(IKeyboardState* st)
     }
 }
 
-DayConsumer::DayConsumer(TimeModel *model)
+DayConsumer::DayConsumer(ScreenController* controller,TimeModel *model)
 {
     m_model=model;
+    m_controller=controller;
 }
 
 void DayConsumer::consume(IKeyboardState* st)
 {
+    if(!st->validate(st->getState())){
+
+        m_controller->showInfoWithText("Wrong input value:\n"+ st->getState());
+        return;
+    }
+
     bool isNum;
     int a = st->getState().toInt(&isNum);
     if(isNum){
@@ -64,13 +84,19 @@ void DayConsumer::consume(IKeyboardState* st)
     }
 }
 
-MonthConsumer::MonthConsumer(TimeModel *model)
+MonthConsumer::MonthConsumer(ScreenController* controller,TimeModel *model)
 {
     m_model=model;
+    m_controller=controller;
 }
 
 void MonthConsumer::consume(IKeyboardState* st)
 {
+    if(!st->validate(st->getState())){
+
+        m_controller->showInfoWithText("Wrong input value:\n"+ st->getState());
+        return;
+    }
 
     bool isNum;
     int a = st->getState().toInt(&isNum);
@@ -85,14 +111,19 @@ void MonthConsumer::consume(IKeyboardState* st)
     }
 }
 
-YearConsumer::YearConsumer(TimeModel *model)
+YearConsumer::YearConsumer(ScreenController* controller,TimeModel *model)
 {
     m_model=model;
+    m_controller=controller;
 }
 
 void YearConsumer::consume(IKeyboardState* st)
 {
+    if(!st->validate(st->getState())){
 
+        m_controller->showInfoWithText("Wrong input value:\n"+ st->getState());
+        return;
+    }
 
     bool isNum;
     int a = st->getState().toInt(&isNum);

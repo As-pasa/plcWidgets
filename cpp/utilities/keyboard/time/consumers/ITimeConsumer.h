@@ -2,6 +2,7 @@
 #define MINUTECONSUMER_H
 
 #include "../../../../timeModel/timemodel.h"
+#include "cpp/utilities/view/screencontroller.h"
 #include "../../keyboardconsumer.h"
 class MinuteConsumer:public KeyboardConsumer
 {
@@ -9,10 +10,10 @@ public:
 
     private:
         TimeModel* model;
-
+        ScreenController* m_controller;
         // KeyboardConsumer interface
     public:
-        MinuteConsumer(TimeModel* m_model);
+        MinuteConsumer(ScreenController*m_controller, TimeModel* m_model);
         void consume(IKeyboardState* st);
 };
 
@@ -20,40 +21,40 @@ class HourConsumer:public KeyboardConsumer{
 
     private:
         TimeModel*m_model;
-
+        ScreenController* m_controller;
         // KeyboardConsumer interface
     public:
-        HourConsumer(TimeModel*model);
+        HourConsumer(ScreenController*controller,TimeModel*model);
         void consume(IKeyboardState* st);
 };
 class DayConsumer:public KeyboardConsumer{
 
     private:
         TimeModel*m_model;
-
+        ScreenController* m_controller;
         // KeyboardConsumer interface
     public:
-        DayConsumer(TimeModel*model);
+        DayConsumer(ScreenController*controller,TimeModel*model);
         void consume(IKeyboardState* st);
 };
 class MonthConsumer:public KeyboardConsumer{
 
     private:
         TimeModel*m_model;
-
+        ScreenController* m_controller;
         // KeyboardConsumer interface
     public:
-        MonthConsumer(TimeModel*model);
+        MonthConsumer(ScreenController*controller,TimeModel*model);
         void consume(IKeyboardState* st);
 };
 class YearConsumer:public KeyboardConsumer{
 
     private:
         TimeModel*m_model;
-
+        ScreenController* m_controller;
         // KeyboardConsumer interface
     public:
-        YearConsumer(TimeModel*model);
+        YearConsumer(ScreenController*controller,TimeModel*model);
         void consume(IKeyboardState* st);
 };
 

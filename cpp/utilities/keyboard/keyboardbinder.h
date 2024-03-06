@@ -9,6 +9,7 @@
 #include "keyboardconsumer.h"
 #include "../view/screencontroller.h"
 #include "../keyboard/time/keybinderroles.h"
+#include "cpp/utilities/keyboard/binderdefaultconsumers.h"
 class KeyboardBinder : public QObject
 {
     Q_OBJECT
@@ -17,6 +18,7 @@ private:
     QMap<int,QList<KeyboardConsumer*>> m_acceptConsumers;
     QMap<int,QList<KeyboardConsumer*>> m_cancelConsumers;
     ScreenController* m_controller;
+    KeyboardConsumer* defaultCancelConsumer;
 public:
     explicit KeyboardBinder(ScreenController* controller,  QObject *parent = nullptr);
     void addConsumer(int role,KeyboardConsumer* consumer);

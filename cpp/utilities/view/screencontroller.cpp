@@ -109,4 +109,5 @@ const QMap<int,int> ScreenController::ClosedHeaderStates={
 
 
 const QList<int> ScreenController::securedScreens={
+        ScreenView::FileMenu
 };

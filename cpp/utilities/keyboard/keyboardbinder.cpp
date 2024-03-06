@@ -5,6 +5,7 @@
 KeyboardBinder::KeyboardBinder(ScreenController* controller, QObject *parent)
 {
     m_controller=controller;
+    defaultCancelConsumer=new BackConsumer(controller);
 }
 
 void KeyboardBinder::addConsumer(int role, KeyboardConsumer *consumer)
@@ -32,21 +33,17 @@ void KeyboardBinder::process(int role,QString ch)
 
     if(m_states.contains(role)){
         if(ch=="close"){
-            clear(role);
-            m_controller->prevScreen();
+            if(m_cancelConsumers.contains(role)){
+                foreach(auto a, m_cancelConsumers[role]){
+                    a->consume(m_states[role]);
+                }
+            }
+            else{
+                defaultCancelConsumer->consume(m_states[role]);
+            }
         }
         else if(ch=="acc"){
-           if(apply(role)){
-               clear(role);
-               if(role!=KeyBinderRoles::Password){
-                    m_controller->prevScreen();
-               }
-
-           }
-           else{
-               m_controller->showInfoWithText("Wrong input value:\n"+ m_states[role]->getState());
-           }
-
+            apply(role);
         }
         else{
             if(m_states[role]->add(ch)){
@@ -77,14 +74,10 @@ QString KeyboardBinder::getState(int role)
 bool KeyboardBinder::apply(int role)
 {
     if(m_acceptConsumers.contains(role) && m_states.contains(role)){
-        if(m_states[role]->validate(m_states[role]->getState())){
+
             foreach(KeyboardConsumer* cons,m_acceptConsumers[role]){
                 cons->consume(m_states[role]);
             }
         }
-        else{
-            return false;
-        }
-    }
     return true;
 }

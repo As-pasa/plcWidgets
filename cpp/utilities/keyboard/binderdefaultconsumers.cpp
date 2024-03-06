@@ -8,5 +8,6 @@ BackConsumer::BackConsumer(ScreenController *controller)
 
 void BackConsumer::consume(IKeyboardState *state)
 {
-
+    state->clearState();
+    m_controller->prevScreen();
 }

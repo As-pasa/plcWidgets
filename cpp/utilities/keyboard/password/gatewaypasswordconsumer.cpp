@@ -8,5 +8,11 @@ GatewayPasswordConsumer::GatewayPasswordConsumer(ScreenController *controller)
 
 void GatewayPasswordConsumer::consume(IKeyboardState* st)
 {
-   m_controller->openTheGate();
+   if(st->validate(st->getState())){
+       m_controller->openTheGate();
+   }
+   else{
+       qDebug()<<"err";
+       m_controller->showInfoWithText("Wrong input value:\n"+ st->getState());
+   }
 }

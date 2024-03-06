@@ -88,27 +88,27 @@ int main(int argc, char *argv[])
     ScreenController screenController(&header,&screens,&passwordModel,displayer,interfaceInputState);
     KeyboardBinder keyboardBinder(&screenController);
     keyboardBinder.addState(KeyBinderRoles::TimeRoles::Day,new DayKeyboardState(&model));
-    keyboardBinder.addConsumer(KeyBinderRoles::TimeRoles::Day,new DayConsumer(&model));
+    keyboardBinder.addConsumer(KeyBinderRoles::TimeRoles::Day,new DayConsumer(&screenController, &model));
 
     keyboardBinder.addState(KeyBinderRoles::TimeRoles::Month,new MonthKeyboardState(&model));
-    keyboardBinder.addConsumer(KeyBinderRoles::TimeRoles::Month,new MonthConsumer(&model));
+    keyboardBinder.addConsumer(KeyBinderRoles::TimeRoles::Month,new MonthConsumer(&screenController,&model));
 
     keyboardBinder.addState(KeyBinderRoles::TimeRoles::Year,new YearKeyboardState(&model));
-    keyboardBinder.addConsumer(KeyBinderRoles::TimeRoles::Year,new YearConsumer(&model));
+    keyboardBinder.addConsumer(KeyBinderRoles::TimeRoles::Year,new YearConsumer(&screenController,&model));
 
     keyboardBinder.addState(KeyBinderRoles::TimeRoles::Minute,new MinuteKeyboardState());
-    keyboardBinder.addConsumer(KeyBinderRoles::TimeRoles::Minute,new MinuteConsumer(&model));
+    keyboardBinder.addConsumer(KeyBinderRoles::TimeRoles::Minute,new MinuteConsumer(&screenController,&model));
 
     keyboardBinder.addState(KeyBinderRoles::TimeRoles::Hour,new HourKeyboardState());
-    keyboardBinder.addConsumer(KeyBinderRoles::TimeRoles::Hour,new HourConsumer(&model));
+    keyboardBinder.addConsumer(KeyBinderRoles::TimeRoles::Hour,new HourConsumer(&screenController,&model));
 
     keyboardBinder.addState(KeyBinderRoles::InterfaceRoles::Ip,new IpKeyboardState());
     keyboardBinder.addState(KeyBinderRoles::InterfaceRoles::Mask,new IpKeyboardState());
     keyboardBinder.addState(KeyBinderRoles::InterfaceRoles::Gate,new IpKeyboardState());
 
-    keyboardBinder.addConsumer(KeyBinderRoles::InterfaceRoles::Ip,new IpConsumer(interfaceInputState));
-    keyboardBinder.addConsumer(KeyBinderRoles::InterfaceRoles::Mask,new MaskConsumer(interfaceInputState));
-    keyboardBinder.addConsumer(KeyBinderRoles::InterfaceRoles::Gate,new GateConsumer(interfaceInputState));
+    keyboardBinder.addConsumer(KeyBinderRoles::InterfaceRoles::Ip,new IpConsumer(&screenController,interfaceInputState));
+    keyboardBinder.addConsumer(KeyBinderRoles::InterfaceRoles::Mask,new MaskConsumer(&screenController,interfaceInputState));
+    keyboardBinder.addConsumer(KeyBinderRoles::InterfaceRoles::Gate,new GateConsumer(&screenController,interfaceInputState));
 
     keyboardBinder.addState(KeyBinderRoles::PasswordRoles::Password,new PasswordState(&passwordModel));
 
