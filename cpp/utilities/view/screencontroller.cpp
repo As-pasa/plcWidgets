@@ -31,7 +31,7 @@ ScreenController::ScreenController(HeaderBarModel *headerModel,
 void ScreenController::goToScreen(int screen)
 {
     if(securedScreens.contains(screen)){
-        qDebug()<<"gate validation to screen "<<m_viewModel->getScreen( screen)<<"started";
+
         startGateValidation(screen);
 
     }else{
