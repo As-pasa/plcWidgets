@@ -22,8 +22,4 @@ ApplicationWindow {
         anchors.fill:parent
         state:screenView.CurrenScreen
     }
-
-
-
-
 }

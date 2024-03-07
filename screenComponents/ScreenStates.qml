@@ -198,6 +198,33 @@ BaseScreen{
                 target:main
                 sourceComponent:importConfirmator
             }
+        },
+        State{
+            name:screenView.getScreen(Screens.ImportFileSelectionScreen)
+            PropertyChanges{
+                target:main
+                sourceComponent:importFileSelectionScreen
+            }
+        },
+        State{
+            name:screenView.getScreen(Screens.ExportDeviceSelect)
+            PropertyChanges{
+                target:main
+                sourceComponent: exportDeviceSelect
+            }
+        },
+        State{
+            name:screenView.getScreen(Screens.ExportConfirm)
+            PropertyChanges{
+                target:main
+                sourceComponent:exportConfirm
+            }
+        },
+        State{
+            name:screenView.getScreen(Screens.PasswordInstallConfirm)
+        },
+        State{
+            name:screenView.getScreen(Screens.PasswordInstallScreen)
         }
 
 
@@ -205,6 +232,13 @@ BaseScreen{
 
 
     ]
+    Component{
+        id:passwordInstallConfirm
+    }
+    Component{
+        id:passwordInstallScreen
+    }
+
 
     Component{
         id:mainMenu
@@ -264,7 +298,7 @@ BaseScreen{
 
             lft.onClicked:screenController.goToScreen(Screens.ImportDeviceSelection)
 
-            rgt.onClicked:commander.import("some strange path")
+            rgt.onClicked:screenController.goToScreen(Screens.ExportDeviceSelect)
         }
 
 
@@ -330,6 +364,7 @@ BaseScreen{
     Component{
         id:appMessageScreen
         BaseText{
+            fontSize: fontBig
             text:messager.message
         }
     }
@@ -552,7 +587,10 @@ BaseScreen{
                     Layout.fillWidth: false
                     Layout.preferredWidth: 100
                     text:"accept"
-                    onClicked:interfaceInput.accept()
+                    onClicked: {
+                        interfaceInput.accept()
+                        screenController.showInfoWithText("setup is done!")
+                    }
                 }
             }
         }
@@ -578,8 +616,13 @@ BaseScreen{
     Component{
         id:importDeviceSelectionScreen
         PageBasedSelector{
-            model:fileModel.detectedDevices
+            model: "foooo baaaaaaa".split(" ") //fileModel.detectedDevices
+            onTriggered: (a)=>{
+                             fileModel.setSelectedDevice(a)
 
+                             screenController.goToScreen(Screens.ImportFileSelectionScreen)
+
+                         }
         }
     }
     Component{
@@ -594,7 +637,30 @@ BaseScreen{
             role:commander.import_role
         }
     }
+    Component{
+        id:importFileSelectionScreen
+        PageBasedSelector{
+            model:"foo bar barr baaaar".split(" ")
+            onTriggered: (a) =>{
 
-
-
+                         commander.import(a)
+                         }
+        }
+    }
+    Component{
+        id:exportDeviceSelect
+        PageBasedSelector{
+            model:"foo bar bar bar".split(" ")
+            onTriggered: (a)=>{
+                            fileModel.setSelectedDevice(a)
+                             commander.exprt()
+                         }
+        }
+    }
+    Component{
+        id:exportConfirm
+        IntKeyboardScreen{
+            role:commander.export_role
+        }
+    }
 }

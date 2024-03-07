@@ -1,6 +1,6 @@
-#include "importcommand.h"
+#include "exportcommand.h"
 
-ImportCommand::ImportCommand(int s_role,KeyboardBinder* binder, ScreenController *controller, FileModel *model,QString path)
+ExportCommand::ExportCommand(int s_role,KeyboardBinder* binder, ScreenController *controller, FileModel *model,QString path)
 {
     m_binder=binder;
     m_controller=controller;
@@ -9,16 +9,17 @@ ImportCommand::ImportCommand(int s_role,KeyboardBinder* binder, ScreenController
     m_role=s_role;
 }
 
-void ImportCommand::consume(IKeyboardState *st)
+
+void ExportCommand::consume(IKeyboardState *st)
 {
     if(!st->validate(st->getState())){
         m_controller->showInfoWithText("Wrong password!");
     }
     else{
-        m_model->copyFrom(m_model->selectedDevice(),m_path);
+        m_model->copyTo(m_model->selectedDevice(),m_path);
         m_controller->prevScreen();
         m_controller->prevScreen();
-        m_controller->showInfoWithText("successfully importing from: \n"+m_path);
+        m_controller->showInfoWithText("successfully exporting to: \n"+m_path);
         m_binder->removeListeners(m_role);
         delete this;
     }

@@ -8,7 +8,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QStringList>
-#include "cpp/utilities/messagedisplayer.h"
+#include "cpp/utilities/view/screencontroller.h"
 #include "cpp/utilities/confirmationDisplayer/commandconfirmator.h"
 class FileModel : public QObject
 {
@@ -17,7 +17,7 @@ class FileModel : public QObject
     Q_PROPERTY(QString selectedDevice READ selectedDevice NOTIFY selectedDeviceChanged)
     Q_PROPERTY(QStringList detectedFiles READ detectedFiles NOTIFY detectedFilesChanged)
 public:
-    explicit FileModel(MessageDisplayer* displayer,CommandConfirmator* confirmator, IFileSystem *sys,QString innerFileDir, QObject *parent = nullptr);
+    explicit FileModel(ScreenController* controller, IFileSystem *sys,QString innerFileDir, QObject *parent = nullptr);
 
 private:
     QList<SaveDeviceEntry> m_devices;
@@ -26,26 +26,14 @@ private:
     QString m_localCodesys;
     QStringList detectedDevices();
     QStringList detectedFiles();
-    MessageDisplayer* m_displayer;
-    CommandConfirmator* m_confirmator;
+    ScreenController* m_controller;
+
     QString m_selectedDevice;
-    class ImportConfirm:public Confirmable{
-        // Confirmable interface
-        private:
-            FileModel * m_model;
-            QString m_device;
-            QString m_saveFile;
 
-        public:
-
-            ImportConfirm(FileModel *model, QString device, QString saveName);
-            QString getDescription();
-            void accept();
-    };
 
 public slots:
     void refreshDevices();
-    void copyTo(QString path);
+    void copyTo(QString deviceName, QString path);
     void copyFrom(QString device, QString saveName);
     void innerCopyFrom(QString device,QString saveName);
     QStringList getfoldersInDevice(QString device);

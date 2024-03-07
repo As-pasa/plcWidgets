@@ -9,7 +9,7 @@ const QMap<int,ScreenView::ScreenInfo> ScreenView::ScreenToInfo={
     {ScreenView::DateSubmenu,{"Date Time Submenu","Datetime",""}},
     {ScreenView::TimeZoneSubmenu,{"Time Zone Submenu","Timezone",""}},
     {ScreenView::AboutMenu,{"About Device Submenu","About",""}},
-    {ScreenView::ExportMenu,{"File Export Menu","Export",""}},
+    {ScreenView::ExportDeviceSelect,{"File Export Menu","Export",""}},
     {ScreenView::ImportMenu,{"File Import Menu","Import",""}},
     {ScreenView::ImportDirSubmenu, {"Import Directory Selection Menu","Import",""}},
     {ScreenView::WifiMenu,{"Wifi Configuration Menu","Wifi",""}},
@@ -33,7 +33,12 @@ const QMap<int,ScreenView::ScreenInfo> ScreenView::ScreenToInfo={
     {ScreenView::GateInput,{"Gate input","Gate input",""}},
     {ScreenView::PasswordInput,{"Password input","Password input",""}},
     {ScreenView::ImportDeviceSelection,{"Device selection screen","Device selection",""}},
-    {ScreenView::ImportConfirm,{"Confirm password","Password confirm",""}}
+    {ScreenView::ImportConfirm,{"Confirm password for import","Password confirm",""}},
+    {ScreenView::ImportFileSelectionScreen,{"Import folder selection","Select folder",""}},
+    {ScreenView::ExportConfirm, {"Confirm password for export","Password confirm",""}},
+    {ScreenView::PasswordInstallConfirm,{"Password install confirmation","password install confirm",""}},
+    {ScreenView::PasswordInstallScreen,{"Password install input","password install",""}},
+
 };
 
 ScreenView::ScreenView(QObject *parent) : QObject(parent)

@@ -70,7 +70,7 @@ int main(int argc, char *argv[])
     PlcFileSystem* fileSys=new PlcFileSystem();
     ScreenModel screenModel(screenSys,confirmator);
 
-    FileModel fileModel(displayer,confirmator, fileSys,QString("/opt/codesys/"));
+
     PLCWifiSystem* wifiSystem=new PLCWifiSystem();
     plcPingSystem* pingSystem = new plcPingSystem();
     IPasswordSystem* passwordSystem = new PlcPaswordSystem();
@@ -86,6 +86,7 @@ int main(int argc, char *argv[])
     ScreenView screens;
 
     ScreenController screenController(&header,&screens,&passwordModel,displayer,interfaceInputState);
+    FileModel fileModel(&screenController,fileSys,QString("/opt/codesys/"));
     KeyboardBinder keyboardBinder(&screenController);
     CommandController* commandController=new CommandController(&screenController,&fileModel,&keyboardBinder,&passwordModel);
 

@@ -7,11 +7,15 @@ CommandController::CommandController(ScreenController *controller, FileModel *fi
     m_binder=binder;
     m_password=password;
     m_binder->addState(binder_import_role,new PasswordState(m_password));
+    m_binder->addState(binder_export_role,new PasswordState(m_password));
+    m_binder->addState(binder_password_role,new PasswordState(m_password));
+    m_binder->addState(binder_password_input_listener)
 }
 
 void CommandController::import(QString filePath)
 {
     m_controller->goToScreen(ScreenView::Screens::ImportConfirm);
+    m_controller->showInfoWithText("close this window and \n input device password to proceed \n after that all local data will be erased\n and imported from: "+filePath);
     m_binder->removeListeners(binder_import_role);
     ImportCommand * command = new ImportCommand(binder_import_role, m_binder,m_controller,m_fileModel,filePath);
     m_binder->addConsumer(binder_import_role,command);
@@ -20,6 +24,36 @@ void CommandController::import(QString filePath)
 int CommandController::import_role()
 {
     return binder_import_role;
+}
+
+int CommandController::export_role()
+{
+    return binder_export_role;
+}
+
+int CommandController::password_role()
+{
+    return binder_password_role;
+}
+
+
+void CommandController::exprt()
+{
+    QString stamp=m_stamer.getStamp();
+    m_controller->goToScreen(ScreenView::Screens::ExportConfirm);
+    m_controller->showInfoWithText("close this window and \n input device password to proceed \n after that all local data will be copied to: "+stamp);
+    m_binder->removeListeners(binder_export_role);
+    ExportCommand* command = new ExportCommand(binder_export_role,m_binder,m_controller,m_fileModel,stamp);
+    m_binder->addConsumer(binder_export_role,command);
+}
+
+void CommandController::changePassword()
+{
+    m_controller->goToScreen(ScreenView::Screens::PasswordInstallConfirm);
+    m_controller->showInfoWithText("close this window and \n input device password to proceed");
+    m_binder->removeListeners(binder_export_role);
+    PasswordInputInitCommand* command=new PasswordChangeCommand(m_controller,binder_password_role,m_password);
+    m_binder->addConsumer(binder_password_role,command);
 }
 
 

@@ -37,7 +37,10 @@ SOURCES += \
     cpp/timeModel/timechangepackage.cpp \
     cpp/timeModel/timemodel.cpp \
     cpp/utilities/commander/commandcontroller.cpp \
+    cpp/utilities/commander/commands/exportcommand.cpp \
     cpp/utilities/commander/commands/importcommand.cpp \
+    cpp/utilities/commander/commands/passwordchangecommand.cpp \
+    cpp/utilities/commander/commands/passwordinputinitcommand.cpp \
     cpp/utilities/confirmationDisplayer/commandconfirmator.cpp \
     cpp/utilities/confirmationDisplayer/confirmatorstate.cpp \
     cpp/utilities/keyboard/binderdefaultconsumers.cpp \
@@ -49,6 +52,7 @@ SOURCES += \
     cpp/utilities/keyboard/network/ipconsumers.cpp \
     cpp/utilities/keyboard/network/ipkeyboardstate.cpp \
     cpp/utilities/keyboard/network/netinterfaceinputstate.cpp \
+    cpp/utilities/keyboard/novalidationstate.cpp \
     cpp/utilities/keyboard/password/gatewaypasswordconsumer.cpp \
     cpp/utilities/keyboard/password/passwordstate.cpp \
     cpp/utilities/keyboard/time/consumers/ITimeConsumer.cpp \
@@ -119,7 +123,10 @@ HEADERS += \
     cpp/timeModel/timechangepackage.h \
     cpp/timeModel/timemodel.h \
     cpp/utilities/commander/commandcontroller.h \
+    cpp/utilities/commander/commands/exportcommand.h \
     cpp/utilities/commander/commands/importcommand.h \
+    cpp/utilities/commander/commands/passwordchangecommand.h \
+    cpp/utilities/commander/commands/passwordinputinitcommand.h \
     cpp/utilities/confirmationDisplayer/commandconfirmator.h \
     cpp/utilities/keyboard/binderdefaultconsumers.h \
     cpp/utilities/keyboard/debugkeyboardconsumer.h \
@@ -130,6 +137,7 @@ HEADERS += \
     cpp/utilities/keyboard/network/ipconsumers.h \
     cpp/utilities/keyboard/network/ipkeyboardstate.h \
     cpp/utilities/keyboard/network/netinterfaceinputstate.h \
+    cpp/utilities/keyboard/novalidationstate.h \
     cpp/utilities/keyboard/password/gatewaypasswordconsumer.h \
     cpp/utilities/keyboard/password/passwordstate.h \
     cpp/utilities/keyboard/time/consumers/ITimeConsumer.h \

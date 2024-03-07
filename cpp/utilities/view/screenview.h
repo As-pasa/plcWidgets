@@ -21,7 +21,7 @@ public:
         DateSubmenu=6,
         TimeZoneSubmenu=7,
         AboutMenu=8,
-        ExportMenu=9,
+        ExportDeviceSelect=9,
         ImportMenu=10,
         ImportDirSubmenu=11,
         WifiMenu=12,
@@ -44,10 +44,16 @@ public:
         GateInput=30,
         PasswordInput=31,
         ImportDeviceSelection=32,
-        ImportConfirm=33
+        ImportConfirm=33,
+        ImportFileSelectionScreen=34,
+        ExportConfirm=35,
+        PasswordInstallConfirm=36,
+        PasswordInstallScreen=37,
+
 
 
     };
+
     struct ScreenInfo{
         QString stateName;
         QString shortName;
