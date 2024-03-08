@@ -222,9 +222,17 @@ BaseScreen{
         },
         State{
             name:screenView.getScreen(Screens.PasswordInstallConfirm)
+            PropertyChanges{
+                target:main
+                sourceComponent:passwordInstallConfirm
+            }
         },
         State{
             name:screenView.getScreen(Screens.PasswordInstallScreen)
+            PropertyChanges{
+                target:main
+                sourceComponent:passwordInstallScreen
+            }
         }
 
 
@@ -234,9 +242,15 @@ BaseScreen{
     ]
     Component{
         id:passwordInstallConfirm
+        IntKeyboardScreen{
+            role:commander.password_role
+        }
     }
     Component{
         id:passwordInstallScreen
+        IntKeyboardScreen{
+            role:commander.password_input_listener
+        }
     }
 
 
@@ -446,6 +460,7 @@ BaseScreen{
                 Layout.fillWidth: false
                 Layout.preferredWidth: 100
                 text:"change\n password"
+                onClicked:commander.changePassword()
             }
         }
     }
@@ -663,4 +678,5 @@ BaseScreen{
             role:commander.export_role
         }
     }
+
 }

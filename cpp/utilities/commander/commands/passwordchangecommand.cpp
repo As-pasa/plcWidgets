@@ -1,11 +1,7 @@
 #include "passwordchangecommand.h"
 
-PasswordChangeCommand::PasswordChangeCommand()
-{
 
-}
-
-PasswordChangeCommand::PasswordChangeCommand(ScreenController *controller, int s_role, PasswordModel *model)
+PasswordChangeCommand::PasswordChangeCommand(ScreenController *controller,PasswordModel *model)
 {
 
     m_controller=controller;
@@ -16,7 +12,6 @@ void PasswordChangeCommand::consume(IKeyboardState *st)
 {
     m_model->setPassword(st->getState());
     m_controller->prevScreen();
-    m_controller->prevScreen();
-    m_controller->prevScreen();
-    m_controller->showInfoWithText("close this screen and input new password");
+    m_controller->showInfoWithText("password changed successfully to:\n" +st->getState());
+
 }

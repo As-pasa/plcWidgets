@@ -9,7 +9,8 @@ CommandController::CommandController(ScreenController *controller, FileModel *fi
     m_binder->addState(binder_import_role,new PasswordState(m_password));
     m_binder->addState(binder_export_role,new PasswordState(m_password));
     m_binder->addState(binder_password_role,new PasswordState(m_password));
-    m_binder->addState(binder_password_input_listener)
+    m_binder->addState(binder_password_input_listener,new NoValidationState());
+    m_binder->addConsumer(binder_password_input_listener,new PasswordChangeCommand(m_controller,m_password));
 }
 
 void CommandController::import(QString filePath)
@@ -36,6 +37,11 @@ int CommandController::password_role()
     return binder_password_role;
 }
 
+int CommandController::password_input_listener()
+{
+    return binder_password_input_listener;
+}
+
 
 void CommandController::exprt()
 {
@@ -52,7 +58,7 @@ void CommandController::changePassword()
     m_controller->goToScreen(ScreenView::Screens::PasswordInstallConfirm);
     m_controller->showInfoWithText("close this window and \n input device password to proceed");
     m_binder->removeListeners(binder_export_role);
-    PasswordInputInitCommand* command=new PasswordChangeCommand(m_controller,binder_password_role,m_password);
+    PasswordInputInitCommand* command=new PasswordInputInitCommand(binder_password_role,m_binder,m_controller);
     m_binder->addConsumer(binder_password_role,command);
 }
 

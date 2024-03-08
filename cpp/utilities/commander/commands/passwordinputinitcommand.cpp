@@ -1,9 +1,6 @@
 #include "passwordinputinitcommand.h"
 
-PasswordInputInitCommand::PasswordInputInitCommand()
-{
 
-}
 
 PasswordInputInitCommand::PasswordInputInitCommand(int s_role, KeyboardBinder *binder, ScreenController *controller)
 {
@@ -19,8 +16,8 @@ void PasswordInputInitCommand::consume(IKeyboardState *st)
         return;
     }
     m_controller->prevScreen();
-    m_controller->prevScreen();
     m_controller->goToScreen(ScreenView::Screens::PasswordInstallScreen);
+    m_controller->showInfoWithText("close this screen and input new password");
     m_binder->removeListeners(m_role);
     delete this;
 

@@ -9,7 +9,6 @@ class PasswordInputInitCommand:public KeyboardConsumer
 private:
     KeyboardBinder* m_binder;
     ScreenController* m_controller;
-    FileModel* m_model;
     int m_role;
 public:
     PasswordInputInitCommand(int s_role,KeyboardBinder* binder,

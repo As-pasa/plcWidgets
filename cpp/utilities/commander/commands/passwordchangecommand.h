@@ -10,7 +10,7 @@ private:
     ScreenController* m_controller;
     PasswordModel* m_model;
 public:
-    PasswordChangeCommand(ScreenController* controller,int s_role,PasswordModel* model);
+    PasswordChangeCommand(ScreenController* controller,PasswordModel* model);
 
     // KeyboardConsumer interface
 public:
