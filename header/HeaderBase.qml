@@ -33,27 +33,29 @@ BaseRect{
             RowLayout{
                 anchors.fill: parent
                 ImageBtn{
-                    id:retranslateBtn
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    //text:"tr"
-                    imageSource: "qrc:/icons2/Files_02.png"
-                    onClicked: devInfo.retranslate();
-                }
-                ImageBtn{
                     id:backBtn
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     //text:"bck"
-                    imageSource: "qrc:/icons2/Files_02.png"
+                    imageSource: "qrc:/icons2/PreviousScreen_02.png"
                     onClicked: screenController.prevScreen()
                 }
+
+                ImageBtn{
+                    id:retranslateBtn
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    //text:"tr"
+                    imageSource: "qrc:/icons2/Language_02.png"
+                    onClicked: devInfo.retranslate();
+                }
+
                 ImageBtn{
                     id:exitBtn
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     //text:"ext"
-                    imageSource: "qrc:/icons2/Files_02.png"
+                    imageSource: "qrc:/icons2/Exit_02.png"
                     onClicked: devInfo.close()
                 }       
             }

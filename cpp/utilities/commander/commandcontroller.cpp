@@ -1,10 +1,11 @@
 #include "commandcontroller.h"
 
-CommandController::CommandController(ScreenController *controller, FileModel *fileModel,KeyboardBinder* binder,PasswordModel* password, QObject *parent)
+CommandController::CommandController(ScreenController *controller, FileModel *fileModel, KeyboardBinder* binder, PasswordModel* password, PingModel *pinger, QObject *parent)
 {
     m_controller=controller;
     m_fileModel=fileModel;
     m_binder=binder;
+    m_ping=pinger;
     m_password=password;
     m_binder->addState(binder_import_role,new PasswordState(m_password));
     m_binder->addState(binder_export_role,new PasswordState(m_password));
@@ -14,6 +15,8 @@ CommandController::CommandController(ScreenController *controller, FileModel *fi
     m_binder->addState(binder_login_listener,new PasswordState(m_password));
     m_binder->addConsumer(binder_login_listener,new LogInCommand(m_controller));
 
+    m_binder->addState(KeyBinderRoles::PingIp,new IpKeyboardState());
+    m_binder->addConsumer(KeyBinderRoles::PingIp,new PingIpConsumer(m_controller,m_ping));
 }
 
 void CommandController::import(QString filePath)
@@ -79,5 +82,25 @@ void CommandController::login()
     m_controller->goToScreen(ScreenView::Screens::LogInConfirm);
 
 }
+
+void CommandController::ping()
+{
+    m_controller->showInfoWithText("pinging... please wait");
+    PingProcessWrapper* wrapper=new PingProcessWrapper(m_ping->getSelectedIp());
+    QThread* thread=new QThread;
+    wrapper->moveToThread(thread);
+    connect(wrapper, SIGNAL(finished()),thread, SLOT(quit()));
+    connect(thread, SIGNAL(started()),wrapper, SLOT(process()));
+    connect(wrapper,SIGNAL(finished()),wrapper, SLOT(deleteLater()));
+    connect(thread, SIGNAL(finished()),thread, SLOT(deleteLater()));
+    connect(wrapper,&PingProcessWrapper::gotAnswer, this, &CommandController::showResult);
+    thread->start();
+}
+
+void CommandController::showResult(QString data)
+{
+    m_controller->showInfoWithText(data);
+}
+
 
 

@@ -29,6 +29,7 @@ SOURCES += \
     cpp/pingModel/debugpingsystem.cpp \
     cpp/pingModel/ipingsystem.cpp \
     cpp/pingModel/pingmodel.cpp \
+    cpp/pingModel/pingprocesswrapper.cpp \
     cpp/pingModel/plcpingsystem.cpp \
     cpp/screenModel/plcscreensystem.cpp \
     cpp/timeModel/debugtimesystem.cpp \
@@ -116,6 +117,7 @@ HEADERS += \
     cpp/pingModel/debugpingsystem.h \
     cpp/pingModel/ipingsystem.h \
     cpp/pingModel/pingmodel.h \
+    cpp/pingModel/pingprocesswrapper.h \
     cpp/pingModel/plcpingsystem.h \
     cpp/screenModel/plcscreensystem.h \
     cpp/timeModel/debugtimesystem.h \

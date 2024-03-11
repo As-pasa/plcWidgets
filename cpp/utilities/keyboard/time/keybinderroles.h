@@ -18,7 +18,8 @@ public:
     enum InterfaceRoles{
         Ip=6,
         Mask=7,
-        Gate=8
+        Gate=8,
+        PingIp=10
     };
     enum PasswordRoles{
         Password=9

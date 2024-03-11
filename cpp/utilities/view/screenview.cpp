@@ -16,7 +16,7 @@ const QMap<int,ScreenView::ScreenInfo> ScreenView::ScreenToInfo={
     {ScreenView::NetInterfaceMenu,{"Network Interface Selection Menu","Net",""}},
     {ScreenView::PingMenu,{"Ping Menu","Ping",""}},
     {ScreenView::DisplayMenu,{"Display Menu","Brightness",""}},
-    {ScreenView::LogInScreen,{"Password Menu","Password",""}},
+    {ScreenView::LogInScreen,{"Password Menu","Configurator",""}},
     {ScreenView::PasswordRecovery,{"Password Recovery Menu","Recovery",""}},
     {ScreenView::AppMessager,{"Application info menu","Info",""}},
     {ScreenView::DayInput,{"Day input menu","Day",""}},
@@ -38,6 +38,7 @@ const QMap<int,ScreenView::ScreenInfo> ScreenView::ScreenToInfo={
     {ScreenView::PasswordInstallConfirm,{"Password install confirmation","password install confirm",""}},
     {ScreenView::PasswordInstallScreen,{"Password install input","password install",""}},
     {ScreenView::LogInConfirm,{"Log in confirm","log in",""}},
+    {ScreenView::PingIpInputScreen,{"Ping ip input screen","ping ip",""}}
 
 };
 

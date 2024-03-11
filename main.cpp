@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
     ScreenController screenController(&header,&screens,&passwordModel,displayer,interfaceInputState);
     FileModel fileModel(&screenController,fileSys,QString("/opt/codesys/"));
     KeyboardBinder keyboardBinder(&screenController);
-    CommandController* commandController=new CommandController(&screenController,&fileModel,&keyboardBinder,&passwordModel);
+    CommandController* commandController=new CommandController(&screenController,&fileModel,&keyboardBinder,&passwordModel,&pingModel);
 
     keyboardBinder.addState(KeyBinderRoles::TimeRoles::Day,new DayKeyboardState(&model));
     keyboardBinder.addConsumer(KeyBinderRoles::TimeRoles::Day,new DayConsumer(&screenController, &model));

@@ -74,5 +74,22 @@
         <file>screenComponents/DateScreen.qml</file>
         <file>widgets/PageBasedSelector.qml</file>
         <file>QmlKeyboard/Ipv4Input.qml</file>
+        <file>icons2/Backspace_02.png</file>
+        <file>icons2/Brightness_02.png</file>
+        <file>icons2/Close_02.png</file>
+        <file>icons2/Enter_02.png</file>
+        <file>icons2/Exit_02.png</file>
+        <file>icons2/Export_02.png</file>
+        <file>icons2/Home_02.png</file>
+        <file>icons2/Import_02.png</file>
+        <file>icons2/Info_02.png</file>
+        <file>icons2/Keyboard_02.png</file>
+        <file>icons2/Language_02.png</file>
+        <file>icons2/NetworkSettings_02.png</file>
+        <file>icons2/Ping_02.png</file>
+        <file>icons2/PreviousScreen_02.png</file>
+        <file>icons2/Refresh_02.png</file>
+        <file>icons2/Time_02.png</file>
+        <file>icons2/Wifi_02.png</file>
     </qresource>
 </RCC>

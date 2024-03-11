@@ -262,8 +262,62 @@ BaseScreen{
                 target:main
                 sourceComponent:passwordRecovery
             }
+        },
+        State{
+            name:screenView.getScreen(Screens.PingMenu)
+            PropertyChanges{
+                target:main
+                sourceComponent:pingMenu
+            }
+        },
+        State{
+            name:screenView.getScreen(Screens.PingIpInputScreen)
+            PropertyChanges {
+                target: main
+                sourceComponent:pingIpInputScreen
+
+            }
         }
     ]
+
+    Component{
+        id:pingIpInputScreen
+        Ipv4Input{
+            role:KeyRole.PingIp
+        }
+    }
+
+    Component{
+        id:pingMenu
+        Item{
+            RowLayout{
+                anchors.fill: parent
+                BaseRect{
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    ColumnLayout{
+                        anchors.fill: parent
+                        BaseText{
+                            Layout.fillHeight: true
+                            Layout.fillWidth: true
+                            text:"target ip:\n"+pingModel.selectedIp
+                            fontSize: fontBig
+                        }
+                        TextBtn{
+                            text:"edit target\n ip"
+                            onClicked:screenController.goToScreen(Screens.PingIpInputScreen)
+                        }
+                    }
+                }
+                TextBtn{
+                    text:"ping"
+                    onClicked:
+                       commander.ping()
+
+                }
+            }
+        }
+    }
     Component{
         id:passwordRecovery
         BaseText{
@@ -326,6 +380,7 @@ BaseScreen{
         }
 
     }
+
     Component{
         id:passwordInstallConfirm
         IntKeyboardScreen{
@@ -347,7 +402,7 @@ BaseScreen{
             mid.text: "Settings"
             rgt.text: "Backup"
 
-            lft.source: "qrc:/icons2/Network_02.png"
+            lft.source: "qrc:/icons2/NetworkSettings_02.png"
             mid.source: "qrc:/icons2/BaseSettings_02.png"
             rgt.source: "qrc:/icons2/Files_02.png"
 
@@ -364,12 +419,12 @@ BaseScreen{
             rgt.text: "Ping"
 
             lft.source:"qrc:/icons2/Network_02.png"
-            mid.source: "qrc:/icons2/BaseSettings_02.png"
-            rgt.source:"qrc:/icons2/Files_02.png"
+            mid.source: "qrc:/icons2/Wifi_02.png"
+            rgt.source:"qrc:/icons2/Ping_02.png"
 
             lft.onClicked:screenController.goToScreen(Screens.NetInterfaceMenu)
             mid.onClicked:{console.log("foo")}
-            rgt.onClicked:{console.log("foo")}
+            rgt.onClicked:screenController.goToScreen(Screens.PingMenu)
         }
     }
     Component{
@@ -379,9 +434,9 @@ BaseScreen{
             mid.text: "Info"
             rgt.text: "Brightness"
 
-            lft.source:"qrc:/icons2/Network_02.png"
-            mid.source: "qrc:/icons2/BaseSettings_02.png"
-            rgt.source:"qrc:/icons2/Files_02.png"
+            lft.source:"qrc:/icons2/Time_02.png"
+            mid.source: "qrc:/icons2/Info_02.png"
+            rgt.source:"qrc:/icons2/Brightness_02.png"
 
             lft.onClicked:screenController.goToScreen(Screens.TimeMenu)
             mid.onClicked:screenController.goToScreen(Screens.AboutMenu)
@@ -393,8 +448,8 @@ BaseScreen{
         DoubleMenu{
             lft.text: "Import"
             rgt.text: "Export"
-            lft.source:"qrc:/icons2/Network_02.png"
-            rgt.source:"qrc:/icons2/Files_02.png"
+            lft.source:"qrc:/icons2/Import_02.png"
+            rgt.source:"qrc:/icons2/Export_02.png"
 
             lft.onClicked:screenController.goToScreen(Screens.ImportDeviceSelection)
 
@@ -407,6 +462,8 @@ BaseScreen{
         id:timeScreenMenu
         DoubleMenu{
             lft.text: "Date/Time"
+            lft.source:"qrc:/icons2/Time_02.png"
+            rgt.source:"qrc:/icons2/Time_02.png"
             rgt.text: "Time Zone"
             lft.onClicked: screenController.goToScreen(Screens.DateSubmenu)
             rgt.onClicked: screenController.goToScreen(Screens.TimeZoneSubmenu)
@@ -464,7 +521,7 @@ BaseScreen{
     Component{
         id:appMessageScreen
         BaseText{
-            fontSize: fontBig
+            fontSize: fontSmall
             text:messager.message
         }
     }

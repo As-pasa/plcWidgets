@@ -49,7 +49,9 @@ public:
         ExportConfirm=35,
         PasswordInstallConfirm=36,
         PasswordInstallScreen=37,
-        LogInConfirm=38
+        LogInConfirm=38,
+        PingIpInputScreen=39
+
 
 
 

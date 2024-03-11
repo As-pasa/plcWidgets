@@ -20,6 +20,7 @@ HeaderBase {
                 visible:false
                 
             }
+
         },
         State{
             name:barModel.getStateName(Header.Opened)
@@ -33,6 +34,7 @@ HeaderBase {
                 onClicked:{
                     screenController.prevScreen()
                 }
+                imageSource:"qrc:/icons2/PreviousScreen_02.png"
             }
         },
         State{
@@ -47,6 +49,7 @@ HeaderBase {
                 onClicked:{
                     screenController.goToScreen(Screens.PasswordRecovery)
                 }
+                imageSource:"qrc:/icons2/Info_02.png"
             }
         }
         

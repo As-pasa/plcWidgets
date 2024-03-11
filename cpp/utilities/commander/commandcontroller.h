@@ -10,10 +10,17 @@
 #include "cpp/utilities/commander/commands/passwordinputinitcommand.h"
 #include "cpp/utilities/commander/commands/passwordchangecommand.h"
 #include "cpp/utilities/commander/commands/logincommand.h"
+#include "cpp/pingModel/pingmodel.h"
 #include "cpp/utilities/keyboard/password/passwordstate.h"
 #include "cpp/passwordModel/passwordmodel.h"
 #include "cpp/fileModel/filesystemtimestamper.h"
 #include "cpp/utilities/keyboard/novalidationstate.h"
+#include "cpp/utilities/os.h"
+#include "cpp/pingModel/pingprocesswrapper.h"
+#include "cpp/utilities/keyboard/time/keybinderroles.h"
+#include "cpp/utilities/keyboard/network/ipkeyboardstate.h"
+#include "cpp/utilities/keyboard/network/ipconsumers.h"
+#include <QThread>
 class CommandController : public QObject
 {
     Q_OBJECT
@@ -28,6 +35,9 @@ private:
     KeyboardBinder* m_binder;
     PasswordModel* m_password;
     FileSystemTimeStamper m_stamer;
+    PingModel* m_ping;
+
+
     int binder_import_role=-1;
     int binder_export_role=-2;
     int binder_password_role=-3;
@@ -38,6 +48,8 @@ public:
                                FileModel* fileModel,
                                KeyboardBinder* binder,
                                PasswordModel* password,
+                               PingModel* pinger,
+
                                QObject *parent = nullptr);
 public slots:
     void import(QString filePath);
@@ -49,12 +61,16 @@ public slots:
     void exprt();
     void changePassword();
     void login();
+    void ping();
+    void showResult(QString data);
 signals:
     void password_roleChanged(int);
     void import_roleChanged(int);
     void export_roleChanged(int);
     void password_input_listenerChanged(int);
     void loginListenerChanged(int);
+
+
 
 };
 
