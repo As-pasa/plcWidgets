@@ -9,7 +9,7 @@ import "../widgets"
 
 
 HeaderBase {
-    height:50
+    height:70
     id: headerState
     states:[
         State{
@@ -25,7 +25,7 @@ HeaderBase {
             name:barModel.getStateName(Header.Opened)
             PropertyChanges{
                 target:headerState
-                height:50
+                height:70
                 visible:true
             }
             PropertyChanges{
@@ -39,7 +39,7 @@ HeaderBase {
             name: barModel.getStateName(Header.Password)
             PropertyChanges{
                 target: headerState
-                height:50
+                height:70
                 visible:true
             }
             PropertyChanges{

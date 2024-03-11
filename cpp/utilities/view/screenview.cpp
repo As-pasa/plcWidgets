@@ -1,7 +1,7 @@
 #include "screenview.h"
 
 const QMap<int,ScreenView::ScreenInfo> ScreenView::ScreenToInfo={
-    {ScreenView::TopMenu,{"Top Level Menu","$version",""}},
+    {ScreenView::TopMenu,{"Top Level Menu","Version: 2.0",""}},
     {ScreenView::NetMenu,{"Network Menu","Network",""}},
     {ScreenView::BaseMenu,{"Base Menu","Settings",""}},
     {ScreenView::FileMenu,{"File Menu","Backup",""}},
@@ -27,7 +27,6 @@ const QMap<int,ScreenView::ScreenInfo> ScreenView::ScreenToInfo={
     {ScreenView::TimeZoneInput,{"Time zone input","Time zone",""}},
     {ScreenView::NetInterfaceView,{"Interface view","interface view",""}},
     {ScreenView::NetInterfaceEdit,{"Interface edit","interface edit",""}},
-
     {ScreenView::IpInput,{"Ip input","Ip input",""}},
     {ScreenView::MaskInput,{"Mask input","Mask input",""}},
     {ScreenView::GateInput,{"Gate input","Gate input",""}},

@@ -108,8 +108,8 @@ const QMap<int,int> ScreenController::ClosedHeaderStates={
     {ScreenView::GateInput,HeaderBarModel::Closed},
     {ScreenView::PasswordInput,HeaderBarModel::Closed},
     {ScreenView::ImportConfirm,HeaderBarModel::Closed},
-    {ScreenView::ExportConfirm,HeaderBarModel::Closed}
-
+    {ScreenView::ExportConfirm,HeaderBarModel::Closed},
+    {ScreenView::PasswordInstallConfirm,HeaderBarModel::Closed}
 };
 
 

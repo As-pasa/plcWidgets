@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.12
 import "../widgets"
 BaseRect{
     id:root
-    height:60
+    height:100
     property int normalHeight
     property string text: screenView.ShortScreenName
     property alias backBtn:backBtn
@@ -32,25 +32,28 @@ BaseRect{
             
             RowLayout{
                 anchors.fill: parent
-                TextBtn{
+                ImageBtn{
                     id:retranslateBtn
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    text:"tr"
+                    //text:"tr"
+                    imageSource: "qrc:/icons2/Files_02.png"
                     onClicked: devInfo.retranslate();
                 }
-                TextBtn{
+                ImageBtn{
                     id:backBtn
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    text:"bck"
+                    //text:"bck"
+                    imageSource: "qrc:/icons2/Files_02.png"
                     onClicked: screenController.prevScreen()
                 }
-                TextBtn{
+                ImageBtn{
                     id:exitBtn
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    text:"ext"
+                    //text:"ext"
+                    imageSource: "qrc:/icons2/Files_02.png"
                     onClicked: devInfo.close()
                 }       
             }
