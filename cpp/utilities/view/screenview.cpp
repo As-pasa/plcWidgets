@@ -16,7 +16,7 @@ const QMap<int,ScreenView::ScreenInfo> ScreenView::ScreenToInfo={
     {ScreenView::NetInterfaceMenu,{"Network Interface Selection Menu","Net",""}},
     {ScreenView::PingMenu,{"Ping Menu","Ping",""}},
     {ScreenView::DisplayMenu,{"Display Menu","Brightness",""}},
-    {ScreenView::PasswordMenu,{"Password Menu","Password",""}},
+    {ScreenView::LogInScreen,{"Password Menu","Password",""}},
     {ScreenView::PasswordRecovery,{"Password Recovery Menu","Recovery",""}},
     {ScreenView::AppMessager,{"Application info menu","Info",""}},
     {ScreenView::DayInput,{"Day input menu","Day",""}},
@@ -37,6 +37,7 @@ const QMap<int,ScreenView::ScreenInfo> ScreenView::ScreenToInfo={
     {ScreenView::ExportConfirm, {"Confirm password for export","Password confirm",""}},
     {ScreenView::PasswordInstallConfirm,{"Password install confirmation","password install confirm",""}},
     {ScreenView::PasswordInstallScreen,{"Password install input","password install",""}},
+    {ScreenView::LogInConfirm,{"Log in confirm","log in",""}},
 
 };
 
@@ -57,6 +58,11 @@ int ScreenView::getPreviousScreen()
 
 void ScreenView::switchToPreviousScreen()
 {
+//    qDebug()<<"STACK START";
+//    foreach(auto aaa , m_screenHistory){
+//        qDebug()<<"STACK:"<<getScreen(aaa) ;
+//    }
+//    qDebug()<<"STACK END";
    if(m_screenHistory.top()==TopMenu){
        currentScreen=TopMenu;
        emit(currentScreenChanged(getScreen(currentScreen)));

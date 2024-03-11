@@ -146,6 +146,6 @@ int main(int argc, char *argv[])
     root-> setContextProperty("interfaceInput",interfaceInputState);
     root->setContextProperty("commander",commandController);
     engine.load(url);
-    screenController.goToScreen(ScreenView::TopMenu);
+    screenController.goToScreen(ScreenView::LogInScreen);
     return app.exec();
 }

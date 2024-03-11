@@ -39,6 +39,7 @@ SOURCES += \
     cpp/utilities/commander/commandcontroller.cpp \
     cpp/utilities/commander/commands/exportcommand.cpp \
     cpp/utilities/commander/commands/importcommand.cpp \
+    cpp/utilities/commander/commands/logincommand.cpp \
     cpp/utilities/commander/commands/passwordchangecommand.cpp \
     cpp/utilities/commander/commands/passwordinputinitcommand.cpp \
     cpp/utilities/confirmationDisplayer/commandconfirmator.cpp \
@@ -125,6 +126,7 @@ HEADERS += \
     cpp/utilities/commander/commandcontroller.h \
     cpp/utilities/commander/commands/exportcommand.h \
     cpp/utilities/commander/commands/importcommand.h \
+    cpp/utilities/commander/commands/logincommand.h \
     cpp/utilities/commander/commands/passwordchangecommand.h \
     cpp/utilities/commander/commands/passwordinputinitcommand.h \
     cpp/utilities/confirmationDisplayer/commandconfirmator.h \

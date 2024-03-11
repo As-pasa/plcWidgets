@@ -44,14 +44,20 @@ void ScreenController::prevScreen()
 {
 
 
-    auto prevScreenv =  m_viewModel->getPreviousScreen();
-    if(prevScreenv==ScreenView::Screens::PasswordInput &&
+    auto m_prevScreenv =  m_viewModel->getPreviousScreen();
+    if(m_prevScreenv==ScreenView::Screens::PasswordInput &&
             m_viewModel->getCurrentScreen()!=m_viewModel->getScreen( ScreenView::Screens::AppMessager)){
-        setupHeader(prevScreenv);
+
+        setupHeader(m_prevScreenv);
         m_viewModel->switchToPreviousScreen();
         prevScreen();
-    }else{
-        setupHeader(prevScreenv);
+    }
+    else if(m_viewModel->getCurrentScreen() ==m_viewModel->getScreen(ScreenView::Screens::TopMenu) ){
+        return;
+    }
+    else{
+
+        setupHeader(m_prevScreenv);
         m_viewModel->switchToPreviousScreen();
     }
 
@@ -102,14 +108,15 @@ const QMap<int,int> ScreenController::ClosedHeaderStates={
     {ScreenView::YearInput, HeaderBarModel::Closed},
     {ScreenView::MinuteInput, HeaderBarModel::Closed},
     {ScreenView::HourInput, HeaderBarModel::Closed},
-    {ScreenView::PasswordMenu,HeaderBarModel::Password},
+    {ScreenView::LogInScreen,HeaderBarModel::Password},
     {ScreenView::IpInput, HeaderBarModel::Closed},
     {ScreenView::MaskInput, HeaderBarModel::Closed},
     {ScreenView::GateInput,HeaderBarModel::Closed},
     {ScreenView::PasswordInput,HeaderBarModel::Closed},
     {ScreenView::ImportConfirm,HeaderBarModel::Closed},
     {ScreenView::ExportConfirm,HeaderBarModel::Closed},
-    {ScreenView::PasswordInstallConfirm,HeaderBarModel::Closed}
+    {ScreenView::PasswordInstallConfirm,HeaderBarModel::Closed},
+    {ScreenView::LogInConfirm,HeaderBarModel::Closed},
 };
 
 

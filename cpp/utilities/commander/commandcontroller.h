@@ -9,6 +9,7 @@
 #include "cpp/utilities/commander/commands/exportcommand.h"
 #include "cpp/utilities/commander/commands/passwordinputinitcommand.h"
 #include "cpp/utilities/commander/commands/passwordchangecommand.h"
+#include "cpp/utilities/commander/commands/logincommand.h"
 #include "cpp/utilities/keyboard/password/passwordstate.h"
 #include "cpp/passwordModel/passwordmodel.h"
 #include "cpp/fileModel/filesystemtimestamper.h"
@@ -20,6 +21,7 @@ class CommandController : public QObject
     Q_PROPERTY(int export_role READ export_role NOTIFY export_roleChanged)
     Q_PROPERTY(int password_role READ password_role NOTIFY password_roleChanged)
     Q_PROPERTY(int  password_input_listener READ password_input_listener NOTIFY password_input_listenerChanged)
+    Q_PROPERTY(int login_listener READ loginListener NOTIFY loginListenerChanged)
 private:
     ScreenController* m_controller;
     FileModel* m_fileModel;
@@ -30,6 +32,7 @@ private:
     int binder_export_role=-2;
     int binder_password_role=-3;
     int binder_password_input_listener=-4;
+    int binder_login_listener=-5;
 public:
     explicit CommandController(ScreenController* controller,
                                FileModel* fileModel,
@@ -42,13 +45,16 @@ public slots:
     int export_role();
     int password_role();
     int password_input_listener();
+    int loginListener();
     void exprt();
     void changePassword();
+    void login();
 signals:
     void password_roleChanged(int);
     void import_roleChanged(int);
     void export_roleChanged(int);
     void password_input_listenerChanged(int);
+    void loginListenerChanged(int);
 
 };
 

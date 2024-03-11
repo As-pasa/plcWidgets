@@ -56,8 +56,6 @@ public slots:
     void setCurrentTime(QDateTime);
     void setTimeZone(QString);
     void setNIPStatus(bool);
-
-
     void setATZStatus(bool status);
 };
 

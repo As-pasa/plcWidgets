@@ -233,13 +233,99 @@ BaseScreen{
                 target:main
                 sourceComponent:passwordInstallScreen
             }
+        },
+        State{
+            name:screenView.getScreen(Screens.TimeZoneSubmenu)
+            PropertyChanges {
+                target: main
+                sourceComponent:timeZoneSubmenu
+
+            }
+        },
+        State{
+            name:screenView.getScreen(Screens.LogInScreen)
+            PropertyChanges{
+                target:main
+                sourceComponent:logInScreen
+            }
+        },
+        State{
+            name:screenView.getScreen(Screens.LogInConfirm)
+            PropertyChanges{
+                target:main
+                sourceComponent:logInConfirm
+            }
+        },
+        State{
+            name:screenView.getScreen(Screens.PasswordRecovery)
+            PropertyChanges{
+                target:main
+                sourceComponent:passwordRecovery
+            }
+        }
+    ]
+    Component{
+        id:passwordRecovery
+        BaseText{
+            text:"to recover your password\n contact one of the following emails:"
+        }
+    }
+    Component{
+        id:logInConfirm
+        IntKeyboardScreen{
+            role:commander.login_listener
+        }
+    }
+
+
+    Component{
+        id:logInScreen
+        Item{
+            TextBtn{
+                anchors.centerIn: parent
+                height:70
+                width:200
+                text:"Log in"
+                onClicked:commander.login()
+            }
+        }
+    }
+
+    Component{
+        id:timeZoneSubmenu
+        Item{
+            ColumnLayout{
+                anchors.fill:parent
+                BaseText{
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                    text:timeModel.currentTimeZone
+                    fontSize: fontBig
+                }
+                BaseRect{
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 50
+                    RowLayout{
+                        anchors.margins: 4
+                        anchors.fill: parent
+                        TextBtn{
+                            text:"Edit"
+                            enabled:!timeModel.ATZStatus
+                            visible:!timeModel.ATZStatus
+                            onClicked:
+                                screenController.goToScreen(Screens.TimeZoneInput)
+                        }
+                        TextBtn{
+                            text: (timeModel.ATZStatus)? "Auto:On" : "Auto:Off"
+                            onClicked:
+                                timeModel.setATZStatus(!timeModel.ATZStatus)
+                        }
+                    }
+                }
+            }
         }
 
-
-
-
-
-    ]
+    }
     Component{
         id:passwordInstallConfirm
         IntKeyboardScreen{
@@ -323,7 +409,7 @@ BaseScreen{
             lft.text: "Date/Time"
             rgt.text: "Time Zone"
             lft.onClicked: screenController.goToScreen(Screens.DateSubmenu)
-            rgt.onClicked: screenController.goToScreen(Screens.TimeZoneInput)
+            rgt.onClicked: screenController.goToScreen(Screens.TimeZoneSubmenu)
         }
 
     }
