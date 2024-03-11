@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.3
 Item{
     id:root
 
-    property int fontSmall:14
+    property int fontSmall:12
     property int fontBig:20
     property string text:"hello"
     property color color:"white"

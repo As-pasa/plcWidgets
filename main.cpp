@@ -53,15 +53,14 @@ int main(int argc, char *argv[])
 {
 
 
+    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+    QGuiApplication app(argc, argv);
 
     qputenv("QT_IM_MODULE", QByteArray("qtvirtualkeyboard"));
 
 
 
 
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QGuiApplication app(argc, argv);
-    QQmlApplicationEngine engine;
     CommandConfirmator* confirmator = new CommandConfirmator();
     MessageDisplayer*displayer = new  MessageDisplayer();
     PlcNetSystem* nets=new PlcNetSystem();
@@ -79,7 +78,7 @@ int main(int argc, char *argv[])
     TimeModel model(s);
     NetModel netModel(nets);
     NetInterfaceInputState* interfaceInputState=new NetInterfaceInputState(&netModel);
-    DevInfoModel devInfo(&engine,devSystem);
+    DevInfoModel devInfo(devSystem);
     PingModel pingModel(displayer, pingSystem);
     PasswordModel passwordModel(passwordSystem);
     HeaderBarModel header;
@@ -118,6 +117,7 @@ int main(int argc, char *argv[])
     keyboardBinder.addConsumer(KeyBinderRoles::PasswordRoles::Password,new GatewayPasswordConsumer(&screenController));
 
 
+    QQmlApplicationEngine engine;
     const QUrl url(QStringLiteral("qrc:/main.qml"));
     QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
                      &app, [url](QObject *obj, const QUrl &objUrl) {

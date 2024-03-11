@@ -11,7 +11,7 @@ import "../screenComponents"
 import "../QmlKeyboard"
 
 BaseScreen{
-    onStateChanged:(a)=> console.log("SCREEN CHANGED:"+a)
+
     states:[
         State{
             name: {

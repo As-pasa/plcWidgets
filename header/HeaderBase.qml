@@ -56,7 +56,7 @@ BaseRect{
                     Layout.fillHeight: true
                     //text:"ext"
                     imageSource: "qrc:/icons2/Exit_02.png"
-                    onClicked: devInfo.close()
+                    onClicked: Qt.exit(0)
                 }       
             }
         }

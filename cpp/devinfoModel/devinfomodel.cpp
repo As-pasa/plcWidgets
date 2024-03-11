@@ -1,9 +1,9 @@
 #include "devinfomodel.h"
 
-DevInfoModel::DevInfoModel(QQmlApplicationEngine* root, PlcDeviceSystem *system, QObject *parent) : QObject(parent)
+DevInfoModel::DevInfoModel(PlcDeviceSystem *system, QObject *parent) : QObject(parent)
 {
     m_system=system;
-    m_root=root;
+
     languages<<":/baseWidgets_en.qm";
     languages<<":/baseWidgets_ru.qm";
 
@@ -22,12 +22,12 @@ void DevInfoModel::retranslate()
     curInd+=1;
     m_translator.load(languages[( curInd)%2]);
 
-    QCoreApplication::instance()->installTranslator(&m_translator);
 
 
-    m_root->retranslate();
 
-    qDebug()<<"retranslate";
+
+
+
 }
 
 void DevInfoModel::close()

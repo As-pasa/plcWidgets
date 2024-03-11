@@ -19,13 +19,13 @@ class DevInfoModel : public QObject
     Q_PROPERTY(QString firmWareDate READ firmWareDate NOTIFY firmWareDateChanged)
     Q_PROPERTY(QString firmwareVersion READ getFirmwareVersion NOTIFY firmwareVersionChanged)
 private:
-    QQmlApplicationEngine* m_root;
+
     QTranslator m_translator;
     QStringList languages;
     int curInd;
     PlcDeviceSystem * m_system;
 public:
-    explicit DevInfoModel(QQmlApplicationEngine* root, PlcDeviceSystem* system, QObject *parent = nullptr);
+    explicit DevInfoModel(PlcDeviceSystem* system, QObject *parent = nullptr);
     QString deviceName();
     QString deviceType();
     QString firmWare();
