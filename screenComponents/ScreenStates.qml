@@ -11,6 +11,21 @@ import "../screenComponents"
 import "../QmlKeyboard"
 
 BaseScreen{
+    id:mrt
+    NumberAnimation{
+        id:animation
+        target:main
+        property:"opacity"
+        from:0
+        to: 1
+        duration:300
+        easing.type:Easing.InExpo
+        onFinished: mrt.enabled=true
+    }
+    onStateChanged:{
+        animation.running=true
+        mrt.enabled=false
+    }
 
     states:[
         State{
