@@ -15,10 +15,9 @@ void PingProcessWrapper::process()
 {
     QProcess proc;
     proc.setProcessChannelMode(QProcess::MergedChannels);
-    proc.start("ping 8.8.8.8");
+    proc.start(m_ip);
     proc.waitForFinished(6000);
     output= proc.readAll();
-    qDebug()<<output;
     emit finished();
     emit gotAnswer(output);
 }

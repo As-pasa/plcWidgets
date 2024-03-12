@@ -1,39 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
-        <file>qtquickcontrols2.conf</file>
-        <file>TextButton.qml</file>
-        <file>CustomRect.qml</file>
-        <file>CustomLabel.qml</file>
-        <file>ImageButton.qml</file>
-        <file>MenuTile.qml</file>
-        <file>MenuButtons.qml</file>
-        <file>MainMenuTiles.qml</file>
-        <file>CustomCheckbox.qml</file>
-        <file>MainScreen.qml</file>
-        <file>SignedLabel.qml</file>
-        <file>TimeEditLine.qml</file>
-        <file>PageSelector.qml</file>
-        <file>DeviceInfo.qml</file>
-        <file>BrightnessPicker.qml</file>
-        <file>ScreenMenu.qml</file>
-        <file>virtualKeyboards/NumPad.qml</file>
-        <file>virtualKeyboards/KeyboardInput.qml</file>
-        <file>virtualKeyboards/TextKeyboardField.qml</file>
-        <file>virtualKeyboards/IntKeyboardInputField.qml</file>
-        <file>TestPgSelector.qml</file>
-        <file>WifiConnectionsMenu.qml</file>
-        <file>NetInerfaces.qml</file>
-        <file>virtualKeyboards/IpKeyboardField.qml</file>
-        <file>PingMenu.qml</file>
-        <file>PasswordScreen.qml</file>
-        <file>TimeScreen.qml</file>
-        <file>DatetimeMenu.qml</file>
-        <file>TimeZoneMenu.qml</file>
-        <file>FileExportScreen.qml</file>
-        <file>ImportDeviceSelector.qml</file>
-        <file>ImportFileSelector.qml</file>
-        <file>PasswordRecoveryScreen.qml</file>
         <file>AppMessager.qml</file>
         <file>widgets/BaseBtn.qml</file>
         <file>widgets/BaseRect.qml</file>
