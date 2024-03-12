@@ -50,7 +50,8 @@ public:
         PasswordInstallConfirm=36,
         PasswordInstallScreen=37,
         LogInConfirm=38,
-        PingIpInputScreen=39
+        PingIpInputScreen=39,
+        WifiPasswordKeyboardEn=40
 
 
 

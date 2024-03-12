@@ -22,7 +22,8 @@ public:
         PingIp=10
     };
     enum PasswordRoles{
-        Password=9
+        Password=9,
+        WifiPassword=11
     };
 
     Q_ENUM(InterfaceRoles)

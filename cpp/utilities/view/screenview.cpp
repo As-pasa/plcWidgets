@@ -38,7 +38,8 @@ const QMap<int,ScreenView::ScreenInfo> ScreenView::ScreenToInfo={
     {ScreenView::PasswordInstallConfirm,{"Password install confirmation","password install confirm",""}},
     {ScreenView::PasswordInstallScreen,{"Password install input","password install",""}},
     {ScreenView::LogInConfirm,{"Log in confirm","log in",""}},
-    {ScreenView::PingIpInputScreen,{"Ping ip input screen","ping ip",""}}
+    {ScreenView::PingIpInputScreen,{"Ping ip input screen","ping ip",""}},
+    {ScreenView::WifiPasswordKeyboardEn,{"Wifi keyboard en","wifi en",""}}
 
 };
 

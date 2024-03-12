@@ -1,12 +1,13 @@
 #include "commandcontroller.h"
 
-CommandController::CommandController(ScreenController *controller, FileModel *fileModel, KeyboardBinder* binder, PasswordModel* password, PingModel *pinger, QObject *parent)
+CommandController::CommandController(ScreenController *controller, FileModel *fileModel, KeyboardBinder* binder, PasswordModel* password, PingModel *pinger,WifiModel* wifi, QObject *parent)
 {
     m_controller=controller;
     m_fileModel=fileModel;
     m_binder=binder;
     m_ping=pinger;
     m_password=password;
+    m_wifi=wifi;
     m_binder->addState(binder_import_role,new PasswordState(m_password));
     m_binder->addState(binder_export_role,new PasswordState(m_password));
     //m_binder->addState(binder_password_role,new PasswordState(m_password));
@@ -17,6 +18,8 @@ CommandController::CommandController(ScreenController *controller, FileModel *fi
 
     m_binder->addState(KeyBinderRoles::PingIp,new IpKeyboardState());
     m_binder->addConsumer(KeyBinderRoles::PingIp,new PingIpConsumer(m_controller,m_ping));
+    m_binder->addState(KeyBinderRoles::WifiPassword,new NoValidationState());
+    m_binder->addConsumer(KeyBinderRoles::WifiPassword, new WifiPasswordConsumer(m_controller,m_wifi));
 }
 
 void CommandController::import(QString filePath)

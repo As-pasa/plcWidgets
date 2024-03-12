@@ -43,6 +43,7 @@ SOURCES += \
     cpp/utilities/commander/commands/logincommand.cpp \
     cpp/utilities/commander/commands/passwordchangecommand.cpp \
     cpp/utilities/commander/commands/passwordinputinitcommand.cpp \
+    cpp/utilities/commander/commands/wifipasswordconsumer.cpp \
     cpp/utilities/confirmationDisplayer/commandconfirmator.cpp \
     cpp/utilities/confirmationDisplayer/confirmatorstate.cpp \
     cpp/utilities/keyboard/binderdefaultconsumers.cpp \
@@ -131,6 +132,7 @@ HEADERS += \
     cpp/utilities/commander/commands/logincommand.h \
     cpp/utilities/commander/commands/passwordchangecommand.h \
     cpp/utilities/commander/commands/passwordinputinitcommand.h \
+    cpp/utilities/commander/commands/wifipasswordconsumer.h \
     cpp/utilities/confirmationDisplayer/commandconfirmator.h \
     cpp/utilities/keyboard/binderdefaultconsumers.h \
     cpp/utilities/keyboard/debugkeyboardconsumer.h \

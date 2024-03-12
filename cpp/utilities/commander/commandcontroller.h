@@ -17,6 +17,7 @@
 #include "cpp/utilities/keyboard/novalidationstate.h"
 #include "cpp/utilities/os.h"
 #include "cpp/pingModel/pingprocesswrapper.h"
+#include "cpp/utilities/commander/commands/wifipasswordconsumer.h"
 #include "cpp/utilities/keyboard/time/keybinderroles.h"
 #include "cpp/utilities/keyboard/network/ipkeyboardstate.h"
 #include "cpp/utilities/keyboard/network/ipconsumers.h"
@@ -36,7 +37,7 @@ private:
     PasswordModel* m_password;
     FileSystemTimeStamper m_stamer;
     PingModel* m_ping;
-
+    WifiModel* m_wifi;
 
     int binder_import_role=-1;
     int binder_export_role=-2;
@@ -49,7 +50,7 @@ public:
                                KeyboardBinder* binder,
                                PasswordModel* password,
                                PingModel* pinger,
-
+                               WifiModel* wifi,
                                QObject *parent = nullptr);
 public slots:
     void import(QString filePath);

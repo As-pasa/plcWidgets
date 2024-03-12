@@ -74,5 +74,7 @@
         <file>icons2/Refresh_02.png</file>
         <file>icons2/Time_02.png</file>
         <file>icons2/Wifi_02.png</file>
+        <file>QmlKeyboard/WifiKeyboardEn.qml</file>
+        <file>QmlKeyboard/FullKeyboard.qml</file>
     </qresource>
 </RCC>

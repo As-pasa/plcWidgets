@@ -277,9 +277,72 @@ BaseScreen{
                 sourceComponent:pingIpInputScreen
 
             }
+        },
+        State{
+            name:screenView.getScreen(Screens.WifiMenu)
+            PropertyChanges{
+                target:main
+                sourceComponent:
+                    wifiMenu
+            }
+        },
+        State{
+            name:screenView.getScreen(Screens.WifiPasswordKeyboardEn)
+            PropertyChanges{
+                target:main
+                sourceComponent:wifiPasswordKeyboardEn
+            }
         }
     ]
+    Component{
+        id:wifiPasswordKeyboardEn
+        Item{
+            ColumnLayout{
+                anchors.fill: parent
+                BaseText{
+                    Layout.preferredHeight: 40
+                    fontSize: fontBig
+                    text:fullkeyboard.process.txt
+                    Layout.fillWidth: true
+                }
+                FullKeyboard {
+                    id:fullkeyboard
+                    role:KeyRole.WifiPassword
+                    Layout.fillHeight: true
+                    Layout.fillWidth: true
+                }
 
+
+                }
+
+
+
+            }
+        }
+
+
+
+    Component{
+        id:wifiMenu
+        Item{
+            ColumnLayout{
+                anchors.fill: parent
+                BaseText{
+                    Layout.fillWidth: true
+                    Layout.preferredHeight: 50
+                    text:"current connection:\n"+"None"
+                    fontSize: fontBig
+                }
+
+                TextBtn{
+                    text:"change"
+                    onClicked:screenController.goToScreen(Screens.WifiPasswordKeyboardEn)
+                    Layout.fillHeight: false
+                    Layout.preferredHeight: 60
+                }
+            }
+        }
+    }
     Component{
         id:pingIpInputScreen
         Ipv4Input{
@@ -423,7 +486,7 @@ BaseScreen{
             rgt.source:"qrc:/icons2/Ping_02.png"
 
             lft.onClicked:screenController.goToScreen(Screens.NetInterfaceMenu)
-            mid.onClicked:{console.log("foo")}
+            mid.onClicked:screenController.goToScreen(Screens.WifiMenu)
             rgt.onClicked:screenController.goToScreen(Screens.PingMenu)
         }
     }
