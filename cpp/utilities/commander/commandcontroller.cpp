@@ -88,7 +88,8 @@ void CommandController::login()
 
 void CommandController::ping()
 {
-    m_controller->showInfoWithText("pinging... please wait");
+    m_controller->showInfoWithText("pinging... please wait\n ip:"+m_ping->getSelectedIp());
+
     PingProcessWrapper* wrapper=new PingProcessWrapper(m_ping->getSelectedIp());
     QThread* thread=new QThread;
     wrapper->moveToThread(thread);

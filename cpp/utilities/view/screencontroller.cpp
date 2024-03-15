@@ -91,6 +91,7 @@ void ScreenController::showInfoWithText(QString text)
 
 void ScreenController::openNetInterfaceEditMenu(QString netInterfaceName, QString startIp, QString startMask, QString startGate)
 {
+
     m_netKeyboardInput->setName(netInterfaceName);
     m_netKeyboardInput->setIp(startIp);
     m_netKeyboardInput->setMask(startMask);
