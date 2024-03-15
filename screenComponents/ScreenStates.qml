@@ -852,7 +852,7 @@ BaseScreen{
     Component{
         id:importDeviceSelectionScreen
         PageBasedSelector{
-            model: "foooo baaaaaaa".split(" ") //fileModel.detectedDevices
+            model: fileModel.detectedDevices
             onTriggered: (a)=>{
                              fileModel.setSelectedDevice(a)
 
@@ -876,7 +876,7 @@ BaseScreen{
     Component{
         id:importFileSelectionScreen
         PageBasedSelector{
-            model:"foo bar barr baaaar".split(" ")
+            model:fileModel.detectedFiles
             onTriggered: (a) =>{
 
                          commander.import(a)
@@ -886,7 +886,7 @@ BaseScreen{
     Component{
         id:exportDeviceSelect
         PageBasedSelector{
-            model:"foo bar bar bar".split(" ")
+            model:fileModel.detectedDevices
             onTriggered: (a)=>{
                             fileModel.setSelectedDevice(a)
                              commander.exprt()

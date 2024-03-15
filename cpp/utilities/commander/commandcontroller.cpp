@@ -10,7 +10,7 @@ CommandController::CommandController(ScreenController *controller, FileModel *fi
     m_wifi=wifi;
     m_binder->addState(binder_import_role,new PasswordState(m_password));
     m_binder->addState(binder_export_role,new PasswordState(m_password));
-    //m_binder->addState(binder_password_role,new PasswordState(m_password));
+    m_binder->addState(binder_password_role,new PasswordState(m_password));
     m_binder->addState(binder_password_input_listener,new NoValidationState());
     m_binder->addConsumer(binder_password_input_listener,new PasswordChangeCommand(m_controller,m_password));
     m_binder->addState(binder_login_listener,new PasswordState(m_password));

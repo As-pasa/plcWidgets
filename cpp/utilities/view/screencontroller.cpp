@@ -119,7 +119,8 @@ const QMap<int,int> ScreenController::ClosedHeaderStates={
     {ScreenView::PasswordInstallConfirm,HeaderBarModel::Closed},
     {ScreenView::LogInConfirm,HeaderBarModel::Closed},
     {ScreenView::PingIpInputScreen,HeaderBarModel::Closed},
-    {ScreenView::WifiPasswordKeyboardEn,HeaderBarModel::Closed}
+    {ScreenView::WifiPasswordKeyboardEn,HeaderBarModel::Closed},
+    {ScreenView::PasswordInstallScreen,HeaderBarModel::Closed}
 };
 
 
