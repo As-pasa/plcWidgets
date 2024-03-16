@@ -1,6 +1,6 @@
 #ifndef MINUTEKEYBOARDSTATE_H
 #define MINUTEKEYBOARDSTATE_H
-
+#include <QDebug>
 #include "../ikeyboardstate.h"
 class MinuteKeyboardState:public IKeyboardState
 {

@@ -27,6 +27,7 @@ void MinuteConsumer::consume(IKeyboardState* st)
             auto aa=QDateTime(cur.date(),tme);
             model->setCurrentTime(aa);
             st->clearState();
+            m_controller->prevScreen();
         }
     }
 }
@@ -53,6 +54,7 @@ void HourConsumer::consume(IKeyboardState* st)
         if(tme.isValid()){
             m_model->setCurrentTime(QDateTime(cur.date(),tme));
             st->clearState();
+            m_controller->prevScreen();
         }
     }
 }
@@ -80,6 +82,7 @@ void DayConsumer::consume(IKeyboardState* st)
         if(dte.isValid()){
             m_model->setCurrentTime(QDateTime(dte,cur.time()));
             st->clearState();
+            m_controller->prevScreen();
         }
     }
 }
@@ -107,6 +110,7 @@ void MonthConsumer::consume(IKeyboardState* st)
         if(dte.isValid()){
             m_model->setCurrentTime(QDateTime(dte,cur.time()));
             st->clearState();
+            m_controller->prevScreen();
         }
     }
 }
@@ -134,6 +138,7 @@ void YearConsumer::consume(IKeyboardState* st)
         if(dte.isValid()){
             m_model->setCurrentTime(QDateTime(dte,cur.time()));
             st->clearState();
+            m_controller->prevScreen();
         }
     }
 }

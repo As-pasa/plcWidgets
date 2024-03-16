@@ -84,7 +84,7 @@ void TimeModel::setCurrentTimeZone(QString n)
 };
 
 bool TimeModel::NIPStatus(){
-    qDebug()<<"NTP: "<<m_NipStatus;
+
     return m_NipStatus;
 };
 void TimeModel::setNIPStatus(bool status){
