@@ -608,7 +608,6 @@ BaseScreen{
         RowLayout{
             id:root
             property int selectedValue:screenModel.brightness
-            onSelectedValueChanged:screenModel.setBrightness(root.selectedValue)
             Item{
                 Layout.fillHeight: true
                 Layout.fillWidth: true
