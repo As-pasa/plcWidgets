@@ -607,7 +607,7 @@ BaseScreen{
         id:brightnessPicker
         RowLayout{
             id:root
-            property int selectedValue:25
+            property int selectedValue:screenModel.brightness
             onSelectedValueChanged:screenModel.setBrightness(root.selectedValue)
             Item{
                 Layout.fillHeight: true
@@ -617,12 +617,12 @@ BaseScreen{
                     TextBtn{
                         color:(root.selectedValue===25)? normalColor:labelColor
                         text:"25%"
-                        onClicked: root.selectedValue=25
+                        onClicked: screenModel.setBrightness(25)
                     }
                     TextBtn{
                         color:(root.selectedValue===100)? normalColor:labelColor
                         text:"100%"
-                        onClicked:root.selectedValue=100
+                        onClicked:screenModel.setBrightness(100)
                     }
                 }
             }
@@ -634,13 +634,13 @@ BaseScreen{
                     TextBtn{
                         color:(root.selectedValue===50)? normalColor:labelColor
                         text:"50%"
-                        onClicked:root.selectedValue=50
+                        onClicked:screenModel.setBrightness(50)
 
                     }
                     TextBtn{
                         color:(root.selectedValue===75)? normalColor:labelColor
                         text:"75%"
-                        onClicked: root.selectedValue=75
+                        onClicked: screenModel.setBrightness(75)
                     }
 
                 }
@@ -749,7 +749,7 @@ BaseScreen{
                         id:dhcp
                         width: 100
                         height: 100
-                        property bool dhcpStatus:false
+                        property bool dhcpStatus:netModel.fromName(netModel.currentSelectedInterface).dhcp
                         anchors.centerIn: parent
                         ColumnLayout{
                             anchors.fill: parent
@@ -776,7 +776,10 @@ BaseScreen{
                                         "Turn on"
                                     }
                                 }
-                                onClicked:dhcp.dhcpStatus=!dhcp.dhcpStatus
+                                onClicked:{
+                                    var a = netModel.fromName(netModel.currentSelectedInterface)
+                                    netModel.setInterface(a.name,a.ip,a.mask,a.gate,!dhcp.dhcpStatus)
+                                }
 
                             }
 
