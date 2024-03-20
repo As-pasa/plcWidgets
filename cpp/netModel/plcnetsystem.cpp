@@ -67,6 +67,7 @@ void PlcNetSystem::setupInterface(InterfaceCredential cred)
 {
     MyLogger::log("netSystem","interface setup: "+cred.toString());
     QString fileName;
+    qDebug()<<cred.toString();
     //for pc ***************отключить после отладки
    // if (newIf.name == "enp0s3") fileName = "/home/bustaz/test/network";
   //  else if (newIf.name == "docker0") fileName = "/home/bustaz/test/network1";
@@ -83,6 +84,7 @@ void PlcNetSystem::setupInterface(InterfaceCredential cred)
 
     if(cred.DHCPUsed)
     {
+        qDebug()<<"dhcp done";
         txt << "DHCP=yes\n[DHCP]\nRouteMetric=1024\n";
     }
     else

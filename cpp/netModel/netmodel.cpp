@@ -44,6 +44,7 @@ QVariant NetModel::fromName(QString name)
 void NetModel::setInterface(QString name, QString ip, QString mask, QString gate, bool dhcpUsed)
 {
     auto interface = InterfaceCredential::from(name,ip,mask,gate,dhcpUsed);
+    qDebug()<<dhcpUsed;
     MyLogger::log("netModel","interface setup; Data: "+interface.toString());
     m_system->setupInterface(interface);
     refresh();
