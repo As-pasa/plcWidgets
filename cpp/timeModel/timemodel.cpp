@@ -110,6 +110,10 @@ void TimeModel::setATZStatus(bool status){
         MyLogger::log("timeModel","atz status changing");
         m_ATZStatus=status;
         m_system->setAtzEnabled(status);
+        if(m_NipStatus){
+            m_currentDT=m_system->getCurrentTime();
+            emit currentTimeChanged(currentTime());
+        }
 
         emit ATZStatusChanged(status);
         MyLogger::log("timeModel","signal emitted: atz status changed");
